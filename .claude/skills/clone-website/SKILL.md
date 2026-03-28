@@ -24,8 +24,8 @@ If the user provides additional instructions (specific fidelity level, customiza
 
 ## Pre-Flight
 
-1. **Chrome MCP is required.** Test it immediately. If it's not available, stop and tell the user to enable it — this skill cannot work without browser automation.
-2. Verify the target URL from `$ARGUMENTS` is valid and accessible via Chrome MCP.
+1. **Browser automation is required.** Check for available browser MCP tools (Chrome MCP, Playwright MCP, Browserbase MCP, Puppeteer MCP, etc.). Use whichever is available — if multiple exist, prefer Chrome MCP. If none are detected, ask the user which browser tool they have and how to connect it. This skill cannot work without browser automation.
+2. Verify the target URL from `$ARGUMENTS` is valid and accessible via your browser MCP tool.
 3. Verify the base project builds: `npm run build`. The Next.js + shadcn/ui + Tailwind v4 scaffold should already be in place. If not, tell the user to set it up first.
 4. Create the output directories if they don't exist: `docs/research/`, `docs/research/components/`, `docs/design-references/`, `scripts/`.
 
@@ -92,7 +92,7 @@ A section with a sticky sidebar and scrolling content panels is fundamentally di
 Many components have multiple visual states — a tab bar shows different cards per tab, a header looks different at scroll position 0 vs 100, a card has hover effects. You must extract ALL states, not just whatever is visible on page load.
 
 For tabbed/stateful content:
-- Click each tab/button via Chrome MCP
+- Click each tab/button via browser MCP
 - Extract the content, images, and card data for EACH state
 - Record which content belongs to which state
 - Note the transition animation between states (opacity, slide, fade, etc.)
@@ -108,7 +108,7 @@ For scroll-dependent elements:
 
 Every component gets a specification file in `docs/research/components/` BEFORE any builder is dispatched. This file is the contract between your extraction work and the builder agent. The builder receives the spec file contents inline in its prompt — the file also persists as an auditable artifact that the user (or you) can review if something looks wrong.
 
-The spec file is not optional. It is not a nice-to-have. If you dispatch a builder without first writing a spec file, you are shipping incomplete instructions based on whatever you can remember from a Chrome MCP session, and the builder will guess to fill gaps.
+The spec file is not optional. It is not a nice-to-have. If you dispatch a builder without first writing a spec file, you are shipping incomplete instructions based on whatever you can remember from a browser MCP session, and the builder will guess to fill gaps.
 
 ### 9. Build Must Always Compile
 
@@ -116,7 +116,7 @@ Every builder agent must verify `npx tsc --noEmit` passes before finishing. Afte
 
 ## Phase 1: Reconnaissance
 
-Navigate to the target URL with Chrome MCP.
+Navigate to the target URL with browser MCP.
 
 ### Screenshots
 - Take **full-page screenshots** at desktop (1440px) and mobile (390px) viewports
@@ -138,7 +138,7 @@ Extract these from the page before doing anything else:
 
 This is a dedicated pass AFTER screenshots and BEFORE anything else. Its purpose is to discover every behavior on the page — many of which are invisible in a static screenshot.
 
-**Scroll sweep:** Scroll the page slowly from top to bottom via Chrome MCP. At each section, pause and observe:
+**Scroll sweep:** Scroll the page slowly from top to bottom via browser MCP. At each section, pause and observe:
 - Does the header change appearance? Record the scroll position where it triggers.
 - Do elements animate into view? Record which ones and the animation type.
 - Does a sidebar or tab indicator auto-switch as you scroll? Record the mechanism.
@@ -154,7 +154,7 @@ This is a dedicated pass AFTER screenshots and BEFORE anything else. Its purpose
 - Buttons, cards, links, images, nav items
 - Record what changes: color, scale, shadow, underline, opacity
 
-**Responsive sweep:** Test at 3 viewport widths via Chrome MCP:
+**Responsive sweep:** Test at 3 viewport widths via browser MCP:
 - Desktop: 1440px
 - Tablet: 768px
 - Mobile: 390px
@@ -185,10 +185,10 @@ This is sequential. Do it yourself (not delegated to an agent) since it touches 
 
 ### Asset Discovery Script Pattern
 
-Use Chrome MCP to enumerate all assets on the page:
+Use browser MCP to enumerate all assets on the page:
 
 ```javascript
-// Run this via Chrome MCP to discover all assets
+// Run this via browser MCP to discover all assets
 JSON.stringify({
   images: [...document.querySelectorAll('img')].map(img => ({
     src: img.src || img.currentSrc,
@@ -229,14 +229,14 @@ This is the core loop. For each section in your page topology (top to bottom), y
 
 ### Step 1: Extract
 
-For each section, use Chrome MCP to extract everything:
+For each section, use browser MCP to extract everything:
 
 1. **Screenshot** the section in isolation (scroll to it, screenshot the viewport). Save to `docs/design-references/`.
 
 2. **Extract CSS** for every element in the section. Use the extraction script below — don't hand-measure individual properties. Run it once per component container and capture the full output:
 
 ```javascript
-// Per-component extraction — run via Chrome MCP
+// Per-component extraction — run via browser MCP
 // Replace SELECTOR with the actual CSS selector for the component
 (function(selector) {
   const el = document.querySelector(selector);
@@ -283,7 +283,7 @@ For each section, use Chrome MCP to extract everything:
 
 ```javascript
 // State A: capture styles at current state (e.g., scroll position 0)
-// Then trigger the state change (scroll, click, hover via Chrome MCP)
+// Then trigger the state change (scroll, click, hover via browser MCP)
 // State B: re-run the extraction script on the same element
 // The diff between A and B IS the behavior specification
 ```
@@ -418,7 +418,7 @@ After assembly, do NOT declare the clone complete. Take side-by-side comparison 
 3. Compare again at mobile (390px)
 4. For each discrepancy found:
    - Check the component spec file — was the value extracted correctly?
-   - If the spec was wrong: re-extract from Chrome MCP, update the spec, fix the component
+   - If the spec was wrong: re-extract from browser MCP, update the spec, fix the component
    - If the spec was right but the builder got it wrong: fix the component to match the spec
 5. Test all interactive behaviors: scroll through the page, click every button/tab, hover over interactive elements
 6. Verify smooth scroll feels right, header transitions work, tab switching works, animations play
