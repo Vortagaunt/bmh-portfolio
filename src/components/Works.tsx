@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "./Reveal";
+import type { CaseStudy } from "@/types";
 
-const projects = [
+const projects: CaseStudy[] = [
   {
     slug: "yearbook-2025",
     title: "Yearbook 2025",

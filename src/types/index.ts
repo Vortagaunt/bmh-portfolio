@@ -3,7 +3,7 @@ export interface CaseStudy {
   title: string;
   description: string;
   image: string;
-  imageAlt: string;
+  imageAlt?: string;
   video?: string;
   poster?: string;
   href: string;
