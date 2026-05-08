@@ -1,38 +1,72 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const heading = nameRef.current;
+    if (!container || !heading) return;
+
+    const fit = () => {
+      const max = container.offsetWidth;
+      let lo = 10,
+        hi = 600;
+      while (lo < hi) {
+        const mid = (lo + hi + 1) >> 1;
+        heading.style.fontSize = `${mid}px`;
+        if (heading.scrollWidth <= max) lo = mid;
+        else hi = mid - 1;
+      }
+      heading.style.fontSize = `${lo}px`;
+    };
+
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(container);
+    return () => ro.disconnect();
+  }, []);
+
   return (
-    <section className="relative px-8 pt-16 pb-16">
-      {/* Headline row */}
-      <div className="mx-auto max-w-[1280px] flex justify-center">
+    <section className="relative pt-16 pb-16">
+      {/* Full-viewport-width name */}
+      <div ref={containerRef} className="w-full overflow-hidden">
         <h1
-          className="hero-rise font-display whitespace-nowrap text-[#181818] leading-[0.95]"
+          ref={nameRef}
+          className="hero-rise font-display whitespace-nowrap text-[#181818] leading-[0.9] block"
           style={{
-            fontSize: "clamp(60px, 9.2vw, 138px)",
             fontWeight: 600,
             letterSpacing: "-0.04em",
+            animationDelay: "3.6s",
           }}
         >
           <span
-            className="font-serif italic pr-1"
+            className="font-serif italic"
             style={{ fontWeight: 400, letterSpacing: "-0.02em" }}
           >
-            Bronx
+            Bronx{" "}
           </span>
           Hanratty
         </h1>
       </div>
 
       {/* Below-headline content row */}
-      <div className="relative mx-auto mt-12 grid max-w-[1280px] grid-cols-12 gap-6">
+      <div className="relative mx-auto mt-12 grid max-w-[1280px] px-8 grid-cols-12 gap-6">
         {/* Bio paragraph */}
-        <div className="col-span-12 sm:col-span-4 hero-rise hero-rise-delay-2">
+        <div
+          className="col-span-12 sm:col-span-4 hero-rise"
+          style={{ animationDelay: "3.8s" }}
+        >
           <p className="text-[16px] leading-[1.5] text-[#181818]">
             Experimental designer getting his{" "}
             <span className="font-serif italic text-[18px] tracking-[-0.01em]">
               roots
             </span>{" "}
-            in the industry of design. Curently{" "}
+            in the industry of design. Currently{" "}
             <span className="font-serif italic text-[18px] tracking-[-0.01em]">
               exploring
             </span>{" "}
@@ -40,8 +74,11 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Vintage Mac with handwritten hello */}
-        <div className="col-span-12 sm:col-span-5 sm:col-start-5 flex justify-center hero-rise hero-rise-delay-3">
+        {/* Vintage Mac */}
+        <div
+          className="col-span-12 sm:col-span-5 sm:col-start-5 flex justify-center hero-rise"
+          style={{ animationDelay: "4.0s" }}
+        >
           <div className="relative w-full max-w-[540px] float-slow">
             <Image
               src="/images/vintage-mac.png"
@@ -54,8 +91,11 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right column — tag + caption */}
-        <div className="col-span-12 sm:col-span-3 sm:col-start-10 flex flex-col justify-between text-right hero-rise hero-rise-delay-4">
+        {/* Right column */}
+        <div
+          className="col-span-12 sm:col-span-3 sm:col-start-10 flex flex-col justify-between text-right hero-rise"
+          style={{ animationDelay: "4.2s" }}
+        >
           <div className="text-[14px] text-[#181818] tracking-tight">
             Designer · Visionary
           </div>
