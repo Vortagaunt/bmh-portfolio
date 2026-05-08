@@ -1,16 +1,49 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 export function Hero() {
+  const nameRef = useRef<HTMLHeadingElement>(null);
+  const [fontSize, setFontSize] = useState(120);
+
+  useEffect(() => {
+    const fit = () => {
+      const el = nameRef.current;
+      if (!el) return;
+      const base = 200;
+      const parent = el.parentElement;
+      if (!parent) return;
+      // Available width = parent inner width minus its horizontal padding
+      const ps = getComputedStyle(parent);
+      const containerWidth =
+        parent.clientWidth - parseFloat(ps.paddingLeft) - parseFloat(ps.paddingRight);
+      // Measure actual text width by temporarily switching to inline-block
+      const origDisplay = el.style.display;
+      const origFontSize = el.style.fontSize;
+      el.style.display = "inline-block";
+      el.style.fontSize = `${base}px`;
+      const textWidth = el.getBoundingClientRect().width;
+      el.style.display = origDisplay;
+      el.style.fontSize = origFontSize;
+      if (textWidth > 0) {
+        setFontSize((containerWidth / textWidth) * base);
+      }
+    };
+    fit();
+    window.addEventListener("resize", fit);
+    return () => window.removeEventListener("resize", fit);
+  }, []);
+
   return (
     <section className="relative pt-16 pb-16">
-      {/* Name — fixed size */}
-      <div className="w-full overflow-hidden px-2">
+      {/* Name — dynamically sized to fill viewport width */}
+      <div className="w-full px-8">
         <h1
+          ref={nameRef}
           className="hero-rise font-display whitespace-nowrap text-[#181818] leading-[0.85] block"
           style={{
-            fontSize: "123.17262830482115px",
+            fontSize: `${fontSize}px`,
             fontWeight: 600,
             letterSpacing: "-0.04em",
             animationDelay: "3.6s",

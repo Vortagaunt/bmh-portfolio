@@ -15,8 +15,8 @@ export function IntroOverlay() {
   const [helloFlying, setHelloFlying] = useState(false);
 
   useEffect(() => {
-    // Size mac to ~50% of viewport height so it fills the screen on any display
-    const macH = Math.round(window.innerHeight * 0.50);
+    // Size mac to ~85% of viewport height so it fills the screen on any display
+    const macH = Math.round(window.innerHeight * 0.85);
     const macW = Math.round(macH * (540 / 420));
 
     const macLeft = window.innerWidth / 2 - macW / 2;

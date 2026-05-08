@@ -2,7 +2,7 @@ import { Reveal } from "./Reveal";
 
 export function Archive() {
   return (
-    <section className="relative bg-[#0a0a0a] text-white">
+    <section className="relative overflow-hidden bg-[#0a0a0a] text-white">
       {/* Curved cap — light area arching down into dark section's top edge */}
       <div
         aria-hidden
