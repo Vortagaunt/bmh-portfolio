@@ -1,45 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const nameRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const heading = nameRef.current;
-    if (!container || !heading) return;
-
-    const fit = () => {
-      // Fill 95% of viewport width to prevent clipping at edges
-      const max = container.offsetWidth * 0.95;
-      let lo = 10,
-        hi = 600;
-      while (lo < hi) {
-        const mid = (lo + hi + 1) >> 1;
-        heading.style.fontSize = `${mid}px`;
-        if (heading.scrollWidth <= max) lo = mid;
-        else hi = mid - 1;
-      }
-      heading.style.fontSize = `${lo}px`;
-    };
-
-    fit();
-    const ro = new ResizeObserver(fit);
-    ro.observe(container);
-    return () => ro.disconnect();
-  }, []);
-
   return (
     <section className="relative pt-16 pb-16">
-      {/* Full-viewport-width name */}
-      <div ref={containerRef} className="w-full overflow-hidden">
+      {/* Name — fixed size */}
+      <div className="w-full overflow-hidden px-2">
         <h1
-          ref={nameRef}
-          className="hero-rise font-display whitespace-nowrap text-[#181818] leading-[0.85] block px-2"
+          className="hero-rise font-display whitespace-nowrap text-[#181818] leading-[0.85] block"
           style={{
+            fontSize: "123.17262830482115px",
             fontWeight: 600,
             letterSpacing: "-0.04em",
             animationDelay: "3.6s",
