@@ -24,11 +24,11 @@ export function IntroOverlay() {
 
     setMacPos({ top: macTop, left: macLeft, width: MAC_W, height: MAC_H });
 
-    // Hello sits on the mac screen area
+    // Hello sits in the MacPaint document area (right of toolbar, center of screen)
     setHelloPos({
-      top: macTop + MAC_H * 0.14,
-      left: macLeft + MAC_W * 0.21,
-      width: MAC_W * 0.56,
+      top: macTop + MAC_H * 0.21,
+      left: macLeft + MAC_W * 0.30,
+      width: MAC_W * 0.42,
     });
 
     // Draw path
