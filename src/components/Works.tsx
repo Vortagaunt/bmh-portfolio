@@ -22,8 +22,8 @@ const projects: CaseStudy[] = [
   },
   {
     slug: "motion-studies",
-    title: "Motion Studies",
-    description: "Brand explorations and looping motion design experiments",
+    title: "Recent Works",
+    description: "Recently made projects in Photoshop, Illustrator, and more.",
     image: "/images/brothers.png",
     href: "/case-study/motion-studies",
   },
