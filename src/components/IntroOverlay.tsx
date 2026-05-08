@@ -1,17 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-
-const MAC_W = 460;
-const MAC_H = Math.round(MAC_W * (420 / 540)); // ~358
 
 export function IntroOverlay() {
   const [phase, setPhase] = useState(0);
   const pathRef = useRef<SVGPathElement>(null);
 
   // Mac fixed position (center of screen)
-  const [macPos, setMacPos] = useState({ top: 0, left: 0, width: MAC_W, height: MAC_H });
+  const [macPos, setMacPos] = useState({ top: 0, left: 0, width: 0, height: 0 });
   const [macMoving, setMacMoving] = useState(false);
 
   // Hello fixed position (starts on mac screen, flies to nav)
@@ -19,16 +15,20 @@ export function IntroOverlay() {
   const [helloFlying, setHelloFlying] = useState(false);
 
   useEffect(() => {
-    const macLeft = window.innerWidth / 2 - MAC_W / 2;
-    const macTop = window.innerHeight / 2 - MAC_H / 2;
+    // Size mac to ~50% of viewport height so it fills the screen on any display
+    const macH = Math.round(window.innerHeight * 0.50);
+    const macW = Math.round(macH * (540 / 420));
 
-    setMacPos({ top: macTop, left: macLeft, width: MAC_W, height: MAC_H });
+    const macLeft = window.innerWidth / 2 - macW / 2;
+    const macTop = window.innerHeight / 2 - macH / 2;
+
+    setMacPos({ top: macTop, left: macLeft, width: macW, height: macH });
 
     // Hello sits in the MacPaint document area (right of toolbar, center of screen)
     setHelloPos({
-      top: macTop + MAC_H * 0.21,
-      left: macLeft + MAC_W * 0.30,
-      width: MAC_W * 0.42,
+      top: macTop + macH * 0.20,
+      left: macLeft + macW * 0.32,
+      width: macW * 0.36,
     });
 
     // Draw path
@@ -117,12 +117,10 @@ export function IntroOverlay() {
           transform: !macMoving ? (phase >= 1 ? "translateY(0px)" : "translateY(28px)") : undefined,
         }}
       >
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="/images/vintage-mac.png"
           alt=""
-          width={540}
-          height={420}
-          priority
           className="w-full h-auto select-none pointer-events-none"
         />
       </div>
