@@ -13,7 +13,8 @@ export function Hero() {
     if (!container || !heading) return;
 
     const fit = () => {
-      const max = container.offsetWidth;
+      // Fill 95% of viewport width to prevent clipping at edges
+      const max = container.offsetWidth * 0.95;
       let lo = 10,
         hi = 600;
       while (lo < hi) {
@@ -37,7 +38,7 @@ export function Hero() {
       <div ref={containerRef} className="w-full overflow-hidden">
         <h1
           ref={nameRef}
-          className="hero-rise font-display whitespace-nowrap text-[#181818] leading-[0.9] block"
+          className="hero-rise font-display whitespace-nowrap text-[#181818] leading-[0.85] block px-2"
           style={{
             fontWeight: 600,
             letterSpacing: "-0.04em",
@@ -74,12 +75,13 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Vintage Mac */}
-        <div
-          className="col-span-12 sm:col-span-5 sm:col-start-5 flex justify-center hero-rise"
-          style={{ animationDelay: "4.0s" }}
-        >
-          <div className="relative w-full max-w-[540px] float-slow">
+        {/* Vintage Mac — revealed by IntroOverlay after it flies into position */}
+        <div className="col-span-12 sm:col-span-5 sm:col-start-5 flex justify-center">
+          <div
+            id="hero-mac-target"
+            className="relative w-full max-w-[540px] float-slow"
+            style={{ opacity: 0 }}
+          >
             <Image
               src="/images/vintage-mac.png"
               alt="Vintage Macintosh with hello handwritten on screen"
