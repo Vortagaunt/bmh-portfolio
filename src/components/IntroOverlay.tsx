@@ -26,9 +26,9 @@ export function IntroOverlay() {
 
     // Hello sits centered inside the "Untitled" white document area
     setHelloPos({
-      top: macTop + macH * 0.235,
-      left: macLeft + macW * 0.36,
-      width: macW * 0.28,
+      top: macTop + macH * 0.25,
+      left: macLeft + macW * 0.39,
+      width: macW * 0.22,
     });
 
     // Draw path
