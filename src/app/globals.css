@@ -219,6 +219,16 @@ body.intro-skipped .hero-rise {
   filter: none;
 }
 
+/* Soft fade-in for the whole home page on return from a case study */
+@keyframes home-return-fade {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+body.intro-skipped main {
+  animation: home-return-fade 800ms cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+
 .float-slow {
   animation: float-slow 6s ease-in-out infinite;
 }
