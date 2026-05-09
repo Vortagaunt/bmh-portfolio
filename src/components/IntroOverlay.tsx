@@ -15,6 +15,16 @@ export function IntroOverlay() {
   const [helloFlying, setHelloFlying] = useState(false);
 
   useEffect(() => {
+    // Skip the intro on subsequent home-page visits within the same session
+    // (e.g., user clicked into a case study and clicked the hello logo to come back).
+    if (sessionStorage.getItem("intro-played") === "1") {
+      setPhase(6);
+      document.body.classList.add("intro-skipped");
+      const target = document.getElementById("hero-mac-target");
+      if (target) target.style.opacity = "1";
+      return;
+    }
+
     // Size mac to ~85% of viewport height so it fills the screen on any display
     const macH = Math.round(window.innerHeight * 0.85);
     const macW = Math.round(macH * (540 / 420));
@@ -82,7 +92,10 @@ export function IntroOverlay() {
       }, 4200),
 
       // Done
-      setTimeout(() => setPhase(6), 5200),
+      setTimeout(() => {
+        setPhase(6);
+        sessionStorage.setItem("intro-played", "1");
+      }, 5200),
     ];
 
     return () => timers.forEach(clearTimeout);

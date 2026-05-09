@@ -209,6 +209,16 @@
   animation: hero-rise 1.4s cubic-bezier(0.2, 0.7, 0.1, 1) both;
 }
 
+/* When the user is returning to the home page mid-session, the intro
+   has already played — skip the long staggered hero-rise delays so
+   everything is visible immediately. */
+body.intro-skipped .hero-rise {
+  animation: none;
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
 .float-slow {
   animation: float-slow 6s ease-in-out infinite;
 }
