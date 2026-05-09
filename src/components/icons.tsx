@@ -1,29 +1,5 @@
 import type { SVGProps } from "react";
 
-export function LogoIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 120 14"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      className={className}
-      {...props}
-    >
-      <text
-        x="0"
-        y="11"
-        fontFamily="var(--font-sans), Inter, sans-serif"
-        fontSize="13"
-        fontWeight={400}
-        letterSpacing="0.02em"
-        fill="currentColor"
-      >
-        bronx.dzn
-      </text>
-    </svg>
-  );
-}
-
 export function SparkleIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -40,45 +16,6 @@ export function SparkleIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
         <line x1="5" y1="5" x2="19" y2="19" />
         <line x1="19" y1="5" x2="5" y2="19" />
       </g>
-    </svg>
-  );
-}
-
-export function PlusIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 12 12"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1"
-      strokeLinecap="round"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      className={className}
-      {...props}
-    >
-      <line x1="6" y1="1" x2="6" y2="11" />
-      <line x1="1" y1="6" x2="11" y2="6" />
-    </svg>
-  );
-}
-
-export function ArrowRightIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      className={className}
-      {...props}
-    >
-      <line x1="2" y1="8" x2="13" y2="8" />
-      <polyline points="9 4 13 8 9 12" />
     </svg>
   );
 }

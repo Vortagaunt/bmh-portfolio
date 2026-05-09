@@ -17,21 +17,21 @@ export function SiteHeader() {
 
         {/* Center nav */}
         <nav className="flex items-center justify-center gap-10 text-[15px] text-white">
-          <Link href="#works" className="link-underline font-medium tracking-tight">
+          <Link href="#works" className="link-underline magnetic font-medium tracking-tight">
             (Works)
           </Link>
-          <Link href="#about-me" className="link-underline font-medium tracking-tight">
+          <Link href="#about-me" className="link-underline magnetic font-medium tracking-tight">
             (About)
           </Link>
-          <Link href="#about-me" className="link-underline font-medium tracking-tight">
+          <Link href="#about-me" className="link-underline magnetic font-medium tracking-tight">
             (Contact)
           </Link>
         </nav>
 
         {/* Right — Open to work */}
         <div className="flex items-center justify-end pr-8 text-[14px] text-white">
-          <span className="inline-flex items-center gap-1.5">
-            <SparkleIcon className="h-3.5 w-3.5" />
+          <span className="magnetic inline-flex items-center gap-1.5">
+            <SparkleIcon className="h-3.5 w-3.5 transition-transform duration-700 hover:rotate-90" />
             <span className="font-medium tracking-tight">Open to work</span>
           </span>
         </div>
