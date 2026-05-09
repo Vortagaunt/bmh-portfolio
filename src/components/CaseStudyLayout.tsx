@@ -1,0 +1,247 @@
+import Image from "next/image";
+import Link from "next/link";
+import { Reveal } from "./Reveal";
+
+export interface CaseStudyMeta {
+  label: string;
+  value: string;
+}
+
+export interface CaseStudySection {
+  heading: string;
+  body: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+export interface CaseStudyData {
+  index: string; // e.g. "01"
+  category: string; // e.g. "Editorial"
+  title: string;
+  subtitle: string;
+  hero: { src: string; alt: string };
+  meta: CaseStudyMeta[];
+  overview: string;
+  sections: CaseStudySection[];
+  gallery: { src: string; alt: string }[];
+  next: { slug: string; title: string };
+}
+
+export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
+  return (
+    <article className="relative pt-32 pb-32">
+      {/* Hero */}
+      <header className="relative mx-auto max-w-[1280px] px-8">
+        <Reveal variant="up" duration={1000}>
+          <div className="flex items-baseline gap-4 text-[12px] tracking-[0.16em] uppercase text-[#181818]/60">
+            <span>({data.index})</span>
+            <span className="h-px w-10 bg-[#181818]/30" />
+            <span>{data.category}</span>
+          </div>
+        </Reveal>
+
+        <Reveal variant="blur" delay={120} duration={1300}>
+          <h1
+            className="mt-6 font-display text-[#181818]"
+            style={{
+              fontSize: "clamp(56px, 9vw, 140px)",
+              fontWeight: 600,
+              letterSpacing: "-0.04em",
+              lineHeight: 0.95,
+            }}
+          >
+            {data.title}
+          </h1>
+        </Reveal>
+
+        <Reveal variant="up" delay={240} duration={1100}>
+          <p className="mt-8 max-w-[640px] text-[20px] leading-[1.45] text-[#181818]/85">
+            {data.subtitle}
+          </p>
+        </Reveal>
+
+        {/* Meta grid */}
+        <Reveal variant="up" delay={360} duration={1100}>
+          <dl className="mt-16 grid grid-cols-2 gap-y-6 sm:grid-cols-4">
+            {data.meta.map((m) => (
+              <div key={m.label} className="flex flex-col gap-1">
+                <dt className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+                  {m.label}
+                </dt>
+                <dd className="text-[15px] tracking-tight text-[#181818]">
+                  {m.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
+      </header>
+
+      {/* Hero image */}
+      <Reveal variant="scale" delay={120} duration={1400}>
+        <div className="relative mx-auto mt-20 w-full max-w-[1440px] px-8">
+          <div
+            className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
+            style={{ aspectRatio: "1.6 / 1" }}
+          >
+            <Image
+              src={data.hero.src}
+              alt={data.hero.alt}
+              fill
+              priority
+              sizes="(min-width: 1440px) 1440px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Overview row */}
+      <section className="relative mx-auto mt-32 grid max-w-[1280px] grid-cols-12 gap-8 px-8">
+        <Reveal variant="up" duration={1100} className="col-span-12 sm:col-span-3">
+          <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+            Overview
+          </span>
+        </Reveal>
+        <Reveal
+          variant="up"
+          delay={150}
+          duration={1200}
+          className="col-span-12 sm:col-span-8 sm:col-start-5"
+        >
+          <p className="text-[22px] leading-[1.45] text-[#181818]">
+            {data.overview}
+          </p>
+        </Reveal>
+      </section>
+
+      {/* Numbered sections */}
+      <div className="mx-auto mt-32 flex max-w-[1280px] flex-col gap-32 px-8">
+        {data.sections.map((s, i) => (
+          <section
+            key={s.heading}
+            className="grid grid-cols-12 gap-8 items-start"
+          >
+            <Reveal
+              variant="up"
+              duration={1100}
+              className="col-span-12 sm:col-span-3 sticky top-24"
+            >
+              <div className="flex flex-col gap-3">
+                <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+                  {String(i + 1).padStart(2, "0")} — Chapter
+                </span>
+                <h2
+                  className="font-display text-[#181818]"
+                  style={{
+                    fontSize: "clamp(28px, 3.4vw, 44px)",
+                    fontWeight: 600,
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1,
+                  }}
+                >
+                  {s.heading}
+                </h2>
+              </div>
+            </Reveal>
+
+            <div className="col-span-12 sm:col-span-8 sm:col-start-5 flex flex-col gap-10">
+              <Reveal variant="up" delay={150} duration={1200}>
+                <p className="text-[18px] leading-[1.55] text-[#181818]/90">
+                  {s.body}
+                </p>
+              </Reveal>
+              {s.image && (
+                <Reveal variant="scale" delay={250} duration={1300}>
+                  <div
+                    className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
+                    style={{ aspectRatio: "1.5 / 1" }}
+                  >
+                    <Image
+                      src={s.image}
+                      alt={s.imageAlt ?? s.heading}
+                      fill
+                      sizes="(min-width: 1024px) 800px, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </Reveal>
+              )}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      {/* Gallery */}
+      {data.gallery.length > 0 && (
+        <section className="relative mx-auto mt-40 max-w-[1440px] px-8">
+          <Reveal variant="up" duration={1000}>
+            <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+              Gallery
+            </span>
+          </Reveal>
+          <div className="mt-10 grid grid-cols-12 gap-6">
+            {data.gallery.map((img, i) => (
+              <Reveal
+                key={img.src}
+                variant="up"
+                delay={i * 80}
+                duration={1100}
+                className={
+                  i % 3 === 0
+                    ? "col-span-12 md:col-span-7"
+                    : i % 3 === 1
+                      ? "col-span-12 md:col-span-5"
+                      : "col-span-12"
+                }
+              >
+                <div
+                  className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
+                  style={{ aspectRatio: i % 3 === 2 ? "2 / 1" : "1.4 / 1" }}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(min-width: 1024px) 700px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Next case study */}
+      <section className="relative mx-auto mt-40 max-w-[1280px] px-8">
+        <Reveal variant="up" duration={1100}>
+          <Link
+            href={`/case-study/${data.next.slug}`}
+            className="group block border-t border-[#181818]/15 pt-12"
+          >
+            <div className="flex items-baseline justify-between gap-8">
+              <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+                Next Project
+              </span>
+              <span className="text-[12px] tracking-[0.18em] uppercase text-[#181818]/55 transition-transform duration-500 group-hover:translate-x-2">
+                →
+              </span>
+            </div>
+            <h3
+              className="mt-4 font-display text-[#181818] transition-transform duration-700 group-hover:-translate-y-1"
+              style={{
+                fontSize: "clamp(40px, 6vw, 88px)",
+                fontWeight: 600,
+                letterSpacing: "-0.03em",
+                lineHeight: 1,
+              }}
+            >
+              {data.next.title}
+            </h3>
+          </Link>
+        </Reveal>
+      </section>
+    </article>
+  );
+}
