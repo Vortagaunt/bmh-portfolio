@@ -257,7 +257,6 @@
 
 /* Magnetic-feel button/link hover */
 .magnetic {
-  display: inline-block;
   transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.1, 1);
   will-change: transform;
 }
