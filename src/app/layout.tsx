@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Bricolage_Grotesque, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import { PageTransition } from "@/components/PageTransition";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -44,7 +45,10 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${bricolage.variable} ${instrument.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <PageTransition />
+        {children}
+      </body>
     </html>
   );
 }
