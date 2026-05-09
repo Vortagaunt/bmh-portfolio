@@ -21,11 +21,11 @@ const projects: CaseStudy[] = [
     href: "/case-study/846-am",
   },
   {
-    slug: "motion-studies",
+    slug: "recent-works",
     title: "Recent Works",
     description: "Recently made projects in Photoshop, Illustrator, and more.",
     image: "/images/brothers.png",
-    href: "/case-study/motion-studies",
+    href: "/case-study/recent-works",
   },
 ];
 

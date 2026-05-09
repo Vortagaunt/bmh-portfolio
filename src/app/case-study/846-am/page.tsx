@@ -48,7 +48,7 @@ const data: CaseStudyData = {
     { src: "/images/846am.png", alt: "Closing frame" },
   ],
   next: {
-    slug: "motion-studies",
+    slug: "recent-works",
     title: "Recent Works",
   },
 };
