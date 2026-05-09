@@ -77,7 +77,7 @@ export function Works() {
               className="group flex flex-col gap-5 card-hover"
             >
               <div
-                className="relative w-full overflow-hidden bg-[#cfcfcf]"
+                className="relative w-full overflow-hidden bg-[#cfcfcf] rounded-sm"
                 style={{ aspectRatio: "1.46 / 1" }}
               >
                 <Image
@@ -87,6 +87,8 @@ export function Works() {
                   sizes="(min-width: 1280px) 1280px, 100vw"
                   className="card-img-zoom object-cover"
                 />
+                {/* Subtle hover overlay — adds depth without changing palette */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
                 {p.video && (
                   <video
                     src={p.video}
@@ -105,7 +107,7 @@ export function Works() {
                 )}
               </div>
               <div className="flex flex-col gap-1">
-                <h3 className="text-[20px] font-medium tracking-tight text-[#181818]">
+                <h3 className="text-[20px] font-medium tracking-tight text-[#181818] transition-transform duration-500 group-hover:translate-x-1">
                   {p.title}
                 </h3>
                 <p className="max-w-[640px] text-[16px] text-[#181818]/70 leading-snug">

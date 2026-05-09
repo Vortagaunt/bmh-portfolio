@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function Hero() {
   const nameRef = useRef<HTMLHeadingElement>(null);
+  const macRef = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState(120);
 
   useEffect(() => {
@@ -33,6 +34,28 @@ export function Hero() {
     fit();
     window.addEventListener("resize", fit);
     return () => window.removeEventListener("resize", fit);
+  }, []);
+
+  // Subtle scroll-driven parallax on the hero mac
+  useEffect(() => {
+    const mac = macRef.current;
+    if (!mac) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        // Move mac up to ~60px as user scrolls past first viewport
+        const offset = Math.max(-60, -y * 0.08);
+        mac.style.transform = `translate3d(0, ${offset}px, 0)`;
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -82,18 +105,21 @@ export function Hero() {
         {/* Vintage Mac — revealed by IntroOverlay after it flies into position */}
         <div className="col-span-12 sm:col-span-5 sm:col-start-5 flex justify-center">
           <div
+            ref={macRef}
             id="hero-mac-target"
-            className="relative w-full max-w-[540px] float-slow"
+            className="relative w-full max-w-[540px] will-change-transform"
             style={{ opacity: 0 }}
           >
-            <Image
-              src="/images/vintage-mac.png"
-              alt="Vintage Macintosh with hello handwritten on screen"
-              width={540}
-              height={420}
-              priority
-              className="w-full h-auto select-none"
-            />
+            <div className="float-slow">
+              <Image
+                src="/images/vintage-mac.png"
+                alt="Vintage Macintosh with hello handwritten on screen"
+                width={540}
+                height={420}
+                priority
+                className="w-full h-auto select-none"
+              />
+            </div>
           </div>
         </div>
 

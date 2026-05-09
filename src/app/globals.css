@@ -180,17 +180,6 @@
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.32);
 }
 
-/* Plus crosshair markers in the grid intersections */
-.plus-mark::before {
-  content: "+";
-  position: absolute;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 300;
-  color: rgba(0, 0, 0, 0.35);
-  line-height: 1;
-}
-
 /* ====== Animations ====== */
 
 @keyframes hero-rise {
@@ -206,35 +195,18 @@
   }
 }
 
-@keyframes soft-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scale-in {
-  from { opacity: 0; transform: scale(0.94); }
-  to { opacity: 1; transform: scale(1); }
-}
-
 @keyframes float-slow {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-8px); }
 }
 
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
 .hero-rise {
   animation: hero-rise 1.4s cubic-bezier(0.2, 0.7, 0.1, 1) both;
-}
-.hero-rise-delay-1 { animation-delay: 0.15s; }
-.hero-rise-delay-2 { animation-delay: 0.35s; }
-.hero-rise-delay-3 { animation-delay: 0.55s; }
-.hero-rise-delay-4 { animation-delay: 0.75s; }
-
-.soft-fade {
-  animation: soft-fade 1.6s ease both;
-}
-
-.scale-in {
-  animation: scale-in 1.4s cubic-bezier(0.2, 0.7, 0.1, 1) both;
 }
 
 .float-slow {
@@ -245,6 +217,7 @@
 .link-underline {
   position: relative;
   display: inline-block;
+  transition: color 0.4s ease;
 }
 .link-underline::after {
   content: "";
@@ -263,21 +236,50 @@
   transform-origin: left center;
 }
 
-/* Card hover */
+/* Card hover — modern lift with subtle shadow + image clip reveal */
 .card-hover {
   transition:
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.1, 1),
-    box-shadow 0.7s cubic-bezier(0.2, 0.7, 0.1, 1);
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.1, 1),
+    box-shadow 0.8s cubic-bezier(0.2, 0.7, 0.1, 1);
+  will-change: transform;
 }
 .card-hover:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
 
 .card-img-zoom {
-  transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.1, 1);
+  transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.1, 1);
+  will-change: transform;
 }
 .group:hover .card-img-zoom {
-  transform: scale(1.1);
+  transform: scale(1.06);
+}
+
+/* Magnetic-feel button/link hover */
+.magnetic {
+  display: inline-block;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.1, 1);
+  will-change: transform;
+}
+.magnetic:hover {
+  transform: translateY(-1px);
+}
+
+/* Shiny shimmer accent — used sparingly on small status pills */
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    currentColor 0%,
+    currentColor 40%,
+    rgba(255, 255, 255, 0.85) 50%,
+    currentColor 60%,
+    currentColor 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
 }
 
 /* Lenis recommended setup */
@@ -296,9 +298,8 @@ html.lenis, html.lenis body {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-rise,
-  .soft-fade,
-  .scale-in,
-  .float-slow {
+  .float-slow,
+  .shimmer-text {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
