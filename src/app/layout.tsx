@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Bricolage_Grotesque, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { PageTransition } from "@/components/PageTransition";
+import { BackgroundMusic } from "@/components/BackgroundMusic";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -47,6 +48,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <PageTransition />
+        <BackgroundMusic src="/audio/background.mp3" volume={0.8} />
         {children}
       </body>
     </html>
