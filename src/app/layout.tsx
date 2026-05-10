@@ -29,10 +29,9 @@ export const metadata: Metadata = {
     "Bronx Hanratty, Digital Product Designer. Current: Almabase",
   icons: {
     icon: [
-      { url: "/seo/favicon.png", sizes: "32x32" },
-      { url: "/seo/favicon-alt.png", sizes: "192x192" },
+      { url: "/seo/favicon.png", type: "image/png", sizes: "any" },
     ],
-    apple: "/seo/apple-touch-icon.png",
+    apple: { url: "/seo/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
   },
 };
 
