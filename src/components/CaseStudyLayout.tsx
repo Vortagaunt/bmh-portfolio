@@ -2,6 +2,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "./Reveal";
 
+/**
+ * Render a string with *word* markers converted to italic serif spans —
+ * matches the home page's "roots / exploring / moving" emphasis style.
+ */
+function RichText({ children }: { children: string }) {
+  const parts = children.split(/(\*[^*]+\*)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part.startsWith("*") && part.endsWith("*") && part.length > 2) {
+          return (
+            <span key={i} className="font-serif italic tracking-[-0.01em]">
+              {part.slice(1, -1)}
+            </span>
+          );
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </>
+  );
+}
+
 export interface CaseStudyMeta {
   label: string;
   value: string;
@@ -56,7 +78,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
 
         <Reveal variant="up" delay={240} duration={1100}>
           <p className="mt-8 max-w-[640px] text-[20px] leading-[1.45] text-[#181818]/85">
-            {data.subtitle}
+            <RichText>{data.subtitle}</RichText>
           </p>
         </Reveal>
 
@@ -69,7 +91,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                   {m.label}
                 </dt>
                 <dd className="text-[15px] tracking-tight text-[#181818]">
-                  {m.value}
+                  <RichText>{m.value}</RichText>
                 </dd>
               </div>
             ))}
@@ -110,7 +132,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
           className="col-span-12 sm:col-span-8 sm:col-start-5"
         >
           <p className="text-[22px] leading-[1.45] text-[#181818]">
-            {data.overview}
+            <RichText>{data.overview}</RichText>
           </p>
         </Reveal>
       </section>
@@ -148,7 +170,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
             <div className="col-span-12 sm:col-span-8 sm:col-start-5 flex flex-col gap-10">
               <Reveal variant="up" delay={150} duration={1200}>
                 <p className="text-[18px] leading-[1.55] text-[#181818]/90">
-                  {s.body}
+                  <RichText>{s.body}</RichText>
                 </p>
               </Reveal>
               {s.image && (
