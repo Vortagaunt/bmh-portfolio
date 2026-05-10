@@ -27,12 +27,6 @@ export const metadata: Metadata = {
   title: "Bronx (Portfolio 2026)",
   description:
     "Bronx Hanratty, Digital Product Designer. Current: Almabase",
-  icons: {
-    icon: [
-      { url: "/seo/favicon.png", type: "image/png", sizes: "any" },
-    ],
-    apple: { url: "/seo/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-  },
 };
 
 export default function RootLayout({
