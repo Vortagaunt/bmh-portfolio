@@ -9,16 +9,16 @@ const data: CaseStudyData = {
   category: "Documentary · Film",
   title: "8:46 AM",
   subtitle:
-    "A short documentary about the morning of September 11, 2001 — researched, filmed, edited, and color-graded as a personal exploration of memory, archive footage, and quiet reflection.",
+    "A short documentary about the morning of *September 11, 2001* — researched, filmed, edited, and color-graded as a personal exploration of memory, archive footage, and quiet reflection.",
   hero: {
     src: "/images/846am.png",
     alt: "Still frame from the 8:46 AM short documentary",
   },
   meta: [
-    { label: "Year", value: "2024" },
+    { label: "Year", value: "2026" },
     { label: "Role", value: "Director · Editor" },
-    { label: "Tools", value: "Premiere Pro, DaVinci Resolve" },
-    { label: "Runtime", value: "Short · ~6 min" },
+    { label: "Tools", value: "*Premiere Pro*, *After Effects*" },
+    { label: "Runtime", value: "Short · 7 min" },
   ],
   overview:
     "An attempt to tell a familiar story in an unfamiliar register — quiet, slow, and observational. The piece weaves archive material with newly shot footage to create a meditative timeline of a single morning.",
@@ -36,8 +36,8 @@ const data: CaseStudyData = {
       imageAlt: "Edit timeline still",
     },
     {
-      heading: "Color & grade",
-      body: "The grade is split: archival material is left in its original temperature, while newly shot footage is pulled toward a cool, slightly desaturated palette. The contrast is gentle but persistent — a reminder of which footage is from then and which is from now.",
+      heading: "Interviews",
+      body: "With the help of my team, I managed to interview *Carol Lin* and *Jordan Swonger*. *Carol Lin* is a retired *CNN* anchor, being the first person to ever cover the *9/11* attacks. *Jordan Swonger* was a local student called in to be a First Responder at the *Pentagon*. Both of them cover an amazing story, and capture both sides of the aisle.",
     },
   ],
   gallery: [

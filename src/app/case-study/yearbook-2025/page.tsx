@@ -9,23 +9,23 @@ const data: CaseStudyData = {
   category: "Editorial · Print",
   title: "Yearbook 2025",
   subtitle:
-    "Designing the cover, opening spreads, and editorial layout system for the 2024–2025 school yearbook — a 200+ page printed book documenting a year on campus.",
+    "Designing the cover, opening spreads, and editorial layout system for the 2025–2026 school yearbook — a 200+ page printed book documenting a year on campus.",
   hero: {
     src: "/images/yearbook-2025.png",
     alt: "Yearbook 2025 cover and editorial spreads",
   },
   meta: [
-    { label: "Year", value: "2025" },
+    { label: "Year", value: "2026" },
     { label: "Role", value: "Lead Designer" },
-    { label: "Tools", value: "InDesign, Photoshop" },
-    { label: "Format", value: "Hardcover · 200+ pages" },
+    { label: "Tools", value: "*Pictavo*, *Photoshop*" },
+    { label: "Format", value: "Hardcover · 112 pages" },
   ],
   overview:
-    "The 2025 yearbook needed a refresh — a system that could carry hundreds of student photos, candid moments, and event coverage without feeling like a template. The goal was an editorial-quality book the entire student body would actually want to keep.",
+    "For the *DMJ 25-26* yearbook, the theme needed to be represented in the best way possible. The goal was to fully recreate the *Spotify Wrapped* look and feel, while capturing the school year in the most memorable way possible.",
   sections: [
     {
       heading: "The brief",
-      body: "Rebuild the yearbook from the cover down: a fresh visual identity, a flexible grid system, and consistent typographic rules that anyone on the yearbook staff could follow. The book had to feel timeless, photographic, and unmistakably from this year — not a recycled template.",
+      body: "Help design the yearbook from the cover down: a fresh visual identity, a flexible grid system, and consistent typographic rules that anyone on the yearbook staff could follow. The book had to feel timeless, photographic, and unmistakably from this year — not a recycled template.",
       image: "/images/yearbook-2025.png",
       imageAlt: "Yearbook cover concept",
     },
@@ -37,7 +37,7 @@ const data: CaseStudyData = {
     },
     {
       heading: "The cover",
-      body: "The cover needed to feel like a museum catalog, not a yearbook. A single hero photograph, a quiet wordmark, and embossed year numerals on the spine. Restraint did the heavy lifting.",
+      body: "The cover needed to feel like it captured the *Spotify* mood, not a yearbook. One of the new times that judging a book by its cover would be appropriate, because when you saw that for the first time you knew you were in for a treat.",
     },
   ],
   gallery: [
