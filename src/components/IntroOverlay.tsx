@@ -25,9 +25,19 @@ export function IntroOverlay() {
       return;
     }
 
-    // Size mac to ~85% of viewport height so it fills the screen on any display
-    const macH = Math.round(window.innerHeight * 0.85);
-    const macW = Math.round(macH * (540 / 420));
+    // Size mac so it fits BOTH height and width — important on phones in
+    // portrait where 85% of height would be wider than the screen.
+    const macAspect = 540 / 420; // image w / h
+    const maxH = window.innerHeight * 0.85;
+    const maxW = window.innerWidth * 0.85;
+    let macW = maxH * macAspect;
+    let macH = maxH;
+    if (macW > maxW) {
+      macW = maxW;
+      macH = maxW / macAspect;
+    }
+    macW = Math.round(macW);
+    macH = Math.round(macH);
 
     const macLeft = window.innerWidth / 2 - macW / 2;
     const macTop = window.innerHeight / 2 - macH / 2;

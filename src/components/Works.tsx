@@ -32,7 +32,7 @@ const projects: CaseStudy[] = [
 
 export function Works() {
   return (
-    <section id="works" className="relative px-8 pt-32 pb-24">
+    <section id="works" className="relative px-5 pt-24 pb-20 sm:px-8 sm:pt-32 sm:pb-24">
       {/* Heading area with outline backdrop */}
       <div className="relative mx-auto flex max-w-[1280px] flex-col items-center pb-20">
         <Reveal

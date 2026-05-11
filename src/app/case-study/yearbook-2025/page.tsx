@@ -63,7 +63,7 @@ const data: CaseStudyData = {
 
 function ComingSoon() {
   return (
-    <section className="relative flex min-h-[78vh] items-center justify-center px-8">
+    <section className="relative flex min-h-[78vh] items-center justify-center px-5 sm:px-8">
       <div className="relative mx-auto flex max-w-[1100px] flex-col items-center text-center">
         {/* Big outline serif backdrop */}
         <Reveal

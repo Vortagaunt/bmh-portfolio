@@ -53,9 +53,9 @@ export default function RecentWorksPage() {
       <SiteHeader />
 
       <div className="relative z-10">
-        <article className="relative pt-32 pb-32">
+        <article className="relative pt-24 pb-24 sm:pt-32 sm:pb-32">
           {/* Header */}
-          <header className="relative mx-auto max-w-[1280px] px-8">
+          <header className="relative mx-auto max-w-[1280px] px-5 sm:px-8">
             <Reveal variant="up" duration={1000}>
               <div className="flex items-baseline gap-4 text-[12px] tracking-[0.16em] uppercase text-[#181818]/60">
                 <span>(03)</span>
@@ -68,7 +68,7 @@ export default function RecentWorksPage() {
               <h1
                 className="mt-6 font-display text-[#181818]"
                 style={{
-                  fontSize: "clamp(56px, 9vw, 140px)",
+                  fontSize: "clamp(44px, 11vw, 140px)",
                   fontWeight: 600,
                   letterSpacing: "-0.04em",
                   lineHeight: 0.95,
@@ -79,7 +79,7 @@ export default function RecentWorksPage() {
             </Reveal>
 
             <Reveal variant="up" delay={240} duration={1100}>
-              <p className="mt-8 max-w-[640px] text-[20px] leading-[1.45] text-[#181818]/85">
+              <p className="mt-6 max-w-[640px] text-[17px] leading-[1.5] text-[#181818]/85 sm:mt-8 sm:text-[20px] sm:leading-[1.45]">
                 A loose photo gallery of recent projects in{" "}
                 <span className="font-serif italic text-[22px] tracking-[-0.01em]">
                   Photoshop
@@ -94,8 +94,8 @@ export default function RecentWorksPage() {
           </header>
 
           {/* Gallery grid */}
-          <section className="relative mx-auto mt-24 max-w-[1440px] px-8">
-            <div className="grid grid-cols-12 gap-6">
+          <section className="relative mx-auto mt-16 max-w-[1440px] px-5 sm:mt-24 sm:px-8">
+            <div className="grid grid-cols-12 gap-4 sm:gap-6">
               {photos.map((p, i) => (
                 <Reveal
                   key={`${p.src}-${i}`}
@@ -123,13 +123,13 @@ export default function RecentWorksPage() {
           </section>
 
           {/* Back to work */}
-          <section className="relative mx-auto mt-40 max-w-[1280px] px-8">
+          <section className="relative mx-auto mt-24 max-w-[1280px] px-5 sm:mt-40 sm:px-8">
             <Reveal variant="up" duration={1100}>
               <Link
                 href="/#works"
-                className="group block border-t border-[#181818]/15 pt-12"
+                className="group block border-t border-[#181818]/15 pt-8 sm:pt-12"
               >
-                <div className="flex items-baseline justify-between gap-8">
+                <div className="flex items-baseline justify-between gap-6 sm:gap-8">
                   <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
                     Back to Work
                   </span>
@@ -140,7 +140,7 @@ export default function RecentWorksPage() {
                 <h3
                   className="mt-4 font-display text-[#181818] transition-transform duration-700 group-hover:-translate-y-1"
                   style={{
-                    fontSize: "clamp(40px, 6vw, 88px)",
+                    fontSize: "clamp(32px, 8vw, 88px)",
                     fontWeight: 600,
                     letterSpacing: "-0.03em",
                     lineHeight: 1,

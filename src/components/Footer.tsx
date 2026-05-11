@@ -12,8 +12,8 @@ export function Footer() {
   return (
     <footer className="relative">
       {/* Let's talk reveal area */}
-      <div className="relative bg-[#f1f1f1] px-8 pt-16 pb-24 overflow-hidden">
-        <div className="relative mx-auto max-w-[1280px] min-h-[640px]">
+      <div className="relative overflow-hidden bg-[#f1f1f1] px-5 pt-16 pb-20 sm:px-8 sm:pb-24">
+        <div className="relative mx-auto min-h-[520px] max-w-[1280px] sm:min-h-[640px]">
           {/* Outline italic Let's Talk backdrop */}
           <Reveal
             variant="fade"
@@ -70,7 +70,7 @@ export function Footer() {
             variant="up"
             delay={300}
             duration={1100}
-            className="relative z-10 mt-48 flex justify-end gap-12 text-[14px] text-[#181818]"
+            className="relative z-10 mt-24 flex flex-wrap justify-start gap-x-8 gap-y-3 text-[14px] text-[#181818] sm:mt-48 sm:justify-end sm:gap-12"
           >
             {contactLinks.map((link) => (
               <a

@@ -61,7 +61,7 @@ export function Hero() {
   return (
     <section className="relative pt-16 pb-16">
       {/* Name — dynamically sized to fill viewport width */}
-      <div className="w-full px-8">
+      <div className="w-full px-5 sm:px-8">
         <h1
           ref={nameRef}
           className="hero-rise font-display whitespace-nowrap text-[#181818] leading-[0.85] block"
@@ -83,19 +83,19 @@ export function Hero() {
       </div>
 
       {/* Below-headline content row */}
-      <div className="relative mx-auto mt-12 grid max-w-[1280px] px-8 grid-cols-12 gap-6">
+      <div className="relative mx-auto mt-10 grid max-w-[1280px] grid-cols-12 gap-6 px-5 sm:mt-12 sm:px-8">
         {/* Bio paragraph */}
         <div
-          className="col-span-12 sm:col-span-4 hero-rise"
+          className="col-span-12 hero-rise sm:col-span-4"
           style={{ animationDelay: "3.8s" }}
         >
-          <p className="text-[16px] leading-[1.5] text-[#181818]">
+          <p className="text-[15px] leading-[1.5] text-[#181818] sm:text-[16px]">
             Experimental designer getting his{" "}
-            <span className="font-serif italic text-[18px] tracking-[-0.01em]">
+            <span className="font-serif italic text-[17px] tracking-[-0.01em] sm:text-[18px]">
               roots
             </span>{" "}
             in the industry of design. Currently{" "}
-            <span className="font-serif italic text-[18px] tracking-[-0.01em]">
+            <span className="font-serif italic text-[17px] tracking-[-0.01em] sm:text-[18px]">
               exploring
             </span>{" "}
             Figma and Blender.
@@ -103,7 +103,7 @@ export function Hero() {
         </div>
 
         {/* Vintage Mac — revealed by IntroOverlay after it flies into position */}
-        <div className="col-span-12 sm:col-span-5 sm:col-start-5 flex justify-center">
+        <div className="col-span-12 flex justify-center sm:col-span-5 sm:col-start-5">
           <div
             ref={macRef}
             id="hero-mac-target"
@@ -123,15 +123,15 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right column */}
+        {/* Right column — stacks tightly on mobile, justifies on desktop */}
         <div
-          className="col-span-12 sm:col-span-3 sm:col-start-10 flex flex-col justify-between text-right hero-rise"
+          className="col-span-12 hero-rise flex flex-col gap-3 sm:col-span-3 sm:col-start-10 sm:justify-between sm:gap-0 sm:text-right"
           style={{ animationDelay: "4.2s" }}
         >
-          <div className="text-[14px] text-[#181818] tracking-tight">
+          <div className="text-[13px] tracking-tight text-[#181818] sm:text-[14px]">
             Designer · Visionary
           </div>
-          <p className="mt-auto pt-12 text-[13px] leading-[1.55] text-[#181818]/85">
+          <p className="text-[13px] leading-[1.55] text-[#181818]/85 sm:mt-auto sm:pt-12">
             Based in Sarasota, Florida;{" "}
             <span className="font-serif italic text-[15px] tracking-[-0.01em]">
               moving
