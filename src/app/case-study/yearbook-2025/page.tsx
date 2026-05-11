@@ -1,8 +1,16 @@
+import Link from "next/link";
 import { CaseStudyLayout, type CaseStudyData } from "@/components/CaseStudyLayout";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GridBackdrop } from "@/components/GridBackdrop";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Reveal } from "@/components/Reveal";
+
+// ─────────────────────────────────────────────────────────────────────
+//  TOGGLE: flip to false when the yearbook drops to reveal the full
+//  case study. The data/layout below is kept intact and ready.
+// ─────────────────────────────────────────────────────────────────────
+const COMING_SOON = true;
 
 const data: CaseStudyData = {
   index: "01",
@@ -53,6 +61,80 @@ const data: CaseStudyData = {
   },
 };
 
+function ComingSoon() {
+  return (
+    <section className="relative flex min-h-[78vh] items-center justify-center px-8">
+      <div className="relative mx-auto flex max-w-[1100px] flex-col items-center text-center">
+        {/* Big outline serif backdrop */}
+        <Reveal
+          variant="fade"
+          duration={1600}
+          as="span"
+          className="serif-outline absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap"
+          style={{
+            fontSize: "clamp(180px, 26vw, 360px)",
+            lineHeight: 1,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Soon
+        </Reveal>
+
+        <Reveal variant="up" duration={1000}>
+          <div className="relative z-10 flex items-baseline gap-4 text-[12px] tracking-[0.16em] uppercase text-[#181818]/60">
+            <span>(01)</span>
+            <span className="h-px w-10 bg-[#181818]/30" />
+            <span>Editorial · Print</span>
+          </div>
+        </Reveal>
+
+        <Reveal variant="blur" delay={150} duration={1300}>
+          <h1
+            className="relative z-10 mt-6 font-display text-[#181818]"
+            style={{
+              fontSize: "clamp(64px, 11vw, 168px)",
+              fontWeight: 600,
+              letterSpacing: "-0.04em",
+              lineHeight: 0.95,
+            }}
+          >
+            Coming{" "}
+            <span
+              className="font-serif italic"
+              style={{ fontWeight: 400, letterSpacing: "-0.02em" }}
+            >
+              Soon
+            </span>
+          </h1>
+        </Reveal>
+
+        <Reveal variant="up" delay={280} duration={1100}>
+          <p className="relative z-10 mt-10 max-w-[560px] text-[18px] leading-[1.55] text-[#181818]/80">
+            The{" "}
+            <span className="font-serif italic tracking-[-0.01em]">
+              Yearbook 2025
+            </span>{" "}
+            case study is being kept under wraps until the book is in
+            students&apos; hands. Check back once it&apos;s officially out.
+          </p>
+        </Reveal>
+
+        <Reveal variant="up" delay={420} duration={1100}>
+          <Link
+            href="/#works"
+            className="group relative z-10 mt-12 inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-6 py-3 text-[14px] font-medium tracking-tight text-[#181818] transition-all duration-500 hover:bg-[#181818]/[0.08] hover:scale-[1.02]"
+          >
+            <span className="transition-transform duration-500 group-hover:-translate-x-1">
+              ←
+            </span>
+            Back to Work
+          </Link>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export default function YearbookCaseStudy() {
   return (
     <main className="relative isolate min-h-screen w-full bg-[#f1f1f1] text-[#181818]">
@@ -62,7 +144,7 @@ export default function YearbookCaseStudy() {
       </div>
       <SiteHeader />
       <div className="relative z-10">
-        <CaseStudyLayout data={data} />
+        {COMING_SOON ? <ComingSoon /> : <CaseStudyLayout data={data} />}
         <Footer />
       </div>
     </main>
