@@ -6,18 +6,27 @@ import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Reveal } from "@/components/Reveal";
 
-// Placeholder gallery — swap these out for real images when ready.
-// "ratio" controls how each tile is sized in the masonry-ish grid.
+// Sorted from tallest aspect ratio → squares → widest. Last row pairs
+// the narrow "Brothers" tile with the wide "Dirty Sara-Soda" logo so the
+// grid closes out cleanly.
 const photos: { src: string; alt: string; ratio: "square" | "wide" | "tall" | "portrait" }[] = [
-  { src: "/images/brothers.png", alt: "Recent work 01", ratio: "wide" },
-  { src: "/images/brothers.png", alt: "Recent work 02", ratio: "tall" },
-  { src: "/images/brothers.png", alt: "Recent work 03", ratio: "square" },
-  { src: "/images/brothers.png", alt: "Recent work 04", ratio: "portrait" },
-  { src: "/images/brothers.png", alt: "Recent work 05", ratio: "wide" },
-  { src: "/images/brothers.png", alt: "Recent work 06", ratio: "square" },
-  { src: "/images/brothers.png", alt: "Recent work 07", ratio: "tall" },
-  { src: "/images/brothers.png", alt: "Recent work 08", ratio: "portrait" },
-  { src: "/images/brothers.png", alt: "Recent work 09", ratio: "wide" },
+  // Posters / portraits
+  { src: "/images/raized-wrong.png", alt: "Raized Wrong — Louder Than Yesterday tour poster", ratio: "portrait" },
+  { src: "/images/846am-poster.png", alt: "8:46 AM — short documentary poster", ratio: "portrait" },
+  { src: "/images/yarg.png", alt: "YARG band poster", ratio: "portrait" },
+  { src: "/images/earth-cost.png", alt: "How much does the Earth cost? — concert visual", ratio: "portrait" },
+  // Squares
+  { src: "/images/red-portrait.png", alt: "Painted-text portrait single cover", ratio: "square" },
+  { src: "/images/north-west.png", alt: "北西 / Northwest album cover", ratio: "square" },
+  { src: "/images/yeezus.png", alt: "Yeezus CD reinterpretation", ratio: "square" },
+  { src: "/images/kanye-bear.png", alt: "Kanye bear album cover", ratio: "square" },
+  { src: "/images/minidisc.png", alt: "MiniDisc render", ratio: "square" },
+  { src: "/images/guitar-hero-20.png", alt: "Guitar Hero 20 anniversary mark", ratio: "square" },
+  { src: "/images/skydive.png", alt: "Skydive / red sun illustration", ratio: "square" },
+  { src: "/images/vorty.png", alt: "Vorty sticker design", ratio: "square" },
+  // Closer row — narrow + wide pair
+  { src: "/images/brothers.png", alt: "Brothers — early concept work", ratio: "tall" },
+  { src: "/images/dirty-sara-soda.png", alt: "Dirty Sara-Soda Jerks brand mark", ratio: "wide" },
 ];
 
 const ratioClass: Record<string, string> = {
