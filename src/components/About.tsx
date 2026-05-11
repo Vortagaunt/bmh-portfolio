@@ -3,7 +3,7 @@ import { Reveal } from "./Reveal";
 
 export function About() {
   return (
-    <section id="about-me" className="relative bg-[#f1f1f1] px-8 pt-32 pb-24">
+    <section id="about-me" className="relative bg-[#f1f1f1] px-5 pt-24 pb-20 sm:px-8 sm:pt-32 sm:pb-24">
       <div className="relative mx-auto max-w-[1280px]">
         {/* Outline italic About backdrop */}
         <Reveal
