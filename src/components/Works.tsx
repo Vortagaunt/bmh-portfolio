@@ -10,8 +10,7 @@ const projects: CaseStudy[] = [
     slug: "yearbook-2025",
     title: "Yearbook 2025",
     description: "Editorial layout and cover design for the school yearbook",
-    // Coming-soon teaser thumbnail — swap back to "/images/yearbook-2025.png" on reveal.
-    image: "/images/yearbook-coming-soon.png",
+    image: "/images/yearbook-2025.png",
     href: "/case-study/yearbook-2025",
   },
   {

@@ -10,7 +10,7 @@ import { Reveal } from "@/components/Reveal";
 //  TOGGLE: flip to false when the yearbook drops to reveal the full
 //  case study. The data/layout below is kept intact and ready.
 // ─────────────────────────────────────────────────────────────────────
-const COMING_SOON = true;
+const COMING_SOON = false;
 
 const data: CaseStudyData = {
   index: "01",
