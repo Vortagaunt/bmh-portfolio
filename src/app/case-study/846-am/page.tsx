@@ -48,8 +48,8 @@ const data: CaseStudyData = {
     { src: "/images/846am.png", alt: "Closing frame" },
   ],
   next: {
-    slug: "recent-works",
-    title: "Recent Works",
+    slug: "lakewood-ranch-redesign",
+    title: "Lakewood Ranch HS — Redesign Concept",
   },
 };
 
