@@ -50,6 +50,14 @@ export function PageTransition() {
       )
         return;
       if (target.getAttribute("target") === "_blank") return;
+      // Anchor with data-external (or rel=external) is a static HTML page
+      // outside Next.js routing — let the browser navigate normally.
+      if (
+        target.tagName === "A" &&
+        (target.getAttribute("rel")?.includes("external") ||
+          target.hasAttribute("data-external"))
+      )
+        return;
       // Same-path click — let it scroll naturally
       if (href === pathname) return;
 
