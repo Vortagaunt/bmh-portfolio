@@ -20,6 +20,9 @@ const data: CaseStudyData = {
     { label: "Tools", value: "*Figma*, *Illustrator*" },
     { label: "Type", value: "Concept · Self-initiated" },
   ],
+  links: [
+    { label: "Explore the brand system", href: "/lrhs-brand-refresh.html", external: true },
+  ],
   overview:
     "The existing site is dense, dated, and hard to navigate. The goal of this concept was a calmer, editorial-feeling refresh — one that respects the school's tradition while making information for students, parents, and faculty far easier to reach.",
   sections: [

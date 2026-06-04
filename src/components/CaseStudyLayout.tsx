@@ -36,6 +36,13 @@ export interface CaseStudySection {
   imageAlt?: string;
 }
 
+export interface CaseStudyLink {
+  label: string;
+  href: string;
+  /** Set true for hrefs that point to static HTML outside Next.js routing */
+  external?: boolean;
+}
+
 export interface CaseStudyData {
   index: string; // e.g. "01"
   category: string; // e.g. "Editorial"
@@ -47,6 +54,8 @@ export interface CaseStudyData {
   sections: CaseStudySection[];
   gallery: { src: string; alt: string }[];
   next: { slug: string; title: string };
+  /** Optional CTA buttons rendered below the hero image */
+  links?: CaseStudyLink[];
 }
 
 export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
@@ -117,6 +126,42 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
           </div>
         </div>
       </Reveal>
+
+      {/* Optional CTA buttons below the hero image */}
+      {data.links && data.links.length > 0 && (
+        <Reveal variant="up" delay={200} duration={1000}>
+          <div className="mx-auto mt-8 flex w-full max-w-[1440px] flex-wrap justify-center gap-3 px-5 sm:px-8">
+            {data.links.map((link) => {
+              const isExternal =
+                link.external ||
+                link.href.startsWith("http") ||
+                link.href.endsWith(".html");
+              const className =
+                "magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818] transition-all duration-500 hover:bg-[#181818]/[0.08]";
+              const content = (
+                <>
+                  <span>{link.label}</span>
+                  <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+                </>
+              );
+              return isExternal ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  data-external
+                  className={className}
+                >
+                  {content}
+                </a>
+              ) : (
+                <Link key={link.href} href={link.href} className={className}>
+                  {content}
+                </Link>
+              );
+            })}
+          </div>
+        </Reveal>
+      )}
 
       {/* Overview row */}
       <section className="relative mx-auto mt-20 grid max-w-[1280px] grid-cols-12 gap-6 px-5 sm:mt-32 sm:gap-8 sm:px-8">
