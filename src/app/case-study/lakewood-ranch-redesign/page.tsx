@@ -11,7 +11,7 @@ const data: CaseStudyData = {
   subtitle:
     "A speculative rebrand and website concept for *Lakewood Ranch High School* — rethinking the identity, type system, and information architecture from the ground up while keeping the spirit of the school intact.",
   hero: {
-    src: "/images/brothers.png",
+    src: "/images/lrhs-banner.png",
     alt: "Lakewood Ranch High School redesign concept hero",
   },
   meta: [
