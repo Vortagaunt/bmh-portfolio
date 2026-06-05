@@ -21,6 +21,15 @@ export function PageTransition() {
       firstRender.current = false;
       return;
     }
+    // Reset scroll position to the top so every new route starts at the hero.
+    // We try Lenis first (the smooth-scroll engine has its own internal target);
+    // if it isn't ready yet during the route swap, fall back to window.scrollTo.
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number, o?: object) => void } }).__lenis;
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+    }
     // Sit at full opacity briefly so the new page can mount underneath.
     setOpacity(1);
     setActive(true);

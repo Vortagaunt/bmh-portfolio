@@ -13,6 +13,9 @@ export function SmoothScroll() {
       touchMultiplier: 1.4,
     });
 
+    // Expose for PageTransition so it can reset scroll between routes.
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
+
     let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
@@ -23,6 +26,7 @@ export function SmoothScroll() {
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
     };
   }, []);
 
