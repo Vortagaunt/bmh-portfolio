@@ -50,22 +50,25 @@ export function PageTransition() {
       )
         return;
       if (target.getAttribute("target") === "_blank") return;
-      // Anchor with data-external (or rel=external) is a static HTML page
-      // outside Next.js routing — let the browser navigate normally.
-      if (
-        target.tagName === "A" &&
-        (target.getAttribute("rel")?.includes("external") ||
-          target.hasAttribute("data-external"))
-      )
-        return;
       // Same-path click — let it scroll naturally
       if (href === pathname) return;
+
+      // External (static HTML outside Next.js routing) — fade out, then use
+      // a full browser navigation. Otherwise use the Next.js client router.
+      const isExternalStatic =
+        target.tagName === "A" &&
+        (target.getAttribute("rel")?.includes("external") ||
+          target.hasAttribute("data-external"));
 
       e.preventDefault();
       setActive(true);
       setOpacity(1);
       window.setTimeout(() => {
-        router.push(href);
+        if (isExternalStatic) {
+          window.location.href = href;
+        } else {
+          router.push(href);
+        }
       }, 420);
     };
 
