@@ -11,8 +11,8 @@ const data: CaseStudyData = {
   subtitle:
     "A short documentary about the morning of *September 11, 2001* — researched, filmed, edited, and color-graded as a personal exploration of memory, archive footage, and quiet reflection.",
   hero: {
-    src: "/images/846am.png",
-    alt: "Still frame from the 8:46 AM short documentary",
+    src: "/images/846-clock.png",
+    alt: "8:46 AM — title clock display",
   },
   meta: [
     { label: "Year", value: "2026" },
@@ -32,20 +32,22 @@ const data: CaseStudyData = {
     {
       heading: "Edit & pacing",
       body: "The cut moves at the pace of a slow walk. Long holds on still frames, ambient room tone, and a single recurring motif — a wall clock — that ties the timeline together. I deliberately avoided dramatic music until the final 30 seconds, where it enters and immediately resolves.",
-      image: "/images/846am.png",
-      imageAlt: "Edit timeline still",
+      image: "/images/846-breaking-news.png",
+      imageAlt: "Archive news still — Breaking News, World Trade Center Disaster",
     },
     {
       heading: "Interviews",
       body: "With the help of my team, I managed to interview *Carol Lin* and *Jordan Swonger*. *Carol Lin* is a retired *CNN* anchor, being the first person to ever cover the *9/11* attacks. *Jordan Swonger* was a local student called in to be a First Responder at the *Pentagon*. Both of them cover an amazing story, and capture both sides of the aisle.",
+      image: "/images/846-carol-lin.png",
+      imageAlt: "Carol Lin — interview still",
     },
   ],
   gallery: [
-    { src: "/images/846am.png", alt: "Opening title card" },
-    { src: "/images/846am.png", alt: "Archive footage still" },
-    { src: "/images/846am.png", alt: "Wall clock motif" },
-    { src: "/images/846am.png", alt: "Newly shot exterior" },
-    { src: "/images/846am.png", alt: "Closing frame" },
+    { src: "/images/846-clock.png", alt: "8:46 AM — recurring clock motif" },
+    { src: "/images/846-breaking-news.png", alt: "Breaking News — World Trade Center Disaster archive still" },
+    { src: "/images/846-bush.png", alt: "President George W. Bush addressing the nation" },
+    { src: "/images/846-jordan.png", alt: "Jordan Swonger — interview still" },
+    { src: "/images/846-carol-lin.png", alt: "Carol Lin — CNN anchor interview" },
   ],
   next: {
     slug: "lakewood-ranch-redesign",
