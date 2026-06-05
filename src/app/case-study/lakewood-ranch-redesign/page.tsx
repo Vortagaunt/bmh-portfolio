@@ -11,8 +11,8 @@ const data: CaseStudyData = {
   subtitle:
     "A speculative rebrand and website concept for *Lakewood Ranch High School* — rebuilding the Mustang identity from the ground up: marks, color, type, voice, and a working website mockup you can actually click through.",
   hero: {
-    src: "/images/lrhs-banner.png",
-    alt: "Lakewood Ranch High School redesign concept hero",
+    src: "/images/lrhs-hero.png",
+    alt: "The Mustang Brand System — hero",
   },
   meta: [
     { label: "Year", value: "2026" },
@@ -29,26 +29,28 @@ const data: CaseStudyData = {
     {
       heading: "Three pillars",
       body: "The brand rests on three ideas. *Proud* — celebrating scholars, athletes, and artists loudly and often, with game-day energy all year. *Grounded* — welcoming and clear for every family; spirited, never corporate. *Together* — one campus, one community, the brand always pulling in the same direction.",
-      image: "/images/lrhs-banner.png",
+      image: "/images/lrhs-identity.png",
       imageAlt: "Identity pillars — Proud, Grounded, Together",
     },
     {
       heading: "Marks, color & type",
       body: "Five marks for every situation — primary lockup, the *LR* emblem for athletics, a reverse lockup for on-green applications, the Mustang icon, and a stacked wordmark. *Mustang Green* (#033922) leads, partnered with black and white; *Spirit Red* is the only true accent, and it stays rare. Headlines are set in *Industry Black* — uppercase, tracked, unapologetically athletic. *Hanken Grotesk* carries body and UI.",
-      image: "/images/lrhs-banner.png",
-      imageAlt: "Marks, color, and type specimen",
+      image: "/images/lrhs-marks.png",
+      imageAlt: "The five Mustang marks",
     },
     {
       heading: "The system, applied",
       body: "Everything above, rolled into a working website mockup. The homepage opens on a single hero photo, then routes *students*, *families*, and *faculty* into the content they actually came for — bell schedule, lunch, calendar, athletics. Voice rules carry through: headlines shout in caps, body stays warm and plain. Less depth, less guessing.",
+      image: "/images/lrhs-in-use.png",
+      imageAlt: "The system applied — game-day social and website header",
     },
   ],
   gallery: [
-    { src: "/images/lrhs-banner.png", alt: "Mustang Brand System hero" },
-    { src: "/images/lrhs-banner.png", alt: "Logo lockups" },
-    { src: "/images/lrhs-banner.png", alt: "Color system" },
-    { src: "/images/lrhs-banner.png", alt: "Industry Black type specimen" },
-    { src: "/images/lrhs-banner.png", alt: "Voice and rallying cries" },
+    { src: "/images/lrhs-color.png", alt: "Color system — Mustang Green, Spirit Red, Ink, Paper" },
+    { src: "/images/lrhs-type.png", alt: "Type specimen — Industry Black & Hanken Grotesk" },
+    { src: "/images/lrhs-icons.png", alt: "Iconography — Lucide outline set" },
+    { src: "/images/lrhs-voice.png", alt: "Voice — We Do / We Don't" },
+    { src: "/images/lrhs-go-mustangs.png", alt: "Go Mustangs — closing splash" },
   ],
   next: {
     slug: "recent-works",
