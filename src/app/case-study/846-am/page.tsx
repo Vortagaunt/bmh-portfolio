@@ -38,8 +38,6 @@ const data: CaseStudyData = {
     {
       heading: "Interviews",
       body: "With the help of my team, I managed to interview *Carol Lin* and *Jordan Swonger*. *Carol Lin* is a retired *CNN* anchor, being the first person to ever cover the *9/11* attacks. *Jordan Swonger* was a local student called in to be a First Responder at the *Pentagon*. Both of them cover an amazing story, and capture both sides of the aisle.",
-      image: "/images/846-carol-lin.png",
-      imageAlt: "Carol Lin — interview still",
     },
   ],
   gallery: [
