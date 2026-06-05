@@ -43,6 +43,20 @@ export interface CaseStudyLink {
   external?: boolean;
 }
 
+export interface MarkLibraryItem {
+  src: string;
+  label: string;
+  /** "paper" = light tile (default), "ink" = dark tile for white/reverse marks */
+  bg?: "paper" | "ink";
+}
+
+export interface MarkLibrary {
+  kicker?: string;
+  heading?: string;
+  intro?: string;
+  items: MarkLibraryItem[];
+}
+
 export interface CaseStudyData {
   index: string; // e.g. "01"
   category: string; // e.g. "Editorial"
@@ -56,6 +70,8 @@ export interface CaseStudyData {
   next: { slug: string; title: string };
   /** Optional CTA buttons rendered below the hero image */
   links?: CaseStudyLink[];
+  /** Optional captioned grid of mark / logo variants */
+  markLibrary?: MarkLibrary;
 }
 
 export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
@@ -238,6 +254,81 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
           </section>
         ))}
       </div>
+
+      {/* Mark library — captioned grid of logo / mark variants */}
+      {data.markLibrary && data.markLibrary.items.length > 0 && (
+        <section className="relative mx-auto mt-24 max-w-[1440px] px-5 sm:mt-40 sm:px-8">
+          <div className="grid grid-cols-12 items-end gap-6 sm:gap-8">
+            <Reveal variant="up" duration={1100} className="col-span-12 sm:col-span-4">
+              <div className="flex flex-col gap-3">
+                <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+                  {data.markLibrary.kicker ?? "Mark Library"}
+                </span>
+                <h2
+                  className="font-display text-[#181818]"
+                  style={{
+                    fontSize: "clamp(28px, 6vw, 56px)",
+                    fontWeight: 600,
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1,
+                  }}
+                >
+                  {data.markLibrary.heading ?? "Every variant"}
+                </h2>
+              </div>
+            </Reveal>
+            {data.markLibrary.intro && (
+              <Reveal
+                variant="up"
+                delay={120}
+                duration={1100}
+                className="col-span-12 sm:col-span-7 sm:col-start-6"
+              >
+                <p className="text-[16px] leading-[1.55] text-[#181818]/80 sm:text-[17px]">
+                  <RichText>{data.markLibrary.intro}</RichText>
+                </p>
+              </Reveal>
+            )}
+          </div>
+
+          <div className="mt-10 grid grid-cols-12 gap-3 sm:mt-14 sm:gap-4">
+            {data.markLibrary.items.map((m, i) => {
+              const dark = m.bg === "ink" || /white/i.test(m.label);
+              return (
+                <Reveal
+                  key={m.src}
+                  variant="up"
+                  delay={(i % 8) * 50}
+                  duration={1000}
+                  className="col-span-6 sm:col-span-4 lg:col-span-3"
+                >
+                  <figure className="group flex flex-col">
+                    <div
+                      className={`relative w-full overflow-hidden rounded-sm border transition-colors duration-500 ${
+                        dark
+                          ? "border-[#181818]/40 bg-[#0a0a0a] group-hover:border-[#181818]/60"
+                          : "border-[#181818]/10 bg-white group-hover:border-[#181818]/25"
+                      }`}
+                      style={{ aspectRatio: "1 / 1" }}
+                    >
+                      <Image
+                        src={m.src}
+                        alt={m.label}
+                        fill
+                        sizes="(min-width: 1024px) 320px, (min-width: 640px) 33vw, 50vw"
+                        className="object-contain p-6 transition-transform duration-700 group-hover:scale-[1.04] sm:p-8"
+                      />
+                    </div>
+                    <figcaption className="mt-3 text-[11px] tracking-[0.16em] uppercase text-[#181818]/70">
+                      {m.label}
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* Gallery */}
       {data.gallery.length > 0 && (
