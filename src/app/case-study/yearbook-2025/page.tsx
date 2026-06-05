@@ -46,6 +46,8 @@ const data: CaseStudyData = {
     {
       heading: "The cover",
       body: "The cover needed to feel like it captured the *Spotify* mood, not a yearbook. One of the new times that judging a book by its cover would be appropriate, because when you saw that for the first time you knew you were in for a treat.",
+      image: "/images/yearbook-cover.png",
+      imageAlt: "DMJ Wrapped — 2025–2026 yearbook cover proof",
     },
   ],
   gallery: [
