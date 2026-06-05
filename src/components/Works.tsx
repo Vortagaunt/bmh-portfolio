@@ -24,7 +24,7 @@ const projects: CaseStudy[] = [
     slug: "lakewood-ranch-redesign",
     title: "Lakewood Ranch High School Redesign Concept",
     description: "A new Mustang brand system and on-brand website mockup for Lakewood Ranch High School",
-    image: "/images/lrhs-hero.png",
+    image: "/images/lrhs-banner.png",
     href: "/case-study/lakewood-ranch-redesign",
   },
   {
