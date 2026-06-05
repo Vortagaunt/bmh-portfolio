@@ -362,7 +362,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                     alt={img.alt}
                     fill
                     sizes="(min-width: 1024px) 700px, 100vw"
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </div>
               </Reveal>

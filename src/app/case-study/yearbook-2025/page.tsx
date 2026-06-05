@@ -51,11 +51,11 @@ const data: CaseStudyData = {
     },
   ],
   gallery: [
-    { src: "/images/yearbook-2025.png", alt: "Cover detail" },
-    { src: "/images/yearbook-2025.png", alt: "Opening spread" },
-    { src: "/images/yearbook-2025.png", alt: "Section divider" },
-    { src: "/images/yearbook-2025.png", alt: "Sports section" },
-    { src: "/images/yearbook-2025.png", alt: "Senior portraits" },
+    { src: "/images/yearbook-fun-times.png", alt: "Fun Times — dress-up days spread" },
+    { src: "/images/yearbook-mash.png", alt: "MASH — interactive fortune game spread" },
+    { src: "/images/yearbook-tsa.png", alt: "Technology Student Association spread" },
+    { src: "/images/yearbook-soccer.png", alt: "Boys Soccer spread" },
+    { src: "/images/yearbook-science.png", alt: "Science spread" },
   ],
   next: {
     slug: "846-am",
