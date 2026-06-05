@@ -34,8 +34,8 @@ const data: CaseStudyData = {
     {
       heading: "The brief",
       body: "Help design the yearbook from the cover down: a fresh visual identity, a flexible grid system, and consistent typographic rules that anyone on the yearbook staff could follow. The book had to feel timeless, photographic, and unmistakably from this year — not a recycled template.",
-      image: "/images/yearbook-2025.png",
-      imageAlt: "Yearbook cover concept",
+      image: "/images/yearbook-brief.png",
+      imageAlt: "Spotify 2024 Wrapped — the visual reference for the DMJ Wrapped concept",
     },
     {
       heading: "Building the system",
