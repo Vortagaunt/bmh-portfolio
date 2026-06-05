@@ -26,8 +26,8 @@ const data: CaseStudyData = {
     {
       heading: "Research",
       body: "I started with raw archive — news broadcasts, oral histories, and photographs — looking for the specific small details that don't usually make the news montages: a half-finished coffee cup, the weather report from earlier that morning, a child's drawing. The thesis was that the texture of an ordinary day is what makes the story land.",
-      image: "/images/846am.png",
-      imageAlt: "Research mood board",
+      image: "/images/846-research.png",
+      imageAlt: "Understanding 9/11 — Television News Archive timeline grid",
     },
     {
       heading: "Edit & pacing",
