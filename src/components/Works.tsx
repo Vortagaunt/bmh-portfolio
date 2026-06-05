@@ -17,7 +17,7 @@ const projects: CaseStudy[] = [
     slug: "846-am",
     title: "“8:46 AM” Short Documentary",
     description: "Filming and editing a documentary short on the 9/11 terrorist attacks",
-    image: "/images/846-clock.png",
+    image: "/images/846am.png",
     href: "/case-study/846-am",
   },
   {
