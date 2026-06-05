@@ -9,7 +9,7 @@ const data: CaseStudyData = {
   category: "Brand · Web Concept",
   title: "Lakewood Ranch HS — Redesign Concept",
   subtitle:
-    "A speculative rebrand and website concept for *Lakewood Ranch High School* — rethinking the identity, type system, and information architecture from the ground up while keeping the spirit of the school intact.",
+    "A speculative rebrand and website concept for *Lakewood Ranch High School* — rebuilding the Mustang identity from the ground up: marks, color, type, voice, and a working website mockup you can actually click through.",
   hero: {
     src: "/images/lrhs-banner.png",
     alt: "Lakewood Ranch High School redesign concept hero",
@@ -24,31 +24,31 @@ const data: CaseStudyData = {
     { label: "Explore the brand system", href: "/lrhs-brand-refresh.html", external: true },
   ],
   overview:
-    "The existing site is dense, dated, and hard to navigate. The goal of this concept was a calmer, editorial-feeling refresh — one that respects the school's tradition while making information for students, parents, and faculty far easier to reach.",
+    "The existing identity lives in a dozen scattered files and a wordmark that hasn't been refreshed in over a decade. This concept rebuilds the whole system from one confident green, an athletic display face, and a clear voice — then ships it as a live, on-brand website mockup.",
   sections: [
     {
-      heading: "Audit & research",
-      body: "I started by mapping every page on the current site and timing how long it took to complete common tasks — finding the bell schedule, registering for an event, locating a teacher's email. The audit surfaced dozens of dead links, three different navigation patterns, and a homepage that buries the things people actually visit for.",
+      heading: "Three pillars",
+      body: "The brand rests on three ideas. *Proud* — celebrating scholars, athletes, and artists loudly and often, with game-day energy all year. *Grounded* — welcoming and clear for every family; spirited, never corporate. *Together* — one campus, one community, the brand always pulling in the same direction.",
       image: "/images/lrhs-banner.png",
-      imageAlt: "Information architecture sketches",
+      imageAlt: "Identity pillars — Proud, Grounded, Together",
     },
     {
-      heading: "Identity refresh",
-      body: "The new mark keeps the *Mustangs* spirit but trades the heavy 90s wordmark for a tighter, more flexible system. A single display sans for headlines, an italic serif for moments, and a quiet two-color palette that lets photography lead. Every component scales from a phone-screen card up to a full-bleed banner without breaking.",
+      heading: "Marks, color & type",
+      body: "Five marks for every situation — primary lockup, the *LR* emblem for athletics, a reverse lockup for on-green applications, the Mustang icon, and a stacked wordmark. *Mustang Green* (#033922) leads, partnered with black and white; *Spirit Red* is the only true accent, and it stays rare. Headlines are set in *Industry Black* — uppercase, tracked, unapologetically athletic. *Hanken Grotesk* carries body and UI.",
       image: "/images/lrhs-banner.png",
-      imageAlt: "Logo and type system exploration",
+      imageAlt: "Marks, color, and type specimen",
     },
     {
-      heading: "Web concept",
-      body: "The homepage opens on a single hero photo and three clear destinations — *Students*, *Parents*, and *Faculty* — each routing into the content that group actually needs. Bell schedule, lunch menu, calendar, and grades are all surfaced within one click. Less depth, less guessing.",
+      heading: "The system, applied",
+      body: "Everything above, rolled into a working website mockup. The homepage opens on a single hero photo, then routes *students*, *families*, and *faculty* into the content they actually came for — bell schedule, lunch, calendar, athletics. Voice rules carry through: headlines shout in caps, body stays warm and plain. Less depth, less guessing.",
     },
   ],
   gallery: [
-    { src: "/images/lrhs-banner.png", alt: "Homepage concept" },
-    { src: "/images/lrhs-banner.png", alt: "Mobile views" },
-    { src: "/images/lrhs-banner.png", alt: "Type system" },
-    { src: "/images/lrhs-banner.png", alt: "Component library" },
-    { src: "/images/lrhs-banner.png", alt: "Identity application" },
+    { src: "/images/lrhs-banner.png", alt: "Mustang Brand System hero" },
+    { src: "/images/lrhs-banner.png", alt: "Logo lockups" },
+    { src: "/images/lrhs-banner.png", alt: "Color system" },
+    { src: "/images/lrhs-banner.png", alt: "Industry Black type specimen" },
+    { src: "/images/lrhs-banner.png", alt: "Voice and rallying cries" },
   ],
   next: {
     slug: "recent-works",
