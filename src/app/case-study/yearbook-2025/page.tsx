@@ -40,8 +40,8 @@ const data: CaseStudyData = {
     {
       heading: "Building the system",
       body: "I built a 12-column grid with three layout primitives — full-bleed, half-spread, and quote callout — that could be combined into any page type. Type pairs a tight display sans for sections with an italic serif for moments. Every spread is built from the same kit, so the book reads as one document instead of a stack of templates.",
-      image: "/images/yearbook-2025.png",
-      imageAlt: "Spread system",
+      image: "/images/yearbook-system.png",
+      imageAlt: "Yearbook spread system — DMJ 25-26 pages 52-53 in Pictavo",
     },
     {
       heading: "The cover",
