@@ -29,13 +29,13 @@ const data: CaseStudyData = {
     {
       heading: "Audit & research",
       body: "I started by mapping every page on the current site and timing how long it took to complete common tasks — finding the bell schedule, registering for an event, locating a teacher's email. The audit surfaced dozens of dead links, three different navigation patterns, and a homepage that buries the things people actually visit for.",
-      image: "/images/brothers.png",
+      image: "/images/lrhs-banner.png",
       imageAlt: "Information architecture sketches",
     },
     {
       heading: "Identity refresh",
       body: "The new mark keeps the *Mustangs* spirit but trades the heavy 90s wordmark for a tighter, more flexible system. A single display sans for headlines, an italic serif for moments, and a quiet two-color palette that lets photography lead. Every component scales from a phone-screen card up to a full-bleed banner without breaking.",
-      image: "/images/brothers.png",
+      image: "/images/lrhs-banner.png",
       imageAlt: "Logo and type system exploration",
     },
     {
@@ -44,11 +44,11 @@ const data: CaseStudyData = {
     },
   ],
   gallery: [
-    { src: "/images/brothers.png", alt: "Homepage concept" },
-    { src: "/images/brothers.png", alt: "Mobile views" },
-    { src: "/images/brothers.png", alt: "Type system" },
-    { src: "/images/brothers.png", alt: "Component library" },
-    { src: "/images/brothers.png", alt: "Identity application" },
+    { src: "/images/lrhs-banner.png", alt: "Homepage concept" },
+    { src: "/images/lrhs-banner.png", alt: "Mobile views" },
+    { src: "/images/lrhs-banner.png", alt: "Type system" },
+    { src: "/images/lrhs-banner.png", alt: "Component library" },
+    { src: "/images/lrhs-banner.png", alt: "Identity application" },
   ],
   next: {
     slug: "recent-works",

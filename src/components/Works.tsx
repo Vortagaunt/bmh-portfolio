@@ -24,7 +24,7 @@ const projects: CaseStudy[] = [
     slug: "lakewood-ranch-redesign",
     title: "Lakewood Ranch High School Redesign Concept",
     description: "A speculative rebrand and website concept for Lakewood Ranch High School",
-    image: "/images/brothers.png",
+    image: "/images/lrhs-banner.png",
     href: "/case-study/lakewood-ranch-redesign",
   },
   {
