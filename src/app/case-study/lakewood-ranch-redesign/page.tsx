@@ -23,6 +23,7 @@ const data: CaseStudyData = {
   links: [
     { label: "Explore the brand system", href: "/lrhs-brand-refresh.html", external: true },
   ],
+  linksDecorated: true,
   overview:
     "The existing identity lives in a dozen scattered files and a wordmark that hasn't been refreshed in over a decade. This concept rebuilds the whole system from one confident green, an athletic display face, and a clear voice — then ships it as a live, on-brand website mockup.",
   sections: [

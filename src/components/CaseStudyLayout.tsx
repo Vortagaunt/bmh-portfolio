@@ -74,6 +74,8 @@ export interface CaseStudyData {
   next: { slug: string; title: string };
   /** Optional CTA buttons rendered below the hero image */
   links?: CaseStudyLink[];
+  /** When true, scatter hand-drawn arrows pointing at the CTA button(s). */
+  linksDecorated?: boolean;
   /** Optional captioned grid of mark / logo variants */
   markLibrary?: MarkLibrary;
 }
@@ -150,35 +152,65 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
       {/* Optional CTA buttons below the hero image */}
       {data.links && data.links.length > 0 && (
         <Reveal variant="up" delay={200} duration={1000}>
-          <div className="mx-auto mt-8 flex w-full max-w-[1440px] flex-wrap justify-center gap-3 px-5 sm:px-8">
-            {data.links.map((link) => {
-              const isExternal =
-                link.external ||
-                link.href.startsWith("http") ||
-                link.href.endsWith(".html");
-              const className =
-                "magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818] transition-all duration-500 hover:bg-[#181818]/[0.08]";
-              const content = (
+          <div className="mx-auto mt-10 w-full max-w-[1440px] px-5 text-center sm:mt-12 sm:px-8">
+            <div className="relative inline-flex flex-wrap justify-center gap-3">
+              {/* Hand-drawn arrows pointing at the button (desktop only) */}
+              {data.linksDecorated && (
                 <>
-                  <span>{link.label}</span>
-                  <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+                  {/* eslint-disable @next/next/no-img-element */}
+                  <img
+                    src="/images/arrows/arrow-left-bold.png"
+                    alt=""
+                    aria-hidden
+                    className="pointer-events-none absolute left-full top-1/2 hidden w-[86px] -translate-y-1/2 select-none md:block"
+                    style={{ marginLeft: "14px" }}
+                  />
+                  <img
+                    src="/images/arrows/arrow-left-thin.png"
+                    alt=""
+                    aria-hidden
+                    className="pointer-events-none absolute right-full top-1/2 hidden w-[84px] -translate-y-1/2 select-none md:block"
+                    style={{ marginRight: "14px", transform: "translateY(-50%) scaleX(-1)" }}
+                  />
+                  <img
+                    src="/images/arrows/arrow-curve.png"
+                    alt=""
+                    aria-hidden
+                    className="pointer-events-none absolute right-full bottom-full hidden w-[66px] select-none md:block"
+                    style={{ marginRight: "-6px", marginBottom: "-10px", transform: "scaleX(-1)" }}
+                  />
+                  {/* eslint-enable @next/next/no-img-element */}
                 </>
-              );
-              return isExternal ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  data-external
-                  className={className}
-                >
-                  {content}
-                </a>
-              ) : (
-                <Link key={link.href} href={link.href} className={className}>
-                  {content}
-                </Link>
-              );
-            })}
+              )}
+              {data.links.map((link) => {
+                const isExternal =
+                  link.external ||
+                  link.href.startsWith("http") ||
+                  link.href.endsWith(".html");
+                const className =
+                  "magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818] transition-all duration-500 hover:bg-[#181818]/[0.08]";
+                const content = (
+                  <>
+                    <span>{link.label}</span>
+                    <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+                  </>
+                );
+                return isExternal ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    data-external
+                    className={className}
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <Link key={link.href} href={link.href} className={className}>
+                    {content}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </Reveal>
       )}
