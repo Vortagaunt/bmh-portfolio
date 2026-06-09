@@ -9,7 +9,7 @@ const data: CaseStudyData = {
   category: "Brand · Web Concept",
   title: "Lakewood Ranch HS — Redesign Concept",
   subtitle:
-    "A speculative rebrand and website concept for *Lakewood Ranch High School* — rebuilding the Mustang identity from the ground up: marks, color, type, voice, and a working website mockup you can actually click through.",
+    "A speculative rebrand and website concept for *Lakewood Ranch High School* — home of the *Mustangs* in Bradenton, Florida since 1998. Rebuilding the identity from the ground up: marks, color, type, voice, and a working website mockup you can actually click through.",
   hero: {
     src: "/images/lrhs-hero.png",
     alt: "The Mustang Brand System — hero",
@@ -25,17 +25,17 @@ const data: CaseStudyData = {
   ],
   linksDecorated: true,
   overview:
-    "The existing identity lives in a dozen scattered files and a wordmark that hasn't been refreshed in over a decade. This concept rebuilds the whole system from one confident green, an athletic display face, and a clear voice — then ships it as a live, on-brand website mockup.",
+    "Lakewood Ranch High is a ~2,400-student public school in *Bradenton, Florida*, part of the *Manatee County* district. Its identity today lives in a dozen scattered files and a wordmark that hasn't been refreshed in over a decade. This concept rebuilds the whole system from one confident green, an athletic display face, and a clear voice — then ships it as a live, on-brand website mockup.",
   sections: [
     {
       heading: "Three pillars",
-      body: "The brand rests on three ideas. *Proud* — celebrating scholars, athletes, and artists loudly and often, with game-day energy all year. *Grounded* — welcoming and clear for every family; spirited, never corporate. *Together* — one campus, one community, the brand always pulling in the same direction.",
+      body: "The brand rests on three ideas. *Proud* — celebrating scholars, athletes, and artists loudly and often; this is a school that once swept both Florida's top academic and all-sports state honors in a single year, so the brand carries game-day energy all year. *Grounded* — welcoming and clear for every family; spirited, never corporate. *Together* — one campus, one community, the brand always pulling in the same direction.",
       image: "/images/lrhs-identity.png",
       imageAlt: "Identity pillars — Proud, Grounded, Together",
     },
     {
       heading: "Marks, color & type",
-      body: "Five marks for every situation — primary lockup, the *LR* emblem for athletics, a reverse lockup for on-green applications, the Mustang icon, and a stacked wordmark. *Mustang Green* (#033922) leads, partnered with black and white; *Spirit Red* is the only true accent, and it stays rare. Headlines are set in *Industry Black* — uppercase, tracked, unapologetically athletic. *Hanken Grotesk* carries body and UI.",
+      body: "Five marks for every situation — primary lockup, the *LR* emblem for athletics, a reverse lockup for on-green applications, the Mustang icon, and a stacked wordmark. *Mustang Green* (#033922) leads — the school's own dark green — partnered with black and a clean white that stands in for the traditional silver. *Spirit Red* is the only true accent, and it stays rare. Headlines are set in *Industry Black* — uppercase, tracked, unapologetically athletic. *Hanken Grotesk* carries body and UI.",
       image: "/images/lrhs-marks.png",
       imageAlt: "The five Mustang marks",
     },
