@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { FloretIcon } from "./icons";
 import { Reveal } from "./Reveal";
+import { IpodPlayer } from "./IpodPlayer";
 
 const contactLinks = [
   { label: "(Email)", href: "mailto:bronxhanratty@gmail.com" },
@@ -30,26 +30,14 @@ export function Footer() {
             Let&apos;s Talk
           </Reveal>
 
-          {/* Phone.obj mockup + caption row */}
+          {/* iPod music player + caption row */}
           <div className="relative z-10 grid grid-cols-12 gap-6 pt-8">
-            <Reveal variant="scale" duration={1300} className="col-span-12 md:col-span-3 md:col-start-2">
-              <div
-                className="relative w-full max-w-[200px] float-slow"
-                style={{
-                  outline: "1px solid rgba(24,24,24,0.35)",
-                  outlineOffset: "8px",
-                }}
-              >
+            <Reveal variant="scale" duration={1300} className="col-span-12 md:col-span-4 md:col-start-2">
+              <div className="relative w-full max-w-[260px]">
                 <span className="absolute -top-7 left-0 px-1 text-[11px] tracking-tight text-[#181818]/70">
-                  phone.obj
+                  now-playing.obj
                 </span>
-                <Image
-                  src="/images/phone-obj.png"
-                  alt="3D rendered flip phone"
-                  width={200}
-                  height={200}
-                  className="h-auto w-full select-none"
-                />
+                <IpodPlayer />
               </div>
             </Reveal>
 
