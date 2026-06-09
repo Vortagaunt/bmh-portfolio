@@ -5,6 +5,7 @@ import { Hero } from "@/components/Hero";
 import { Works } from "@/components/Works";
 import { Archive } from "@/components/Archive";
 import { ArchivePiece } from "@/components/ArchivePiece";
+import { ExperiencePiece } from "@/components/ExperiencePiece";
 import { About } from "@/components/About";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
@@ -27,6 +28,7 @@ export default function Home() {
         <Works />
         <Archive />
         <ArchivePiece />
+        <ExperiencePiece />
         <About />
         <Footer />
       </div>
