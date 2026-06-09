@@ -1,6 +1,6 @@
 import { FloretIcon } from "./icons";
 import { Reveal } from "./Reveal";
-import { IpodPlayer } from "./IpodPlayer";
+import { IpodDock } from "./IpodDock";
 
 const contactLinks = [
   { label: "(Email)", href: "mailto:bronxhanratty@gmail.com" },
@@ -34,10 +34,10 @@ export function Footer() {
           <div className="relative z-10 grid grid-cols-12 gap-6 pt-8">
             <Reveal variant="scale" duration={1300} className="col-span-12 md:col-span-4 md:col-start-2">
               <div className="relative w-full max-w-[260px]">
-                <span className="absolute -top-7 left-0 px-1 text-[11px] tracking-tight text-[#181818]/70">
+                <span className="absolute -top-7 left-0 z-10 px-1 text-[11px] tracking-tight text-[#181818]/70">
                   now-playing.obj
                 </span>
-                <IpodPlayer />
+                <IpodDock />
               </div>
             </Reveal>
 
