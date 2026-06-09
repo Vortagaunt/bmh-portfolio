@@ -7,10 +7,44 @@ import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
 /**
+ * Read the Industry-Black font once at build time. We embed it directly
+ * inside each text-bearing SVG so the marks render correctly in every
+ * browsing context — iOS Safari is fussy about page @font-face reaching
+ * inline SVGs in time, but a self-contained font in the SVG's own <defs>
+ * works everywhere.
+ */
+const industryFontBase64 = (() => {
+  try {
+    return fs
+      .readFileSync(path.join(process.cwd(), "public", "fonts", "industry-black.otf"))
+      .toString("base64");
+  } catch {
+    return "";
+  }
+})();
+
+const EMBEDDED_FONT_STYLE = industryFontBase64
+  ? `<defs><style type="text/css"><![CDATA[
+      @font-face {
+        font-family: 'Industry-Black';
+        src: url('data:font/otf;base64,${industryFontBase64}') format('opentype');
+        font-weight: 400 900;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Industry';
+        src: url('data:font/otf;base64,${industryFontBase64}') format('opentype');
+        font-weight: 400 900;
+        font-style: normal;
+      }
+    ]]></style></defs>`
+  : "";
+
+/**
  * Read an SVG file from /public at build time and prepare it for inline
- * rendering: strip the XML declaration and force the root <svg> tag to
- * fill its container. Inline SVGs inherit the host page's font context,
- * which is required for the few marks that reference Industry-Black.
+ * rendering: strip the XML declaration, force the root <svg> tag to fill
+ * its container, and inject the Industry-Black font into the SVG's own
+ * <defs> so its <text> elements never fall back to a system serif.
  */
 function readInlineSvg(publicSrc: string): string | undefined {
   try {
@@ -23,7 +57,7 @@ function readInlineSvg(publicSrc: string): string | undefined {
       (_m, attrs: string) => {
         let a = attrs.replace(/\s(width|height)="[^"]*"/gi, "");
         if (!/preserveAspectRatio=/i.test(a)) a += ' preserveAspectRatio="xMidYMid meet"';
-        return `<svg${a} width="100%" height="100%" style="display:block">`;
+        return `<svg${a} width="100%" height="100%" style="display:block">${EMBEDDED_FONT_STYLE}`;
       },
     );
     return svg;
