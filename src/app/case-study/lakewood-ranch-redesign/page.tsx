@@ -1,8 +1,49 @@
-import { CaseStudyLayout, type CaseStudyData } from "@/components/CaseStudyLayout";
+import fs from "fs";
+import path from "path";
+import { CaseStudyLayout, type CaseStudyData, type MarkLibraryItem } from "@/components/CaseStudyLayout";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GridBackdrop } from "@/components/GridBackdrop";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+
+/**
+ * Read an SVG file from /public at build time and prepare it for inline
+ * rendering: strip the XML declaration and force the root <svg> tag to
+ * fill its container. Inline SVGs inherit the host page's font context,
+ * which is required for the few marks that reference Industry-Black.
+ */
+function readInlineSvg(publicSrc: string): string | undefined {
+  try {
+    const fileName = decodeURIComponent(publicSrc.replace(/^\//, ""));
+    const fullPath = path.join(process.cwd(), "public", fileName);
+    let svg = fs.readFileSync(fullPath, "utf8");
+    svg = svg.replace(/<\?xml[^?]*\?>/g, "").trim();
+    svg = svg.replace(
+      /<svg\b([^>]*)>/i,
+      (_m, attrs: string) => {
+        let a = attrs.replace(/\s(width|height)="[^"]*"/gi, "");
+        if (!/preserveAspectRatio=/i.test(a)) a += ' preserveAspectRatio="xMidYMid meet"';
+        return `<svg${a} width="100%" height="100%" style="display:block">`;
+      },
+    );
+    return svg;
+  } catch {
+    return undefined;
+  }
+}
+
+/** Mark labels whose SVGs reference Industry-Black and therefore need inline rendering. */
+const INLINE_MARK_LABELS = new Set([
+  "LRHS Mustang Band",
+  "LRHS Mustangs Ahead 1",
+  "LRHS Mustangs Ahead 2",
+]);
+
+function hydrateMarks(items: MarkLibraryItem[]): MarkLibraryItem[] {
+  return items.map((m) =>
+    INLINE_MARK_LABELS.has(m.label) ? { ...m, svg: readInlineSvg(m.src) } : m,
+  );
+}
 
 const data: CaseStudyData = {
   index: "03",
@@ -73,7 +114,7 @@ const data: CaseStudyData = {
       { src: "/images/lrhs-marks/Old%20LRHS%20Horse.svg", label: "Old LRHS Horse" },
       { src: "/images/lrhs-marks/Old%20LRHS%20Horse%202.svg", label: "Old LRHS Horse 2" },
       { src: "/images/lrhs-marks/Old%20LRHS%20Horse%203.svg", label: "Old LRHS Horse 3" },
-    ],
+    ] as MarkLibraryItem[],
   },
   next: {
     slug: "recent-works",
@@ -82,6 +123,14 @@ const data: CaseStudyData = {
 };
 
 export default function LakewoodRanchCaseStudy() {
+  // Hydrate the mark library at build time so SVGs with text render inline
+  // and have access to Industry-Black loaded by globals.css.
+  const hydratedData: CaseStudyData = {
+    ...data,
+    markLibrary: data.markLibrary
+      ? { ...data.markLibrary, items: hydrateMarks(data.markLibrary.items) }
+      : undefined,
+  };
   return (
     <main className="relative isolate min-h-screen w-full bg-[#f1f1f1] text-[#181818]">
       <SmoothScroll />
@@ -90,7 +139,7 @@ export default function LakewoodRanchCaseStudy() {
       </div>
       <SiteHeader />
       <div className="relative z-10">
-        <CaseStudyLayout data={data} />
+        <CaseStudyLayout data={hydratedData} />
         <Footer />
       </div>
     </main>

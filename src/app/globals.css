@@ -2,6 +2,24 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Industry Black — the LRHS Mustang brand display face. Used inside
+   inline SVG marks (Mustang Band, Mustangs Ahead 1/2) so their text
+   renders correctly instead of falling back to a system serif. */
+@font-face {
+  font-family: "Industry-Black";
+  src: url("/fonts/industry-black.otf") format("opentype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Industry";
+  src: url("/fonts/industry-black.otf") format("opentype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: block;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
