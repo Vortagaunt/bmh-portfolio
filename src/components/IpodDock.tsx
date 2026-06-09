@@ -70,8 +70,9 @@ export function IpodDock() {
         <div
           className="fixed inset-0 z-[9995] flex items-center justify-center p-6"
           style={{
-            background: "rgba(10,10,12,0.72)",
-            backdropFilter: "blur(10px)",
+            background: "rgba(18,18,22,0.55)",
+            backdropFilter: "blur(7px)",
+            WebkitBackdropFilter: "blur(7px)",
             opacity: show ? 1 : 0,
             transition: "opacity .32s ease",
           }}
@@ -81,9 +82,14 @@ export function IpodDock() {
             type="button"
             onClick={close}
             aria-label="Close player"
-            className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-[22px] text-white/80 transition hover:bg-white/10"
+            className="absolute right-6 top-6 flex h-14 w-14 items-center justify-center rounded-full bg-white text-[30px] font-light leading-none text-black shadow-lg transition hover:scale-105"
+            style={{
+              opacity: show ? 1 : 0,
+              transform: show ? "scale(1)" : "scale(0.8)",
+              transition: "opacity .32s ease, transform .32s cubic-bezier(.2,.7,.1,1)",
+            }}
           >
-            ×
+            ✕
           </button>
           <div
             onClick={(e) => e.stopPropagation()}
