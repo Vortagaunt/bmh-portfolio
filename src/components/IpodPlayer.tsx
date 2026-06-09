@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-/* iPod artwork geometry (% of the device image box). */
-const SCREEN = { left: 9.64, top: 5.72, width: 71.93, height: 37.22 };
+/* iPod artwork geometry (% of the device image box), measured from the
+ * blacked-out screen of public/images/ipod.webp. */
+const SCREEN = { left: 7.91, top: 4.78, width: 84.18, height: 38.13 };
 const WHEEL = { cx: 50, cy: 68.5, r: 27, center: 10.5 };
 
 const DALI = "/images/dali-bear.jpg";

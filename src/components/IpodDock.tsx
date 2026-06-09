@@ -48,7 +48,7 @@ export function IpodDock() {
           <div
             className="absolute flex flex-col items-center justify-center overflow-hidden rounded-[5px]"
             style={{
-              left: "9.64%", top: "5.72%", width: "71.93%", height: "37.22%",
+              left: "7.91%", top: "4.78%", width: "84.18%", height: "38.13%",
               containerType: "size", background: "linear-gradient(135deg,#7b54d6,#5a34b0)",
             }}
           >
