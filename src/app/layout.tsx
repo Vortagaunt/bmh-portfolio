@@ -29,6 +29,10 @@ export const metadata: Metadata = {
     "Bronx Hanratty, Digital Product Designer. Current: Almabase",
 };
 
+// Toggle background music site-wide. Flip to `true` to bring it back —
+// the BackgroundMusic component is left fully intact below.
+const MUSIC_ENABLED = false;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,7 +45,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <PageTransition />
-        <BackgroundMusic src="/audio/background.mp3" volume={0.8} />
+        {MUSIC_ENABLED && (
+          <BackgroundMusic src="/audio/background.mp3" volume={0.8} />
+        )}
         {children}
       </body>
     </html>
