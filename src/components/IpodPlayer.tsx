@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import cascadeManifest from "@/data/cascade.json";
 
 /* iPod artwork geometry (% of the device image box), measured from the
  * blacked-out screen of public/images/ipod.webp. */
@@ -12,10 +13,14 @@ const BG = "/audio/background.mp3";
 
 export type Track = { title: string; artist: string; art: string; src: string };
 
-/* Cascade Creations — placeholder track list, real audio swaps into `src`. */
-const CASCADE_TRACKS: Track[] = [
-  "Intro", "Sanity", "Disintegration", "Recovery", "Reverie", "Cascade", "Outro",
-].map((t) => ({ title: t, artist: "Bronx Hanratty", art: DALI, src: BG }));
+/* Cascade Creations — generated from /public/audio/cascade/*.m4a by
+ * scripts/build-cascade.mjs (title, artist, album art read from each file). */
+const CASCADE_TRACKS: Track[] = (cascadeManifest as Track[]).map((t) => ({
+  title: t.title,
+  artist: t.artist,
+  art: t.art || DALI,
+  src: t.src,
+}));
 
 /* Cover Flow albums — covers live in /public/images/cover-flow */
 const COVERS = Array.from({ length: 13 }, (_, i) => ({
