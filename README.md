@@ -89,8 +89,7 @@ src/
 └── types/index.ts                    # CaseStudy interface
 public/
 ├── audio/background.mp3
-├── images/                           # All artwork and photography
-└── seo/                              # Legacy favicon copies (kept for fallback)
+└── images/                           # All artwork and photography
 ```
 
 ## Local development
