@@ -48,10 +48,6 @@ export interface MarkLibraryItem {
   label: string;
   /** "paper" = light tile (default), "ink" = dark tile for white/reverse marks */
   bg?: "paper" | "ink";
-  /** Optional inlined SVG content — used when the mark needs page-level font
-   *  access (e.g. SVGs that reference Industry-Black). When present, the
-   *  layout renders this string instead of <Image> via dangerouslySetInnerHTML. */
-  svg?: string;
 }
 
 export interface MarkLibrary {
@@ -347,21 +343,13 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                       }`}
                       style={{ aspectRatio: "1 / 1" }}
                     >
-                      {m.svg ? (
-                        <div
-                          aria-label={m.label}
-                          className="absolute inset-0 flex items-center justify-center p-6 transition-transform duration-700 group-hover:scale-[1.04] sm:p-8 [&>svg]:h-full [&>svg]:w-full"
-                          dangerouslySetInnerHTML={{ __html: m.svg }}
-                        />
-                      ) : (
-                        <Image
-                          src={m.src}
-                          alt={m.label}
-                          fill
-                          sizes="(min-width: 1024px) 320px, (min-width: 640px) 33vw, 50vw"
-                          className="object-contain p-6 transition-transform duration-700 group-hover:scale-[1.04] sm:p-8"
-                        />
-                      )}
+                      <Image
+                        src={m.src}
+                        alt={m.label}
+                        fill
+                        sizes="(min-width: 1024px) 320px, (min-width: 640px) 33vw, 50vw"
+                        className="object-contain p-6 transition-transform duration-700 group-hover:scale-[1.04] sm:p-8"
+                      />
                     </div>
                     <figcaption className="mt-3 text-[11px] tracking-[0.16em] uppercase text-[#181818]/70">
                       {m.label}
