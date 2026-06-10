@@ -53,3 +53,7 @@ temp/
 
 # Large/imported audio dump — do not commit
 /public/audio/cascade/iPod/
+
+# playlist build temp artifacts
+.cascade-*
+.tmp-docx/
