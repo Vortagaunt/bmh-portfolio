@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { IpodPlayer } from "./IpodPlayer";
 
 /**
@@ -11,6 +12,9 @@ import { IpodPlayer } from "./IpodPlayer";
 export function IpodDock() {
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false); // drives the enter/exit transition
+  const [mounted, setMounted] = useState(false); // portal target only exists client-side
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) return;
@@ -65,8 +69,9 @@ export function IpodDock() {
         </div>
       </button>
 
-      {/* Fullscreen modal */}
-      {open && (
+      {/* Fullscreen modal — portaled to <body> so a transformed ancestor
+          (the footer's Reveal scale wrapper) can't trap position:fixed. */}
+      {open && mounted && createPortal(
         <div
           className="fixed inset-0 z-[9995] flex items-center justify-center p-6"
           style={{
@@ -104,7 +109,8 @@ export function IpodDock() {
               <IpodPlayer />
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );
