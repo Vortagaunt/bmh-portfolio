@@ -1,9 +1,807 @@
 [
-  { "title": "Intro", "artist": "Bronx Hanratty", "album": "Cascade Creations", "art": "/images/dali-bear.jpg", "src": "/audio/background.mp3", "duration": 0 },
-  { "title": "Sanity", "artist": "Bronx Hanratty", "album": "Cascade Creations", "art": "/images/dali-bear.jpg", "src": "/audio/background.mp3", "duration": 0 },
-  { "title": "Disintegration", "artist": "Bronx Hanratty", "album": "Cascade Creations", "art": "/images/dali-bear.jpg", "src": "/audio/background.mp3", "duration": 0 },
-  { "title": "Recovery", "artist": "Bronx Hanratty", "album": "Cascade Creations", "art": "/images/dali-bear.jpg", "src": "/audio/background.mp3", "duration": 0 },
-  { "title": "Reverie", "artist": "Bronx Hanratty", "album": "Cascade Creations", "art": "/images/dali-bear.jpg", "src": "/audio/background.mp3", "duration": 0 },
-  { "title": "Cascade", "artist": "Bronx Hanratty", "album": "Cascade Creations", "art": "/images/dali-bear.jpg", "src": "/audio/background.mp3", "duration": 0 },
-  { "title": "Outro", "artist": "Bronx Hanratty", "album": "Cascade Creations", "art": "/images/dali-bear.jpg", "src": "/audio/background.mp3", "duration": 0 }
+  {
+    "title": "Walk Out Music",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c5/00/19/c500197f-a99c-c3aa-65f2-2a3a78b90630/00198704897481_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/dc/37/ef/dc37ef40-ade1-570a-f571-f306e9976443/mzaf_14357236426714176629.plus.aac.p.m4a"
+  },
+  {
+    "title": "Death of Love",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/44/f7/f244f787-d498-d60d-4a32-3ad34c1f43d6/00198704897474_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b7/78/01/b77801bd-6d8c-4243-eb1e-a80d60c6d4d3/mzaf_12288729917417259215.plus.aac.p.m4a"
+  },
+  {
+    "title": "I Had a Dream She Took My Hand",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/44/f7/f244f787-d498-d60d-4a32-3ad34c1f43d6/00198704897474_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/f7/fa/b9/f7fab9d6-a750-696c-33b5-39208610d22d/mzaf_10305671938486496134.plus.aac.p.m4a"
+  },
+  {
+    "title": "Trying Times",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c5/00/19/c500197f-a99c-c3aa-65f2-2a3a78b90630/00198704897481_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3b/32/c1/3b32c17c-eb33-6a3c-e303-f4ec95bca956/mzaf_3602836602204466892.plus.aac.p.m4a"
+  },
+  {
+    "title": "Make Something Up",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c5/00/19/c500197f-a99c-c3aa-65f2-2a3a78b90630/00198704897481_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2a/68/45/2a684599-0776-5230-5645-a17eeb5f03b8/mzaf_6225356098021187934.plus.aac.p.m4a"
+  },
+  {
+    "title": "Didn’t Come To Argue",
+    "artist": "James Blake & Monica Martin",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/44/f7/f244f787-d498-d60d-4a32-3ad34c1f43d6/00198704897474_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a5/ea/3a/a5ea3a32-8cd7-9cd4-4328-523cd402e64f/mzaf_5692613319595657676.plus.aac.p.m4a"
+  },
+  {
+    "title": "Days Go By",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c5/00/19/c500197f-a99c-c3aa-65f2-2a3a78b90630/00198704897481_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ac/9c/ab/ac9cabc7-c0bd-057b-47eb-b0febe7b9371/mzaf_3108607576524298371.plus.aac.p.m4a"
+  },
+  {
+    "title": "Obsession",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/44/f7/f244f787-d498-d60d-4a32-3ad34c1f43d6/00198704897474_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d6/d5/7e/d6d57e99-79cd-2220-fd5b-3760d6f2c3ed/mzaf_17886969282117521402.plus.aac.p.m4a"
+  },
+  {
+    "title": "Rest Of Your Life",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/44/f7/f244f787-d498-d60d-4a32-3ad34c1f43d6/00198704897474_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/57/a9/62/57a96295-7054-ac38-74e1-4118e6e3a432/mzaf_13280766618816139309.plus.aac.p.m4a"
+  },
+  {
+    "title": "Through The High Wire",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c5/00/19/c500197f-a99c-c3aa-65f2-2a3a78b90630/00198704897481_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/28/49/26/284926c9-c65e-84c5-4647-16eace0baf5a/mzaf_6928408685120175944.plus.aac.p.m4a"
+  },
+  {
+    "title": "Feel It Again",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c5/00/19/c500197f-a99c-c3aa-65f2-2a3a78b90630/00198704897481_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cb/06/93/cb06938e-5013-1abb-7a67-1e0252626e78/mzaf_3067402368293630257.plus.aac.p.m4a"
+  },
+  {
+    "title": "Just A Little Higher",
+    "artist": "James Blake",
+    "album": "Trying Times",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c5/00/19/c500197f-a99c-c3aa-65f2-2a3a78b90630/00198704897481_Cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/99/70/ae/9970aef3-450e-3495-9d1b-9b3c658b8ce6/mzaf_18288865073236073554.plus.aac.p.m4a"
+  },
+  {
+    "title": "Highlights",
+    "artist": "Kanye West",
+    "album": "The Life of Pablo",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ec/fd/e0/ecfde04e-6db2-e55e-41fe-83c87a52b16e/00602547908339.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/a0/87/76/a08776e7-4148-f34a-ac39-cc7fd4210d37/mzaf_14817056405066217033.plus.aac.p.m4a"
+  },
+  {
+    "title": "30 Hours",
+    "artist": "Kanye West",
+    "album": "The Life of Pablo",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ec/fd/e0/ecfde04e-6db2-e55e-41fe-83c87a52b16e/00602547908339.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/1f/b6/dd/1fb6dd0c-44bb-26cf-c549-7028f7dae212/mzaf_6657933395032567805.plus.aac.p.m4a"
+  },
+  {
+    "title": "I Love It",
+    "artist": "Kanye West & Lil Pump",
+    "album": "I Love It - Single",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/01/9a/a9/019aa93f-ff97-1e5a-9980-a9d92ad0eea6/00602577081811.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/19/cd/d8/19cdd874-205c-f4cf-468e-79f0a0558a31/mzaf_12974403542407143216.plus.aac.p.m4a"
+  },
+  {
+    "title": "Amazing (feat. Young Jeezy)",
+    "artist": "Kanye West",
+    "album": "808s & Heartbreak",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/4d/75/2d/4d752db1-022d-f65d-40a1-a2390f01427a/13UAEIM26465.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/26/a8/9f/26a89f3a-baff-dff0-3af3-270461b01629/mzaf_10262825466768554773.plus.aac.p.m4a"
+  },
+  {
+    "title": "SISTERS AND BROTHERS",
+    "artist": "Kanye West",
+    "album": "BULLY",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4b/38/d1/4b38d146-381d-ace2-73df-24074576e62b/656465138828_cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e5/09/9d/e5099d6d-8fe5-4dab-cc9b-dbab86c2d3c5/mzaf_11404680566982211695.plus.aac.p.m4a"
+  },
+  {
+    "title": "DON'T KILL THE PARTY (feat. Quavo & Juicy J)",
+    "artist": "Ty Dolla $ign",
+    "album": "TYCOON",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b4/9f/9e/b49f9e8e-c0d2-4e8e-df0b-ded17bd6679b/075679595744.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/96/58/01/9658016b-845e-62fd-690b-ef574a063c30/mzaf_10330446322001805581.plus.aac.p.m4a"
+  },
+  {
+    "title": "CARNIVAL (INSTRUMENTAL)",
+    "artist": "¥$, Kanye West & Ty Dolla $ign",
+    "album": "CARNIVAL PACK (feat. Rich The Kid, Playboi Carti) - EP",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f6/f7/6f/f6f76fcf-dc13-4d21-e34a-42351a63eb49/355402.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/65/61/64/65616419-21e8-cdcc-b999-855fb14e83f0/mzaf_17260697643263889273.plus.aac.p.m4a"
+  },
+  {
+    "title": "FRIED",
+    "artist": "¥$, Kanye West & Ty Dolla $ign",
+    "album": "VULTURES 2",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bf/db/25/bfdb25f8-1518-d6d9-32ad-053cc9f87d88/357949.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/59/b2/e5/59b2e5cc-b40d-6de0-80fc-1af75da07b63/mzaf_3765337234699639348.plus.aac.p.m4a"
+  },
+  {
+    "title": "FIELD TRIP",
+    "artist": "¥$, Kanye West & Ty Dolla $ign",
+    "album": "VULTURES 2",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bf/db/25/bfdb25f8-1518-d6d9-32ad-053cc9f87d88/357949.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/24/0f/e1/240fe1a0-83c1-ca80-3909-9be0611099a9/mzaf_4935315518745323117.plus.aac.p.m4a"
+  },
+  {
+    "title": "FOREVER ROLLING",
+    "artist": "¥$, Kanye West & Ty Dolla $ign",
+    "album": "VULTURES 2",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bf/db/25/bfdb25f8-1518-d6d9-32ad-053cc9f87d88/357949.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ac/32/90/ac32902d-274e-00e2-9eca-f8a033cebcca/mzaf_1374251289818665618.plus.aac.p.m4a"
+  },
+  {
+    "title": "PROMOTION",
+    "artist": "¥$, Kanye West & Ty Dolla $ign",
+    "album": "VULTURES 2",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bf/db/25/bfdb25f8-1518-d6d9-32ad-053cc9f87d88/357949.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5d/17/90/5d1790e6-13c3-d38d-57b8-66f7e68c9cc5/mzaf_6100398171729732019.plus.aac.p.m4a"
+  },
+  {
+    "title": "LIFESTYLE",
+    "artist": "¥$, Kanye West & Ty Dolla $ign",
+    "album": "VULTURES 2",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/d9/e3/b3/d9e3b369-0fd1-d505-4cf7-0eebada5dbdd/358175.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/27/c7/9b/27c79b85-8c0a-87e5-94e1-24dd6f248aed/mzaf_4982196749806511820.plus.aac.p.m4a"
+  },
+  {
+    "title": "RIVER",
+    "artist": "¥$, Kanye West & Ty Dolla $ign",
+    "album": "VULTURES 2",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bf/db/25/bfdb25f8-1518-d6d9-32ad-053cc9f87d88/357949.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/4e/d4/41/4ed4411c-79c0-8e18-eaad-cb3381a2c39a/mzaf_17830961259574188069.plus.aac.p.m4a"
+  },
+  {
+    "title": "Jail",
+    "artist": "Kanye West",
+    "album": "Donda",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/b6/0d/7e/b60d7e2b-64bc-cf0d-a5e6-45a34955f3c4/mzaf_4136485114443224164.plus.aac.p.m4a"
+  },
+  {
+    "title": "God Breathed",
+    "artist": "Kanye West",
+    "album": "Donda",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/7a/4e/9b/7a4e9b1e-027d-e310-f826-cecd1463aca4/mzaf_6710457262695167625.plus.aac.p.m4a"
+  },
+  {
+    "title": "Off The Grid",
+    "artist": "Kanye West",
+    "album": "Donda (Deluxe)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/cf/a7/f9/cfa7f9be-2d62-89a4-19bf-26276ab39f16/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/94/c6/c6/94c6c6bd-4830-b4e5-d089-9ba69b555197/mzaf_13085138761590314376.plus.aac.p.m4a"
+  },
+  {
+    "title": "Hurricane (feat. Lil Baby)",
+    "artist": "Kanye West & The Weeknd",
+    "album": "Hurricane (feat. Lil Baby) - Single",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d3/36/7f/d3367fc3-f0f5-bb79-db1d-9055ae7631d8/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/50/93/bc/5093bc17-ac00-f6cc-1a8d-54c8573a032f/mzaf_18084264968174378214.plus.aac.p.m4a"
+  },
+  {
+    "title": "Praise God",
+    "artist": "Kanye West",
+    "album": "Donda",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/f4/6d/c0/f46dc03d-f96f-cc56-eb5e-80807cf59d8c/mzaf_2152716061598621824.plus.aac.p.m4a"
+  },
+  {
+    "title": "Believe What I Say",
+    "artist": "Kanye West",
+    "album": "Donda",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/01/fe/b1/01feb148-ce3c-9e3a-3ae6-4c21b6d89eca/mzaf_8184820477365191814.plus.aac.p.m4a"
+  },
+  {
+    "title": "24",
+    "artist": "Kanye West",
+    "album": "Donda",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/22/54/d8/2254d806-2cf7-a5af-e9b3-d8515e563ff5/mzaf_11585312186844738947.plus.aac.p.m4a"
+  },
+  {
+    "title": "Remote Control",
+    "artist": "Kanye West",
+    "album": "Donda",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/ae/d5/bb/aed5bbcc-d19c-83b6-dbb0-ba4560132d79/mzaf_17583644916546991846.plus.aac.p.m4a"
+  },
+  {
+    "title": "Moon",
+    "artist": "Kanye West",
+    "album": "Donda",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/b8/60/28/b86028ff-19ad-d2c0-2b99-7ff587623889/mzaf_11405205832304808728.plus.aac.p.m4a"
+  },
+  {
+    "title": "New Again",
+    "artist": "Kanye West",
+    "album": "Donda",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/63/bc/f4/63bcf4f3-64d9-27b1-65d1-3509d9da88dd/mzaf_10902252135990146041.plus.aac.p.m4a"
+  },
+  {
+    "title": "Pure Souls",
+    "artist": "Kanye West",
+    "album": "Donda (Deluxe)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/cf/a7/f9/cfa7f9be-2d62-89a4-19bf-26276ab39f16/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/96/9d/4b/969d4b51-a3fa-e927-07e9-f316f42fdc28/mzaf_14268774019452477605.plus.aac.p.m4a"
+  },
+  {
+    "title": "Come to Life",
+    "artist": "Kanye West",
+    "album": "Donda",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/02/c9/02/02c90291-2421-feba-fd4a-e65df3480bef/mzaf_3503723774635053799.plus.aac.p.m4a"
+  },
+  {
+    "title": "Life Of The Party",
+    "artist": "Kanye West & André 3000",
+    "album": "Donda (Deluxe)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/cf/a7/f9/cfa7f9be-2d62-89a4-19bf-26276ab39f16/21UMGIM64738.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/bf/16/6d/bf166d62-7c54-01aa-ddcb-3d416ab796fc/mzaf_3477270663550436874.plus.aac.p.m4a"
+  },
+  {
+    "title": "Ni**as in Paris",
+    "artist": "Kanye West & JAŸ-Z",
+    "album": "Watch the Throne (Deluxe Version)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/18/f5/07/18f5070d-b5dc-796c-bce4-42badb41a762/00602527812526.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/16/05/26/1605268b-83ce-6c22-1224-e999d0006a6d/mzaf_4723869812628029401.plus.aac.p.m4a"
+  },
+  {
+    "title": "Otis (feat. Otis Redding)",
+    "artist": "Kanye West & JAŸ-Z",
+    "album": "Watch the Throne (Deluxe Version)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/18/f5/07/18f5070d-b5dc-796c-bce4-42badb41a762/00602527812526.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/fa/1c/5a/fa1c5a36-f118-93f2-0635-ea995dc7a989/mzaf_6042612572591340778.plus.aac.p.m4a"
+  },
+  {
+    "title": "H•a•m",
+    "artist": "Kanye West & JAŸ-Z",
+    "album": "Watch the Throne (Deluxe Version)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/18/f5/07/18f5070d-b5dc-796c-bce4-42badb41a762/00602527812526.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/4c/a9/e0/4ca9e034-471f-6e1a-c2de-c060eb2c1650/mzaf_12718329316230870361.plus.aac.p.m4a"
+  },
+  {
+    "title": "Heard 'Em Say (feat. Adam Levine)",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/ee/ac/ae/eeacaeb1-2323-aece-f0a0-785dd97e23d2/mzaf_11505090353784970353.plus.aac.p.m4a"
+  },
+  {
+    "title": "Touch the Sky (feat. Lupe Fiasco)",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/ec/72/00/ec72002a-713f-f1eb-8ddb-30d2e66a631c/mzaf_14256312986443673368.plus.aac.p.m4a"
+  },
+  {
+    "title": "Drive Slow (feat. Paul Wall & GLC)",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/f0/38/6a/f0386a68-b8ce-7260-dd9c-0c20d98c1d8d/mzaf_6738112531400977163.plus.aac.p.m4a"
+  },
+  {
+    "title": "My Way Home (feat. Common)",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/fc/cc/0d/fccc0d50-5088-dad8-7907-c229643a23d1/mzaf_12255063846280580161.plus.aac.p.m4a"
+  },
+  {
+    "title": "Crack Music (feat. The Game)",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/3a/72/98/3a7298ed-937e-2f81-5f8a-a1c3e8473200/mzaf_13621358628498672369.plus.aac.p.m4a"
+  },
+  {
+    "title": "Roses",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/e9/d3/09/e9d309c3-3d0a-ab47-1861-af0301e5e836/mzaf_2744104127735874041.plus.aac.p.m4a"
+  },
+  {
+    "title": "Addiction",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/cb/de/f4/cbdef40e-2976-d699-44c5-f6738422d4bb/mzaf_2396892204349104861.plus.aac.p.m4a"
+  },
+  {
+    "title": "Diamonds from Sierra Leone (feat. JAŸ-Z)",
+    "artist": "Kanye West featuring Jay-Z",
+    "album": "Diamonds from Sierra Leone (Remix) - Single",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/6f/e0/34/6fe034eb-9c65-2957-9131-e295133a0f02/00602498843123.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/06/fb/d1/06fbd1e5-a081-5e07-2eb3-cf95dc9788b4/mzaf_13473978303514434821.plus.aac.p.m4a"
+  },
+  {
+    "title": "We Major (feat. Nas & Really Doe)",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/0e/ab/20/0eab20c5-b17e-f115-ecb8-4066b057b7eb/mzaf_6356242491650330880.plus.aac.p.m4a"
+  },
+  {
+    "title": "Hey Mama",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/30/66/60/306660bc-c4cf-67c1-ca08-ceb8925cdbe4/mzaf_6257799110454169707.plus.aac.p.m4a"
+  },
+  {
+    "title": "Celebration",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/8e/b0/db/8eb0db7b-a770-36de-9d06-38eb547f617a/mzaf_6973343969806159673.plus.aac.p.m4a"
+  },
+  {
+    "title": "Gone (feat. Consequence & Cam'ron)",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/49/a9/92/49a992bc-601a-79c8-525d-740488940021/mzaf_11028754531877097097.plus.aac.p.m4a"
+  },
+  {
+    "title": "Late",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/a8/75/03/a8750323-d331-7742-1055-fc1ebadfb71d/mzaf_16592034089785789189.plus.aac.p.m4a"
+  },
+  {
+    "title": "We Don't Care",
+    "artist": "Kanye West",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/af/39/f2/af39f216-5131-7d4e-b236-9522f48297e6/mzaf_18332655755765119976.plus.aac.p.m4a"
+  },
+  {
+    "title": "All Falls Down (feat. Syleena Johnson)",
+    "artist": "Kanye West",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/47/a1/3b/47a13ba2-6f63-ced7-24f0-0c3307ee6218/mzaf_6552050600916041999.plus.aac.p.m4a"
+  },
+  {
+    "title": "Spaceship (feat. GLC & Consequence)",
+    "artist": "Kanye West",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/a5/7b/10/a57b1031-77dd-7819-896e-6f3c75717a0c/mzaf_13082274465397725169.plus.aac.p.m4a"
+  },
+  {
+    "title": "Jesus Walks",
+    "artist": "Kanye West",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/9b/76/ed/9b76ed0f-c860-ad5a-af24-96333cd6d3cf/mzaf_8891252582474583741.plus.aac.p.m4a"
+  },
+  {
+    "title": "Never Let Me Down (feat. JAŸ-Z & J. Ivy)",
+    "artist": "Kanye West",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/5c/84/eb/5c84ebd9-793a-ef14-2a3a-d20ffaf5cffc/mzaf_15630759113151080944.plus.aac.p.m4a"
+  },
+  {
+    "title": "Slow Jamz",
+    "artist": "Twista, Kanye West & Jamie Foxx",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/f0/22/e4/f022e4ee-6689-daee-4fc2-de65165b83b8/mzaf_17828723120120514982.plus.aac.p.m4a"
+  },
+  {
+    "title": "Two Words (feat. Mos Def, Freeway & The Boys Choir of Harlem)",
+    "artist": "Kanye West",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/bf/45/2a/bf452a67-2398-b7fe-366d-9821b2ac64f9/mzaf_8755689036498457415.plus.aac.p.m4a"
+  },
+  {
+    "title": "Through the Wire (Mixed)",
+    "artist": "Kanye West",
+    "album": "ALL THAT POWER (DJ Mix)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b8/7a/b8/b87ab8c7-70ba-3aac-8cb7-ffb8d04de997/ba5d20fc-a046-4869-a4a4-037b9270d921.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/44/c2/46/44c2464b-cb4c-c394-33ac-c1683b40723b/mzaf_18234972832870544158.plus.aac.p.m4a"
+  },
+  {
+    "title": "Family Business",
+    "artist": "Kanye West",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c0/6d/90/c06d90cd-b8bd-ea50-bbcf-ad81a8b65553/mzaf_3107251434598868986.plus.aac.p.m4a"
+  },
+  {
+    "title": "Last Call",
+    "artist": "Kanye West",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/0a/45/18/0a451885-d777-d767-0295-fccf680fa8da/mzaf_17954059643550762758.plus.aac.p.m4a"
+  },
+  {
+    "title": "Forever (with Drake, Kanye West & Lil Wayne)",
+    "artist": "Drake, Kanye West, Lil Wayne & Eminem",
+    "album": "Relapse: Refill",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/b2/eb/92/b2eb92ce-84f7-9ccd-709f-063c30de71c3/00602527307749.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/b7/6a/4c/b76a4c18-cb32-852a-3a8f-2242efca6647/mzaf_13462121099244476799.plus.aac.p.m4a"
+  },
+  {
+    "title": "Diet Coke",
+    "artist": "Pusha T",
+    "album": "It's Almost Dry",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/21/2b/b6/212bb692-7772-7b26-220c-144dd3cc2e97/22UMGIM43682.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6b/c6/09/6bc6095f-e7e7-fd2b-3c02-6395b5fe2528/mzaf_3831920406954383788.plus.aac.p.m4a"
+  },
+  {
+    "title": "Don't Like",
+    "artist": "Kanye West, Chief Keef, Pusha T, Big Sean & Jadakiss",
+    "album": "Kanye West Presents Good Music Cruel Summer",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/fb/89/da/fb89da0d-1920-2cef-a965-8421d11e28cc/00602537164431.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/c6/84/4f/c6844fe6-a566-b520-2a02-f23987d68c96/mzaf_10465817734640388651.plus.aac.p.m4a"
+  },
+  {
+    "title": "Clique",
+    "artist": "Kanye West, JAŸ-Z & Big Sean",
+    "album": "Kanye West Presents Good Music Cruel Summer",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/fb/89/da/fb89da0d-1920-2cef-a965-8421d11e28cc/00602537164431.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/26/03/8d/26038de4-420b-5594-0ade-d30ce15ae317/mzaf_14767044500590734198.plus.aac.p.m4a"
+  },
+  {
+    "title": "Mercy",
+    "artist": "Kanye West, Big Sean, Pusha T & 2 Chainz",
+    "album": "Kanye West Presents Good Music Cruel Summer",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/fb/89/da/fb89da0d-1920-2cef-a965-8421d11e28cc/00602537164431.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/3b/e7/11/3be71187-3ad2-cf61-dfed-aafc381fd3f3/mzaf_9072581490573010426.plus.aac.p.m4a"
+  },
+  {
+    "title": "New God Flow",
+    "artist": "Kanye West, Pusha T & Ghostface Killah",
+    "album": "Kanye West Presents Good Music Cruel Summer",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/fb/89/da/fb89da0d-1920-2cef-a965-8421d11e28cc/00602537164431.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/29/5e/18/295e1811-602f-a172-cf57-add9d687111c/mzaf_16781366836785224049.plus.aac.p.m4a"
+  },
+  {
+    "title": "Cold",
+    "artist": "DJ Khaled",
+    "album": "Kanye West Presents Good Music Cruel Summer",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/fb/89/da/fb89da0d-1920-2cef-a965-8421d11e28cc/00602537164431.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/1f/85/1b/1f851b18-ff8f-6fe4-920a-e9aa885878f5/mzaf_11440969188612348680.plus.aac.p.m4a"
+  },
+  {
+    "title": "Starlight",
+    "artist": "Michael Jackson",
+    "album": "Thriller 40",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/73/8c/e1/738ce1db-60bd-eb25-0059-18778c1ca9b3/196589412409.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/53/2d/71/532d71e0-0711-04e1-ee91-67bad8d8fa3a/mzaf_14559800254762168928.plus.aac.p.m4a"
+  },
+  {
+    "title": "Wanna Be Startin' Somethin'",
+    "artist": "Michael Jackson",
+    "album": "Thriller (25th Anniversary) [Deluxe Edition]",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b5/58/d3/b558d32f-24fd-c889-d544-bc4c96f6113e/dj.oinzmlgt.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/27/c3/11/27c31133-7e02-d690-54c5-85d6b073cd52/mzaf_3127967146811245107.plus.aac.p.m4a"
+  },
+  {
+    "title": "Baby Be Mine",
+    "artist": "Michael Jackson",
+    "album": "Thriller",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/32/4f/fd/324ffda2-9e51-8f6a-0c2d-c6fd2b41ac55/074643811224.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b3/9c/8b/b39c8b6b-7a9f-8944-25c2-1348eaadeaac/mzaf_2663676543764471086.plus.aac.p.m4a"
+  },
+  {
+    "title": "The Girl Is Mine (with Paul McCartney)",
+    "artist": "Michael Jackson",
+    "album": "HIStory - PAST, PRESENT AND FUTURE - BOOK I",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c5/8d/b1/c58db1f1-0249-7a52-b58c-6f4eb145b06a/884977149166.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/02/ff/d5/02ffd5e7-596a-9ae7-7545-d1a351d91567/mzaf_3699957093046566266.plus.aac.p.m4a"
+  },
+  {
+    "title": "Thriller",
+    "artist": "Michael Jackson",
+    "album": "Thriller",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/32/4f/fd/324ffda2-9e51-8f6a-0c2d-c6fd2b41ac55/074643811224.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/58/8c/cb/588ccb9a-ab79-4a38-43b5-d4c24ea42859/mzaf_2083607504726567992.plus.aac.p.m4a"
+  },
+  {
+    "title": "Beat It",
+    "artist": "Michael Jackson",
+    "album": "Thriller",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/32/4f/fd/324ffda2-9e51-8f6a-0c2d-c6fd2b41ac55/074643811224.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/88/cd/46/88cd46bd-dba7-1dc2-a63b-e8c111ac4fc3/mzaf_4042555053237612653.plus.aac.p.m4a"
+  },
+  {
+    "title": "Billie Jean",
+    "artist": "Michael Jackson",
+    "album": "Thriller",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/32/4f/fd/324ffda2-9e51-8f6a-0c2d-c6fd2b41ac55/074643811224.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/dc/bc/8a/dcbc8a3e-4ce1-c00d-cc02-eda2212053c7/mzaf_8347559338388601510.plus.aac.p.m4a"
+  },
+  {
+    "title": "Human Nature",
+    "artist": "Michael Jackson",
+    "album": "Thriller (25th Anniversary) [Deluxe Edition]",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b5/58/d3/b558d32f-24fd-c889-d544-bc4c96f6113e/dj.oinzmlgt.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5b/f8/a1/5bf8a1ce-68a9-896b-b9de-abbba22bc65a/mzaf_2514540964270694755.plus.aac.p.m4a"
+  },
+  {
+    "title": "P.Y.T. (Pretty Young Thing)",
+    "artist": "Michael Jackson",
+    "album": "Thriller (25th Anniversary) [Deluxe Edition]",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b5/58/d3/b558d32f-24fd-c889-d544-bc4c96f6113e/dj.oinzmlgt.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/77/2a/a8/772aa865-9267-3d22-3690-fa0e6a3e5dd6/mzaf_15572595923669451473.plus.aac.p.m4a"
+  },
+  {
+    "title": "Don't Stop 'Til You Get Enough",
+    "artist": "Michael Jackson",
+    "album": "Off the Wall",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0c/fe/a3/0cfea324-57c1-d530-5248-9bb591bbd7bf/074643574525.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/02/8b/f4/028bf436-7279-0dd0-4b10-adbf2275ab80/mzaf_7743925534490811276.plus.aac.p.m4a"
+  },
+  {
+    "title": "Rock With You (Single Version)",
+    "artist": "Michael Jackson",
+    "album": "The Essential Michael Jackson",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/3d/9d/38/3d9d3811-71f0-3a0e-1ada-3004e56ff852/827969428726.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a4/56/8d/a4568d3e-8e64-308d-2853-43ad1f0759f7/mzaf_13933541891562040232.plus.aac.p.m4a"
+  },
+  {
+    "title": "Off the Wall",
+    "artist": "Michael Jackson",
+    "album": "Off the Wall",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0c/fe/a3/0cfea324-57c1-d530-5248-9bb591bbd7bf/074643574525.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b2/0d/54/b20d5435-1536-ea69-4e4a-a7485164aa46/mzaf_15141501831603668160.plus.aac.p.m4a"
+  },
+  {
+    "title": "Noid",
+    "artist": "Tyler, The Creator",
+    "album": "CHROMAKOPIA",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b6/ef/ee/b6efeefa-fc99-37d1-ad21-0d769b2a4958/196872796971.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/62/75/31/6275311b-0cb7-ac29-ca21-86175a73be30/mzaf_3754607188088660307.plus.aac.p.m4a"
+  },
+  {
+    "title": "Like Him (feat. Lola Young)",
+    "artist": "Tyler, The Creator",
+    "album": "CHROMAKOPIA",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b6/ef/ee/b6efeefa-fc99-37d1-ad21-0d769b2a4958/196872796971.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f8/16/31/f81631fe-84f4-a48e-518e-4e11e99339c4/mzaf_13519420484368287837.plus.aac.p.m4a"
+  },
+  {
+    "title": "Darling, I (feat. Teezo Touchdown)",
+    "artist": "Tyler, The Creator",
+    "album": "CHROMAKOPIA +",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2c/88/46/2c884679-3a9e-0cb6-779d-559ebfd23781/196873735177.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7e/9d/16/7e9d165f-2caf-84eb-9233-74f5c976d1cf/mzaf_15720649818300798977.plus.aac.p.m4a"
+  },
+  {
+    "title": "Make Them Pay",
+    "artist": "Drake",
+    "album": "ICEMAN",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7f/39/61/7f396123-be56-bc11-eaab-976441808e58/26UMGIM63622.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/09/ba/35/09ba359b-0e4b-17e7-3738-b59353f72841/mzaf_17941044474969674401.plus.aac.p.m4a"
+  },
+  {
+    "title": "What Did I Miss?",
+    "artist": "Drake",
+    "album": "What Did I Miss? - Single",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/9b/ed/a5/9beda5e9-1163-a2bd-c77b-3863bb25fc67/25UMGIM91537.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/85/b1/48/85b1484a-4863-9c11-9e9a-df117a248bb0/mzaf_2929465132030339814.plus.aac.p.m4a"
+  },
+  {
+    "title": "B’s On The Table",
+    "artist": "Drake & 21 Savage",
+    "album": "ICEMAN",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7f/39/61/7f396123-be56-bc11-eaab-976441808e58/26UMGIM63622.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e7/cb/74/e7cb749b-2b9c-3b27-b45a-8e5da2493a49/mzaf_15494222518134088783.plus.aac.p.m4a"
+  },
+  {
+    "title": "National Treasures",
+    "artist": "Drake",
+    "album": "ICEMAN",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7f/39/61/7f396123-be56-bc11-eaab-976441808e58/26UMGIM63622.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/16/04/63/160463ef-20fb-2e17-3b7b-1d916ea40fd2/mzaf_3195755801559110536.plus.aac.p.m4a"
+  },
+  {
+    "title": "E85",
+    "artist": "Don Toliver",
+    "album": "OCTANE",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/00/c1/dd/00c1dd09-3f86-7288-01dc-63b9f4262f57/075679599377.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/17/68/e1/1768e109-c034-115d-affc-01a97c427142/mzaf_4718121937950048317.plus.aac.p.m4a"
+  },
+  {
+    "title": "Devil In a New Dress (feat. Rick Ross)",
+    "artist": "Kanye West & Rick Ross",
+    "album": "My Beautiful Dark Twisted Fantasy (Deluxe Edition)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/37/da/7c/37da7cc5-2b6f-9bb8-30ba-8a8c3be3e16a/00602527584973.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/99/51/21/99512123-3f87-de36-a302-01023f9be601/mzaf_15127288582389669472.plus.aac.p.m4a"
+  },
+  {
+    "title": "BEAUTY AND THE BEAST",
+    "artist": "Kanye West",
+    "album": "BULLY",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4b/38/d1/4b38d146-381d-ace2-73df-24074576e62b/656465138828_cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/43/74/b3/4374b31b-4f4c-7679-2579-3d1fe5e3330b/mzaf_9126685695619964813.plus.aac.p.m4a"
+  },
+  {
+    "title": "Chicago",
+    "artist": "Michael Jackson",
+    "album": "XSCAPE (Deluxe)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/83/15/cc/8315ccdd-5a8d-8344-fa15-72e4cb64145e/886444533171.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/80/bb/dc/80bbdcb7-a325-0ee5-c0ef-d4aaadf2d830/mzaf_14860590645166772884.plus.aac.p.m4a"
+  },
+  {
+    "title": "Ghost Town (feat. PARTYNEXTDOOR)",
+    "artist": "Kanye West",
+    "album": "ye",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/f8/92/62/f892628e-bfd5-2437-c1f5-0ebbd366de09/00602577303098.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/00/92/b1/0092b198-5650-41c2-c5e7-5822487a20a9/mzaf_130702666960893818.plus.aac.p.m4a"
+  },
+  {
+    "title": "Timeless (feat. Playboi Carti) [Remix]",
+    "artist": "The Weeknd & Doechii",
+    "album": "Timeless (Remix) [feat. Playboi Carti] - Single",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2d/dd/f7/2dddf721-a46d-439d-65df-b7ec60d9de7b/25UMGIM63126.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/50/08/a7/5008a7c0-44a1-18df-1967-799e07667836/mzaf_12207321641641321673.plus.aac.p.m4a"
+  },
+  {
+    "title": "White Dress",
+    "artist": "Kanye West",
+    "album": "The Man with the Iron Fists: Soundtrack Instrumental",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music4/v4/43/c4/5b/43c45b98-591f-ad38-9558-36f579c06b11/886444114363.tif/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/3c/74/75/3c747554-1d17-9ffb-7631-c92cff739db4/mzaf_1623159933374077066.plus.aac.p.m4a"
+  },
+  {
+    "title": "PUNCH DRUNK",
+    "artist": "Kanye West",
+    "album": "BULLY",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4b/38/d1/4b38d146-381d-ace2-73df-24074576e62b/656465138828_cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/08/f0/90/08f090b4-eb0d-8889-622c-12ca7dbdaa28/mzaf_11649117354568372269.plus.aac.p.m4a"
+  },
+  {
+    "title": "Pink + White",
+    "artist": "Frank Ocean",
+    "album": "Blonde",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/bb/45/68/bb4568f3-68cd-619d-fbcb-4e179916545d/BlondCover-Final.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/45/a8/a2/45a8a2e0-9516-86b2-66ea-e8b2bf71de68/mzaf_10773372944954067241.plus.aac.p.m4a"
+  },
+  {
+    "title": "SKELETONS",
+    "artist": "Travis Scott",
+    "album": "ASTROWORLD",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/e7/49/8f/e7498f65-df8f-bead-d6e3-2a8d4d642a79/886447235317.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/93/ee/7a/93ee7af9-fec3-f525-344e-ad65bb1292da/mzaf_616635783771499841.plus.aac.p.m4a"
+  },
+  {
+    "title": "I am Iceman",
+    "artist": "La Tribu de Thor",
+    "album": "I am Iceman - Single",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/44/2f/51/442f5108-9459-7202-0e2c-972923a804c6/artwork.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/af/ba/63/afba6354-c019-60a3-6fb8-8ef9f1a51ea6/mzaf_16530954780739237227.plus.aac.p.m4a"
+  },
+  {
+    "title": "Janice STFU",
+    "artist": "Drake",
+    "album": "ICEMAN",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7f/39/61/7f396123-be56-bc11-eaab-976441808e58/26UMGIM63622.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c6/d7/d1/c6d7d1ec-84e6-ef8a-e02a-70d0ebb556be/mzaf_12941739828801829931.plus.aac.p.m4a"
+  },
+  {
+    "title": "4:44",
+    "artist": "JAY-Z",
+    "album": "4:44",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/ee/d1/da/eed1da86-9e2f-a19b-498a-f03622b183b2/00854242007569.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/3e/c1/22/3ec122bc-88e4-6665-c8de-64dd58405055/mzaf_13776268416746720389.plus.aac.p.m4a"
+  },
+  {
+    "title": "Be (Intro) [Instrumental]",
+    "artist": "Common",
+    "album": "Be (20th Anniversary)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/76/3a/3f/763a3fa3-7248-49f6-e951-ec89da544cc3/25UMGIM63717.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/de/09/e3/de09e3be-5276-0803-57fe-ce7340c79646/mzaf_14964414494814242251.plus.aac.p.m4a"
+  },
+  {
+    "title": "Erase Me (feat. Kanye West)",
+    "artist": "Kid Cudi & Kanye West",
+    "album": "Man On the Moon, Vol. II: The Legend of Mr. Rager (Bonus Track Version)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c9/72/b6/c972b69d-29d5-5442-7e40-020a7abddc17/10UMGIM27686.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0e/5f/80/0e5f8014-0942-b384-329a-93403aca8666/mzaf_15363946762256466879.plus.aac.p.m4a"
+  },
+  {
+    "title": "Make Her Say (feat. Kanye West & Common)",
+    "artist": "Kid Cudi",
+    "album": "Man On the Moon: The End of Day (Deluxe Version)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/e1/cb/32/e1cb3268-1ba1-2c11-2f47-92ee469fac6a/09UMGIM33420.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/59/0a/ac/590aac68-06a0-815a-e626-a81779ef08b4/mzaf_11880752890553445006.plus.aac.p.m4a"
+  },
+  {
+    "title": "Pursuit of Happiness (Nightmare) [feat. MGMT & Ratatat]",
+    "artist": "Kid Cudi",
+    "album": "Man On the Moon: The End of Day",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/c5/bb/ae/c5bbae2c-68ce-4efe-e0fa-2ee8769e46f3/09UMGIM33418.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1e/95/b1/1e95b15b-d430-a95b-3790-866a881177ed/mzaf_11438712416923742021.plus.aac.p.m4a"
+  },
+  {
+    "title": "Day 'n' Nite (Nightmare)",
+    "artist": "Kid Cudi",
+    "album": "Man On the Moon: The End of Day (Expanded Version)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/41/06/28/410628df-cab2-2779-f8c8-ef2974ee2dce/09UMGIM33419.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c6/d2/4f/c6d24fed-c256-e14e-20ea-dcac1dd59830/mzaf_7435126812336649045.plus.aac.p.m4a"
+  },
+  {
+    "title": "Selfish",
+    "artist": "Slum Village, Kanye West & John Legend",
+    "album": "Detroit Deli (A Taste of Detroit)",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/9c/30/b7/9c30b77c-b547-b74c-5535-fae78599ba02/13UABIM29343.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/9f/bf/2b/9fbf2b62-fda5-fa1c-c26a-603e1879b094/mzaf_9127132697512912311.plus.aac.p.m4a"
+  },
+  {
+    "title": "Numb / Encore",
+    "artist": "JAŸ-Z & LINKIN PARK",
+    "album": "Collision Course (Bonus Video Version) - EP",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8c/b2/85/8cb28589-a74d-1961-894c-6d7662ee90da/mzi.eaqqjnzg.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d3/8f/de/d38fde51-ef60-1e9b-4657-1e9c76aa38ab/mzaf_12252124278080100584.plus.aac.p.m4a"
+  },
+  {
+    "title": "Supernova (feat. Kanye West)",
+    "artist": "Mr Hudson",
+    "album": "Straight No Chaser",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/2c/2a/4e/2c2a4e7e-7e17-2d88-d084-72f78d409792/00602527107950.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/51/1a/ab/511aabd3-347c-5271-2918-63f94c3e21a3/mzaf_17624084680944325634.plus.aac.p.m4a"
+  },
+  {
+    "title": "GEMINI SEASON",
+    "artist": "Kanye West",
+    "album": "GEMINI SEASON - Single",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f4/6d/41/f46d418c-4494-9410-5473-f608c24b006b/712132021876_cover.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/f5/99/cf/f599cfa6-fda5-cc73-b680-72dc08cfcef0/mzaf_1772245231377078306.plus.aac.p.m4a"
+  },
+  {
+    "title": "Workout Plan",
+    "artist": "Kanye West",
+    "album": "The College Dropout",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/15/05/09/15050911-a2f1-9ebc-0d16-6e8faad1cf80/00602567924326.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/71/24/19/71241975-5cbb-c46c-59b6-b55203db4696/mzaf_2070242098768885541.plus.aac.p.m4a"
+  },
+  {
+    "title": "Bring Me Down (feat. Brandy)",
+    "artist": "Kanye West",
+    "album": "Late Registration",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0e/90/3c/0e903c43-9d81-f91b-90f1-727a58f7fb2c/00602498824030.rgb.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/40/9e/a4/409ea40c-11b8-c500-0393-f659b7633cb1/mzaf_17353997097647663003.plus.aac.p.m4a"
+  },
+  {
+    "title": "Hybrid",
+    "artist": "Annie DiRusso",
+    "album": "God, I Hate This Place - EP",
+    "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2d/c1/e1/2dc1e10c-5829-d670-55bf-74bcb35b1d27/19807810064.jpg/600x600bb.jpg",
+    "src": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f7/e2/ec/f7e2ecf0-f9c7-f8eb-a8f3-6f5c1d53cf36/mzaf_507265134244335129.plus.aac.p.m4a"
+  }
 ]

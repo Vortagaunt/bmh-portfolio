@@ -243,7 +243,7 @@ export function IpodPlayer() {
                 {CASCADE_TRACKS.map((tr, i) => {
                   const on = i === listSel;
                   return (
-                    <div key={tr.title} ref={(n) => { rowRefs.current[i] = n; }}
+                    <div key={`${tr.src}-${i}`} ref={(n) => { rowRefs.current[i] = n; }}
                       className="flex items-center justify-between px-[3.5cqw] text-[5cqw] tracking-tight"
                       style={{ height: "11cqw", color: on ? "#fff" : "#111", background: on ? "linear-gradient(#4aa3ff,#1f6fea)" : "transparent", borderBottom: "0.3cqw solid rgba(0,0,0,.06)" }}>
                       <span className="truncate">{tr.title}</span>
@@ -254,7 +254,7 @@ export function IpodPlayer() {
               </div>
               <div className="flex shrink-0 items-center justify-center" style={{ width: "40%", background: "linear-gradient(135deg,#7b54d6,#5a34b0)", padding: "5cqw" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={DALI} alt="" className="block w-full" style={{ aspectRatio: "1/1", objectFit: "cover", borderRadius: "1cqw", boxShadow: "0 1cqw 3cqw rgba(0,0,0,.4)" }} draggable={false} />
+                <img src={CASCADE_TRACKS[listSel]?.art || DALI} alt="" className="block w-full" style={{ aspectRatio: "1/1", objectFit: "cover", borderRadius: "1cqw", boxShadow: "0 1cqw 3cqw rgba(0,0,0,.4)" }} draggable={false} />
               </div>
             </div>
           )}
