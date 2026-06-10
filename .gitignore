@@ -50,3 +50,6 @@ temp/
 
 # Claude worktrees (internal tooling)
 .claude/worktrees/
+
+# Large/imported audio dump — do not commit
+/public/audio/cascade/iPod/
