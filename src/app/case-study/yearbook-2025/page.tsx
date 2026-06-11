@@ -15,12 +15,12 @@ const COMING_SOON = false;
 const data: CaseStudyData = {
   index: "01",
   category: "Editorial · Print",
-  title: "Yearbook 2025",
+  title: "DMJ Yearbook 2025-2026",
   subtitle:
     "Designing the cover, opening spreads, and editorial layout system for the 2025–2026 school yearbook — a 200+ page printed book documenting a year on campus.",
   hero: {
     src: "/images/yearbook-2025.png",
-    alt: "Yearbook 2025 cover and editorial spreads",
+    alt: "DMJ Yearbook 2025-2026 cover and editorial spreads",
   },
   meta: [
     { label: "Year", value: "2026" },
@@ -114,7 +114,7 @@ function ComingSoon() {
           <p className="relative z-10 mt-10 max-w-[560px] text-[18px] leading-[1.55] text-[#181818]/80">
             The{" "}
             <span className="font-serif italic tracking-[-0.01em]">
-              Yearbook 2025
+              DMJ Yearbook 2025-2026
             </span>{" "}
             case study is being kept under wraps until the book is in
             students&apos; hands. Check back once it&apos;s officially out.
