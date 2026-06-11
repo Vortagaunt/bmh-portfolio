@@ -4,7 +4,7 @@ import { IpodDock } from "./IpodDock";
 
 const contactLinks = [
   { label: "(Email)", href: "mailto:bronxhanratty@gmail.com" },
-  { label: "(LinkedIn)", href: "https://www.linkedin.com/in/bronxhanratty/" },
+  { label: "(LinkedIn)", href: "https://www.linkedin.com/in/bronx-hanratty-57a8212b6" },
   { label: "(x.com)", href: "https://x.com/vortagaunt" },
 ];
 
