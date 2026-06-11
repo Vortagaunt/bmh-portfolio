@@ -8,7 +8,7 @@ import type { CaseStudy } from "@/types";
 const projects: CaseStudy[] = [
   {
     slug: "yearbook-2025",
-    title: "Yearbook 2025",
+    title: "DMJ Yearbook 2025-2026",
     description: "Editorial layout and cover design for the school yearbook",
     image: "/images/yearbook-2025.png",
     href: "/case-study/yearbook-2025",
