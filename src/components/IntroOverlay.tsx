@@ -2,6 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
+// Module-scoped: resets on every full page load (so the intro plays on every
+// visit/refresh), but survives client-side navigation (so returning from a
+// case study via the hello logo skips straight to the soft fade instead).
+let introPlayedThisLoad = false;
+
 export function IntroOverlay() {
   const [phase, setPhase] = useState(0);
   const pathRef = useRef<SVGPathElement>(null);
@@ -15,9 +20,10 @@ export function IntroOverlay() {
   const [helloFlying, setHelloFlying] = useState(false);
 
   useEffect(() => {
-    // Skip the intro on subsequent home-page visits within the same session
-    // (e.g., user clicked into a case study and clicked the hello logo to come back).
-    if (sessionStorage.getItem("intro-played") === "1") {
+    // Skip the intro only on client-side returns to the home page
+    // (e.g., user clicked into a case study and clicked the hello logo to
+    // come back). Full page loads always replay the animation.
+    if (introPlayedThisLoad) {
       setPhase(6);
       document.body.classList.add("intro-skipped");
       const target = document.getElementById("hero-mac-target");
@@ -104,7 +110,7 @@ export function IntroOverlay() {
       // Done
       setTimeout(() => {
         setPhase(6);
-        sessionStorage.setItem("intro-played", "1");
+        introPlayedThisLoad = true;
       }, 5200),
     ];
 
