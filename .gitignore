@@ -51,9 +51,7 @@ temp/
 # Claude worktrees (internal tooling)
 .claude/worktrees/
 
-# Large/imported audio dump — do not commit
-/public/audio/cascade/iPod/
-
 # playlist build temp artifacts
 .cascade-*
 .tmp-docx/
+.tmp-shots/

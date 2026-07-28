@@ -151,14 +151,13 @@ Pushing to `master` triggers a redeploy automatically. The custom domain `bronxh
 
 ## Screenshots
 
-> Add PNGs to `docs/screenshots/` with the filenames below and they'll render inline on GitHub. Suggested set: `home.png` (full hero), `case-study.png` (a section from 8:46 AM), and `recent-works.png` (the gallery grid).
-
-<!--
-| | |
+| The intro | The hero |
 |---|---|
-| ![Home](docs/screenshots/home.png) | ![Hero detail](docs/screenshots/hero-detail.png) |
-| ![Case study](docs/screenshots/case-study.png) | ![Recent Works](docs/screenshots/recent-works.png) |
--->
+| ![Intro animation — vintage Mac drawing "hello"](docs/screenshots/intro.jpg) | ![Home hero — Bronx Hanratty](docs/screenshots/home.jpg) |
+
+| Case study | Recent Works |
+|---|---|
+| ![Lakewood Ranch HS case study](docs/screenshots/case-study.jpg) | ![Recent Works gallery](docs/screenshots/recent-works.jpg) |
 
 
 ## Credits
