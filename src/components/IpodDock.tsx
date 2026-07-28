@@ -75,9 +75,10 @@ export function IpodDock() {
         <div
           className="fixed inset-0 z-[9995] flex items-center justify-center p-6"
           style={{
-            background: "rgba(18,18,22,0.55)",
-            backdropFilter: "blur(7px)",
-            WebkitBackdropFilter: "blur(7px)",
+            // No backdrop-filter: blurring the whole page behind the modal is
+            // a continuous GPU cost (brutal on large/ultrawide screens) and was
+            // lagging the machine during playback. A solid dim reads the same.
+            background: "rgba(14,14,17,0.82)",
             opacity: show ? 1 : 0,
             transition: "opacity .32s ease",
           }}
