@@ -24,9 +24,31 @@ const instrument = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bronxhanratty.me"),
   title: "Bronx (Portfolio 2026)",
   description:
     "Bronx Hanratty, Digital Product Designer. Current: Almabase",
+  openGraph: {
+    title: "Bronx Hanratty — Portfolio 2026",
+    description: "Digital & brand designer based in Sarasota, FL.",
+    url: "/",
+    siteName: "Bronx Hanratty",
+    type: "website",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Bronx Hanratty — digital & brand designer, Portfolio 2026",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bronx Hanratty — Portfolio 2026",
+    description: "Digital & brand designer based in Sarasota, FL.",
+    images: ["/og.jpg"],
+  },
 };
 
 // Toggle background music site-wide. Flip to `true` to bring it back —
