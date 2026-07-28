@@ -38,6 +38,11 @@ function fmt(t: number) {
   if (!isFinite(t) || t < 0) t = 0;
   return `${Math.floor(t / 60)}:${Math.floor(t % 60).toString().padStart(2, "0")}`;
 }
+/* The screen shows art at ~150px CSS; Apple's 600px source is 4x more pixels
+ * than needed and its decode janks song changes. Request the 300px rendition. */
+function smallArt(u: string) {
+  return u.replace("600x600bb", "300x300bb");
+}
 function angleDiff(a: number, b: number) {
   let d = a - b;
   while (d > 180) d -= 360;
@@ -62,6 +67,7 @@ export function IpodPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const wheelRef = useRef<HTMLDivElement>(null);
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lastTimeRef = useRef(0); // gate timeupdate re-renders to ~1Hz
 
   const s = useRef({ top, menuSel, listSel, cf, queue, qi, playing });
   s.current = { top, menuSel, listSel, cf, queue, qi, playing };
@@ -77,6 +83,8 @@ export function IpodPlayer() {
     if (a) {
       a.src = list[i].src;
       a.currentTime = 0;
+      lastTimeRef.current = 0;
+      setTime(0);
       a.play().then(() => setPlaying(true)).catch(() => {});
     }
   }, []);
@@ -96,11 +104,21 @@ export function IpodPlayer() {
     if (a) {
       a.src = q[n].src;
       a.currentTime = 0;
+      lastTimeRef.current = 0;
+      setTime(0);
       a.play().then(() => setPlaying(true)).catch(() => {});
     }
   }, []);
 
   useEffect(() => { rowRefs.current[listSel]?.scrollIntoView({ block: "nearest" }); }, [listSel, top]);
+
+  /* Warm the next/prev track art so skipping never decode-janks. */
+  useEffect(() => {
+    for (const d of [1, -1]) {
+      const t = queue[(qi + d + queue.length) % queue.length];
+      if (t) new window.Image().src = smallArt(t.art);
+    }
+  }, [qi, queue]);
 
   /* ----- click wheel ----- */
   useEffect(() => {
@@ -231,7 +249,7 @@ export function IpodPlayer() {
               </div>
               <div className="flex shrink-0 items-center justify-center" style={{ width: "40%", background: "linear-gradient(135deg,#7b54d6,#5a34b0)", padding: "5cqw" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={menuSel === 0 ? COVERS[cf].cover : menuSel === 2 ? cur.art : DALI} alt="" className="block w-full"
+                <img src={menuSel === 0 ? COVERS[cf].cover : menuSel === 2 ? smallArt(cur.art) : DALI} alt="" className="block w-full"
                   style={{ aspectRatio: "1/1", objectFit: "cover", borderRadius: "1cqw", boxShadow: "0 1cqw 3cqw rgba(0,0,0,.4)" }} draggable={false} />
               </div>
             </div>
@@ -254,7 +272,7 @@ export function IpodPlayer() {
               </div>
               <div className="flex shrink-0 items-center justify-center" style={{ width: "40%", background: "linear-gradient(135deg,#7b54d6,#5a34b0)", padding: "5cqw" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={CASCADE_TRACKS[listSel]?.art || DALI} alt="" className="block w-full" style={{ aspectRatio: "1/1", objectFit: "cover", borderRadius: "1cqw", boxShadow: "0 1cqw 3cqw rgba(0,0,0,.4)" }} draggable={false} />
+                <img src={smallArt(CASCADE_TRACKS[listSel]?.art || DALI)} alt="" className="block w-full" style={{ aspectRatio: "1/1", objectFit: "cover", borderRadius: "1cqw", boxShadow: "0 1cqw 3cqw rgba(0,0,0,.4)" }} draggable={false} />
               </div>
             </div>
           )}
@@ -302,7 +320,7 @@ export function IpodPlayer() {
           {top === "now" && (
             <div className="flex h-full flex-col items-center px-[5cqw] py-[3.5cqw]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={cur.art} alt="" className="block" style={{ width: "34%", aspectRatio: "1/1", objectFit: "cover", borderRadius: "1.4cqw", boxShadow: "0 1cqw 3cqw rgba(0,0,0,.35)" }} draggable={false} />
+              <img src={smallArt(cur.art)} alt="" className="block" style={{ width: "34%", aspectRatio: "1/1", objectFit: "cover", borderRadius: "1.4cqw", boxShadow: "0 1cqw 3cqw rgba(0,0,0,.35)" }} draggable={false} />
               <div className="mt-[2.5cqw] w-full text-center">
                 <div className="truncate text-[5.2cqw] font-semibold tracking-tight text-black">{cur.title}</div>
                 <div className="truncate text-[4.2cqw] text-black/55">{cur.artist}</div>
@@ -326,7 +344,14 @@ export function IpodPlayer() {
 
       <audio ref={audioRef} preload="metadata"
         onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}
-        onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
+        onTimeUpdate={(e) => {
+          // timeupdate fires ~4x/sec; re-render at most ~1Hz (scrubber is 1s-granular)
+          const t = e.currentTarget.currentTime;
+          if (Math.abs(t - lastTimeRef.current) >= 0.9) {
+            lastTimeRef.current = t;
+            setTime(t);
+          }
+        }}
         onLoadedMetadata={(e) => setDur(e.currentTarget.duration || 0)}
         onEnded={() => skip(1)} />
     </div>
