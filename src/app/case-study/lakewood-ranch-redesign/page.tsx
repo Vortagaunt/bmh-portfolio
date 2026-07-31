@@ -1,8 +1,28 @@
+import type { Metadata } from "next";
 import { CaseStudyLayout, type CaseStudyData } from "@/components/CaseStudyLayout";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GridBackdrop } from "@/components/GridBackdrop";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+
+export const metadata: Metadata = {
+  title: "Lakewood Ranch HS — Redesign Concept — Bronx Hanratty",
+  description: "A speculative Mustang brand system and working website mockup for Lakewood Ranch High School.",
+  openGraph: {
+    title: "Lakewood Ranch HS — Redesign Concept — Bronx Hanratty",
+    description: "A speculative Mustang brand system and working website mockup for Lakewood Ranch High School.",
+    url: "/case-study/lakewood-ranch-redesign",
+    siteName: "Bronx Hanratty",
+    type: "article",
+    images: [{ url: "/og/lakewood-ranch-redesign.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lakewood Ranch HS — Redesign Concept — Bronx Hanratty",
+    description: "A speculative Mustang brand system and working website mockup for Lakewood Ranch High School.",
+    images: ["/og/lakewood-ranch-redesign.jpg"],
+  },
+};
 
 const data: CaseStudyData = {
   index: "03",

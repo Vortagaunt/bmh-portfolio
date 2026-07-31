@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -5,6 +6,25 @@ import { GridBackdrop } from "@/components/GridBackdrop";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Reveal } from "@/components/Reveal";
+
+export const metadata: Metadata = {
+  title: "Recent Works — Bronx Hanratty",
+  description: "A gallery of recent projects in Photoshop, Illustrator, and more — posters, album covers, brand marks, and illustrations.",
+  openGraph: {
+    title: "Recent Works — Bronx Hanratty",
+    description: "A gallery of recent projects in Photoshop, Illustrator, and more — posters, album covers, brand marks, and illustrations.",
+    url: "/case-study/recent-works",
+    siteName: "Bronx Hanratty",
+    type: "article",
+    images: [{ url: "/og/recent-works.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Recent Works — Bronx Hanratty",
+    description: "A gallery of recent projects in Photoshop, Illustrator, and more — posters, album covers, brand marks, and illustrations.",
+    images: ["/og/recent-works.jpg"],
+  },
+};
 
 // Sorted from tallest aspect ratio → squares → widest. Last row pairs
 // the narrow "Brothers" tile with the wide "Dirty Sara-Soda" logo so the

@@ -1,8 +1,28 @@
+import type { Metadata } from "next";
 import { CaseStudyLayout, type CaseStudyData } from "@/components/CaseStudyLayout";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GridBackdrop } from "@/components/GridBackdrop";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+
+export const metadata: Metadata = {
+  title: "“8:46 AM” Short Documentary — Bronx Hanratty",
+  description: "A reflective short documentary on the morning of September 11, 2001 — researched, filmed, and edited by Bronx Hanratty.",
+  openGraph: {
+    title: "“8:46 AM” Short Documentary — Bronx Hanratty",
+    description: "A reflective short documentary on the morning of September 11, 2001 — researched, filmed, and edited by Bronx Hanratty.",
+    url: "/case-study/846-am",
+    siteName: "Bronx Hanratty",
+    type: "article",
+    images: [{ url: "/og/846-am.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "“8:46 AM” Short Documentary — Bronx Hanratty",
+    description: "A reflective short documentary on the morning of September 11, 2001 — researched, filmed, and edited by Bronx Hanratty.",
+    images: ["/og/846-am.jpg"],
+  },
+};
 
 const data: CaseStudyData = {
   index: "02",

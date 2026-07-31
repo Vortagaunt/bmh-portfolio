@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CaseStudyLayout, type CaseStudyData } from "@/components/CaseStudyLayout";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -5,6 +6,25 @@ import { GridBackdrop } from "@/components/GridBackdrop";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Reveal } from "@/components/Reveal";
+
+export const metadata: Metadata = {
+  title: "DMJ Yearbook 2025-2026 — Bronx Hanratty",
+  description: "Cover, layout system, and editorial design for Dr. Mona Jain Middle School’s 2025–2026 yearbook — a Spotify Wrapped-inspired book.",
+  openGraph: {
+    title: "DMJ Yearbook 2025-2026 — Bronx Hanratty",
+    description: "Cover, layout system, and editorial design for Dr. Mona Jain Middle School’s 2025–2026 yearbook — a Spotify Wrapped-inspired book.",
+    url: "/case-study/yearbook-2025",
+    siteName: "Bronx Hanratty",
+    type: "article",
+    images: [{ url: "/og/yearbook-2025.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DMJ Yearbook 2025-2026 — Bronx Hanratty",
+    description: "Cover, layout system, and editorial design for Dr. Mona Jain Middle School’s 2025–2026 yearbook — a Spotify Wrapped-inspired book.",
+    images: ["/og/yearbook-2025.jpg"],
+  },
+};
 
 // ─────────────────────────────────────────────────────────────────────
 //  TOGGLE: flip to false when the yearbook drops to reveal the full
