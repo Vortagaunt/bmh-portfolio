@@ -71,6 +71,12 @@ export default function RootLayout({
           <BackgroundMusic src="/audio/background.mp3" volume={0.8} />
         )}
         {children}
+        {/* Cloudflare Web Analytics — privacy-friendly, no cookies */}
+        <script
+          type="module"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "adf5f867c9e547328d72667a902d802c"}'
+        />
       </body>
     </html>
   );
