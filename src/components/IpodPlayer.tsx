@@ -36,7 +36,7 @@ const COVERS = [
   { n: 6, title: "808s & Heartbreak", artist: "Kanye West", match: ["808s"] },
   { n: 7, title: "Man on the Moon", artist: "Kid Cudi", match: ["Man On The Moon"] },
   { n: 8, title: "Thriller", artist: "Michael Jackson", match: ["Thriller"] },
-  { n: 9, title: "SABLE, fABLE", artist: "Bon Iver", match: [] },
+  { n: 9, title: "Donda", artist: "Kanye West", match: ["Donda"] },
   { n: 10, title: "Blonde", artist: "Frank Ocean", match: ["Blonde"] },
   { n: 11, title: "Ten", artist: "Pearl Jam", match: [] },
   { n: 12, title: "Shake Your Money Maker", artist: "The Black Crowes", match: [] },
