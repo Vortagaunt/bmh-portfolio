@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { ZoomImage } from "@/components/ZoomImage";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GridBackdrop } from "@/components/GridBackdrop";
@@ -128,12 +128,14 @@ export default function RecentWorksPage() {
                     className="group relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
                     style={{ aspectRatio: ratioAspect[p.ratio] }}
                   >
-                    <Image
+                    <ZoomImage
                       src={p.src}
                       alt={p.alt}
                       fill
                       sizes="(min-width: 1440px) 700px, (min-width: 768px) 50vw, 100vw"
                       className="card-img-zoom object-cover"
+                      zoomItems={photos.map((x) => ({ src: x.src, alt: x.alt }))}
+                      zoomIndex={i}
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
                   </div>

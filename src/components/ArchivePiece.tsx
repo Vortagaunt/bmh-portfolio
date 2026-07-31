@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ZoomImage } from "./ZoomImage";
 import { Reveal } from "./Reveal";
 
 const steps = [
@@ -95,7 +95,7 @@ export function ArchivePiece() {
           >
             <figure>
               <div className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]" style={{ aspectRatio: "1 / 1" }}>
-                <Image
+                <ZoomImage
                   src="/images/dali-bear.jpg"
                   alt="Dalí Museum — surreal multi-mouthed bear photo-composite"
                   fill

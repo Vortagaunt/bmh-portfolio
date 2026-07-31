@@ -29,7 +29,7 @@ const data: CaseStudyData = {
   category: "Brand · Web Concept",
   title: "Lakewood Ranch HS — Redesign Concept",
   subtitle:
-    "A speculative rebrand and website concept for *Lakewood Ranch High School* — home of the *Mustangs* in Bradenton, Florida since 1998. Rebuilding the identity from the ground up: marks, color, type, voice, and a working website mockup you can actually click through.",
+    "A speculative rebrand and website concept for *Lakewood Ranch High School* — my school, home of the *Mustangs* in Bradenton, Florida since 1998. Rebuilding the identity from the ground up: marks, color, type, voice, and a working website mockup you can actually click through.",
   hero: {
     src: "/images/lrhs-hero.png",
     alt: "The Mustang Brand System — hero",

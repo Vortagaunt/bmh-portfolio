@@ -42,7 +42,7 @@ const experience = [
   {
     when: "2026",
     role: "Brand Concept — Lakewood Ranch High School",
-    org: "Self-initiated",
+    org: "Self-initiated · my school",
     points: [
       "Rebuilt the Mustang identity as a full brand system — marks, color, type, voice — plus a working website mockup.",
     ],
@@ -198,9 +198,11 @@ export default function ResumePage() {
             <div className="col-span-12 sm:col-span-5">
               <h2 className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">Education</h2>
               <p className="mt-4 text-[14px] leading-[1.55] text-[#181818]/85">
-                Dr. Mona Jain Middle School — Bradenton, FL
+                Lakewood Ranch High School — Bradenton, FL
                 <br />
-                <span className="text-[#181818]/60">Currently in 9th grade · Class of 2029</span>
+                <span className="text-[#181818]/60">9th grade · Class of 2030</span>
+                <br />
+                <span className="mt-2 inline-block">Dr. Mona Jain Middle School — through 2026</span>
               </p>
             </div>
           </section>

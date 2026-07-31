@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ZoomImage } from "./ZoomImage";
 import Link from "next/link";
 import { Reveal } from "./Reveal";
 
@@ -133,7 +133,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
             className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
             style={{ aspectRatio: "1.6 / 1" }}
           >
-            <Image
+            <ZoomImage
               src={data.hero.src}
               alt={data.hero.alt}
               fill
@@ -272,7 +272,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                     className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
                     style={{ aspectRatio: "1.5 / 1" }}
                   >
-                    <Image
+                    <ZoomImage
                       src={s.image}
                       alt={s.imageAlt ?? s.heading}
                       fill
@@ -343,12 +343,14 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                       }`}
                       style={{ aspectRatio: "1 / 1" }}
                     >
-                      <Image
+                      <ZoomImage
                         src={m.src}
                         alt={m.label}
                         fill
                         sizes="(min-width: 1024px) 320px, (min-width: 640px) 33vw, 50vw"
                         className="object-contain p-6 transition-transform duration-700 group-hover:scale-[1.04] sm:p-8"
+                        zoomItems={data.markLibrary!.items.map((x) => ({ src: decodeURI(x.src), alt: x.label }))}
+                        zoomIndex={i}
                       />
                     </div>
                     <figcaption className="mt-3 text-[11px] tracking-[0.16em] uppercase text-[#181818]/70">
@@ -389,12 +391,14 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                   className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
                   style={{ aspectRatio: i % 3 === 2 ? "2 / 1" : "1.4 / 1" }}
                 >
-                  <Image
+                  <ZoomImage
                     src={img.src}
                     alt={img.alt}
                     fill
                     sizes="(min-width: 1024px) 700px, 100vw"
                     className="object-cover object-top"
+                    zoomItems={data.gallery}
+                    zoomIndex={i}
                   />
                 </div>
               </Reveal>
