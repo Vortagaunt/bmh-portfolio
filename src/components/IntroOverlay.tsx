@@ -20,6 +20,10 @@ export function IntroOverlay() {
   const [helloFlying, setHelloFlying] = useState(false);
 
   useEffect(() => {
+    // All state updates run inside an rAF callback rather than synchronously
+    // in the effect body (avoids cascading renders; keeps the linter honest).
+    let timers: ReturnType<typeof setTimeout>[] = [];
+    const boot = requestAnimationFrame(() => {
     // Skip the intro only on client-side returns to the home page
     // (e.g., user clicked into a case study and clicked the hello logo to
     // come back). Full page loads always replay the animation.
@@ -65,7 +69,7 @@ export function IntroOverlay() {
       path.style.strokeDashoffset = `${len}`;
     }
 
-    const timers = [
+    timers = [
       // Mac fades in
       setTimeout(() => setPhase(1), 400),
 
@@ -113,8 +117,12 @@ export function IntroOverlay() {
         introPlayedThisLoad = true;
       }, 5200),
     ];
+    });
 
-    return () => timers.forEach(clearTimeout);
+    return () => {
+      cancelAnimationFrame(boot);
+      timers.forEach(clearTimeout);
+    };
   }, []);
 
   if (phase >= 6) return null;
