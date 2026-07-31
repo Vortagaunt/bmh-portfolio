@@ -28,6 +28,13 @@ const projects: CaseStudy[] = [
     href: "/case-study/lakewood-ranch-redesign",
   },
   {
+    slug: "dirty-sara-soda",
+    title: "Dirty Sara-Soda",
+    description: "Launch branding for a family-run mobile dirty-soda stand in Sarasota, FL",
+    image: "/images/dirty-sara-soda.png",
+    href: "/case-study/dirty-sara-soda",
+  },
+  {
     slug: "recent-works",
     title: "Recent Works",
     description: "Recently made projects in Photoshop, Illustrator, and more.",

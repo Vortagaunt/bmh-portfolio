@@ -97,8 +97,8 @@ const data: CaseStudyData = {
     ],
   },
   next: {
-    slug: "recent-works",
-    title: "Recent Works",
+    slug: "dirty-sara-soda",
+    title: "Dirty Sara-Soda",
   },
 };
 
