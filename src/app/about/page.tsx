@@ -36,7 +36,13 @@ const recognition = [
   {
     year: "2026",
     title: "“8:46 AM” — Short Documentary",
-    detail: "Directed and edited a reflective short on the morning of 9/11.",
+    detail:
+      "Directed and edited a reflective short on 9/11 — winner, Manatee Film Rush · Jim Harbin Student Festival.",
+  },
+  {
+    year: "2026",
+    title: "Brand Designer — Dirty Sara-Soda",
+    detail: "Launch mark and identity for a family-run mobile soda business.",
   },
   {
     year: "2026",
@@ -57,6 +63,7 @@ const toolkit = [
 ];
 
 const contact = [
+  { label: "Resume", href: "/resume" },
   { label: "Email", href: "mailto:bronxhanratty@gmail.com" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/bronx-hanratty-57a8212b6" },
   { label: "x.com", href: "https://x.com/vortagaunt" },
