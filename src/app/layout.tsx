@@ -74,6 +74,7 @@ export default function RootLayout({
         {/* Cloudflare Web Analytics — privacy-friendly, no cookies */}
         <script
           type="module"
+          async
           src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "adf5f867c9e547328d72667a902d802c"}'
         />

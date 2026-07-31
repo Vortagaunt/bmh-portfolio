@@ -30,14 +30,24 @@ export function PageTransition() {
     } else {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
     }
-    // Sit at full opacity briefly so the new page can mount underneath.
-    setOpacity(1);
-    setActive(true);
-    const id = requestAnimationFrame(() => {
-      setOpacity(0);
-      setTimeout(() => setActive(false), 600);
+    // Sit at full opacity briefly so the new page can mount underneath, then
+    // fade out. State updates happen inside rAF callbacks (not synchronously
+    // in the effect body) so React never cascades renders mid-commit.
+    let fadeId = 0;
+    let doneId: ReturnType<typeof setTimeout> | undefined;
+    const showId = requestAnimationFrame(() => {
+      setOpacity(1);
+      setActive(true);
+      fadeId = requestAnimationFrame(() => {
+        setOpacity(0);
+        doneId = setTimeout(() => setActive(false), 600);
+      });
     });
-    return () => cancelAnimationFrame(id);
+    return () => {
+      cancelAnimationFrame(showId);
+      cancelAnimationFrame(fadeId);
+      if (doneId) clearTimeout(doneId);
+    };
   }, [pathname]);
 
   // Intercept internal link clicks to fade the overlay IN before routing.

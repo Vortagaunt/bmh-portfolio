@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { IpodPlayer } from "./IpodPlayer";
 
@@ -12,9 +12,10 @@ import { IpodPlayer } from "./IpodPlayer";
 export function IpodDock() {
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false); // drives the enter/exit transition
-  const [mounted, setMounted] = useState(false); // portal target only exists client-side
-
-  useEffect(() => setMounted(true), []);
+  const close = useCallback(() => {
+    setShow(false);
+    window.setTimeout(() => setOpen(false), 320);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -28,13 +29,7 @@ export function IpodDock() {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
-
-  const close = () => {
-    setShow(false);
-    window.setTimeout(() => setOpen(false), 320);
-  };
+  }, [open, close]);
 
   return (
     <>
@@ -71,7 +66,7 @@ export function IpodDock() {
 
       {/* Fullscreen modal — portaled to <body> so a transformed ancestor
           (the footer's Reveal scale wrapper) can't trap position:fixed. */}
-      {open && mounted && createPortal(
+      {open && createPortal(
         <div
           className="fixed inset-0 z-[9995] flex items-center justify-center p-6"
           style={{
