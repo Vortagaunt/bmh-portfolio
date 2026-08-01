@@ -58,6 +58,7 @@ export function ZoomImage({ zoomItems, zoomIndex = 0, ...imgProps }: ZoomImagePr
     <>
       <Image
         {...imgProps}
+        alt={imgProps.alt ?? ""}
         className={`${imgProps.className ?? ""} cursor-zoom-in`}
         onClick={() => {
           setIdx(zoomIndex);
