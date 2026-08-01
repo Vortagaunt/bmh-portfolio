@@ -137,12 +137,8 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
               videoId={data.film.videoId}
               poster={data.film.poster}
               title={data.film.title}
+              caption={data.film.caption}
             />
-            {data.film.caption && (
-              <p className="mt-6 text-center text-[11px] tracking-[0.16em] uppercase text-[#181818]/55">
-                {data.film.caption}
-              </p>
-            )}
           </div>
         </Reveal>
       ) : (
