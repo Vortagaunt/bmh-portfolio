@@ -1,4 +1,5 @@
 import { ZoomImage } from "./ZoomImage";
+import { FilmPlayer } from "./FilmPlayer";
 import Link from "next/link";
 import { Reveal } from "./Reveal";
 
@@ -74,6 +75,8 @@ export interface CaseStudyData {
   linksDecorated?: boolean;
   /** Optional captioned grid of mark / logo variants */
   markLibrary?: MarkLibrary;
+  /** Optional embedded film — renders a CRT set in place of the hero image */
+  film?: { videoId: string; poster: string; title: string; caption?: string };
 }
 
 export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
@@ -126,24 +129,41 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
         </Reveal>
       </header>
 
-      {/* Hero image */}
-      <Reveal variant="scale" delay={120} duration={1400}>
-        <div className="relative mx-auto mt-12 w-full max-w-[1440px] px-5 sm:mt-20 sm:px-8">
-          <div
-            className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
-            style={{ aspectRatio: "1.6 / 1" }}
-          >
-            <ZoomImage
-              src={data.hero.src}
-              alt={data.hero.alt}
-              fill
-              priority
-              sizes="(min-width: 1440px) 1440px, 100vw"
-              className="object-cover"
+      {/* Hero — the film's CRT set when present, otherwise the hero image */}
+      {data.film ? (
+        <Reveal variant="scale" delay={120} duration={1400}>
+          <div className="relative mx-auto mt-12 w-full max-w-[1440px] px-5 sm:mt-20 sm:px-8">
+            <FilmPlayer
+              videoId={data.film.videoId}
+              poster={data.film.poster}
+              title={data.film.title}
             />
+            {data.film.caption && (
+              <p className="mt-6 text-center text-[11px] tracking-[0.16em] uppercase text-[#181818]/55">
+                {data.film.caption}
+              </p>
+            )}
           </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      ) : (
+        <Reveal variant="scale" delay={120} duration={1400}>
+          <div className="relative mx-auto mt-12 w-full max-w-[1440px] px-5 sm:mt-20 sm:px-8">
+            <div
+              className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
+              style={{ aspectRatio: "1.6 / 1" }}
+            >
+              <ZoomImage
+                src={data.hero.src}
+                alt={data.hero.alt}
+                fill
+                priority
+                sizes="(min-width: 1440px) 1440px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </Reveal>
+      )}
 
       {/* Optional CTA buttons below the hero image */}
       {data.links && data.links.length > 0 && (

@@ -29,10 +29,16 @@ const data: CaseStudyData = {
   category: "Documentary · Film",
   title: "8:46 AM",
   subtitle:
-    "A short documentary about the morning of *September 11, 2001* — researched, filmed, edited, and color-graded as a personal exploration of memory, archive footage, and quiet reflection.",
+    "A short documentary about the morning of *September 11, 2001* — researched, filmed, edited, and color-graded as a personal exploration of memory, archive footage, and quiet reflection. *Watch it below.*",
   hero: {
     src: "/images/846-clock.webp",
     alt: "8:46 AM — title clock display",
+  },
+  film: {
+    videoId: "5JL9cPFDxKM",
+    poster: "/images/846-clock.webp",
+    title: "8:46 AM — a short documentary by Bronx Hanratty",
+    caption: "8:46 AM · Short documentary · 2026",
   },
   meta: [
     { label: "Year", value: "2026" },
