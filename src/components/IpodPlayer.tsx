@@ -9,7 +9,7 @@ import { BrickGame, type BrickApi } from "./BrickGame";
 const SCREEN = { left: 7.91, top: 4.78, width: 84.18, height: 38.13 };
 const WHEEL = { cx: 50, cy: 68.5, r: 27, center: 10.5 };
 
-const DALI = "/images/dali-bear.jpg";
+const DALI = "/images/dali-bear.webp";
 
 export type Track = { title: string; artist: string; album?: string; art: string; src: string };
 

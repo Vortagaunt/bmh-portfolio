@@ -52,7 +52,7 @@ export function IpodDock() {
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/dali-bear.jpg" alt="" className="block" draggable={false}
+            <img src="/images/dali-bear.webp" alt="" className="block" draggable={false}
               style={{ width: "40%", aspectRatio: "1/1", objectFit: "cover", borderRadius: "1.5cqw", boxShadow: "0 1cqw 3cqw rgba(0,0,0,.4)" }} />
             <div className="mt-[3cqw] text-center text-white">
               <div className="text-[5cqw] font-semibold tracking-tight">Cascade Creations</div>

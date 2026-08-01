@@ -112,7 +112,7 @@ export function Hero() {
           >
             <div className="float-slow">
               <Image
-                src="/images/vintage-mac.png"
+                src="/images/vintage-mac.webp"
                 alt="Vintage Macintosh with hello handwritten on screen"
                 width={540}
                 height={420}
