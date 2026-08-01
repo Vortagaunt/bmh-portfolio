@@ -1,12 +1,29 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export function Hero() {
   const nameRef = useRef<HTMLHeadingElement>(null);
   const macRef = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState(120);
+  const router = useRouter();
+
+  // Secret: seven quick clicks on the Mac opens the vault gate.
+  const secretRef = useRef({ count: 0, last: 0 });
+  const [macPulse, setMacPulse] = useState(0);
+  const onMacClick = () => {
+    const now = Date.now();
+    const s = secretRef.current;
+    s.count = now - s.last < 1500 ? s.count + 1 : 1;
+    s.last = now;
+    setMacPulse((p) => p + 1);
+    if (s.count >= 7) {
+      s.count = 0;
+      router.push("/secret");
+    }
+  };
 
   useEffect(() => {
     const fit = () => {
@@ -111,14 +128,21 @@ export function Hero() {
             style={{ opacity: 0 }}
           >
             <div className="float-slow">
-              <Image
-                src="/images/vintage-mac.webp"
-                alt="Vintage Macintosh with hello handwritten on screen"
-                width={540}
-                height={420}
-                priority
-                className="w-full h-auto select-none"
-              />
+              {/* Seventh click opens the vault gate — no pointer cursor; secrets stay secret. */}
+              <div
+                onClick={onMacClick}
+                className={macPulse ? "mac-pulse" : undefined}
+                key={macPulse}
+              >
+                <Image
+                  src="/images/vintage-mac.webp"
+                  alt="Vintage Macintosh with hello handwritten on screen"
+                  width={540}
+                  height={420}
+                  priority
+                  className="w-full h-auto select-none"
+                />
+              </div>
             </div>
           </div>
         </div>
