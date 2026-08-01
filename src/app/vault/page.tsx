@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { GridBackdrop } from "@/components/GridBackdrop";
 import { Reveal } from "@/components/Reveal";
 import { PixelGame } from "@/components/PixelGame";
+import { DoomGame } from "@/components/DoomGame";
 
 /* Every major update, straight from the commit history. */
 const LOG: [string, string][] = [
@@ -103,17 +104,33 @@ export default function VaultPage() {
           </h1>
         </Reveal>
 
-        {/* The game */}
+        {/* The arcade */}
         <Reveal variant="up" delay={260} duration={1100}>
           <div className="mt-14 max-w-[720px]">
             <h2 className="text-[11px] tracking-[0.18em] uppercase text-white/50">
-              Vault Arcade — Moving Pixels
+              Vault Arcade — Cabinet 01 · Moving Pixels
             </h2>
             <p className="mt-3 text-[15px] leading-[1.55] text-white/60">
               &ldquo;Moving pixels since 2020.&rdquo; Might as well move some now.
             </p>
             <div className="mt-5">
               <PixelGame />
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal variant="up" delay={320} duration={1100}>
+          <div className="mt-14 max-w-[720px]">
+            <h2 className="text-[11px] tracking-[0.18em] uppercase text-white/50">
+              Vault Arcade — Cabinet 02 · DOOM
+            </h2>
+            <p className="mt-3 text-[15px] leading-[1.55] text-white/60">
+              1993, running in a browser tab, in a vault, behind a passcode.
+              Knee-Deep in the Dead — the shareware episode id let the whole
+              world copy.
+            </p>
+            <div className="mt-5">
+              <DoomGame />
             </div>
           </div>
         </Reveal>
