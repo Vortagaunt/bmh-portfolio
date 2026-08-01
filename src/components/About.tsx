@@ -59,7 +59,7 @@ export function About() {
               Documentarys, and more. I have collaborated with a lot of
               bright people, and hopefully you can be the next.
             </p>
-            <div className="mt-12">
+            <div className="mt-12 flex flex-wrap gap-3">
               <Link
                 href="/about"
                 className="magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818] transition-all duration-500 hover:bg-[#181818]/[0.08]"
@@ -67,6 +67,15 @@ export function About() {
                 <span>Learn more</span>
                 <span className="transition-transform duration-500 group-hover:translate-x-1">
                   →
+                </span>
+              </Link>
+              <Link
+                href="/resume"
+                className="magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818]/70 transition-all duration-500 hover:bg-[#181818]/[0.05]"
+              >
+                <span>Resume</span>
+                <span className="transition-transform duration-500 group-hover:translate-y-0.5">
+                  ↓
                 </span>
               </Link>
             </div>
