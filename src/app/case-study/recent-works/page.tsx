@@ -31,22 +31,22 @@ export const metadata: Metadata = {
 // grid closes out cleanly.
 const photos: { src: string; alt: string; ratio: "square" | "wide" | "tall" | "portrait" }[] = [
   // Posters / portraits
-  { src: "/images/raized-wrong.png", alt: "Raized Wrong — Louder Than Yesterday tour poster", ratio: "portrait" },
-  { src: "/images/846am-poster.png", alt: "8:46 AM — short documentary poster", ratio: "portrait" },
-  { src: "/images/yarg.png", alt: "YARG band poster", ratio: "portrait" },
-  { src: "/images/earth-cost.png", alt: "How much does the Earth cost? — concert visual", ratio: "portrait" },
+  { src: "/images/raized-wrong.webp", alt: "Raized Wrong — Louder Than Yesterday tour poster", ratio: "portrait" },
+  { src: "/images/846am-poster.webp", alt: "8:46 AM — short documentary poster", ratio: "portrait" },
+  { src: "/images/yarg.webp", alt: "YARG band poster", ratio: "portrait" },
+  { src: "/images/earth-cost.webp", alt: "How much does the Earth cost? — concert visual", ratio: "portrait" },
   // Squares
-  { src: "/images/red-portrait.png", alt: "Painted-text portrait single cover", ratio: "square" },
-  { src: "/images/north-west.png", alt: "北西 / Northwest album cover", ratio: "square" },
-  { src: "/images/yeezus.png", alt: "Yeezus CD reinterpretation", ratio: "square" },
-  { src: "/images/kanye-bear.png", alt: "Kanye bear album cover", ratio: "square" },
-  { src: "/images/minidisc.png", alt: "MiniDisc render", ratio: "square" },
-  { src: "/images/guitar-hero-20.png", alt: "Guitar Hero 20 anniversary mark", ratio: "square" },
-  { src: "/images/skydive.png", alt: "Skydive / red sun illustration", ratio: "square" },
-  { src: "/images/vorty.png", alt: "Vorty sticker design", ratio: "square" },
+  { src: "/images/red-portrait.webp", alt: "Painted-text portrait single cover", ratio: "square" },
+  { src: "/images/north-west.webp", alt: "北西 / Northwest album cover", ratio: "square" },
+  { src: "/images/yeezus.webp", alt: "Yeezus CD reinterpretation", ratio: "square" },
+  { src: "/images/kanye-bear.webp", alt: "Kanye bear album cover", ratio: "square" },
+  { src: "/images/minidisc.webp", alt: "MiniDisc render", ratio: "square" },
+  { src: "/images/guitar-hero-20.webp", alt: "Guitar Hero 20 anniversary mark", ratio: "square" },
+  { src: "/images/skydive.webp", alt: "Skydive / red sun illustration", ratio: "square" },
+  { src: "/images/vorty.webp", alt: "Vorty sticker design", ratio: "square" },
   // Closer row — narrow + wide pair
-  { src: "/images/brothers.png", alt: "Brothers — early concept work", ratio: "tall" },
-  { src: "/images/dirty-sara-soda.png", alt: "Dirty Sara-Soda Jerks brand mark", ratio: "wide" },
+  { src: "/images/brothers.webp", alt: "Brothers — early concept work", ratio: "tall" },
+  { src: "/images/dirty-sara-soda.webp", alt: "Dirty Sara-Soda Jerks brand mark", ratio: "wide" },
 ];
 
 const ratioClass: Record<string, string> = {

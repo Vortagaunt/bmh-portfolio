@@ -29,7 +29,7 @@ export function About() {
               style={{ aspectRatio: "420 / 520" }}
             >
               <Image
-                src="/images/bronx-portrait.png"
+                src="/images/bronx-portrait.webp"
                 alt="Bronx Hanratty"
                 fill
                 sizes="(min-width: 768px) 420px, 100vw"

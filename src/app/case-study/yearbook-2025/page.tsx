@@ -39,7 +39,7 @@ const data: CaseStudyData = {
   subtitle:
     "Designing the cover, opening spreads, and editorial layout system for the 2025–2026 school yearbook — a 200+ page printed book documenting a year on campus.",
   hero: {
-    src: "/images/yearbook-2025.png",
+    src: "/images/yearbook-2025.webp",
     alt: "DMJ Yearbook 2025-2026 cover and editorial spreads",
   },
   meta: [
@@ -54,28 +54,28 @@ const data: CaseStudyData = {
     {
       heading: "The brief",
       body: "Help design the yearbook from the cover down: a fresh visual identity, a flexible grid system, and consistent typographic rules that anyone on the yearbook staff could follow. The book had to feel timeless, photographic, and unmistakably from this year — not a recycled template.",
-      image: "/images/yearbook-brief.png",
+      image: "/images/yearbook-brief.webp",
       imageAlt: "Spotify 2024 Wrapped — the visual reference for the DMJ Wrapped concept",
     },
     {
       heading: "Building the system",
       body: "I built a 12-column grid with three layout primitives — full-bleed, half-spread, and quote callout — that could be combined into any page type. Type pairs a tight display sans for sections with an italic serif for moments. Every spread is built from the same kit, so the book reads as one document instead of a stack of templates.",
-      image: "/images/yearbook-system.png",
+      image: "/images/yearbook-system.webp",
       imageAlt: "Yearbook spread system — DMJ 25-26 pages 52-53 in Pictavo",
     },
     {
       heading: "The cover",
       body: "The cover needed to feel like it captured the *Spotify* mood, not a yearbook. One of the new times that judging a book by its cover would be appropriate, because when you saw that for the first time you knew you were in for a treat.",
-      image: "/images/yearbook-cover.png",
+      image: "/images/yearbook-cover.webp",
       imageAlt: "DMJ Wrapped — 2025–2026 yearbook cover proof",
     },
   ],
   gallery: [
-    { src: "/images/yearbook-fun-times.png", alt: "Fun Times — dress-up days spread" },
-    { src: "/images/yearbook-mash.png", alt: "MASH — interactive fortune game spread" },
-    { src: "/images/yearbook-tsa.png", alt: "Technology Student Association spread" },
-    { src: "/images/yearbook-soccer.png", alt: "Boys Soccer spread" },
-    { src: "/images/yearbook-science.png", alt: "Science spread" },
+    { src: "/images/yearbook-fun-times.webp", alt: "Fun Times — dress-up days spread" },
+    { src: "/images/yearbook-mash.webp", alt: "MASH — interactive fortune game spread" },
+    { src: "/images/yearbook-tsa.webp", alt: "Technology Student Association spread" },
+    { src: "/images/yearbook-soccer.webp", alt: "Boys Soccer spread" },
+    { src: "/images/yearbook-science.webp", alt: "Science spread" },
   ],
   next: {
     slug: "846-am",
