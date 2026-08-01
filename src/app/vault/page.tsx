@@ -2,63 +2,54 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { GridBackdrop } from "@/components/GridBackdrop";
 import { Reveal } from "@/components/Reveal";
+import { PixelGame } from "@/components/PixelGame";
 
-const RELICS = [
-  { t: "05.2026", e: "hello — the intro animation boots for the first time" },
-  { t: "05.2026", e: "bronxhanratty.me goes live on Cloudflare" },
-  { t: "06.2026", e: "the iPod arrives in the footer, wheel and all" },
-  { t: "06.2026", e: "Award of Excellence — Dalí Museum, “Cascade Creation”" },
-  { t: "07.2026", e: "Cover Flow learns to flip; Brick ships in the menu" },
-  { t: "07.2026", e: "the 404 bomb detonates for the first lost visitor" },
-  { t: "07.2026", e: "the site loses 57MB on the WebP diet" },
-  { t: "NOW", e: "you clicked a Mac seven times and typed the sacred code" },
+/* Every major update, straight from the commit history. */
+const LOG: [string, string][] = [
+  ["03.2026", "repo scaffolded — the template this all grew out of"],
+  ["05.2026", "the portfolio lands: hero, works, archive, footer"],
+  ["05.2026", "bronxhanratty.me goes live on Cloudflare Pages"],
+  ["05.2026", "BMH favicon replaces the default"],
+  ["05.2026", "hello — the intro animation boots for the first time"],
+  ["05.2026", "the name goes full-bleed, edge to edge"],
+  ["05.2026", "case study pages + paper-fade route transitions"],
+  ["05.2026", "Recent Works opens as its own gallery"],
+  ["06.2026", "Lakewood Ranch brand system ships with its own live pages"],
+  ["06.2026", "the mark library — every Mustang variant, captioned"],
+  ["06.2026", "DMJ Wrapped: cover, spread system, real yearbook proofs"],
+  ["06.2026", "8:46 AM fills with real documentary stills"],
+  ["06.2026", "Dalí Museum feature lands under the Digital Archive"],
+  ["06.2026", "Dr. Mona Jain block + the Observer article"],
+  ["06.2026", "Learn more → a real /about page"],
+  ["06.2026", "the iPod replaces the phone in the footer"],
+  ["06.2026", "click-to-zoom, Cover Flow, Cascade Creations"],
+  ["06.2026", "118 real tracks arrive via iTunes previews"],
+  ["06.2026", "the intro learns to replay on every visit"],
+  ["07.2026", "the 404 bomb detonates for the first lost visitor"],
+  ["07.2026", "share cards — every link finally previews properly"],
+  ["07.2026", "analytics switch on; the site starts counting visitors"],
+  ["07.2026", "Cover Flow learns to flip; Brick ships in the iPod menu"],
+  ["07.2026", "/resume + PDF, and Dirty Sara-Soda becomes case study 04"],
+  ["07.2026", "lightbox: the artwork finally opens fullscreen"],
+  ["07.2026", "the site loses 57MB on the WebP diet"],
+  ["08.2026", "the vault is sealed — seven clicks and a passcode"],
+  ["08.2026", "8:46 AM becomes watchable: the CRT set powers on"],
+  ["NOW", "you found the door, knew the words, and walked in"],
 ];
-
-function LostSoundtrack() {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const toggle = () => {
-    const a = audioRef.current;
-    if (!a) return;
-    if (a.paused) a.play().then(() => setPlaying(true)).catch(() => {});
-    else { a.pause(); setPlaying(false); }
-  };
-  return (
-    <div className="flex items-center gap-5 border border-white/15 bg-white/[0.04] p-5 sm:p-6">
-      <button
-        type="button"
-        onClick={toggle}
-        aria-label={playing ? "Pause the lost soundtrack" : "Play the lost soundtrack"}
-        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/25 text-[20px] text-white transition hover:bg-white/10"
-      >
-        {playing ? "❚❚" : "▶"}
-      </button>
-      <div className="min-w-0">
-        <p className="text-[15px] font-medium tracking-tight text-white">
-          The Lost Soundtrack
-        </p>
-        <p className="mt-1 text-[13px] leading-[1.5] text-white/55">
-          This song used to autoplay on the whole site. It was retired… but
-          nothing truly leaves the{" "}
-          <span className="font-serif italic text-[15px]">vault</span>.
-        </p>
-      </div>
-      <audio ref={audioRef} src="/audio/background.mp3" loop preload="none"
-        onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} />
-    </div>
-  );
-}
 
 export default function VaultPage() {
   const router = useRouter();
   const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("vault-unlocked") === "1") setAllowed(true);
-    else router.replace("/secret");
+    const id = requestAnimationFrame(() => {
+      if (sessionStorage.getItem("vault-unlocked") === "1") setAllowed(true);
+      else router.replace("/secret");
+    });
+    return () => cancelAnimationFrame(id);
   }, [router]);
 
   if (!allowed) {
@@ -77,7 +68,7 @@ export default function VaultPage() {
           variant="fade"
           duration={1600}
           as="span"
-          className="serif-outline serif-outline--dark pointer-events-none absolute left-1/2 top-[300px] -translate-x-1/2 select-none whitespace-nowrap"
+          className="serif-outline serif-outline--dark pointer-events-none absolute left-1/2 top-[280px] -translate-x-1/2 select-none whitespace-nowrap"
           style={{
             fontSize: "clamp(200px, 30vw, 460px)",
             lineHeight: 1,
@@ -112,45 +103,39 @@ export default function VaultPage() {
           </h1>
         </Reveal>
 
+        {/* The game */}
         <Reveal variant="up" delay={260} duration={1100}>
-          <p className="mt-8 max-w-[560px] text-[17px] leading-[1.55] text-white/75 sm:text-[19px]">
-            Most people scroll right past that Mac. You clicked it{" "}
-            <span className="font-serif italic text-[21px]">seven</span> times,
-            found a locked door, and knew the words. Welcome to the inner
-            circle — population: you.
-          </p>
-        </Reveal>
-
-        {/* Lost soundtrack */}
-        <Reveal variant="up" delay={380} duration={1100}>
-          <div className="mt-16 max-w-[560px]">
+          <div className="mt-14 max-w-[720px]">
             <h2 className="text-[11px] tracking-[0.18em] uppercase text-white/50">
-              Relic 001 — Audio
+              Vault Arcade — Moving Pixels
             </h2>
-            <div className="mt-4">
-              <LostSoundtrack />
+            <p className="mt-3 text-[15px] leading-[1.55] text-white/60">
+              &ldquo;Moving pixels since 2020.&rdquo; Might as well move some now.
+            </p>
+            <div className="mt-5">
+              <PixelGame />
             </div>
           </div>
         </Reveal>
 
         {/* Vault log */}
-        <Reveal variant="up" delay={480} duration={1100}>
-          <div className="mt-16 max-w-[640px]">
+        <Reveal variant="up" delay={380} duration={1100}>
+          <div className="mt-20 max-w-[720px]">
             <h2 className="text-[11px] tracking-[0.18em] uppercase text-white/50">
-              The Vault Log
+              The Vault Log — every major update
             </h2>
-            <div className="mt-4 border border-white/15 bg-white/[0.03] p-5 font-mono text-[13px] leading-[2] sm:p-6">
-              {RELICS.map((r) => (
-                <p key={r.e} className="flex gap-4">
-                  <span className="shrink-0 text-white/35">{r.t}</span>
-                  <span className="text-white/80">{r.e}</span>
+            <div className="mt-4 border border-white/15 bg-white/[0.03] p-5 font-mono text-[13px] leading-[1.95] sm:p-6">
+              {LOG.map(([when, what]) => (
+                <p key={what} className="flex gap-4">
+                  <span className="w-[62px] shrink-0 text-white/35">{when}</span>
+                  <span className="text-white/80">{what}</span>
                 </p>
               ))}
             </div>
           </div>
         </Reveal>
 
-        <Reveal variant="up" delay={580} duration={1100}>
+        <Reveal variant="up" delay={480} duration={1100}>
           <div className="mt-16 flex flex-wrap gap-3">
             <Link
               href="/"
@@ -162,7 +147,7 @@ export default function VaultPage() {
           </div>
         </Reveal>
 
-        <Reveal variant="up" delay={680} duration={1100}>
+        <Reveal variant="up" delay={580} duration={1100}>
           <p className="mt-12 text-[12px] tracking-tight text-white/35">
             Tell no one. Or tell everyone — honestly, it&apos;s great marketing.
           </p>
