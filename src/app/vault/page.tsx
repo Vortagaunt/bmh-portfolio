@@ -9,6 +9,7 @@ import { PixelGame } from "@/components/PixelGame";
 import { DoomGame } from "@/components/DoomGame";
 import { QuakeGame } from "@/components/QuakeGame";
 import { HextrisGame } from "@/components/HextrisGame";
+import { HalfLifeGame } from "@/components/HalfLifeGame";
 
 /* Every major update, straight from the commit history. */
 const LOG: [string, string][] = [
@@ -43,6 +44,8 @@ const LOG: [string, string][] = [
   ["08.2026", "the arcade opens — DOOM boots inside the vault"],
   ["08.2026", "Cabinet 03: Quake, 1996, running on WebGL"],
   ["08.2026", "Cabinet 04: Hextris, rebuilt by hand and drained of colour"],
+  ["08.2026", "Cabinet 05: Half-Life on Xash3D — bring your own copy"],
+  ["08.2026", "the site learns the dark"],
   ["NOW", "you found the door, knew the words, and walked in"],
 ];
 
@@ -168,6 +171,22 @@ export default function VaultPage() {
             </p>
             <div className="mt-5">
               <HextrisGame />
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal variant="up" delay={380} duration={1100}>
+          <div className="mt-14 max-w-[720px]">
+            <h2 className="text-[11px] tracking-[0.18em] uppercase text-white/50">
+              Vault Arcade — Cabinet 05 · Half-Life
+            </h2>
+            <p className="mt-3 text-[15px] leading-[1.55] text-white/60">
+              1998, on Xash3D — an open-source rebuild of the GoldSrc engine.
+              The engine lives here. The game doesn&apos;t: point it at your own
+              copy and it loads without ever leaving your machine.
+            </p>
+            <div className="mt-5">
+              <HalfLifeGame />
             </div>
           </div>
         </Reveal>
