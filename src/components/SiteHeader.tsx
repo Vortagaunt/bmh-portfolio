@@ -8,7 +8,11 @@ export function SiteHeader() {
       className="sticky top-0 z-50 h-16 w-full"
       style={{ mixBlendMode: "difference" }}
     >
-      <div className="grid h-full grid-cols-3 items-center px-0 sm:grid-cols-[160px_1fr_160px]">
+      {/* Side columns match each other so the centre nav stays centred. They
+          widened from 160px when the theme toggle joined "Open to work" —
+          at 160 the label wrapped onto two lines. On phones they size to
+          their contents instead, which is tighter than a fixed third. */}
+      <div className="grid h-full grid-cols-[auto_1fr_auto] items-center px-0 sm:grid-cols-[210px_1fr_210px]">
         {/* Logo */}
         <div className="flex items-center justify-start pl-5 sm:pl-8">
           <Link href="/" aria-label="Home" className="block w-[56px] text-white sm:w-[64px]">
@@ -40,9 +44,9 @@ export function SiteHeader() {
         </nav>
 
         {/* Right — Open to work (shortened on mobile) */}
-        <div className="flex items-center justify-end gap-3 pr-5 text-[12px] text-white sm:gap-4 sm:pr-8 sm:text-[14px]">
+        <div className="flex items-center justify-end gap-2 pr-5 text-[12px] whitespace-nowrap text-white sm:gap-4 sm:pr-8 sm:text-[14px]">
           <span className="magnetic inline-flex items-center gap-1.5">
-            <SparkleIcon className="h-3 w-3 transition-transform duration-700 hover:rotate-90 sm:h-3.5 sm:w-3.5" />
+            <SparkleIcon className="h-3 w-3 shrink-0 transition-transform duration-700 hover:rotate-90 sm:h-3.5 sm:w-3.5" />
             <span className="font-medium tracking-tight">
               <span className="hidden sm:inline">Open to work</span>
               <span className="sm:hidden">Available</span>

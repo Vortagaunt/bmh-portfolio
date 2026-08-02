@@ -17,28 +17,16 @@ const KEY = "bmh-theme";
  */
 export function ThemeToggle() {
   const [dark, setDark] = useState(false);
+  // Until the real theme has been read, the mark must not animate — otherwise
+  // every page load plays a half-second spin as state catches up to <html>.
+  const [live, setLive] = useState(false);
 
   useEffect(() => {
-    const id = requestAnimationFrame(() =>
-      setDark(document.documentElement.classList.contains("dark")),
-    );
+    const id = requestAnimationFrame(() => {
+      setDark(document.documentElement.classList.contains("dark"));
+      setLive(true);
+    });
     return () => cancelAnimationFrame(id);
-  }, []);
-
-  // Track the OS for as long as the visitor hasn't overridden it themselves.
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const onChange = (e: MediaQueryListEvent) => {
-      try {
-        if (localStorage.getItem(KEY)) return;
-      } catch {
-        return;
-      }
-      document.documentElement.classList.toggle("dark", e.matches);
-      setDark(e.matches);
-    };
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   const toggle = useCallback(() => {
@@ -78,7 +66,9 @@ export function ThemeToggle() {
           style={{
             transformOrigin: "12px 12px",
             transform: `rotate(${dark ? 180 : 0}deg)`,
-            transition: "transform .55s cubic-bezier(.2,.7,.1,1)",
+            transition: live
+              ? "transform .55s cubic-bezier(.2,.7,.1,1)"
+              : "none",
           }}
         />
       </svg>
