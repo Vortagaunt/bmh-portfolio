@@ -96,7 +96,7 @@ export function ArchivePiece() {
             <figure>
               <div className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]" style={{ aspectRatio: "1 / 1" }}>
                 <ZoomImage
-                  src="/images/dali-bear.webp"
+                  src="/images/dali-bear.jpg"
                   alt="Dalí Museum — surreal multi-mouthed bear photo-composite"
                   fill
                   sizes="(min-width: 1024px) 620px, 100vw"

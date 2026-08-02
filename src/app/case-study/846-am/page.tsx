@@ -31,12 +31,12 @@ const data: CaseStudyData = {
   subtitle:
     "A short documentary about the morning of *September 11, 2001* — researched, filmed, edited, and color-graded as a personal exploration of memory, archive footage, and quiet reflection. *Watch it below.*",
   hero: {
-    src: "/images/846-clock.webp",
+    src: "/images/846-clock.png",
     alt: "8:46 AM — title clock display",
   },
   film: {
     videoId: "5JL9cPFDxKM",
-    poster: "/images/846-clock.webp",
+    poster: "/images/846-clock.png",
     title: "8:46 AM — a short documentary by Bronx Hanratty",
     caption: "8:46 AM · Short documentary · 2026",
   },
@@ -52,13 +52,13 @@ const data: CaseStudyData = {
     {
       heading: "Research",
       body: "I started with raw archive — news broadcasts, oral histories, and photographs — looking for the specific small details that don't usually make the news montages: a half-finished coffee cup, the weather report from earlier that morning, a child's drawing. The thesis was that the texture of an ordinary day is what makes the story land.",
-      image: "/images/846-research.webp",
+      image: "/images/846-research.png",
       imageAlt: "Understanding 9/11 — Television News Archive timeline grid",
     },
     {
       heading: "Edit & pacing",
       body: "The cut moves at the pace of a slow walk. Long holds on still frames, ambient room tone, and a single recurring motif — a wall clock — that ties the timeline together. I deliberately avoided dramatic music until the final 30 seconds, where it enters and immediately resolves.",
-      image: "/images/846-breaking-news.webp",
+      image: "/images/846-breaking-news.png",
       imageAlt: "Archive news still — Breaking News, World Trade Center Disaster",
     },
     {
@@ -67,11 +67,11 @@ const data: CaseStudyData = {
     },
   ],
   gallery: [
-    { src: "/images/846-clock.webp", alt: "8:46 AM — recurring clock motif" },
-    { src: "/images/846-breaking-news.webp", alt: "Breaking News — World Trade Center Disaster archive still" },
-    { src: "/images/846-bush.webp", alt: "President George W. Bush addressing the nation" },
-    { src: "/images/846-jordan.webp", alt: "Jordan Swonger — interview still" },
-    { src: "/images/846-carol-lin.webp", alt: "Carol Lin — CNN anchor interview" },
+    { src: "/images/846-clock.png", alt: "8:46 AM — recurring clock motif" },
+    { src: "/images/846-breaking-news.png", alt: "Breaking News — World Trade Center Disaster archive still" },
+    { src: "/images/846-bush.png", alt: "President George W. Bush addressing the nation" },
+    { src: "/images/846-jordan.png", alt: "Jordan Swonger — interview still" },
+    { src: "/images/846-carol-lin.png", alt: "Carol Lin — CNN anchor interview" },
   ],
   next: {
     slug: "lakewood-ranch-redesign",

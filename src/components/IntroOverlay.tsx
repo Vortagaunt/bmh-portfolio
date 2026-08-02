@@ -156,7 +156,7 @@ export function IntroOverlay() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/vintage-mac.webp"
+          src="/images/vintage-mac.png"
           alt=""
           className="w-full h-auto select-none pointer-events-none"
         />

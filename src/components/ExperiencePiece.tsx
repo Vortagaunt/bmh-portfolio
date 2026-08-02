@@ -103,7 +103,7 @@ export function ExperiencePiece() {
                   style={{ aspectRatio: "1.32 / 1" }}
                 >
                   <Image
-                    src="/images/mona-jain-article.webp"
+                    src="/images/mona-jain-article.jpg"
                     alt="Your Observer — Local Student Honored at Dalí Museum exhibit"
                     fill
                     sizes="(min-width: 1024px) 620px, 100vw"

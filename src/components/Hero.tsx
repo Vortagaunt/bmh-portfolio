@@ -135,7 +135,7 @@ export function Hero() {
                 key={macPulse}
               >
                 <Image
-                  src="/images/vintage-mac.webp"
+                  src="/images/vintage-mac.png"
                   alt="Vintage Macintosh with hello handwritten on screen"
                   width={540}
                   height={420}
