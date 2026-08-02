@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>Wolfenstein 3D — shareware</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: #000; overflow: hidden;
+    font-family: ui-monospace, monospace;
+  }
+  #screen { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+  canvas { display: block; width: 100% !important; height: 100% !important; image-rendering: pixelated; }
+  #boot {
+    position: absolute; inset: 0; display: flex;
+    align-items: center; justify-content: center;
+    color: rgba(255,255,255,.55); font-size: 11px;
+    letter-spacing: .18em; text-transform: uppercase;
+    background: #0b0b0e; text-align: center; padding: 0 24px;
+  }
+</style>
+</head>
+<body>
+<canvas id="screen"></canvas>
+<div id="boot">Loading DOS…</div>
+
+<script src="js-dos.js"></script>
+<script>
+/*
+ * Wolfenstein 3D, shareware episode one, on js-dos (DOSBox compiled to
+ * WebAssembly, GPL-2.0).
+ *
+ * The .WL1 extension is the shareware marker — the registered game uses .WL6.
+ * These files plus WOLF3D.EXE are the complete 1992 shareware package id
+ * distributed for free copying, and nothing else is served here.
+ *
+ * Files are pushed into the DOS filesystem individually rather than as a zip,
+ * so what ships stays exactly the set you can see in the directory.
+ */
+var GAME = [
+  "WOLF3D.EXE",
+  "AUDIOHED.WL1", "AUDIOT.WL1",
+  "GAMEMAPS.WL1", "MAPHEAD.WL1",
+  "VGADICT.WL1", "VGAGRAPH.WL1", "VGAHEAD.WL1",
+  "VSWAP.WL1"
+];
+
+var boot = document.getElementById("boot");
+var say = function (t) { if (boot) boot.textContent = t; };
+
+Dos(document.getElementById("screen"), {
+  wdosboxUrl: "wdosbox.js",
+  cycles: "auto",
+  autolock: false,
+  onprogress: function (stage, total, loaded) {
+    if (total) say("Loading DOS… " + Math.round((loaded / total) * 100) + "%");
+  }
+}).ready(function (fs, main) {
+  say("Loading the game…");
+  var done = 0;
+  Promise.all(GAME.map(function (name) {
+    return fetch(name).then(function (r) {
+      if (!r.ok) throw new Error(name + " -> " + r.status);
+      return r.arrayBuffer();
+    }).then(function (buf) {
+      fs.createFile(name, new Uint8Array(buf));
+      say("Loading the game… " + (++done) + "/" + GAME.length);
+    });
+  })).then(function () {
+    say("Starting…");
+    return main(["-c", "WOLF3D.EXE"]);
+  }).then(function (ci) {
+    window.__wolfReady = true;          // read by the verification harness
+    if (boot && boot.parentNode) boot.parentNode.removeChild(boot);
+    return ci;
+  }).catch(function (err) {
+    window.__wolfError = String(err);
+    say("Failed: " + err);
+  });
+});
+</script>
+</body>
+</html>
