@@ -34,7 +34,7 @@ const data: CaseStudyData = {
   subtitle:
     "Real branding for a real business — the launch mark and identity for *Dirty Sara-Soda*, a family-run mobile dirty-soda stand rolling through *Sarasota, Florida*.",
   hero: {
-    src: "/images/dirty-sara-soda.webp",
+    src: "/images/dirty-sara-soda.png",
     alt: "Dirty Sara-Soda — the Dirty Soda Jerks brand mark",
   },
   meta: [
@@ -53,7 +53,7 @@ const data: CaseStudyData = {
     {
       heading: "The mark",
       body: "A strutting soda-cup mascot in shades, mid-fizz, wrapped in a bubbly hand-lettered script. The sticker-style white outline keeps it punchy on any background, and the *Dirty Soda Jerks* banner locks up location and attitude in one line. Bubblegum pink and cream soda blue carry the palette.",
-      image: "/images/dirty-sara-soda.webp",
+      image: "/images/dirty-sara-soda.png",
       imageAlt: "The Dirty Sara-Soda mascot mark",
     },
     {
@@ -62,7 +62,7 @@ const data: CaseStudyData = {
     },
   ],
   gallery: [
-    { src: "/images/dirty-sara-soda.webp", alt: "Dirty Sara-Soda brand mark" },
+    { src: "/images/dirty-sara-soda.png", alt: "Dirty Sara-Soda brand mark" },
   ],
   next: {
     slug: "recent-works",

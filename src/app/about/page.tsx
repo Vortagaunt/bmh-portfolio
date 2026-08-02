@@ -119,7 +119,7 @@ export default function AboutPage() {
                 style={{ aspectRatio: "420 / 520" }}
               >
                 <Image
-                  src="/images/bronx-portrait.webp"
+                  src="/images/bronx-portrait.png"
                   alt="Bronx Hanratty"
                   fill
                   sizes="(min-width: 768px) 460px, 100vw"
