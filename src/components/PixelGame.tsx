@@ -97,7 +97,12 @@ export function PixelGame() {
       if (map[k]) { e.preventDefault(); if (alive) turn(map[k]); else reset(); }
       else if (k === " " || k === "enter") { e.preventDefault(); if (!alive) reset(); }
     };
-    window.addEventListener("keydown", onKey);
+    // On the canvas rather than the window — the vault now stacks several
+    // playable cabinets, and a window listener would let one arrow press
+    // steer all of them at once.
+    canvas.addEventListener("keydown", onKey);
+    const onDown = () => canvas.focus();
+    canvas.addEventListener("pointerdown", onDown);
 
     // touch swipe
     let tsx = 0, tsy = 0;
@@ -175,7 +180,8 @@ export function PixelGame() {
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
-      window.removeEventListener("keydown", onKey);
+      canvas.removeEventListener("keydown", onKey);
+      canvas.removeEventListener("pointerdown", onDown);
       canvas.removeEventListener("touchstart", onTS);
       canvas.removeEventListener("touchend", onTE);
     };
@@ -196,12 +202,20 @@ export function PixelGame() {
       </div>
 
       <div className="relative mt-4">
-        <canvas ref={canvasRef} className="block w-full" style={{ aspectRatio: `${COLS} / ${ROWS}` }} />
+        <canvas
+          ref={canvasRef}
+          tabIndex={0}
+          className="block w-full outline-none"
+          style={{ aspectRatio: `${COLS} / ${ROWS}` }}
+        />
 
         {status !== "run" && (
           <button
             type="button"
-            onClick={start}
+            onClick={() => {
+              start();
+              canvasRef.current?.focus();
+            }}
             className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3"
             style={{ background: "rgba(11,11,14,0.72)" }}
           >
@@ -216,7 +230,8 @@ export function PixelGame() {
       </div>
 
       <p className="mt-4 font-mono text-[11px] leading-[1.7] tracking-[0.1em] uppercase text-white/35">
-        Arrows / WASD to steer · swipe on touch · collect the pixels, avoid yourself
+        Click the board first · arrows / WASD to steer · swipe on touch · collect
+        the pixels, avoid yourself
       </p>
     </div>
   );

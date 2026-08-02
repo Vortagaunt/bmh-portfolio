@@ -8,6 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { PixelGame } from "@/components/PixelGame";
 import { DoomGame } from "@/components/DoomGame";
 import { QuakeGame } from "@/components/QuakeGame";
+import { HextrisGame } from "@/components/HextrisGame";
 
 /* Every major update, straight from the commit history. */
 const LOG: [string, string][] = [
@@ -41,6 +42,7 @@ const LOG: [string, string][] = [
   ["08.2026", "8:46 AM becomes watchable: the CRT set powers on"],
   ["08.2026", "the arcade opens — DOOM boots inside the vault"],
   ["08.2026", "Cabinet 03: Quake, 1996, running on WebGL"],
+  ["08.2026", "Cabinet 04: Hextris, rebuilt by hand and drained of colour"],
   ["NOW", "you found the door, knew the words, and walked in"],
 ];
 
@@ -150,6 +152,22 @@ export default function VaultPage() {
             </p>
             <div className="mt-5">
               <QuakeGame />
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal variant="up" delay={360} duration={1100}>
+          <div className="mt-14 max-w-[720px]">
+            <h2 className="text-[11px] tracking-[0.18em] uppercase text-white/50">
+              Vault Arcade — Cabinet 04 · Hextris
+            </h2>
+            <p className="mt-3 text-[15px] leading-[1.55] text-white/60">
+              Tetris bent around a hexagon. Rebuilt from scratch, then stripped
+              of its colours — four tones instead of four hues, the last one
+              hollow.
+            </p>
+            <div className="mt-5">
+              <HextrisGame />
             </div>
           </div>
         </Reveal>
