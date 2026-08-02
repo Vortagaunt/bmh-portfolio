@@ -81,7 +81,7 @@ export function Hero() {
       <div className="w-full px-5 sm:px-8">
         <h1
           ref={nameRef}
-          className="hero-rise font-display whitespace-nowrap text-[#181818] leading-[0.85] block"
+          className="hero-rise font-display whitespace-nowrap text-ink leading-[0.85] block"
           style={{
             fontSize: `${fontSize}px`,
             fontWeight: 600,
@@ -106,7 +106,7 @@ export function Hero() {
           className="col-span-12 hero-rise sm:col-span-4"
           style={{ animationDelay: "3.8s" }}
         >
-          <p className="text-[15px] leading-[1.5] text-[#181818] sm:text-[16px]">
+          <p className="text-[15px] leading-[1.5] text-ink sm:text-[16px]">
             Experimental designer getting his{" "}
             <span className="font-serif italic text-[17px] tracking-[-0.01em] sm:text-[18px]">
               roots
@@ -152,10 +152,10 @@ export function Hero() {
           className="col-span-12 hero-rise flex flex-col gap-3 sm:col-span-3 sm:col-start-10 sm:justify-between sm:gap-0 sm:text-right"
           style={{ animationDelay: "4.2s" }}
         >
-          <div className="text-[13px] tracking-tight text-[#181818] sm:text-[14px]">
+          <div className="text-[13px] tracking-tight text-ink sm:text-[14px]">
             Designer · Visionary
           </div>
-          <p className="text-[13px] leading-[1.55] text-[#181818]/85 sm:mt-auto sm:pt-12">
+          <p className="text-[13px] leading-[1.55] text-ink/85 sm:mt-auto sm:pt-12">
             Based in Sarasota, Florida;{" "}
             <span className="font-serif italic text-[15px] tracking-[-0.01em]">
               moving

@@ -101,7 +101,7 @@ export function PageTransition() {
       style={{
         position: "fixed",
         inset: 0,
-        background: "#f1f1f1",
+        background: "var(--paper)",
         opacity,
         pointerEvents: active ? "auto" : "none",
         transition: "opacity 500ms cubic-bezier(0.4, 0, 0.2, 1)",

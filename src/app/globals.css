@@ -19,6 +19,8 @@
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
 
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -64,11 +66,14 @@
   --paper: #f1f1f1;            /* body background */
   --ink: #181818;              /* primary text */
   --ink-muted: #4f4f4f;        /* secondary text */
-  --grid: rgba(0, 0, 0, 0.1);  /* light-mode grid lines */
-  --grid-dark: rgba(255, 255, 255, 0.2);
+  --grid: rgba(0, 0, 0, 0.1);  /* grid lines over paper */
+  --grid-dark: rgba(255, 255, 255, 0.2); /* grid lines over a dark room */
+  --surface: #ffffff;          /* cards and dialogs sitting on paper */
+  --line: rgba(24, 24, 24, 0.15);
 
   --background: #f1f1f1;
   --foreground: #181818;
+  color-scheme: light;
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -103,8 +108,21 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  /* The Sahor palette turned over. Not a literal inversion — #f1f1f1 flipped
+     is #0e0e0e and #181818 flipped is #e7e7e7, and that pairing glares at
+     these type sizes. Paper lands just off black so the vault still reads as
+     the darker room, and ink stops short of white so the huge display
+     headings don't bloom. */
+  --paper: #0e0e10;
+  --ink: #ececee;
+  --ink-muted: #9a9aa1;
+  --grid: rgba(255, 255, 255, 0.075);
+  --surface: #17171a;
+  --line: rgba(236, 236, 238, 0.16);
+  color-scheme: dark;
+
+  --background: #0e0e10;
+  --foreground: #ececee;
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
@@ -152,6 +170,19 @@
     color: var(--ink);
     font-family: var(--font-sans);
     overflow-x: hidden;
+  }
+  /* Only the two big surfaces ease across. Transitioning every element would
+     fight the hover timings already tuned throughout the site. */
+  html,
+  body {
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+  /* Artwork is never inverted — it's photography and design work, and a
+     flipped image is a ruined image. It only loses the faintest edge of
+     glare against the dark page. */
+  .dark img,
+  .dark video {
+    filter: brightness(0.94);
   }
 }
 

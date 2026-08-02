@@ -6,7 +6,7 @@ export function Archive() {
       {/* Curved cap — light area arching down into dark section's top edge */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-[40vh] left-1/2 -translate-x-1/2 rounded-[50%] bg-[#f1f1f1]"
+        className="pointer-events-none absolute -top-[40vh] left-1/2 -translate-x-1/2 rounded-[50%] bg-paper"
         style={{
           width: "240vw",
           height: "60vh",
@@ -50,7 +50,7 @@ export function Archive() {
       {/* Curved cap — light area arching up into dark section's bottom edge */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-[40vh] left-1/2 -translate-x-1/2 rounded-[50%] bg-[#f1f1f1]"
+        className="pointer-events-none absolute -bottom-[40vh] left-1/2 -translate-x-1/2 rounded-[50%] bg-paper"
         style={{
           width: "240vw",
           height: "60vh",

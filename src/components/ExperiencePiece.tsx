@@ -17,22 +17,22 @@ export function ExperiencePiece() {
   return (
     <section
       id="experience"
-      className="relative bg-[#f1f1f1] px-5 pt-10 pb-24 sm:px-8 sm:pt-14 sm:pb-32"
+      className="relative bg-paper px-5 pt-10 pb-24 sm:px-8 sm:pt-14 sm:pb-32"
     >
-      <div className="relative mx-auto max-w-[1280px] border-t border-[#181818]/10 pt-16 sm:pt-20">
+      <div className="relative mx-auto max-w-[1280px] border-t border-ink/10 pt-16 sm:pt-20">
         <div className="grid grid-cols-12 items-start gap-8 lg:gap-12">
           {/* Left — copy */}
           <div className="col-span-12 flex flex-col lg:col-span-6">
             <Reveal variant="up" duration={1000}>
-              <div className="flex items-center gap-3 text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#181818]" />
+              <div className="flex items-center gap-3 text-[11px] tracking-[0.18em] uppercase text-ink/55">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-ink" />
                 Experience
               </div>
             </Reveal>
 
             <Reveal variant="blur" delay={120} duration={1300}>
               <h2
-                className="mt-5 font-display text-[#181818]"
+                className="mt-5 font-display text-ink"
                 style={{
                   fontSize: "clamp(40px, 7vw, 84px)",
                   fontWeight: 600,
@@ -45,7 +45,7 @@ export function ExperiencePiece() {
             </Reveal>
 
             <Reveal variant="up" delay={240} duration={1100}>
-              <p className="mt-6 max-w-[540px] text-[18px] leading-[1.5] text-[#181818]/85 sm:text-[19px]">
+              <p className="mt-6 max-w-[540px] text-[18px] leading-[1.5] text-ink/85 sm:text-[19px]">
                 Dr. Mona Jain Middle School gave me the biggest opportunity of my
                 life. With the help of the greatest teacher of all time —{" "}
                 <span className="font-serif italic">Mrs. Reyes</span> — I&apos;ve
@@ -59,7 +59,7 @@ export function ExperiencePiece() {
                 {tags.map((t) => (
                   <li
                     key={t}
-                    className="rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-4 py-1.5 text-[13px] font-medium tracking-tight text-[#181818]/80"
+                    className="rounded-full border border-ink/15 bg-ink/[0.03] px-4 py-1.5 text-[13px] font-medium tracking-tight text-ink/80"
                   >
                     {t}
                   </li>
@@ -73,7 +73,7 @@ export function ExperiencePiece() {
                   href={ARTICLE_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818] transition-all duration-500 hover:bg-[#181818]/[0.08]"
+                  className="magnetic group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:bg-ink/[0.08]"
                 >
                   <span>View full article</span>
                   <span className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
@@ -99,7 +99,7 @@ export function ExperiencePiece() {
                 aria-label="Read the full Observer article"
               >
                 <div
-                  className="relative w-full overflow-hidden rounded-sm border border-[#181818]/10 bg-white"
+                  className="relative w-full overflow-hidden rounded-sm border border-ink/10 bg-surface"
                   style={{ aspectRatio: "1.32 / 1" }}
                 >
                   <Image
@@ -111,7 +111,7 @@ export function ExperiencePiece() {
                   />
                 </div>
               </a>
-              <figcaption className="mt-3 text-[11px] tracking-[0.16em] uppercase text-[#181818]/55">
+              <figcaption className="mt-3 text-[11px] tracking-[0.16em] uppercase text-ink/55">
                 YourObserver.com · June 2025
               </figcaption>
             </figure>

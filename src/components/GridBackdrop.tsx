@@ -7,10 +7,9 @@ export function GridBackdrop({
   variant?: "light" | "dark";
   className?: string;
 }) {
-  const lineColor =
-    variant === "dark"
-      ? "rgba(255, 255, 255, 0.2)"
-      : "rgba(0, 0, 0, 0.1)";
+  // "dark" means a permanently dark room (the vault), so it stays pinned.
+  // "light" means over paper, which flips with the theme — hence the token.
+  const lineColor = variant === "dark" ? "var(--grid-dark)" : "var(--grid)";
 
   return (
     <div

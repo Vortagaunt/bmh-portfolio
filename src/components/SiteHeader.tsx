@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HelloHandwritingIcon, SparkleIcon } from "./icons";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function SiteHeader() {
   return (
@@ -39,7 +40,7 @@ export function SiteHeader() {
         </nav>
 
         {/* Right — Open to work (shortened on mobile) */}
-        <div className="flex items-center justify-end pr-5 text-[12px] text-white sm:pr-8 sm:text-[14px]">
+        <div className="flex items-center justify-end gap-3 pr-5 text-[12px] text-white sm:gap-4 sm:pr-8 sm:text-[14px]">
           <span className="magnetic inline-flex items-center gap-1.5">
             <SparkleIcon className="h-3 w-3 transition-transform duration-700 hover:rotate-90 sm:h-3.5 sm:w-3.5" />
             <span className="font-medium tracking-tight">
@@ -47,6 +48,7 @@ export function SiteHeader() {
               <span className="sm:hidden">Available</span>
             </span>
           </span>
+          <ThemeToggle />
         </div>
       </div>
     </header>

@@ -12,7 +12,7 @@ export function Footer() {
   return (
     <footer className="relative">
       {/* Let's talk reveal area */}
-      <div className="relative overflow-hidden bg-[#f1f1f1] px-5 pt-16 pb-20 sm:px-8 sm:pb-24">
+      <div className="relative overflow-hidden bg-paper px-5 pt-16 pb-20 sm:px-8 sm:pb-24">
         <div className="relative mx-auto min-h-[520px] max-w-[1280px] sm:min-h-[640px]">
           {/* Outline italic Let's Talk backdrop */}
           <Reveal
@@ -34,7 +34,7 @@ export function Footer() {
           <div className="relative z-10 grid grid-cols-12 gap-6 pt-8">
             <Reveal variant="scale" duration={1300} className="col-span-12 md:col-span-4 md:col-start-2">
               <div className="relative w-full max-w-[260px]">
-                <span className="absolute -top-7 left-0 z-10 px-1 text-[11px] tracking-tight text-[#181818]/70">
+                <span className="absolute -top-7 left-0 z-10 px-1 text-[11px] tracking-tight text-ink/70">
                   now-playing.obj
                 </span>
                 <IpodDock />
@@ -47,7 +47,7 @@ export function Footer() {
               duration={1200}
               className="col-span-12 md:col-span-4 md:col-start-6 pt-2 md:pt-12"
             >
-              <p className="max-w-[260px] text-[15px] leading-[1.45] text-[#181818]">
+              <p className="max-w-[260px] text-[15px] leading-[1.45] text-ink">
                 If you&apos;ve scrolled this far, we should probably talk.
               </p>
             </Reveal>
@@ -58,7 +58,7 @@ export function Footer() {
             variant="up"
             delay={300}
             duration={1100}
-            className="relative z-10 mt-24 flex flex-wrap justify-start gap-x-8 gap-y-3 text-[14px] text-[#181818] sm:mt-48 sm:justify-end sm:gap-12"
+            className="relative z-10 mt-24 flex flex-wrap justify-start gap-x-8 gap-y-3 text-[14px] text-ink sm:mt-48 sm:justify-end sm:gap-12"
           >
             {contactLinks.map((link) => (
               <a

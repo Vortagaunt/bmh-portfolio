@@ -81,7 +81,7 @@ const data: CaseStudyData = {
 
 export default function ShortDocCaseStudy() {
   return (
-    <main className="relative isolate min-h-screen w-full bg-[#f1f1f1] text-[#181818]">
+    <main className="relative isolate min-h-screen w-full bg-paper text-ink">
       <SmoothScroll />
       <div className="pointer-events-none fixed inset-0 z-0">
         <GridBackdrop />

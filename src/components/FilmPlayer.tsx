@@ -92,7 +92,7 @@ export function FilmPlayer({
             />
             {/* play button */}
             <span className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-              <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/40 bg-black/40 text-[26px] text-white backdrop-blur-[2px] transition-all duration-500 group-hover:scale-110 group-hover:bg-black/60 sm:h-24 sm:w-24 sm:text-[30px]">
+              <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/40 bg-ink/40 text-[26px] text-white backdrop-blur-[2px] transition-all duration-500 group-hover:scale-110 group-hover:bg-ink/60 sm:h-24 sm:w-24 sm:text-[30px]">
                 ▶
               </span>
               <span className="text-[11px] tracking-[0.22em] uppercase text-white/75">
@@ -131,7 +131,7 @@ export function FilmPlayer({
         {television(false)}
         <div className="relative mt-6 h-[16px]">
           {caption && (
-            <p className="absolute inset-x-0 text-center text-[11px] tracking-[0.16em] uppercase text-[#181818]/55">
+            <p className="absolute inset-x-0 text-center text-[11px] tracking-[0.16em] uppercase text-ink/55">
               {caption}
             </p>
           )}

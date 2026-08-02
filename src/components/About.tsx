@@ -4,7 +4,7 @@ import { Reveal } from "./Reveal";
 
 export function About() {
   return (
-    <section id="about-me" className="relative bg-[#f1f1f1] px-5 pt-24 pb-20 sm:px-8 sm:pt-32 sm:pb-24">
+    <section id="about-me" className="relative bg-paper px-5 pt-24 pb-20 sm:px-8 sm:pt-32 sm:pb-24">
       <div className="relative mx-auto max-w-[1280px]">
         {/* Outline italic About backdrop */}
         <Reveal
@@ -45,7 +45,7 @@ export function About() {
             duration={1300}
             className="col-span-12 md:col-span-6 md:col-start-7 flex flex-col justify-end"
           >
-            <p className="max-w-[560px] text-[18px] leading-[1.55] text-[#181818]">
+            <p className="max-w-[560px] text-[18px] leading-[1.55] text-ink">
               Hello, my name is{" "}
               <span className="font-serif italic text-[20px] tracking-[-0.01em]">
                 Bronx Hanratty
@@ -62,7 +62,7 @@ export function About() {
             <div className="mt-12 flex flex-wrap gap-3">
               <Link
                 href="/about"
-                className="magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818] transition-all duration-500 hover:bg-[#181818]/[0.08]"
+                className="magnetic group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:bg-ink/[0.08]"
               >
                 <span>Learn more</span>
                 <span className="transition-transform duration-500 group-hover:translate-x-1">
@@ -71,7 +71,7 @@ export function About() {
               </Link>
               <Link
                 href="/resume"
-                className="magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818] transition-all duration-500 hover:bg-[#181818]/[0.08]"
+                className="magnetic group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:bg-ink/[0.08]"
               >
                 <span>Resume</span>
                 <span className="transition-transform duration-500 group-hover:translate-y-0.5">

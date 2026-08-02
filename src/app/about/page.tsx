@@ -71,7 +71,7 @@ const contact = [
 
 export default function AboutPage() {
   return (
-    <main className="relative isolate min-h-screen w-full bg-[#f1f1f1] text-[#181818]">
+    <main className="relative isolate min-h-screen w-full bg-paper text-ink">
       <SmoothScroll />
       <div className="pointer-events-none fixed inset-0 z-0">
         <GridBackdrop />
@@ -83,14 +83,14 @@ export default function AboutPage() {
           {/* Intro statement */}
           <header className="mx-auto max-w-[1280px] px-5 sm:px-8">
             <Reveal variant="up" duration={1000}>
-              <div className="flex items-center gap-3 text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#181818]" />
+              <div className="flex items-center gap-3 text-[11px] tracking-[0.18em] uppercase text-ink/55">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-ink" />
                 About
               </div>
             </Reveal>
             <Reveal variant="blur" delay={120} duration={1300}>
               <h1
-                className="mt-6 max-w-[14ch] font-display text-[#181818]"
+                className="mt-6 max-w-[14ch] font-display text-ink"
                 style={{
                   fontSize: "clamp(44px, 8vw, 120px)",
                   fontWeight: 600,
@@ -130,7 +130,7 @@ export default function AboutPage() {
 
             <div className="col-span-12 flex flex-col justify-center gap-6 md:col-span-6 md:col-start-7">
               <Reveal variant="up" delay={120} duration={1100}>
-                <p className="text-[20px] leading-[1.5] text-[#181818] sm:text-[22px]">
+                <p className="text-[20px] leading-[1.5] text-ink sm:text-[22px]">
                   I&apos;m{" "}
                   <span className="font-serif italic">Bronx Hanratty</span> — a
                   ninth-grade designer who fell for digital design and
@@ -138,7 +138,7 @@ export default function AboutPage() {
                 </p>
               </Reveal>
               <Reveal variant="up" delay={200} duration={1100}>
-                <p className="text-[16px] leading-[1.6] text-[#181818]/80">
+                <p className="text-[16px] leading-[1.6] text-ink/80">
                   Most of my work lives in the{" "}
                   <span className="font-serif italic">Adobe Creative Cloud</span>
                   , but I&apos;ll reach for whatever the idea needs — Figma for
@@ -149,7 +149,7 @@ export default function AboutPage() {
                 </p>
               </Reveal>
               <Reveal variant="up" delay={280} duration={1100}>
-                <p className="text-[16px] leading-[1.6] text-[#181818]/80">
+                <p className="text-[16px] leading-[1.6] text-ink/80">
                   I care about the details most people scroll past — the spacing,
                   the type, the one pixel that makes something feel{" "}
                   <span className="font-serif italic">right</span>. I&apos;ve been
@@ -163,7 +163,7 @@ export default function AboutPage() {
           {/* At a glance */}
           <section className="mx-auto mt-24 max-w-[1280px] px-5 sm:mt-32 sm:px-8">
             <Reveal variant="up" duration={1000}>
-              <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+              <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
                 At a glance
               </span>
             </Reveal>
@@ -171,10 +171,10 @@ export default function AboutPage() {
               {glance.map((g, i) => (
                 <Reveal key={g.label} variant="up" delay={i * 70} duration={1000}>
                   <div className="flex flex-col gap-1">
-                    <dt className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+                    <dt className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
                       {g.label}
                     </dt>
-                    <dd className="text-[16px] tracking-tight text-[#181818]">
+                    <dd className="text-[16px] tracking-tight text-ink">
                       {g.value}
                     </dd>
                   </div>
@@ -186,21 +186,21 @@ export default function AboutPage() {
           {/* Selected recognition */}
           <section className="mx-auto mt-24 max-w-[1280px] px-5 sm:mt-32 sm:px-8">
             <Reveal variant="up" duration={1000}>
-              <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+              <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
                 Selected recognition
               </span>
             </Reveal>
             <div className="mt-8">
               {recognition.map((r, i) => (
                 <Reveal key={r.title} variant="up" delay={i * 70} duration={1000}>
-                  <div className="grid grid-cols-12 items-baseline gap-4 border-t border-[#181818]/15 py-6">
-                    <span className="col-span-12 text-[13px] tracking-tight text-[#181818]/50 sm:col-span-2">
+                  <div className="grid grid-cols-12 items-baseline gap-4 border-t border-ink/15 py-6">
+                    <span className="col-span-12 text-[13px] tracking-tight text-ink/50 sm:col-span-2">
                       {r.year}
                     </span>
-                    <h3 className="col-span-12 text-[18px] font-medium tracking-tight text-[#181818] sm:col-span-4">
+                    <h3 className="col-span-12 text-[18px] font-medium tracking-tight text-ink sm:col-span-4">
                       {r.title}
                     </h3>
-                    <p className="col-span-12 text-[15px] leading-[1.5] text-[#181818]/70 sm:col-span-6">
+                    <p className="col-span-12 text-[15px] leading-[1.5] text-ink/70 sm:col-span-6">
                       {r.detail}
                     </p>
                   </div>
@@ -212,14 +212,14 @@ export default function AboutPage() {
           {/* Toolkit */}
           <section className="mx-auto mt-24 max-w-[1280px] px-5 sm:mt-32 sm:px-8">
             <Reveal variant="up" duration={1000}>
-              <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+              <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
                 Toolkit
               </span>
             </Reveal>
             <ul className="mt-8 flex flex-wrap gap-2.5">
               {toolkit.map((t, i) => (
                 <Reveal key={t} variant="up" delay={i * 40} duration={900} as="li">
-                  <span className="inline-block rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-4 py-1.5 text-[13px] font-medium tracking-tight text-[#181818]/80">
+                  <span className="inline-block rounded-full border border-ink/15 bg-ink/[0.03] px-4 py-1.5 text-[13px] font-medium tracking-tight text-ink/80">
                     {t}
                   </span>
                 </Reveal>
@@ -231,7 +231,7 @@ export default function AboutPage() {
           <section className="mx-auto mt-28 max-w-[1280px] px-5 sm:mt-36 sm:px-8">
             <Reveal variant="up" duration={1100}>
               <h2
-                className="font-display text-[#181818]"
+                className="font-display text-ink"
                 style={{
                   fontSize: "clamp(36px, 6vw, 80px)",
                   fontWeight: 600,
@@ -250,7 +250,7 @@ export default function AboutPage() {
                     href={c.href}
                     target={c.href.startsWith("http") ? "_blank" : undefined}
                     rel="noreferrer"
-                    className="link-underline font-medium tracking-tight text-[#181818] transition-opacity hover:opacity-80"
+                    className="link-underline font-medium tracking-tight text-ink transition-opacity hover:opacity-80"
                   >
                     {c.label}
                   </a>
@@ -260,7 +260,7 @@ export default function AboutPage() {
             <Reveal variant="up" delay={250} duration={1000}>
               <Link
                 href="/#works"
-                className="group mt-12 inline-flex items-center gap-2 text-[13px] tracking-[0.18em] uppercase text-[#181818]/55"
+                className="group mt-12 inline-flex items-center gap-2 text-[13px] tracking-[0.18em] uppercase text-ink/55"
               >
                 <span className="transition-transform duration-500 group-hover:-translate-x-1">
                   ←

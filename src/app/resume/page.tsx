@@ -78,7 +78,7 @@ const skills = [
 
 export default function ResumePage() {
   return (
-    <main className="relative isolate min-h-screen w-full bg-[#f1f1f1] text-[#181818] print:bg-white">
+    <main className="relative isolate min-h-screen w-full bg-paper text-ink print:bg-surface">
       <div className="pointer-events-none fixed inset-0 z-0 print:hidden">
         <GridBackdrop />
       </div>
@@ -89,7 +89,7 @@ export default function ResumePage() {
       <article className="relative z-10 mx-auto max-w-[880px] px-5 pt-24 pb-24 sm:px-8 sm:pt-28 print:max-w-none print:px-0 print:pt-0 print:pb-0">
         {/* Header */}
         <Reveal variant="up" duration={1000}>
-          <header className="border-b border-[#181818]/15 pb-8">
+          <header className="border-b border-ink/15 pb-8">
             <h1
               className="font-display"
               style={{ fontSize: "clamp(40px, 7vw, 64px)", fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 0.95 }}
@@ -99,23 +99,23 @@ export default function ResumePage() {
               </span>
               Hanratty
             </h1>
-            <p className="mt-3 text-[16px] tracking-tight text-[#181818]/75">
+            <p className="mt-3 text-[16px] tracking-tight text-ink/75">
               Digital &amp; brand designer — Sarasota, Florida
             </p>
-            <p className="mt-2 text-[13px] tracking-tight text-[#181818]/60">
+            <p className="mt-2 text-[13px] tracking-tight text-ink/60">
               bronxhanratty.me · bronxhanratty@gmail.com · linkedin.com/in/bronx-hanratty-57a8212b6
             </p>
             <div className="mt-6 flex flex-wrap gap-3 print:hidden">
               <a
                 href="/resume.pdf"
-                className="magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight transition-all duration-500 hover:bg-[#181818]/[0.08]"
+                className="magnetic group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight transition-all duration-500 hover:bg-ink/[0.08]"
               >
                 <span>Download PDF</span>
                 <span className="transition-transform duration-500 group-hover:translate-y-0.5">↓</span>
               </a>
               <Link
                 href="/"
-                className="magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818]/70 transition-all duration-500 hover:bg-[#181818]/[0.05]"
+                className="magnetic group inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink/70 transition-all duration-500 hover:bg-ink/[0.05]"
               >
                 <span className="transition-transform duration-500 group-hover:-translate-x-1">←</span>
                 <span>Back home</span>
@@ -127,8 +127,8 @@ export default function ResumePage() {
         {/* Profile */}
         <Reveal variant="up" delay={100} duration={1000}>
           <section className="mt-10">
-            <h2 className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">Profile</h2>
-            <p className="mt-3 max-w-[640px] text-[15px] leading-[1.6] text-[#181818]/90">
+            <h2 className="text-[11px] tracking-[0.18em] uppercase text-ink/55">Profile</h2>
+            <p className="mt-3 max-w-[640px] text-[15px] leading-[1.6] text-ink/90">
               Ninth-grade designer working across brand, editorial, and film.
               Award-winning digital artist with real client work, a published
               yearbook, and a museum wall to show for it. Adobe Creative Cloud
@@ -140,19 +140,19 @@ export default function ResumePage() {
         {/* Experience */}
         <Reveal variant="up" delay={160} duration={1000}>
           <section className="mt-12">
-            <h2 className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">Experience</h2>
+            <h2 className="text-[11px] tracking-[0.18em] uppercase text-ink/55">Experience</h2>
             <div className="mt-4">
               {experience.map((e) => (
-                <div key={e.role} className="grid grid-cols-12 gap-3 border-t border-[#181818]/10 py-5 first:border-t-0">
-                  <span className="col-span-12 text-[12.5px] tracking-tight text-[#181818]/50 sm:col-span-3">
+                <div key={e.role} className="grid grid-cols-12 gap-3 border-t border-ink/10 py-5 first:border-t-0">
+                  <span className="col-span-12 text-[12.5px] tracking-tight text-ink/50 sm:col-span-3">
                     {e.when}
                   </span>
                   <div className="col-span-12 sm:col-span-9">
                     <h3 className="text-[16px] font-medium tracking-tight">{e.role}</h3>
-                    <p className="text-[13.5px] text-[#181818]/60">{e.org}</p>
+                    <p className="text-[13.5px] text-ink/60">{e.org}</p>
                     <ul className="mt-2 flex flex-col gap-1.5">
                       {e.points.map((p) => (
-                        <li key={p} className="text-[14px] leading-[1.55] text-[#181818]/85">
+                        <li key={p} className="text-[14px] leading-[1.55] text-ink/85">
                           — {p}
                         </li>
                       ))}
@@ -167,12 +167,12 @@ export default function ResumePage() {
         {/* Recognition */}
         <Reveal variant="up" delay={220} duration={1000}>
           <section className="mt-12">
-            <h2 className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">Recognition &amp; Press</h2>
+            <h2 className="text-[11px] tracking-[0.18em] uppercase text-ink/55">Recognition &amp; Press</h2>
             <div className="mt-4">
               {recognition.map((r) => (
-                <div key={r.what} className="border-t border-[#181818]/10 py-4 first:border-t-0">
+                <div key={r.what} className="border-t border-ink/10 py-4 first:border-t-0">
                   <h3 className="text-[15px] font-medium tracking-tight">{r.what}</h3>
-                  <p className="mt-1 text-[13.5px] leading-[1.5] text-[#181818]/65">{r.detail}</p>
+                  <p className="mt-1 text-[13.5px] leading-[1.5] text-ink/65">{r.detail}</p>
                 </div>
               ))}
             </div>
@@ -183,12 +183,12 @@ export default function ResumePage() {
         <Reveal variant="up" delay={280} duration={1000}>
           <section className="mt-12 grid grid-cols-12 gap-8">
             <div className="col-span-12 sm:col-span-7">
-              <h2 className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">Toolkit</h2>
+              <h2 className="text-[11px] tracking-[0.18em] uppercase text-ink/55">Toolkit</h2>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {skills.map((t) => (
                   <li
                     key={t}
-                    className="rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-3.5 py-1 text-[13px] font-medium tracking-tight text-[#181818]/80 print:border-[#181818]/40"
+                    className="rounded-full border border-ink/15 bg-ink/[0.03] px-3.5 py-1 text-[13px] font-medium tracking-tight text-ink/80 print:border-ink/40"
                   >
                     {t}
                   </li>
@@ -196,11 +196,11 @@ export default function ResumePage() {
               </ul>
             </div>
             <div className="col-span-12 sm:col-span-5">
-              <h2 className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">Education</h2>
-              <p className="mt-4 text-[14px] leading-[1.55] text-[#181818]/85">
+              <h2 className="text-[11px] tracking-[0.18em] uppercase text-ink/55">Education</h2>
+              <p className="mt-4 text-[14px] leading-[1.55] text-ink/85">
                 Lakewood Ranch High School — Bradenton, FL
                 <br />
-                <span className="text-[#181818]/60">9th grade · Class of 2030</span>
+                <span className="text-ink/60">9th grade · Class of 2030</span>
                 <br />
                 <span className="mt-2 inline-block">Dr. Mona Jain Middle School — through 2026</span>
               </p>

@@ -85,16 +85,16 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
       {/* Hero */}
       <header className="relative mx-auto max-w-[1280px] px-5 sm:px-8">
         <Reveal variant="up" duration={1000}>
-          <div className="flex items-baseline gap-4 text-[12px] tracking-[0.16em] uppercase text-[#181818]/60">
+          <div className="flex items-baseline gap-4 text-[12px] tracking-[0.16em] uppercase text-ink/60">
             <span>({data.index})</span>
-            <span className="h-px w-10 bg-[#181818]/30" />
+            <span className="h-px w-10 bg-ink/30" />
             <span>{data.category}</span>
           </div>
         </Reveal>
 
         <Reveal variant="blur" delay={120} duration={1300}>
           <h1
-            className="mt-6 font-display text-[#181818]"
+            className="mt-6 font-display text-ink"
             style={{
               fontSize: "clamp(44px, 11vw, 140px)",
               fontWeight: 600,
@@ -107,7 +107,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
         </Reveal>
 
         <Reveal variant="up" delay={240} duration={1100}>
-          <p className="mt-6 max-w-[640px] text-[17px] leading-[1.5] text-[#181818]/85 sm:mt-8 sm:text-[20px] sm:leading-[1.45]">
+          <p className="mt-6 max-w-[640px] text-[17px] leading-[1.5] text-ink/85 sm:mt-8 sm:text-[20px] sm:leading-[1.45]">
             <RichText>{data.subtitle}</RichText>
           </p>
         </Reveal>
@@ -117,10 +117,10 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
           <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 sm:mt-16 sm:grid-cols-4">
             {data.meta.map((m) => (
               <div key={m.label} className="flex flex-col gap-1">
-                <dt className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+                <dt className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
                   {m.label}
                 </dt>
-                <dd className="text-[14px] tracking-tight text-[#181818] sm:text-[15px]">
+                <dd className="text-[14px] tracking-tight text-ink sm:text-[15px]">
                   <RichText>{m.value}</RichText>
                 </dd>
               </div>
@@ -200,7 +200,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                   link.href.startsWith("http") ||
                   link.href.endsWith(".html");
                 const className =
-                  "magnetic group inline-flex items-center gap-2 rounded-full border border-[#181818]/15 bg-[#181818]/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-[#181818] transition-all duration-500 hover:bg-[#181818]/[0.08]";
+                  "magnetic group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:bg-ink/[0.08]";
                 const content = (
                   <>
                     <span>{link.label}</span>
@@ -230,7 +230,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
       {/* Overview row */}
       <section className="relative mx-auto mt-20 grid max-w-[1280px] grid-cols-12 gap-6 px-5 sm:mt-32 sm:gap-8 sm:px-8">
         <Reveal variant="up" duration={1100} className="col-span-12 sm:col-span-3">
-          <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+          <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
             Overview
           </span>
         </Reveal>
@@ -240,7 +240,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
           duration={1200}
           className="col-span-12 sm:col-span-8 sm:col-start-5"
         >
-          <p className="text-[18px] leading-[1.45] text-[#181818] sm:text-[22px]">
+          <p className="text-[18px] leading-[1.45] text-ink sm:text-[22px]">
             <RichText>{data.overview}</RichText>
           </p>
         </Reveal>
@@ -259,11 +259,11 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
               className="col-span-12 sm:sticky sm:top-24 sm:col-span-3"
             >
               <div className="flex flex-col gap-3">
-                <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+                <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
                   {String(i + 1).padStart(2, "0")} — Chapter
                 </span>
                 <h2
-                  className="font-display text-[#181818]"
+                  className="font-display text-ink"
                   style={{
                     fontSize: "clamp(24px, 6vw, 44px)",
                     fontWeight: 600,
@@ -278,7 +278,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
 
             <div className="col-span-12 flex flex-col gap-8 sm:col-span-8 sm:col-start-5 sm:gap-10">
               <Reveal variant="up" delay={150} duration={1200}>
-                <p className="text-[16px] leading-[1.55] text-[#181818]/90 sm:text-[18px]">
+                <p className="text-[16px] leading-[1.55] text-ink/90 sm:text-[18px]">
                   <RichText>{s.body}</RichText>
                 </p>
               </Reveal>
@@ -309,11 +309,11 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
           <div className="grid grid-cols-12 items-end gap-6 sm:gap-8">
             <Reveal variant="up" duration={1100} className="col-span-12 sm:col-span-4">
               <div className="flex flex-col gap-3">
-                <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+                <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
                   {data.markLibrary.kicker ?? "Mark Library"}
                 </span>
                 <h2
-                  className="font-display text-[#181818]"
+                  className="font-display text-ink"
                   style={{
                     fontSize: "clamp(28px, 6vw, 56px)",
                     fontWeight: 600,
@@ -332,7 +332,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                 duration={1100}
                 className="col-span-12 sm:col-span-7 sm:col-start-6"
               >
-                <p className="text-[16px] leading-[1.55] text-[#181818]/80 sm:text-[17px]">
+                <p className="text-[16px] leading-[1.55] text-ink/80 sm:text-[17px]">
                   <RichText>{data.markLibrary.intro}</RichText>
                 </p>
               </Reveal>
@@ -354,8 +354,8 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                     <div
                       className={`relative w-full overflow-hidden rounded-sm border transition-colors duration-500 ${
                         dark
-                          ? "border-[#181818]/40 bg-[#0a0a0a] group-hover:border-[#181818]/60"
-                          : "border-[#181818]/10 bg-white group-hover:border-[#181818]/25"
+                          ? "border-ink/40 bg-[#0a0a0a] group-hover:border-ink/60"
+                          : "border-ink/10 bg-surface group-hover:border-ink/25"
                       }`}
                       style={{ aspectRatio: "1 / 1" }}
                     >
@@ -369,7 +369,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                         zoomIndex={i}
                       />
                     </div>
-                    <figcaption className="mt-3 text-[11px] tracking-[0.16em] uppercase text-[#181818]/70">
+                    <figcaption className="mt-3 text-[11px] tracking-[0.16em] uppercase text-ink/70">
                       {m.label}
                     </figcaption>
                   </figure>
@@ -384,7 +384,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
       {data.gallery.length > 0 && (
         <section className="relative mx-auto mt-24 max-w-[1440px] px-5 sm:mt-40 sm:px-8">
           <Reveal variant="up" duration={1000}>
-            <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+            <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
               Gallery
             </span>
           </Reveal>
@@ -428,18 +428,18 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
         <Reveal variant="up" duration={1100}>
           <Link
             href={`/case-study/${data.next.slug}`}
-            className="group block border-t border-[#181818]/15 pt-8 sm:pt-12"
+            className="group block border-t border-ink/15 pt-8 sm:pt-12"
           >
             <div className="flex items-baseline justify-between gap-6 sm:gap-8">
-              <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+              <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
                 Next Project
               </span>
-              <span className="text-[12px] tracking-[0.18em] uppercase text-[#181818]/55 transition-transform duration-500 group-hover:translate-x-2">
+              <span className="text-[12px] tracking-[0.18em] uppercase text-ink/55 transition-transform duration-500 group-hover:translate-x-2">
                 →
               </span>
             </div>
             <h3
-              className="mt-4 font-display text-[#181818] transition-transform duration-700 group-hover:-translate-y-1"
+              className="mt-4 font-display text-ink transition-transform duration-700 group-hover:-translate-y-1"
               style={{
                 fontSize: "clamp(32px, 8vw, 88px)",
                 fontWeight: 600,

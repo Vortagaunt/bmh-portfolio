@@ -87,7 +87,7 @@ export function BackgroundMusic({
       onClick={toggleMute}
       aria-label={muted ? "Unmute background music" : "Mute background music"}
       title={muted ? "Unmute" : "Mute"}
-      className="fixed bottom-5 right-4 z-[100] flex h-10 w-10 items-center justify-center rounded-full border border-[#181818]/15 bg-white/70 text-[#181818] backdrop-blur transition-all duration-300 hover:scale-110 hover:bg-white sm:bottom-12 sm:right-6 sm:h-9 sm:w-9"
+      className="fixed bottom-5 right-4 z-[100] flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 bg-white/70 text-ink backdrop-blur transition-all duration-300 hover:scale-110 hover:bg-surface sm:bottom-12 sm:right-6 sm:h-9 sm:w-9"
     >
       {showSoundIcon ? (
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">

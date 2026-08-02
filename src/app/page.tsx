@@ -12,7 +12,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 
 export default function Home() {
   return (
-    <main className="relative isolate min-h-screen w-full bg-[#f1f1f1] text-[#181818]">
+    <main className="relative isolate min-h-screen w-full bg-paper text-ink">
       <IntroOverlay />
       <SmoothScroll />
 
