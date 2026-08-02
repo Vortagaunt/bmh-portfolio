@@ -55,6 +55,9 @@ export function QuakeGame() {
         }}
       >
         {booted && (
+          /* Keep index.html. Pages 308s it to /games/quake/ and the iframe
+             follows silently, whereas the dev server 308s the bare directory
+             the other way — this form is the one that works in both. */
           <iframe
             src="/games/quake/index.html"
             title="Quake — shareware episode"

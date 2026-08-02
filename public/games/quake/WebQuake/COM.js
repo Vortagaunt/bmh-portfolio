@@ -222,6 +222,39 @@ COM.WriteTextFile = function(filename, data)
 	return true;
 };
 
+/*
+ * Byte-range read that survives a CDN which ignores the Range header.
+ *
+ * WebQuake reads everything out of pak0.pak in slices — the 12-byte header,
+ * the directory, then each lump. Cloudflare Pages answers a ranged GET for a
+ * static asset with 200 and the entire 18.7MB body, so every slice used to
+ * come back the wrong length and the pak failed to load at all.
+ *
+ * If the server honours Range we behave exactly as before. If it doesn't, we
+ * keep that first full body and slice it locally from then on, so the pak is
+ * downloaded once rather than once per lump.
+ */
+COM.pakcache = {};
+
+COM.ReadRange = function(url, start, len)
+{
+	var whole = COM.pakcache[url];
+	if (whole === undefined)
+	{
+		var xhr = new XMLHttpRequest();
+		xhr.overrideMimeType('text/plain; charset=x-user-defined');
+		xhr.open('GET', url, false);
+		xhr.setRequestHeader('Range', 'bytes=' + start + '-' + (start + len - 1));
+		xhr.send();
+		if ((xhr.status <= 199) || (xhr.status >= 300))
+			return;
+		if (xhr.responseText.length === len)
+			return xhr.responseText;
+		COM.pakcache[url] = whole = xhr.responseText;
+	}
+	return whole.substr(start, len);
+};
+
 COM.LoadFile = function(filename)
 {
 	filename = filename.toLowerCase();
@@ -253,14 +286,12 @@ COM.LoadFile = function(filename)
 					Draw.EndDisc();
 					return new ArrayBuffer(0);
 				}
-				xhr.open('GET', search.filename + '/pak' + j + '.pak', false);
-				xhr.setRequestHeader('Range', 'bytes=' + file.filepos + '-' + (file.filepos + file.filelen - 1));
-				xhr.send();
-				if ((xhr.status >= 200) && (xhr.status <= 299) && (xhr.responseText.length === file.filelen))
+				var lump = COM.ReadRange(search.filename + '/pak' + j + '.pak', file.filepos, file.filelen);
+				if ((lump != null) && (lump.length === file.filelen))
 				{
 					Sys.Print('PackFile: ' + search.filename + '/pak' + j + '.pak : ' + filename + '\n')
 					Draw.EndDisc();
-					return Q.strmem(xhr.responseText);
+					return Q.strmem(lump);
 				}
 				break;
 			}
@@ -296,14 +327,10 @@ COM.LoadTextFile = function(filename)
 
 COM.LoadPackFile = function(packfile)
 {
-	var xhr = new XMLHttpRequest();
-	xhr.overrideMimeType('text/plain; charset=x-user-defined');
-	xhr.open('GET', packfile, false);
-	xhr.setRequestHeader('Range', 'bytes=0-11');
-	xhr.send();
-	if ((xhr.status <= 199) || (xhr.status >= 300) || (xhr.responseText.length !== 12))
+	var head = COM.ReadRange(packfile, 0, 12);
+	if ((head == null) || (head.length !== 12))
 		return;
-	var header = new DataView(Q.strmem(xhr.responseText));
+	var header = new DataView(Q.strmem(head));
 	if (header.getUint32(0, true) !== 0x4b434150)
 		Sys.Error(packfile + ' is not a packfile');
 	var dirofs = header.getUint32(4, true);
@@ -314,12 +341,10 @@ COM.LoadPackFile = function(packfile)
 	var pack = [];
 	if (numpackfiles !== 0)
 	{
-		xhr.open('GET', packfile, false);
-		xhr.setRequestHeader('Range', 'bytes=' + dirofs + '-' + (dirofs + dirlen - 1));
-		xhr.send();
-		if ((xhr.status <= 199) || (xhr.status >= 300) || (xhr.responseText.length !== dirlen))
+		var dir = COM.ReadRange(packfile, dirofs, dirlen);
+		if ((dir == null) || (dir.length !== dirlen))
 			return;
-		var info = Q.strmem(xhr.responseText);
+		var info = Q.strmem(dir);
 		if (CRC.Block(new Uint8Array(info)) !== 32981)
 			COM.modified = true;
 		var i;
