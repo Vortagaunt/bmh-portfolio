@@ -55,3 +55,10 @@ temp/
 .cascade-*
 .tmp-docx/
 .tmp-shots/
+.verify-*.mjs
+
+# Ports whose game data isn't ours to redistribute. Keep them locally, play
+# them locally — but anything under public/ ships to bronxhanratty.me, and
+# these carry Valve's and Rockstar's copyrighted engine binaries and assets.
+public/games/hl2-web/
+public/games/vice-dos/

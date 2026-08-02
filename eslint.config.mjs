@@ -14,6 +14,10 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Claude worktrees carry their own .next build output — never lint them.
     ".claude/**",
+    // public/ is served verbatim, not compiled. The arcade cabinets vendor
+    // third-party game engines in there (36 modules of 1996-era globals) —
+    // our rules have nothing useful to say about them.
+    "public/**",
   ]),
 ]);
 
