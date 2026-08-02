@@ -63,13 +63,13 @@ export function Works() {
           Selected
         </Reveal>
         <Reveal variant="up" delay={120}>
-          <p className="relative z-10 text-[14px] tracking-tight text-[#181818]">
+          <p className="relative z-10 text-[14px] tracking-tight text-ink">
             2020-2026
           </p>
         </Reveal>
         <Reveal variant="blur" delay={200} duration={1300}>
           <h2
-            className="relative z-10 font-display text-[#181818]"
+            className="relative z-10 font-display text-ink"
             style={{
               fontSize: "clamp(60px, 9vw, 124px)",
               fontWeight: 600,
@@ -121,10 +121,10 @@ export function Works() {
                 )}
               </div>
               <div className="flex flex-col gap-1">
-                <h3 className="text-[20px] font-medium tracking-tight text-[#181818] transition-transform duration-500 group-hover:translate-x-1">
+                <h3 className="text-[20px] font-medium tracking-tight text-ink transition-transform duration-500 group-hover:translate-x-1">
                   {p.title}
                 </h3>
-                <p className="max-w-[640px] text-[16px] text-[#181818]/70 leading-snug">
+                <p className="max-w-[640px] text-[16px] text-ink/70 leading-snug">
                   {p.description}
                 </p>
               </div>

@@ -63,9 +63,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${bricolage.variable} ${instrument.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Runs synchronously before anything paints, so a dark-theme visitor
+            never gets a white flash on the way in. Saved choice wins; with no
+            saved choice we follow the OS. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('bmh-theme');" +
+              "if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))" +
+              "document.documentElement.classList.add('dark')}catch(e){}",
+          }}
+        />
         <PageTransition />
         {MUSIC_ENABLED && (
           <BackgroundMusic src="/audio/background.mp3" volume={0.8} />

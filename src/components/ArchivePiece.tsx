@@ -50,21 +50,21 @@ export function ArchivePiece() {
   return (
     <section
       id="archive-piece"
-      className="relative bg-[#f1f1f1] px-5 pt-24 pb-24 sm:px-8 sm:pt-28 sm:pb-32"
+      className="relative bg-paper px-5 pt-24 pb-24 sm:px-8 sm:pt-28 sm:pb-32"
     >
       <div className="relative mx-auto max-w-[1280px]">
         {/* Heading block */}
         <div className="mb-12 max-w-[760px] sm:mb-16">
           <Reveal variant="up" duration={1000}>
-            <div className="flex items-center gap-3 text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#181818]" />
+            <div className="flex items-center gap-3 text-[11px] tracking-[0.18em] uppercase text-ink/55">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-ink" />
               Featured · Award of Excellence
             </div>
           </Reveal>
 
           <Reveal variant="blur" delay={120} duration={1300}>
             <h2
-              className="mt-5 font-display text-[#181818]"
+              className="mt-5 font-display text-ink"
               style={{
                 fontSize: "clamp(48px, 8vw, 110px)",
                 fontWeight: 600,
@@ -77,7 +77,7 @@ export function ArchivePiece() {
           </Reveal>
 
           <Reveal variant="up" delay={240} duration={1100}>
-            <p className="mt-6 text-[18px] leading-[1.5] text-[#181818]/85 sm:text-[20px]">
+            <p className="mt-6 text-[18px] leading-[1.5] text-ink/85 sm:text-[20px]">
               A surreal photo-composite that began as a tribute and became its
               own beast — and somehow won an{" "}
               <span className="font-serif italic">Award of Excellence</span>{" "}
@@ -103,7 +103,7 @@ export function ArchivePiece() {
                   className="object-cover"
                 />
               </div>
-              <figcaption className="mt-3 text-[11px] tracking-[0.16em] uppercase text-[#181818]/55">
+              <figcaption className="mt-3 text-[11px] tracking-[0.16em] uppercase text-ink/55">
                 Dalí Museum · Photoshop · 2025
               </figcaption>
             </figure>
@@ -112,20 +112,20 @@ export function ArchivePiece() {
           <div className="col-span-12 flex flex-col gap-8 lg:col-span-6 lg:gap-10">
             {steps.map((s, i) => (
               <Reveal key={s.heading} variant="up" delay={150 + i * 90} duration={1100}>
-                <div className="border-t border-[#181818]/15 pt-6">
+                <div className="border-t border-ink/15 pt-6">
                   <div className="flex items-baseline justify-between gap-4">
-                    <span className="text-[11px] tracking-[0.18em] uppercase text-[#181818]/55">
+                    <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
                       {s.label}
                     </span>
                     <span
-                      className="font-display text-[#181818]/20"
+                      className="font-display text-ink/20"
                       style={{ fontSize: "28px", fontWeight: 600, lineHeight: 1 }}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
                   <h3
-                    className="mt-3 font-display text-[#181818]"
+                    className="mt-3 font-display text-ink"
                     style={{
                       fontSize: "clamp(24px, 3vw, 34px)",
                       fontWeight: 600,
@@ -135,7 +135,7 @@ export function ArchivePiece() {
                   >
                     {s.heading}
                   </h3>
-                  <p className="mt-3 text-[16px] leading-[1.55] text-[#181818]/85">
+                  <p className="mt-3 text-[16px] leading-[1.55] text-ink/85">
                     {s.body}
                   </p>
                 </div>
