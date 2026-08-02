@@ -67,15 +67,15 @@ export default function RootLayout({
       className={`${inter.variable} ${bricolage.variable} ${instrument.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {/* Runs synchronously before anything paints, so a dark-theme visitor
-            never gets a white flash on the way in. Saved choice wins; with no
-            saved choice we follow the OS. */}
+        {/* Runs synchronously before anything paints, so nobody sees a white
+            flash on the way in. Dark is the default and the house style —
+            light is opt-in, and once chosen it sticks. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{var t=localStorage.getItem('bmh-theme');" +
-              "if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))" +
-              "document.documentElement.classList.add('dark')}catch(e){}",
+              "try{document.documentElement.classList.toggle('dark'," +
+              "localStorage.getItem('bmh-theme')!=='light')}" +
+              "catch(e){document.documentElement.classList.add('dark')}",
           }}
         />
         <PageTransition />
