@@ -80,5 +80,25 @@ Dos(document.getElementById("screen"), {
   });
 });
 </script>
+
+<script>
+/* Clicking an iframe does not give it keyboard focus, and clicks inside one
+   never bubble out to the parent — so the grab has to happen in here. Without
+   this every keypress went to the vault page instead of the game. */
+(function () {
+  function grab() {
+    try { window.focus(); } catch (e) {}
+    var c = document.querySelector("canvas");
+    if (!c) return;
+    if (!c.hasAttribute("tabindex")) c.setAttribute("tabindex", "0");
+    try { c.focus({ preventScroll: true }); } catch (e) { c.focus(); }
+  }
+  window.addEventListener("pointerdown", grab, true);
+  window.addEventListener("mousedown", grab, true);
+  window.addEventListener("touchstart", grab, true);
+  document.addEventListener("DOMContentLoaded", grab);
+  setTimeout(grab, 1500);
+})();
+</script>
 </body>
 </html>
