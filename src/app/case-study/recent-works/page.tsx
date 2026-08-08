@@ -29,19 +29,13 @@ export const metadata: Metadata = {
 // Sorted from tallest aspect ratio → squares → widest. Last row pairs
 // the narrow "Brothers" tile with the wide "Dirty Sara-Soda" logo so the
 // grid closes out cleanly.
-const photos: { src: string; alt: string; ratio: "square" | "wide" | "tall" | "portrait" }[] = [
+const photos: { src: string; alt: string; ratio: "square" | "wide" | "tall" | "portrait" | "poster" | "banner" }[] = [
   // Posters / portraits
   { src: "/images/raized-wrong.png", alt: "Raized Wrong — Louder Than Yesterday tour poster", ratio: "portrait" },
   { src: "/images/846am-poster.png", alt: "8:46 AM — short documentary poster", ratio: "portrait" },
   { src: "/images/yarg.png", alt: "YARG band poster", ratio: "portrait" },
   { src: "/images/earth-cost.png", alt: "How much does the Earth cost? — concert visual", ratio: "portrait" },
   // Squares
-  { src: "/images/vultures3.jpg", alt: "Vultures 3 — album cover", ratio: "square" },
-  { src: "/images/selfactualize.png", alt: "Self Actualize — album cover", ratio: "square" },
-  { src: "/images/bbpb.png", alt: "BBPB — album cover", ratio: "square" },
-  { src: "/images/doomsday.png", alt: "Doomsday — poster", ratio: "portrait" },
-  { src: "/images/google.png", alt: "Google — concept visual", ratio: "wide" },
-  { src: "/images/agr30hr2.png", alt: "AGR 30HR2 — wide composition", ratio: "wide" },
   { src: "/images/red-portrait.png", alt: "Painted-text portrait single cover", ratio: "square" },
   { src: "/images/north-west.png", alt: "北西 / Northwest album cover", ratio: "square" },
   { src: "/images/yeezus.png", alt: "Yeezus CD reinterpretation", ratio: "square" },
@@ -53,6 +47,13 @@ const photos: { src: string; alt: string; ratio: "square" | "wide" | "tall" | "p
   // Closer row — narrow + wide pair
   { src: "/images/brothers.png", alt: "Brothers — early concept work", ratio: "tall" },
   { src: "/images/dirty-sara-soda.png", alt: "Dirty Sara-Soda Jerks brand mark", ratio: "wide" },
+
+  { src: "/images/vultures3.jpg", alt: "Vultures 3 — album cover", ratio: "square" },
+  { src: "/images/selfactualize.png", alt: "Self Actualize — album cover", ratio: "square" },
+  { src: "/images/bbpb.png", alt: "BBPB — album cover", ratio: "square" },
+  { src: "/images/doomsday.png", alt: "Doomsday — poster", ratio: "poster" },
+  { src: "/images/google.png", alt: "Google — concept visual", ratio: "banner" },
+  { src: "/images/agr30hr2.png", alt: "AGR 30HR2 — 30 Hour Weekend stream art", ratio: "banner" },
 ];
 
 const ratioClass: Record<string, string> = {
@@ -60,6 +61,8 @@ const ratioClass: Record<string, string> = {
   tall: "col-span-12 md:col-span-4",
   square: "col-span-12 md:col-span-6",
   portrait: "col-span-12 md:col-span-6",
+  poster: "col-span-12 md:col-span-6",
+  banner: "col-span-12",
 };
 
 const ratioAspect: Record<string, string> = {
@@ -67,6 +70,8 @@ const ratioAspect: Record<string, string> = {
   tall: "0.9 / 1",
   square: "1 / 1",
   portrait: "0.75 / 1",
+  poster: "0.675 / 1",   // 1944x2880, exact
+  banner: "1.75 / 1",    // 3840x2160 and 6979x4000, near-exact
 };
 
 export default function RecentWorksPage() {
