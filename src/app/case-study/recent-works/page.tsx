@@ -36,6 +36,12 @@ const photos: { src: string; alt: string; ratio: "square" | "wide" | "tall" | "p
   { src: "/images/yarg.png", alt: "YARG band poster", ratio: "portrait" },
   { src: "/images/earth-cost.png", alt: "How much does the Earth cost? — concert visual", ratio: "portrait" },
   // Squares
+  { src: "/images/vultures3.jpg", alt: "Vultures 3 — album cover", ratio: "square" },
+  { src: "/images/selfactualize.png", alt: "Self Actualize — album cover", ratio: "square" },
+  { src: "/images/bbpb.png", alt: "BBPB — album cover", ratio: "square" },
+  { src: "/images/doomsday.png", alt: "Doomsday — poster", ratio: "portrait" },
+  { src: "/images/google.png", alt: "Google — concept visual", ratio: "wide" },
+  { src: "/images/agr30hr2.png", alt: "AGR 30HR2 — wide composition", ratio: "wide" },
   { src: "/images/red-portrait.png", alt: "Painted-text portrait single cover", ratio: "square" },
   { src: "/images/north-west.png", alt: "北西 / Northwest album cover", ratio: "square" },
   { src: "/images/yeezus.png", alt: "Yeezus CD reinterpretation", ratio: "square" },
