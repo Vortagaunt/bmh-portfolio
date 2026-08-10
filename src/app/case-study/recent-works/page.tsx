@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 // grid closes out cleanly.
 const photos: { src: string; alt: string; ratio: "square" | "wide" | "tall" | "portrait" | "poster" | "banner" }[] = [
   // Posters / portraits
-  { src: "/images/raized-wrong.png", alt: "Raized Wrong — Louder Than Yesterday tour poster", ratio: "portrait" },
+  { src: "/images/raized-wrong.jpg", alt: "Raized Wrong — Louder Than Yesterday tour poster", ratio: "portrait" },
   { src: "/images/846am-poster.png", alt: "8:46 AM — short documentary poster", ratio: "portrait" },
   { src: "/images/yarg.png", alt: "YARG band poster", ratio: "portrait" },
   { src: "/images/earth-cost.png", alt: "How much does the Earth cost? — concert visual", ratio: "portrait" },
@@ -45,15 +45,15 @@ const photos: { src: string; alt: string; ratio: "square" | "wide" | "tall" | "p
   { src: "/images/skydive.png", alt: "Skydive / red sun illustration", ratio: "square" },
   { src: "/images/vorty.png", alt: "Vorty sticker design", ratio: "square" },
   // Closer row — narrow + wide pair
-  { src: "/images/brothers.png", alt: "Brothers — early concept work", ratio: "tall" },
+  { src: "/images/brothers.jpg", alt: "Brothers — early concept work", ratio: "tall" },
   { src: "/images/dirty-sara-soda.png", alt: "Dirty Sara-Soda Jerks brand mark", ratio: "wide" },
 
   { src: "/images/vultures3.jpg", alt: "Vultures 3 — album cover", ratio: "square" },
-  { src: "/images/selfactualize.png", alt: "Self Actualize — album cover", ratio: "square" },
-  { src: "/images/bbpb.png", alt: "BBPB — album cover", ratio: "square" },
-  { src: "/images/doomsday.png", alt: "Doomsday — poster", ratio: "poster" },
+  { src: "/images/selfactualize.jpg", alt: "Self Actualize — album cover", ratio: "square" },
+  { src: "/images/bbpb.jpg", alt: "BBPB — album cover", ratio: "square" },
+  { src: "/images/doomsday.jpg", alt: "Doomsday — poster", ratio: "poster" },
   { src: "/images/google.png", alt: "Google — concept visual", ratio: "banner" },
-  { src: "/images/agr30hr2.png", alt: "AGR 30HR2 — 30 Hour Weekend stream art", ratio: "banner" },
+  { src: "/images/agr30hr2.jpg", alt: "AGR 30HR2 — 30 Hour Weekend stream art", ratio: "banner" },
 ];
 
 const ratioClass: Record<string, string> = {

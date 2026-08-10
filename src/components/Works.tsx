@@ -17,14 +17,14 @@ const projects: CaseStudy[] = [
     slug: "846-am",
     title: "“8:46 AM” Short Documentary",
     description: "Filming and editing a documentary short on the 9/11 terrorist attacks",
-    image: "/images/846am.png",
+    image: "/images/846am.jpg",
     href: "/case-study/846-am",
   },
   {
     slug: "lakewood-ranch-redesign",
     title: "Lakewood Ranch High School Redesign Concept",
     description: "A new Mustang brand system and on-brand website mockup for Lakewood Ranch High School",
-    image: "/images/lrhs-banner.png",
+    image: "/images/lrhs-banner.jpg",
     href: "/case-study/lakewood-ranch-redesign",
   },
   {
@@ -38,7 +38,7 @@ const projects: CaseStudy[] = [
     slug: "recent-works",
     title: "Recent Works",
     description: "Recently made projects in Photoshop, Illustrator, and more.",
-    image: "/images/brothers.png",
+    image: "/images/brothers.jpg",
     href: "/case-study/recent-works",
   },
 ];
