@@ -54,7 +54,7 @@ const TOOLS: Tool[] = [
 function Tile({ t }: { t: Tool }) {
   const g = t.icon ? GLYPHS[t.icon] : undefined;
   return (
-    <li className="flex w-[88px] shrink-0 flex-col items-center gap-3 sm:w-[100px]">
+    <li className="mr-5 flex w-[88px] shrink-0 flex-col items-center gap-3 sm:mr-7 sm:w-[100px]">
       <span
         title={t.note}
         className="flex h-[68px] w-[68px] items-center justify-center rounded-[18px] border border-line p-[14px] transition-transform duration-500 hover:-translate-y-1 sm:h-[78px] sm:w-[78px] sm:rounded-[20px] sm:p-4"
@@ -123,11 +123,11 @@ export function ToolStack() {
           />
 
           <div className="tool-carousel__track flex w-max pb-3">
-            <ul className="flex gap-5 pl-5 pr-5 sm:gap-7 sm:pl-8 sm:pr-7">
+            <ul className="flex">
               {TOOLS.map((t) => <Tile key={t.name} t={t} />)}
             </ul>
             {/* the seam copy — identical, so -50% lands on the same tile */}
-            <ul className="flex gap-5 pl-5 pr-5 sm:gap-7 sm:pl-8 sm:pr-7" aria-hidden>
+            <ul className="flex" aria-hidden>
               {TOOLS.map((t) => <Tile key={`dup-${t.name}`} t={t} />)}
             </ul>
           </div>
