@@ -55,7 +55,17 @@ temp/
 .cascade-*
 .tmp-docx/
 .tmp-shots/
+# one-shot scripts run from the repo root and deleted after
 .verify-*.mjs
+.build-*.js
+.fit-*.js
+.wire-*.js
+.add-*.js
+.shot-*.mjs
+.probe-*.mjs
+.psd2png.js
+.lrhs-*.js
+.full-map.json
 
 # Ports whose game data isn't ours to redistribute. Keep them locally, play
 # them locally — but anything under public/ ships to bronxhanratty.me, and

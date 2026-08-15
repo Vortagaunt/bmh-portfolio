@@ -15,6 +15,10 @@ export type ZoomItem = {
   medium?: string;
   project?: string;
   description?: string;
+  /** Full-resolution file for the download button. The displayed src is
+   *  capped at 2560px so phones can decode it; this is the original. When
+   *  absent the displayed file already is the original, so src is used. */
+  download?: string;
 };
 
 type ZoomImageProps = ImageProps & {
@@ -187,12 +191,12 @@ export function ZoomImage({ zoomItems, zoomIndex = 0, ...imgProps }: ZoomImagePr
 
                   <div className="mt-auto flex items-center justify-between gap-4 pt-2">
                     <a
-                      href={cur.src}
-                      download
+                      href={cur.download ?? cur.src}
+                      download={`${cur.title ?? cur.alt}${(cur.download ?? cur.src).replace(/^.*(\.[a-z]+)$/i, "$1")}`}
                       onClick={(e) => e.stopPropagation()}
                       className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2 font-mono text-[11px] tracking-[0.16em] uppercase text-white transition hover:bg-white/10"
                     >
-                      ↓ Download
+                      ↓ Download{cur.download ? " original" : ""}
                     </a>
                     {many && (
                       <span className="font-mono text-[11px] tabular-nums tracking-[0.14em] text-white/40">
