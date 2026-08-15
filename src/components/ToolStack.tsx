@@ -1,22 +1,18 @@
 import { Reveal } from "./Reveal";
 
 /**
- * Tool stack — the rail between the hero and the works.
+ * Tool stack — a continuous carousel between the hero and the works.
  *
- * Three kinds of mark, because no single source covers everything:
- *   file  the real product logo, served from /images/tools as its own SVG.
- *         These carry internal <style> class blocks, so inlining four of
- *         them in one document would collide on class names — as separate
- *         files they stay self-contained.
- *   icon  single-colour glyphs from simple-icons (CC0 icon data), inlined
- *         at build so nothing is fetched at runtime, and tinted per brand.
- *   abbr  the fallback for a tool with no obtainable mark (Pictavo), set
- *         typographically in the site's display face.
+ * Two kinds of mark. Most tools carry their real app icon, served from
+ * /images/tools as its own SVG; several of those embed <style> class blocks,
+ * so inlining them together would collide on class names — separate files
+ * keep them self-contained. The rest are single-colour glyphs from
+ * simple-icons (CC0 icon data), inlined at build so nothing is fetched at
+ * runtime.
  *
- * The rail scrolls continuously: the list is rendered twice and the track
- * translates exactly -50%, so the seam lands on an identical tile and the
- * loop is invisible. Hover pauses it; reduced-motion stops it and hands
- * scrolling back to the user.
+ * The track renders the list twice and translates exactly -50%, so the seam
+ * lands on an identical tile and the loop is invisible. Hover pauses it;
+ * reduced-motion stops it and hands scrolling back to the reader.
  */
 const GLYPHS: Record<string, { hex: string; d: string }> = {
   figma: { hex: "F24E1E", d: "M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z" },
@@ -36,38 +32,29 @@ const isNearBlack = (hex: string) => {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b < 40;
 };
 
-type Tool = {
-  name: string;
-  note: string;
-  icon?: string;
-  file?: string;
-  abbr?: string;
-  tint?: string;
-};
+type Tool = { name: string; note: string; icon?: string; file?: string };
 
 const TOOLS: Tool[] = [
+  { name: "Figma", note: "Interface and brand layout", file: "figma.svg" },
+  { name: "Claude", note: "Pair programming", icon: "claude" },
   { name: "Photoshop", note: "Composites, album art, retouching", file: "photoshop.svg" },
   { name: "Illustrator", note: "Marks and vector artwork", file: "illustrator.svg" },
-  { name: "Figma", note: "Interface and brand layout", icon: "figma" },
+  { name: "VS Code", note: "Where the site gets written", file: "vscode.svg" },
   { name: "Premiere Pro", note: "Editing", file: "premiere.svg" },
   { name: "After Effects", note: "Motion and titles", file: "aftereffects.svg" },
-  { name: "Pictavo", note: "Yearbook production", abbr: "Pv", tint: "#6E8F7A" },
   { name: "Next.js", note: "This site, hand-written", icon: "nextdotjs" },
-  { name: "React", note: "Components", icon: "react" },
   { name: "TypeScript", note: "Types everywhere", icon: "typescript" },
-  { name: "Tailwind", note: "Styling", icon: "tailwindcss" },
-  { name: "Claude", note: "Pair programming", icon: "claude" },
   { name: "Cloudflare", note: "Deploys and analytics", icon: "cloudflare" },
 ];
 
 function Tile({ t }: { t: Tool }) {
   const g = t.icon ? GLYPHS[t.icon] : undefined;
   return (
-    <li className="flex w-[92px] shrink-0 flex-col items-center gap-3 sm:w-[104px]">
+    <li className="flex w-[88px] shrink-0 flex-col items-center gap-3 sm:w-[100px]">
       <span
         title={t.note}
-        className="flex h-[72px] w-[72px] items-center justify-center overflow-hidden rounded-[20px] border border-line transition-transform duration-500 hover:-translate-y-1 sm:h-[84px] sm:w-[84px]"
-        style={{ background: t.file ? "transparent" : "var(--surface)" }}
+        className="flex h-[68px] w-[68px] items-center justify-center rounded-[18px] border border-line p-[14px] transition-transform duration-500 hover:-translate-y-1 sm:h-[78px] sm:w-[78px] sm:rounded-[20px] sm:p-4"
+        style={{ background: "var(--surface)" }}
       >
         {t.file ? (
           /* eslint-disable-next-line @next/next/no-img-element */
@@ -82,22 +69,14 @@ function Tile({ t }: { t: Tool }) {
             role="img"
             aria-label={t.name}
             viewBox="0 0 24 24"
-            className="h-[34px] w-[34px] sm:h-[38px] sm:w-[38px]"
+            className="h-full w-full"
             fill={isNearBlack(g.hex) ? "var(--ink)" : `#${g.hex}`}
           >
             <path d={g.d} />
           </svg>
-        ) : (
-          <span
-            aria-label={t.name}
-            className="font-display text-[26px] font-semibold tracking-tight sm:text-[29px]"
-            style={{ color: t.tint }}
-          >
-            {t.abbr}
-          </span>
-        )}
+        ) : null}
       </span>
-      <span className="text-center text-[12px] leading-tight tracking-tight text-ink/60 sm:text-[13px]">
+      <span className="text-center text-[12px] leading-tight tracking-tight text-ink/55 sm:text-[13px]">
         {t.name}
       </span>
     </li>
@@ -119,14 +98,15 @@ export function ToolStack() {
 
         <Reveal variant="up" delay={120} duration={1000}>
           <p className="mt-5 max-w-[62ch] text-[16px] leading-[1.6] text-ink/70 sm:text-[18px]">
-            The current rotation — what the design actually gets made in, and the
+            Knowing the craft matters more than knowing one app. These are the
+            ones in rotation right now — what the design gets made in, and the
             stack this site is hand-written on.
           </p>
         </Reveal>
       </div>
 
       <Reveal variant="up" delay={220} duration={1100}>
-        <div className="tool-rail relative mt-12 sm:mt-16">
+        <div className="tool-carousel relative mt-12 sm:mt-16">
           <span
             aria-hidden
             className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-28"
@@ -138,12 +118,12 @@ export function ToolStack() {
             style={{ background: "linear-gradient(to left, var(--paper), transparent)" }}
           />
 
-          <div className="tool-track flex w-max gap-5 pb-3 sm:gap-7">
-            <ul className="flex gap-5 pl-5 sm:gap-7 sm:pl-8">
+          <div className="tool-carousel__track flex w-max pb-3">
+            <ul className="flex gap-5 pl-5 pr-5 sm:gap-7 sm:pl-8 sm:pr-7">
               {TOOLS.map((t) => <Tile key={t.name} t={t} />)}
             </ul>
             {/* the seam copy — identical, so -50% lands on the same tile */}
-            <ul className="flex gap-5 pl-5 sm:gap-7 sm:pl-8" aria-hidden>
+            <ul className="flex gap-5 pl-5 pr-5 sm:gap-7 sm:pl-8 sm:pr-7" aria-hidden>
               {TOOLS.map((t) => <Tile key={`dup-${t.name}`} t={t} />)}
             </ul>
           </div>
@@ -155,15 +135,15 @@ export function ToolStack() {
           from { transform: translate3d(0, 0, 0); }
           to   { transform: translate3d(-50%, 0, 0); }
         }
-        .tool-track {
-          animation: tool-marquee 46s linear infinite;
+        .tool-carousel__track {
+          animation: tool-marquee 42s linear infinite;
           will-change: transform;
         }
-        .tool-rail:hover .tool-track { animation-play-state: paused; }
+        .tool-carousel:hover .tool-carousel__track { animation-play-state: paused; }
         @media (prefers-reduced-motion: reduce) {
-          .tool-track { animation: none; }
-          .tool-rail { overflow-x: auto; scrollbar-width: none; }
-          .tool-rail::-webkit-scrollbar { display: none; }
+          .tool-carousel__track { animation: none; }
+          .tool-carousel { overflow-x: auto; scrollbar-width: none; }
+          .tool-carousel::-webkit-scrollbar { display: none; }
         }
       `}</style>
     </section>
