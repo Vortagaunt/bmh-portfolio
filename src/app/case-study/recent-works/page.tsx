@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ZoomImage } from "@/components/ZoomImage";
+import { ZoomImage, type ZoomItem } from "@/components/ZoomImage";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GridBackdrop } from "@/components/GridBackdrop";
@@ -29,31 +29,31 @@ export const metadata: Metadata = {
 // Sorted from tallest aspect ratio → squares → widest. Last row pairs
 // the narrow "Brothers" tile with the wide "Dirty Sara-Soda" logo so the
 // grid closes out cleanly.
-const photos: { src: string; alt: string; ratio: "square" | "wide" | "tall" | "portrait" | "poster" | "banner" }[] = [
+const photos: (ZoomItem & { ratio: "square" | "wide" | "tall" | "portrait" | "poster" | "banner" })[] = [
   // Posters / portraits
-  { src: "/images/raized-wrong.jpg", alt: "Raized Wrong — Louder Than Yesterday tour poster", ratio: "portrait" },
-  { src: "/images/846am-poster.png", alt: "8:46 AM — short documentary poster", ratio: "portrait" },
-  { src: "/images/yarg.png", alt: "YARG band poster", ratio: "portrait" },
-  { src: "/images/earth-cost.png", alt: "How much does the Earth cost? — concert visual", ratio: "portrait" },
+  { src: "/images/raized-wrong.jpg", alt: "Raized Wrong — Louder Than Yesterday tour poster", title: "Raized Wrong — Louder Than Yesterday", medium: "Tour poster", project: "Raized Wrong", description: "Tour poster for the Louder Than Yesterday run — type-led, built to read at a distance and survive being stapled to a pole.", ratio: "portrait" },
+  { src: "/images/846am-poster.png", alt: "8:46 AM — short documentary poster", title: "8:46 AM", date: "2026", medium: "Film poster", project: "8:46 AM", description: "Poster for the short documentary on September 11th — directed, shot and edited start to finish. Winner, Manatee Film Rush, and a Jim Harbin Student Festival selection.", ratio: "portrait" },
+  { src: "/images/yarg.png", alt: "YARG band poster", title: "YARG", medium: "Band poster", description: "Live-shot band poster with a custom display lockup set over the performance.", ratio: "portrait" },
+  { src: "/images/earth-cost.png", alt: "How much does the Earth cost? — concert visual", title: "How Much Does the Earth Cost?", medium: "Concert visual", description: "Concert visual — a lone figure on the curve of the planet, built for projection behind a live set.", ratio: "portrait" },
   // Squares
-  { src: "/images/red-portrait.png", alt: "Painted-text portrait single cover", ratio: "square" },
-  { src: "/images/north-west.png", alt: "北西 / Northwest album cover", ratio: "square" },
-  { src: "/images/yeezus.png", alt: "Yeezus CD reinterpretation", ratio: "square" },
-  { src: "/images/kanye-bear.png", alt: "Kanye bear album cover", ratio: "square" },
-  { src: "/images/minidisc.png", alt: "MiniDisc render", ratio: "square" },
-  { src: "/images/guitar-hero-20.png", alt: "Guitar Hero 20 anniversary mark", ratio: "square" },
-  { src: "/images/skydive.png", alt: "Skydive / red sun illustration", ratio: "square" },
-  { src: "/images/vorty.png", alt: "Vorty sticker design", ratio: "square" },
+  { src: "/images/red-portrait.png", alt: "Painted-text portrait single cover", title: "Painted Text Portrait", medium: "Single cover", description: "Single cover: a portrait overpainted with hand-drawn type, the lettering following the form of the face rather than sitting on top of it.", ratio: "square" },
+  { src: "/images/north-west.png", alt: "北西 / Northwest album cover", title: "北西 / Northwest", medium: "Concept album cover", description: "Concept cover pairing Japanese and Latin type over a high-contrast halftone treatment.", ratio: "square" },
+  { src: "/images/yeezus.png", alt: "Yeezus CD reinterpretation", title: "Yeezus — Reinterpretation", medium: "Concept album cover", description: "A reinterpretation of the Yeezus packaging as a physical object — jewel case, price stickers, and the red tape treatment rebuilt from scratch.", ratio: "square" },
+  { src: "/images/kanye-bear.png", alt: "Kanye bear album cover", title: "Dropout Bear", medium: "Concept album cover", description: "Concept cover built around the dropout bear, framed in ornamental gold.", ratio: "square" },
+  { src: "/images/minidisc.png", alt: "MiniDisc render", title: "MiniDisc", medium: "Product render", description: "Render of a MiniDisc — a study in reflective plastic, chromatic edges and dead-centre composition.", ratio: "square" },
+  { src: "/images/guitar-hero-20.png", alt: "Guitar Hero 20 anniversary mark", title: "Guitar Hero 20", medium: "Anniversary mark", description: "Anniversary mark — chrome-and-neon numerals over brick, in the spirit of the original game's packaging.", ratio: "square" },
+  { src: "/images/skydive.png", alt: "Skydive / red sun illustration", title: "Skydive", medium: "Illustration", description: "Illustration — a red figure falling through cloud under a red sun, on a hard gradient sky.", ratio: "square" },
+  { src: "/images/vorty.png", alt: "Vorty sticker design", title: "Vorty", medium: "Sticker design", description: "Die-cut sticker design — a masked character on orange, drawn to survive being printed small.", ratio: "square" },
   // Closer row — narrow + wide pair
-  { src: "/images/brothers.jpg", alt: "Brothers — early concept work", ratio: "tall" },
-  { src: "/images/dirty-sara-soda.png", alt: "Dirty Sara-Soda Jerks brand mark", ratio: "wide" },
+  { src: "/images/brothers.jpg", alt: "Brothers — early concept work", title: "Brothers", medium: "Concept work", description: "Early concept work, kept here as a marker of where the visual language started.", ratio: "tall" },
+  { src: "/images/dirty-sara-soda.png", alt: "Dirty Sara-Soda Jerks brand mark", title: "Dirty Sara-Soda Jerks", medium: "Brand mark", project: "Dirty Sara-Soda", description: "Launch mark and identity for a family-run mobile soda business.", ratio: "wide" },
 
-  { src: "/images/vultures3.jpg", alt: "Vultures 3 — album cover", ratio: "square" },
-  { src: "/images/selfactualize.jpg", alt: "Self Actualize — album cover", ratio: "square" },
-  { src: "/images/bbpb.jpg", alt: "BBPB — album cover", ratio: "square" },
-  { src: "/images/doomsday.jpg", alt: "Doomsday — poster", ratio: "poster" },
-  { src: "/images/google.png", alt: "Google — concept visual", ratio: "banner" },
-  { src: "/images/agr30hr2.jpg", alt: "AGR 30HR2 — 30 Hour Weekend stream art", ratio: "banner" },
+  { src: "/images/vultures3.jpg", alt: "Vultures 3 — album cover", title: "Vultures 3", date: "June 2026", medium: "Concept album cover", description: "Concept cover — stark, near-monochrome, built around a single central figure.", ratio: "square" },
+  { src: "/images/selfactualize.jpg", alt: "Self Actualize — album cover", title: "Self Actualize", date: "July 2026", medium: "Concept album cover", description: "Concept cover exploring self-image through layered photographic treatment.", ratio: "square" },
+  { src: "/images/bbpb.jpg", alt: "BBPB — album cover", title: "BBPB", date: "January 2026", medium: "Concept album cover", description: "Concept cover — a square composition worked entirely in Photoshop.", ratio: "square" },
+  { src: "/images/doomsday.jpg", alt: "Doomsday — poster", title: "Doomsday", date: "July 2026", medium: "Concept film poster", description: "Concept one-sheet — full billing block, title treatment and key art built to the proportions of a real theatrical poster.", ratio: "poster" },
+  { src: "/images/google.png", alt: "Google — concept visual", title: "Google — Redesign", date: "March 2026", medium: "Identity concept", description: "Identity concept: the wordmark rebuilt so the search field becomes the second o, set on a full-spectrum gradient.", ratio: "banner" },
+  { src: "/images/agr30hr2.jpg", alt: "AGR 30HR2 — 30 Hour Weekend stream art", title: "AUGER — 30 Hour Weekend", date: "October 2025", medium: "Stream key art", project: "AUGER", description: "Key art for a 30-hour charity stream weekend — blackletter title, portrait inset, and the broadcast dates set large.", ratio: "banner" },
 ];
 
 const ratioClass: Record<string, string> = {
@@ -145,7 +145,7 @@ export default function RecentWorksPage() {
                       fill
                       sizes="(min-width: 1440px) 700px, (min-width: 768px) 50vw, 100vw"
                       className="card-img-zoom object-cover"
-                      zoomItems={photos.map((x) => ({ src: x.src, alt: x.alt }))}
+                      zoomItems={photos}
                       zoomIndex={i}
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
