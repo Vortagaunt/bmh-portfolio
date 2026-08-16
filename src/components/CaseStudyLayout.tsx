@@ -42,6 +42,10 @@ export interface CaseStudyLink {
   href: string;
   /** Set true for hrefs that point to static HTML outside Next.js routing */
   external?: boolean;
+  /** Colour the destination paints on first frame, so the exit fade lands on
+   *  a matching frame instead of cutting. Only needed for external targets
+   *  that do not share the site palette. */
+  exitBg?: string;
 }
 
 export interface MarkLibraryItem {
@@ -212,6 +216,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                     key={link.href}
                     href={link.href}
                     data-external
+                    data-exit-bg={link.exitBg}
                     className={className}
                   >
                     {content}

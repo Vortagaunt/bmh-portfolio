@@ -13,6 +13,10 @@ export function PageTransition() {
   const router = useRouter();
   const [opacity, setOpacity] = useState(0);
   const [active, setActive] = useState(false);
+  // Colour to fade OUT to. Normally the paper we're already on, but a link can
+  // name the colour its destination paints — the static LRHS pages are #0e0e10
+  // and #fbfbf9, so fading to our own paper put a hard cut mid-transition.
+  const [exitBg, setExitBg] = useState<string | null>(null);
   const firstRender = useRef(true);
 
   // Fade overlay out whenever the path changes (new page has mounted).
@@ -40,7 +44,7 @@ export function PageTransition() {
       setActive(true);
       fadeId = requestAnimationFrame(() => {
         setOpacity(0);
-        doneId = setTimeout(() => setActive(false), 600);
+        doneId = setTimeout(() => { setActive(false); setExitBg(null); }, 600);
       });
     });
     return () => {
@@ -80,6 +84,7 @@ export function PageTransition() {
           target.hasAttribute("data-external"));
 
       e.preventDefault();
+      setExitBg(target.getAttribute("data-exit-bg"));
       setActive(true);
       setOpacity(1);
       window.setTimeout(() => {
@@ -101,7 +106,7 @@ export function PageTransition() {
       style={{
         position: "fixed",
         inset: 0,
-        background: "var(--paper)",
+        background: exitBg ?? "var(--paper)",
         opacity,
         pointerEvents: active ? "auto" : "none",
         transition: "opacity 500ms cubic-bezier(0.4, 0, 0.2, 1)",
