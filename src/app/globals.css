@@ -70,6 +70,7 @@
   --grid-dark: rgba(255, 255, 255, 0.2); /* grid lines over a dark room */
   --surface: #ffffff;          /* cards and dialogs sitting on paper */
   --line: rgba(24, 24, 24, 0.15);
+  --outline-stroke: rgba(0, 0, 0, 0.18);   /* decorative outline type */
 
   --background: #f1f1f1;
   --foreground: #181818;
@@ -119,6 +120,7 @@
   --grid: rgba(255, 255, 255, 0.075);
   --surface: #17171a;
   --line: rgba(236, 236, 238, 0.16);
+  --outline-stroke: rgba(255, 255, 255, 0.17);
   color-scheme: dark;
 
   --background: #0e0e10;
@@ -198,17 +200,142 @@
   font-style: italic;
 }
 
-/* Outline italic backdrop text (Selected, Digital, About, Let's Talk) */
+/* Outline italic backdrop text (Selected, Digital, About, Let's Talk).
+   The stroke has to follow the theme: hard-coded black at 18% it vanished
+   completely on dark paper, taking the whole decorative layer with it. */
 .serif-outline {
   font-family: var(--font-serif);
   font-style: italic;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.18);
+  -webkit-text-stroke: 1px var(--outline-stroke);
   user-select: none;
   pointer-events: none;
 }
 .serif-outline.serif-outline--dark {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.32);
+}
+
+/* ====== Liquid glass ======================================================
+   Apple's glass is mostly not blur. What reads as glass is three things: a
+   translucent fill, a bright specular rim along the lit (top) edge, and a
+   soft ambient shadow that lifts the surface off the page. None of those
+   need backdrop-filter — which matters here, because a full-page backdrop
+   blur once lagged this site badly on an ultrawide. So blur is opt-in
+   (.glass-frost) and reserved for small, fixed-size chrome; the glass look
+   itself costs nothing to paint. */
+:root {
+  --glass-fill: rgba(255, 255, 255, 0.55);
+  --glass-rim: rgba(24, 24, 24, 0.09);
+  --glass-edge: rgba(255, 255, 255, 0.9);
+  --glass-sheen: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.06) 45%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --glass-shadow: 0 12px 34px -14px rgba(16, 16, 20, 0.3),
+    0 3px 10px -4px rgba(16, 16, 20, 0.12);
+}
+
+.dark {
+  --glass-fill: rgba(44, 44, 52, 0.55);
+  --glass-rim: rgba(255, 255, 255, 0.1);
+  --glass-edge: rgba(255, 255, 255, 0.22);
+  --glass-sheen: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --glass-shadow: 0 16px 44px -16px rgba(0, 0, 0, 0.8),
+    0 3px 12px -5px rgba(0, 0, 0, 0.55);
+}
+
+.glass {
+  background-color: var(--glass-fill);
+  background-image: var(--glass-sheen);
+  border: 1px solid var(--glass-rim);
+  /* the inset highlight is the specular edge — the single most "glass" part */
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-edge);
+}
+
+/* Frosting. Cost scales with the blurred area, so this belongs on small
+   chrome only — never over the whole page. It is used in exactly one place
+   (the header bar, ~52px tall), which is roughly 1/28th the area of the
+   full-viewport blur that once lagged an ultrawide here. That ratio is the
+   argument — not a measurement: headless Chrome reports the known-bad
+   full-page case as costing 0.7%, so it cannot see this class of GPU work.
+   If the page ever feels heavy while scrolling, delete the one `glass-frost`
+   in SiteHeader and everything still looks right.
+   The @supports wrapper is load-bearing, not decoration: written bare, the
+   build's CSS transform rewrote this to a lone -webkit-backdrop-filter, which
+   Chrome does not support, so the frost silently did nothing. Inside a
+   feature query the standard property survives, and browsers without it just
+   get the (already legible) translucent fill. */
+@supports (backdrop-filter: blur(20px)) {
+  .glass-frost {
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+}
+
+/* ====== Ambient colour field ==============================================
+   The paper was dead flat. Three very wide, very low-opacity radials give
+   the page somewhere to travel without touching the palette — it reads as
+   depth rather than as colour. Deliberately static: a drifting full-viewport
+   layer means continuous compositing, which is exactly the cost this site
+   already learned to avoid. */
+.ambient {
+  background:
+    radial-gradient(38% 44% at 14% 10%, rgba(96, 132, 255, 0.13), transparent 70%),
+    radial-gradient(34% 40% at 86% 18%, rgba(255, 122, 176, 0.1), transparent 70%),
+    radial-gradient(44% 48% at 62% 94%, rgba(86, 210, 235, 0.1), transparent 72%);
+}
+
+.dark .ambient {
+  background:
+    radial-gradient(38% 44% at 14% 10%, rgba(96, 132, 255, 0.2), transparent 70%),
+    radial-gradient(34% 40% at 86% 18%, rgba(232, 92, 160, 0.15), transparent 70%),
+    radial-gradient(44% 48% at 62% 94%, rgba(60, 200, 230, 0.14), transparent 72%);
+}
+
+/* ====== Elevated media ====================================================
+   Work images used to sit flat on the paper with a 2px radius. A generous
+   radius plus a two-part shadow (a tight contact shadow and a wide ambient
+   one) is what makes a surface look like it's above the page rather than
+   printed on it. */
+.media-elevated {
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(16, 16, 20, 0.07), 0 14px 34px -16px rgba(16, 16, 20, 0.26);
+  transition: box-shadow 0.8s cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+.dark .media-elevated {
+  /* the inset hairline gives dark artwork an edge to end on — without it a
+     dark image just dissolves into dark paper */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 18px 44px -18px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+}
+.card-hover:hover .media-elevated {
+  box-shadow: 0 2px 6px rgba(16, 16, 20, 0.1), 0 30px 60px -22px rgba(16, 16, 20, 0.34);
+}
+.dark .card-hover:hover .media-elevated {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 36px 72px -24px rgba(0, 0, 0, 0.9);
+}
+
+/* ====== Selection and focus ==============================================
+   The base layer's focus outline is a translucent grey, which disappears
+   against the glass surfaces. Keyboard users get a real ring; pointer users
+   never see it. */
+::selection {
+  background: rgba(96, 132, 255, 0.26);
+  color: var(--ink);
+}
+.dark ::selection {
+  background: rgba(96, 132, 255, 0.38);
+}
+
+:focus-visible {
+  outline: 2px solid rgba(96, 132, 255, 0.8);
+  outline-offset: 3px;
 }
 
 /* ====== Animations ====== */

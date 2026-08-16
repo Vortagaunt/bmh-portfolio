@@ -43,7 +43,7 @@ export function FilmPlayer({
     >
       {/* Screen bezel */}
       <div
-        className="relative overflow-hidden bg-black"
+        className="media-elevated relative overflow-hidden bg-black"
         style={{
           aspectRatio: "16 / 9",
           borderRadius: "12px",

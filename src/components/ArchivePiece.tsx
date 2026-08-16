@@ -50,7 +50,7 @@ export function ArchivePiece() {
   return (
     <section
       id="archive-piece"
-      className="relative bg-paper px-5 pt-24 pb-24 sm:px-8 sm:pt-28 sm:pb-32"
+      className="relative px-5 pt-24 pb-24 sm:px-8 sm:pt-28 sm:pb-32"
     >
       <div className="relative mx-auto max-w-[1280px]">
         {/* Heading block */}
@@ -94,7 +94,7 @@ export function ArchivePiece() {
             className="col-span-12 lg:col-span-6"
           >
             <figure>
-              <div className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]" style={{ aspectRatio: "1 / 1" }}>
+              <div className="media-elevated relative w-full overflow-hidden bg-[#cfcfcf]" style={{ aspectRatio: "1 / 1" }}>
                 <ZoomImage
                   src="/images/dali-bear.jpg"
                   alt="Dalí Museum — surreal multi-mouthed bear photo-composite"

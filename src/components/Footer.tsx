@@ -12,7 +12,7 @@ export function Footer() {
   return (
     <footer className="relative">
       {/* Let's talk reveal area */}
-      <div className="relative overflow-hidden bg-paper px-5 pt-16 pb-20 sm:px-8 sm:pb-24">
+      <div className="relative overflow-hidden px-5 pt-16 pb-20 sm:px-8 sm:pb-24">
         <div className="relative mx-auto min-h-[520px] max-w-[1280px] sm:min-h-[640px]">
           {/* Outline italic Let's Talk backdrop */}
           <Reveal

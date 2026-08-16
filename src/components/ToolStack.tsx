@@ -64,8 +64,7 @@ function Tile({ t }: { t: Tool }) {
     <li className="mr-5 flex w-[88px] shrink-0 flex-col items-center gap-3 sm:mr-7 sm:w-[100px]">
       <span
         title={t.note}
-        className="flex h-[68px] w-[68px] items-center justify-center rounded-[18px] border border-line p-[14px] transition-transform duration-500 hover:-translate-y-1 sm:h-[78px] sm:w-[78px] sm:rounded-[20px] sm:p-4"
-        style={{ background: "var(--surface)" }}
+        className="glass flex h-[68px] w-[68px] items-center justify-center rounded-[18px] p-[14px] transition-transform duration-500 hover:-translate-y-1 sm:h-[78px] sm:w-[78px] sm:rounded-[20px] sm:p-4"
       >
         {t.file ? (
           /* eslint-disable-next-line @next/next/no-img-element */
@@ -98,7 +97,7 @@ function Tile({ t }: { t: Tool }) {
 
 export function ToolStack() {
   return (
-    <section className="relative w-full overflow-hidden bg-paper py-20 sm:py-28">
+    <section className="relative w-full overflow-hidden py-20 sm:py-28">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8">
         <Reveal variant="up" duration={1000}>
           <h2
