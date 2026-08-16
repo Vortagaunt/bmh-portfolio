@@ -370,7 +370,13 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                         fill
                         sizes="(min-width: 1024px) 320px, (min-width: 640px) 33vw, 50vw"
                         className="object-contain p-6 transition-transform duration-700 group-hover:scale-[1.04] sm:p-8"
-                        zoomItems={data.markLibrary!.items.map((x) => ({ src: decodeURI(x.src), alt: x.label }))}
+                        zoomItems={data.markLibrary!.items.map((x) => ({
+                          src: decodeURI(x.src),
+                          alt: x.label,
+                          // carry the tile’s ground into the lightbox — a white
+                          // mark on the bare scrim would be invisible
+                          panel: x.bg === "ink" ? ("ink" as const) : ("paper" as const),
+                        }))}
                         zoomIndex={i}
                       />
                     </div>
