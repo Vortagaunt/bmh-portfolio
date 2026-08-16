@@ -19,6 +19,10 @@ export type ZoomItem = {
    *  capped at 2560px so phones can decode it; this is the original. When
    *  absent the displayed file already is the original, so src is used. */
   download?: string;
+  /** Backing surface for transparent vector art, mirroring the tile the item
+   *  came from. Logo marks are black or white with a transparent ground, so
+   *  on the bare scrim half of them would be invisible. */
+  panel?: "paper" | "ink";
 };
 
 type ZoomImageProps = ImageProps & {
@@ -76,6 +80,13 @@ export function ZoomImage({ zoomItems, zoomIndex = 0, ...imgProps }: ZoomImagePr
 
   const cur = items[Math.min(idx, items.length - 1)];
   const detailed = hasDetail(cur);
+
+  /* Vector art has no useful intrinsic size — an SVG mark whose file says
+     150px rendered at 150px, however much room the lightbox had, because
+     max-width only ever shrinks. Vectors get an explicit box to fill instead,
+     on a backing surface so transparent black and white marks stay legible. */
+  const isVector = /\.svg(\?|#|$)/i.test(cur.src);
+  const panel = cur.panel ?? (isVector ? "paper" : undefined);
 
   const rows = (
     [
@@ -207,25 +218,47 @@ export function ZoomImage({ zoomItems, zoomIndex = 0, ...imgProps }: ZoomImagePr
                 </div>
               </div>
             ) : (
-              /* ---- plain image, unchanged ---- */
+              /* ---- plain image ---- */
               <div
                 className="flex max-h-full max-w-full flex-col items-center"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  key={cur.src}
-                  src={cur.src}
-                  alt={cur.alt}
-                  className="rounded-2xl object-contain"
-                  style={{
-                    maxWidth: "min(1400px, 92vw)",
-                    maxHeight: "80vh",
-                    boxShadow: "0 24px 80px rgba(0,0,0,.55)",
-                    animation: "lightbox-in .28s cubic-bezier(.2,.7,.1,1) both",
-                  }}
-                  draggable={false}
-                />
+                {panel ? (
+                  <div
+                    key={cur.src}
+                    className="flex items-center justify-center rounded-2xl p-[clamp(28px,5vw,72px)]"
+                    style={{
+                      width: "min(1080px, 90vw)",
+                      height: "min(74vh, 780px)",
+                      background: panel === "ink" ? "#0a0a0a" : "#F4F4F2",
+                      boxShadow: "0 24px 80px rgba(0,0,0,.55)",
+                      animation: "lightbox-in .28s cubic-bezier(.2,.7,.1,1) both",
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={cur.src}
+                      alt={cur.alt}
+                      className="h-full w-full object-contain"
+                      draggable={false}
+                    />
+                  </div>
+                ) : (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    key={cur.src}
+                    src={cur.src}
+                    alt={cur.alt}
+                    className="rounded-2xl object-contain"
+                    style={{
+                      maxWidth: "min(1400px, 92vw)",
+                      maxHeight: "80vh",
+                      boxShadow: "0 24px 80px rgba(0,0,0,.55)",
+                      animation: "lightbox-in .28s cubic-bezier(.2,.7,.1,1) both",
+                    }}
+                    draggable={false}
+                  />
+                )}
                 <div className="mt-4 flex items-baseline gap-4 text-center">
                   <p className="max-w-[70ch] text-[13px] tracking-tight text-white/70">{cur.alt}</p>
                   {many && (
