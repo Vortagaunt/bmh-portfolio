@@ -41,7 +41,7 @@ const data: CaseStudyData = {
     { label: "Type", value: "Concept · Self-initiated" },
   ],
   links: [
-    { label: "Explore the brand system", href: "/lrhs-brand-refresh.html", external: true },
+    { label: "Explore the brand system", href: "/lrhs-brand-refresh.html", external: true, exitBg: "#0e0e10" },
   ],
   linksDecorated: true,
   overview:
