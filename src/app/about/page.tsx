@@ -74,6 +74,7 @@ export default function AboutPage() {
     <main className="relative isolate min-h-screen w-full bg-paper text-ink">
       <SmoothScroll />
       <div className="pointer-events-none fixed inset-0 z-0">
+        <div aria-hidden className="ambient absolute inset-0" />
         <GridBackdrop />
       </div>
       <SiteHeader />
@@ -115,7 +116,7 @@ export default function AboutPage() {
               className="col-span-12 md:col-span-5"
             >
               <div
-                className="relative w-full max-w-[460px] overflow-hidden rounded-sm bg-[#cfcfcf]"
+                className="media-elevated relative w-full max-w-[460px] overflow-hidden bg-[#cfcfcf]"
                 style={{ aspectRatio: "420 / 520" }}
               >
                 <Image

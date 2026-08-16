@@ -142,7 +142,7 @@ export function ZoomImage({ zoomItems, zoomIndex = 0, ...imgProps }: ZoomImagePr
             {detailed ? (
               /* ---- two-pane card: artwork + details ---- */
               <div
-                className="flex max-h-[90vh] w-full max-w-[1180px] flex-col overflow-hidden rounded-lg md:flex-row"
+                className="flex max-h-[90vh] w-full max-w-[1180px] flex-col overflow-hidden rounded-[22px] md:flex-row"
                 style={{
                   background: "#17171a",
                   boxShadow: "0 30px 100px rgba(0,0,0,.6)",
@@ -217,7 +217,7 @@ export function ZoomImage({ zoomItems, zoomIndex = 0, ...imgProps }: ZoomImagePr
                   key={cur.src}
                   src={cur.src}
                   alt={cur.alt}
-                  className="rounded-sm object-contain"
+                  className="rounded-2xl object-contain"
                   style={{
                     maxWidth: "min(1400px, 92vw)",
                     maxHeight: "80vh",

@@ -79,6 +79,7 @@ export default function RecentWorksPage() {
     <main className="relative isolate min-h-screen w-full bg-paper text-ink">
       <SmoothScroll />
       <div className="pointer-events-none fixed inset-0 z-0">
+        <div aria-hidden className="ambient absolute inset-0" />
         <GridBackdrop />
       </div>
       <SiteHeader />
@@ -136,7 +137,7 @@ export default function RecentWorksPage() {
                   className={ratioClass[p.ratio]}
                 >
                   <div
-                    className="group relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
+                    className="media-elevated group relative w-full overflow-hidden bg-[#cfcfcf]"
                     style={{ aspectRatio: ratioAspect[p.ratio] }}
                   >
                     <ZoomImage

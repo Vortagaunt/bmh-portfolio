@@ -17,7 +17,7 @@ export function ExperiencePiece() {
   return (
     <section
       id="experience"
-      className="relative bg-paper px-5 pt-10 pb-24 sm:px-8 sm:pt-14 sm:pb-32"
+      className="relative px-5 pt-10 pb-24 sm:px-8 sm:pt-14 sm:pb-32"
     >
       <div className="relative mx-auto max-w-[1280px] border-t border-ink/10 pt-16 sm:pt-20">
         <div className="grid grid-cols-12 items-start gap-8 lg:gap-12">
@@ -99,7 +99,7 @@ export function ExperiencePiece() {
                 aria-label="Read the full Observer article"
               >
                 <div
-                  className="relative w-full overflow-hidden rounded-sm border border-ink/10 bg-surface"
+                  className="glass rounded-[20px] relative w-full overflow-hidden"
                   style={{ aspectRatio: "1.32 / 1" }}
                 >
                   <Image

@@ -91,7 +91,7 @@ export function Works() {
               className="group flex flex-col gap-5 card-hover"
             >
               <div
-                className="relative w-full overflow-hidden bg-[#cfcfcf] rounded-sm"
+                className="media-elevated relative w-full overflow-hidden bg-[#cfcfcf]"
                 style={{ aspectRatio: "1.46 / 1" }}
               >
                 <Image

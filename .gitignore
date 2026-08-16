@@ -72,3 +72,4 @@ temp/
 # these carry Valve's and Rockstar's copyrighted engine binaries and assets.
 public/games/hl2-web/
 public/games/vice-dos/
+.design-shots/

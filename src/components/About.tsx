@@ -4,7 +4,7 @@ import { Reveal } from "./Reveal";
 
 export function About() {
   return (
-    <section id="about-me" className="relative bg-paper px-5 pt-24 pb-20 sm:px-8 sm:pt-32 sm:pb-24">
+    <section id="about-me" className="relative px-5 pt-24 pb-20 sm:px-8 sm:pt-32 sm:pb-24">
       <div className="relative mx-auto max-w-[1280px]">
         {/* Outline italic About backdrop */}
         <Reveal
@@ -25,7 +25,7 @@ export function About() {
           {/* Portrait */}
           <Reveal variant="scale" duration={1300} className="col-span-12 md:col-span-4 md:col-start-2">
             <div
-              className="relative w-full max-w-[420px] overflow-hidden"
+              className="media-elevated relative w-full max-w-[420px] overflow-hidden"
               style={{ aspectRatio: "420 / 520" }}
             >
               <Image
@@ -62,7 +62,7 @@ export function About() {
             <div className="mt-12 flex flex-wrap gap-3">
               <Link
                 href="/about"
-                className="magnetic group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:bg-ink/[0.08]"
+                className="glass magnetic group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:-translate-y-0.5"
               >
                 <span>Learn more</span>
                 <span className="transition-transform duration-500 group-hover:translate-x-1">
@@ -71,7 +71,7 @@ export function About() {
               </Link>
               <Link
                 href="/resume"
-                className="magnetic group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:bg-ink/[0.08]"
+                className="glass magnetic group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:-translate-y-0.5"
               >
                 <span>Resume</span>
                 <span className="transition-transform duration-500 group-hover:translate-y-0.5">

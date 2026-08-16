@@ -145,7 +145,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
         <Reveal variant="scale" delay={120} duration={1400}>
           <div className="relative mx-auto mt-12 w-full max-w-[1440px] px-5 sm:mt-20 sm:px-8">
             <div
-              className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
+              className="media-elevated relative w-full overflow-hidden bg-[#cfcfcf]"
               style={{ aspectRatio: "1.6 / 1" }}
             >
               <ZoomImage
@@ -200,7 +200,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                   link.href.startsWith("http") ||
                   link.href.endsWith(".html");
                 const className =
-                  "magnetic group inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.03] px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:bg-ink/[0.08]";
+                  "glass magnetic group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:-translate-y-0.5";
                 const content = (
                   <>
                     <span>{link.label}</span>
@@ -285,7 +285,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
               {s.image && (
                 <Reveal variant="scale" delay={250} duration={1300}>
                   <div
-                    className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
+                    className="media-elevated relative w-full overflow-hidden bg-[#cfcfcf]"
                     style={{ aspectRatio: "1.5 / 1" }}
                   >
                     <ZoomImage
@@ -352,10 +352,10 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                 >
                   <figure className="group flex flex-col">
                     <div
-                      className={`relative w-full overflow-hidden rounded-sm border transition-colors duration-500 ${
+                      className={`relative w-full overflow-hidden rounded-[20px] transition-colors duration-500 ${
                         dark
-                          ? "border-ink/40 bg-[#0a0a0a] group-hover:border-ink/60"
-                          : "border-ink/10 bg-surface group-hover:border-ink/25"
+                          ? "media-elevated border border-ink/40 bg-[#0a0a0a] group-hover:border-ink/60"
+                          : "glass"
                       }`}
                       style={{ aspectRatio: "1 / 1" }}
                     >
@@ -404,7 +404,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                 }
               >
                 <div
-                  className="relative w-full overflow-hidden rounded-sm bg-[#cfcfcf]"
+                  className="media-elevated relative w-full overflow-hidden bg-[#cfcfcf]"
                   style={{ aspectRatio: i % 3 === 2 ? "2 / 1" : "1.4 / 1" }}
                 >
                   <ZoomImage

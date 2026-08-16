@@ -162,6 +162,7 @@ export default function YearbookCaseStudy() {
     <main className="relative isolate min-h-screen w-full bg-paper text-ink">
       <SmoothScroll />
       <div className="pointer-events-none fixed inset-0 z-0">
+        <div aria-hidden className="ambient absolute inset-0" />
         <GridBackdrop />
       </div>
       <SiteHeader />

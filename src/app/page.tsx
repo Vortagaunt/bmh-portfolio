@@ -17,8 +17,10 @@ export default function Home() {
       <IntroOverlay />
       <SmoothScroll />
 
-      {/* Persistent grid lines across the whole page */}
+      {/* Persistent grid lines across the whole page, over a soft colour field
+          that keeps the paper from reading as a flat fill */}
       <div className="pointer-events-none fixed inset-0 z-0">
+        <div aria-hidden className="ambient absolute inset-0" />
         <GridBackdrop />
       </div>
 
