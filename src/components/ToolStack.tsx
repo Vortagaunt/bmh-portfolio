@@ -3,12 +3,12 @@ import { Reveal } from "./Reveal";
 /**
  * Tool stack — a continuous carousel between the hero and the works.
  *
- * Three kinds of mark. Most tools carry their real app icon, served from
+ * Two kinds of mark. Most tools carry their real app icon, served from
  * /images/tools as its own SVG; several of those embed <style> class blocks,
  * so inlining them together would collide on class names — separate files
- * keep them self-contained. Next are single-colour glyphs from simple-icons
- * (CC0 icon data), inlined at build so nothing is fetched at runtime. Last is
- * a typographic tile, for tools whose mark isn't ours to reproduce.
+ * keep them self-contained. The rest are single-colour glyphs from
+ * simple-icons (CC0 icon data), inlined at build so nothing is fetched at
+ * runtime.
  *
  * The track renders the list twice and translates exactly -50%, so the seam
  * lands on an identical tile and the loop is invisible. Hover pauses it;
@@ -37,17 +37,14 @@ const isNearBlack = (hex: string) => {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b < 40;
 };
 
-/** `word` is the fallback for tools with no obtainable mark: a letter set in
- *  the site's own display face, which reads as a deliberate stand-in rather
- *  than an imitation of a logo nobody published. */
-type Tool = { name: string; note: string; icon?: string; file?: string; word?: string };
+type Tool = { name: string; note: string; icon?: string; file?: string };
 
 const TOOLS: Tool[] = [
   { name: "Figma", note: "Interface and brand layout", file: "figma.svg" },
   { name: "Claude", note: "Pair programming", icon: "claude" },
   { name: "Photoshop", note: "Composites, album art, retouching", file: "photoshop.svg" },
   { name: "Illustrator", note: "Marks and vector artwork", file: "illustrator.svg" },
-  { name: "Pictavo", note: "Yearbook pages, laid out for print", word: "P" },
+  { name: "Pictavo", note: "Yearbook pages, laid out for print", file: "pictavo.svg" },
   { name: "VS Code", note: "Where the site gets written", file: "vscode.svg" },
   { name: "Premiere Pro", note: "Editing", file: "premiere.svg" },
   { name: "After Effects", note: "Motion and titles", file: "aftereffects.svg" },
@@ -90,14 +87,6 @@ function Tile({ t }: { t: Tool }) {
           >
             <path d={g.d} />
           </svg>
-        ) : t.word ? (
-          <span
-            aria-label={t.name}
-            className="font-display text-[32px] leading-none sm:text-[36px]"
-            style={{ fontWeight: 700, letterSpacing: "-0.04em", color: "#A82424" }}
-          >
-            {t.word}
-          </span>
         ) : null}
       </span>
       <span className="text-center text-[12px] leading-tight tracking-tight text-ink/55 sm:text-[13px]">

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="Pictavo">
+  <rect x="0"   y="0"   width="100" height="100" fill="#F4C229"/>
+  <rect x="100" y="0"   width="100" height="100" fill="#F068A1"/>
+  <rect x="0"   y="100" width="100" height="100" fill="#967F90"/>
+  <rect x="200" y="100" width="100" height="100" fill="#8F8A36"/>
+  <rect x="100" y="200" width="100" height="100" fill="#D4E040"/>
+  <rect x="200" y="200" width="100" height="100" fill="#55849A"/>
+  <rect x="0"   y="300" width="100" height="100" fill="#6FC7AE"/>
+</svg>
