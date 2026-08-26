@@ -13,10 +13,35 @@ import opentype from "opentype.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
 const marksDir = path.join(root, "public", "images", "lrhs-marks");
-const fontPath = path.join(root, "public", "fonts", "industry-black.otf");
+/* Industry Black is a licensed face and deliberately not committed. Look in
+ * the repo first, then where Windows installs per-user fonts, so this can be
+ * re-run on a machine that has the font without ever shipping it. */
+const FONT_CANDIDATES = [
+  path.join(root, "public", "fonts", "industry-black.otf"),
+  path.join(
+    process.env.LOCALAPPDATA || "",
+    "Microsoft",
+    "Windows",
+    "Fonts",
+    "industry-black.otf",
+  ),
+];
+const fontPath = FONT_CANDIDATES.find((p) => p && fs.existsSync(p));
+if (!fontPath) {
+  console.error(
+    "Industry Black not found. Install it, or drop industry-black.otf at " +
+      FONT_CANDIDATES[0],
+  );
+  process.exit(1);
+}
 
+/* Every mark that ships with live <text>. Already-outlined files are skipped
+ * automatically (no font-family left to find), so listing them is harmless. */
 const TARGETS = [
-  "LRHS Mustang Band.svg",
+  "LRHS Band 1.svg",
+  "LRHS Band 2.svg",
+  "LRHS Full Logo 2.svg",
+  "LRHS Full Logo 3.svg",
   "LRHS Mustangs Ahead 1.svg",
   "LRHS Mustangs Ahead 2.svg",
 ];
