@@ -79,16 +79,23 @@ const data: CaseStudyData = {
     intro:
       "The full set of *Mustang* marks — current lockups, athletic emblems, and the retired *legacy* artwork kept here for reference. Use the supplied SVGs only; never redraw, recolor, or stretch.",
     items: [
-      { src: "/images/lrhs-marks/Full%20LRHS%20Logo.svg", label: "Full LRHS Logo" },
+      // current lockups
+      { src: "/images/lrhs-marks/LRHS%20Full%20Logo%201.svg", label: "LRHS Full Logo 1" },
+      { src: "/images/lrhs-marks/LRHS%20Full%20Logo%202.svg", label: "LRHS Full Logo 2" },
+      { src: "/images/lrhs-marks/LRHS%20Full%20Logo%203.svg", label: "LRHS Full Logo 3" },
+      // emblems
       { src: "/images/lrhs-marks/LRHS%20Emblem.svg", label: "LRHS Emblem" },
       { src: "/images/lrhs-marks/LRHS%20Emblem%20Black.svg", label: "LRHS Emblem Black" },
       { src: "/images/lrhs-marks/LRHS%20Emblem%20White.svg", label: "LRHS Emblem White", bg: "ink" },
       { src: "/images/lrhs-marks/LRHS%20Emblem%20No%20Horse.svg", label: "LRHS Emblem No Horse" },
       { src: "/images/lrhs-marks/LRHS%20Horse.svg", label: "LRHS Horse" },
-      { src: "/images/lrhs-marks/LRHS%20Mustang%20Band.svg", label: "LRHS Mustang Band" },
+      // programme + spirit marks
+      { src: "/images/lrhs-marks/LRHS%20Band%201.svg", label: "LRHS Band 1" },
+      { src: "/images/lrhs-marks/LRHS%20Band%202.svg", label: "LRHS Band 2" },
       { src: "/images/lrhs-marks/LRHS%20Mustangs%20Ahead%201.svg", label: "LRHS Mustangs Ahead 1" },
       { src: "/images/lrhs-marks/LRHS%20Mustangs%20Ahead%202.svg", label: "LRHS Mustangs Ahead 2" },
-      { src: "/images/lrhs-marks/LRHS%20Retro%20Logo.svg", label: "LRHS Retro Logo" },
+      { src: "/images/lrhs-marks/LRHS%20Retro.svg", label: "LRHS Retro" },
+      // retired legacy artwork, kept for reference
       { src: "/images/lrhs-marks/I%20Love%20LRHS.svg", label: "I Love LRHS" },
       { src: "/images/lrhs-marks/Old%20LRHS%20Emblem.svg", label: "Old LRHS Emblem" },
       { src: "/images/lrhs-marks/Old%20LRHS%20Horse.svg", label: "Old LRHS Horse" },
