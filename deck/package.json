@@ -1,0 +1,11 @@
+{
+  "name": "lrhs-deck",
+  "private": true,
+  "type": "commonjs",
+  "description": "Build scripts for the Lakewood Ranch pitch deck, printable PDF and their assets.",
+  "dependencies": {
+    "jsqr": "^1.4.0",
+    "pptxgenjs": "^3.12.0",
+    "qrcode": "^1.5.4"
+  }
+}

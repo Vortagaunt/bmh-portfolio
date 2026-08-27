@@ -1,0 +1,14 @@
+# Generated. `node prepare-assets.mjs` rebuilds img/ from repo assets;
+# render-slides / assemble / build-pdf rebuild the rest.
+node_modules/
+img/
+slides-png/
+slides-jpg/
+wallpaper/
+*.pptx
+*.pdf
+_*.html
+
+# Industry Black is licensed and must not be committed. The scripts find it in
+# public/fonts or where Windows installs per-user fonts.
+fonts/industry-black.otf
