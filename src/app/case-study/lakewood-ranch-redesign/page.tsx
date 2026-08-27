@@ -71,7 +71,7 @@ const data: CaseStudyData = {
     { src: "/images/lrhs-type.png", alt: "Type specimen — Industry Black & Hanken Grotesk" },
     { src: "/images/lrhs-icons.png", alt: "Iconography — Lucide outline set" },
     { src: "/images/lrhs-voice.png", alt: "Voice — We Do / We Don't" },
-    { src: "/images/lrhs-go-mustangs.png", alt: "Go Mustangs — closing splash" },
+    { src: "/images/lrhs-go-mustangs.jpg", alt: "Go Mustangs — closing splash" },
   ],
   markLibrary: {
     kicker: "Mark Library",
