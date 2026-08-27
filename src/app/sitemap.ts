@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/case-study/yearbook-2025`, priority: 0.9 },
     { url: `${BASE}/case-study/846-am`, priority: 0.9 },
     { url: `${BASE}/case-study/lakewood-ranch-redesign`, priority: 0.9 },
-    { url: `${BASE}/case-study/dirty-sara-soda`, priority: 0.9 },
     { url: `${BASE}/case-study/recent-works`, priority: 0.9 },
   ];
 }

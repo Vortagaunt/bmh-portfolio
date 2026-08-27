@@ -103,9 +103,51 @@ const data: CaseStudyData = {
       { src: "/images/lrhs-marks/Old%20LRHS%20Horse%203.svg", label: "Old LRHS Horse 3" },
     ],
   },
+  photoSets: [
+    {
+      kicker: "The evidence",
+      heading: "Count the horses",
+      intro:
+        "Before drawing anything, I walked the campus with a phone. Every one of these is on site right now, and all of them were photographed in a *single afternoon* — not hunted for, just noticed on the way to class.",
+      cols: 6,
+      fit: "cover",
+      items: [
+      { src: "/images/lrhs-audit/img-4591.jpg", caption: "Scoreboard", alt: "Lakewood Ranch campus signage — scoreboard" },
+      { src: "/images/lrhs-audit/img-4605.jpg", caption: "Academic banner", alt: "Lakewood Ranch campus signage — academic banner" },
+      { src: "/images/lrhs-audit/img-4608.jpg", caption: "Pole banner", alt: "Lakewood Ranch campus signage — pole banner" },
+      { src: "/images/lrhs-audit/img-4609.jpg", caption: "Building sign", alt: "Lakewood Ranch campus signage — building sign" },
+      { src: "/images/lrhs-audit/img-4594.jpg", caption: "Field bench", alt: "Lakewood Ranch campus signage — field bench" },
+      { src: "/images/lrhs-audit/img-4611.jpg", caption: "Entrance banner", alt: "Lakewood Ranch campus signage — entrance banner" },
+      { src: "/images/lrhs-audit/img-4813.jpg", caption: "Parking sign", alt: "Lakewood Ranch campus signage — parking sign" },
+      { src: "/images/lrhs-audit/img-4617.jpg", caption: "Band trailer", alt: "Lakewood Ranch campus signage — band trailer" },
+      { src: "/images/lrhs-audit/img-4616.jpg", caption: "Band trailer", alt: "Lakewood Ranch campus signage — band trailer" },
+      { src: "/images/lrhs-audit/img-4606.jpg", caption: "Pole banner", alt: "Lakewood Ranch campus signage — pole banner" },
+      { src: "/images/lrhs-audit/img-4612.jpg", caption: "Cafeteria", alt: "Lakewood Ranch campus signage — cafeteria" },
+      { src: "/images/lrhs-audit/7e57aa60-1d8d-4695-84ee-2cf9b2c02b30.jpg", caption: "Midfield", alt: "Lakewood Ranch campus signage — midfield" },
+      ],
+      note:
+        "At least five different horse drawings, greens running from near-black to teal to cyan, and no two lockups built the same way. None of them are wrong — they were each somebody doing their best with whatever file they could find. That is the problem a system solves.",
+    },
+    {
+      kicker: "In use",
+      heading: "The part students actually wear",
+      intro:
+        "Spirit wear is the largest run the school prints each year, and the place a mark takes the most abuse. Embroidery, one-colour print, sublimation and a stitched patch — every one of these comes off the *same file*.",
+      cols: 5,
+      tile: "paper",
+      fit: "contain",
+      items: [
+      { src: "/images/lrhs-apparel/cap.png", caption: "Cap — embroidered", alt: "Mustang identity on a cap" },
+      { src: "/images/lrhs-apparel/hoodie.png", caption: "Hoodie — one-colour print", alt: "Mustang identity on a hoodie" },
+      { src: "/images/lrhs-apparel/jersey.png", caption: "Game jersey — sublimated", alt: "Mustang identity on a game jersey" },
+      { src: "/images/lrhs-apparel/crewneck.png", caption: "Crewneck — reversed on green", alt: "Mustang identity on a crewneck" },
+      { src: "/images/lrhs-apparel/polo.png", caption: "Polo — embroidered patch", alt: "Mustang identity on a polo" },
+      ],
+    },
+  ],
   next: {
-    slug: "dirty-sara-soda",
-    title: "Dirty Sara-Soda",
+    slug: "recent-works",
+    title: "Recent Works",
   },
 };
 
