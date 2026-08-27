@@ -55,6 +55,22 @@ export interface MarkLibraryItem {
   bg?: "paper" | "ink";
 }
 
+/** A captioned photo block. Used twice on the LRHS study: the campus audit
+ *  (evidence, many small tiles) and the apparel mockups (fewer, larger). */
+export interface PhotoSet {
+  kicker: string;
+  heading: string;
+  intro?: string;
+  note?: string;
+  /** tiles per row on desktop */
+  cols: 3 | 4 | 5 | 6;
+  /** tile ground — cut-out PNGs need a light one, photos look better dark */
+  tile?: "paper" | "shade";
+  /** contain keeps whole garments visible; cover crops photos to a grid */
+  fit?: "cover" | "contain";
+  items: { src: string; caption: string; alt?: string }[];
+}
+
 export interface MarkLibrary {
   kicker?: string;
   heading?: string;
@@ -79,6 +95,8 @@ export interface CaseStudyData {
   linksDecorated?: boolean;
   /** Optional captioned grid of mark / logo variants */
   markLibrary?: MarkLibrary;
+  /** Optional captioned photo blocks, rendered above the gallery */
+  photoSets?: PhotoSet[];
   /** Optional embedded film — renders a CRT set in place of the hero image */
   film?: { videoId: string; poster: string; title: string; caption?: string };
 }
@@ -392,6 +410,86 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
       )}
 
       {/* Gallery */}
+      {/* Captioned photo blocks — campus audit, apparel */}
+      {data.photoSets?.map((set) => {
+        const cols = {
+          3: "sm:grid-cols-2 lg:grid-cols-3",
+          4: "sm:grid-cols-2 lg:grid-cols-4",
+          5: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5",
+          6: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6",
+        }[set.cols];
+        const zoomItems = set.items.map((it) => ({
+          src: it.src,
+          alt: it.alt ?? it.caption,
+          title: it.caption,
+        }));
+        return (
+          <section
+            key={set.heading}
+            className="relative mx-auto mt-24 max-w-[1440px] px-5 sm:mt-40 sm:px-8"
+          >
+            <Reveal variant="up" duration={1000}>
+              <span className="text-[11px] tracking-[0.18em] uppercase text-ink/55">
+                {set.kicker}
+              </span>
+            </Reveal>
+            <Reveal variant="up" delay={100} duration={1100}>
+              <h2
+                className="mt-5 font-display text-ink"
+                style={{ fontSize: "clamp(30px, 4.6vw, 52px)", fontWeight: 600, letterSpacing: "-0.035em" }}
+              >
+                {set.heading}
+              </h2>
+            </Reveal>
+            {set.intro && (
+              <Reveal variant="up" delay={160} duration={1100}>
+                <p className="mt-5 max-w-[62ch] text-[16px] leading-[1.6] text-ink/70 sm:text-[18px]">
+                  <RichText>{set.intro}</RichText>
+                </p>
+              </Reveal>
+            )}
+            <div className={`mt-10 grid gap-4 sm:gap-5 ${cols}`}>
+              {set.items.map((it, i) => (
+                <Reveal key={it.src} variant="up" delay={(i % 6) * 60} duration={1000}>
+                  <figure className="flex flex-col">
+                    <div
+                      className={`media-elevated relative w-full overflow-hidden ${
+                        set.tile === "paper" ? "bg-surface" : "bg-[#cfcfcf]"
+                      }`}
+                      style={{ aspectRatio: set.fit === "contain" ? "3 / 4" : "1 / 1" }}
+                    >
+                      <ZoomImage
+                        src={it.src}
+                        alt={it.alt ?? it.caption}
+                        fill
+                        sizes="(min-width: 1024px) 260px, 40vw"
+                        className={
+                          set.fit === "contain"
+                            ? "object-contain p-3 sm:p-4"
+                            : "object-cover"
+                        }
+                        zoomItems={zoomItems}
+                        zoomIndex={i}
+                      />
+                    </div>
+                    <figcaption className="mt-3 text-[11px] tracking-[0.14em] uppercase text-ink/55">
+                      {it.caption}
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+            {set.note && (
+              <Reveal variant="up" delay={140} duration={1000}>
+                <p className="mt-8 max-w-[70ch] text-[15px] leading-[1.6] text-ink/60 sm:text-[16px]">
+                  <RichText>{set.note}</RichText>
+                </p>
+              </Reveal>
+            )}
+          </section>
+        );
+      })}
+
       {data.gallery.length > 0 && (
         <section className="relative mx-auto mt-24 max-w-[1440px] px-5 sm:mt-40 sm:px-8">
           <Reveal variant="up" duration={1000}>
