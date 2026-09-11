@@ -60,6 +60,16 @@ const poster = await sharp(img("846am-poster.png"))
   .toBuffer();
 const POSTER = "data:image/jpeg;base64," + poster.toString("base64");
 
+/* The banner that fronts the film on the site's works grid. Already 16:9, so
+   it drops into the same band as the clock still with only the outer bezel
+   cropped. Resampled to 2160 wide because that is exactly what the 2x render
+   consumes; the full 2560 would only bloat the inlined data URI. */
+const banner = await sharp(img("846am.jpg"))
+  .resize({ width: 2160 })
+  .jpeg({ quality: 96 })
+  .toBuffer();
+const BANNER = "data:image/jpeg;base64," + banner.toString("base64");
+
 const INK = "#F4F3F1", MUTED = "#8B8B86", FAINT = "#5C5C58";
 const GROUND = "#0A0A0B";
 const RED = "#DC030F"; // sampled from the clock digits themselves
@@ -99,7 +109,7 @@ body{font-family:'InterV',sans-serif;background:${GROUND};color:${INK};
 .foot .a{font-size:${18 * s}px;letter-spacing:.16em;text-transform:uppercase;
   color:${FAINT};text-align:right;}`;
 
-const BOT_HTML = `
+const BOT_HTML = (footRight) => `
   <div class="bot">
     <div class="lede">A short documentary</div>
     <div class="body">
@@ -112,7 +122,7 @@ const BOT_HTML = `
       2/26/1993 and 9/11/2001</span></div>
     <div class="foot">
       <span class="w">bronxhanratty.me</span>
-      <span class="a">Winner &middot; Jim Harbin Student Festival</span>
+      <span class="a">${footRight}</span>
     </div>
   </div>`;
 
@@ -128,8 +138,8 @@ ${SHARED_CSS(o)}
 /* full-bleed: the frame edges of the original window read as the edge of the
    flyer, which is why the image is not inset like the text */
 .hero{position:relative;width:${o.w}px;height:${o.heroH}px;flex:0 0 auto;overflow:hidden;}
-.hero img{width:100%;height:100%;object-fit:cover;object-position:50% 46%;display:block;}
-.hero .fade{position:absolute;left:0;right:0;bottom:0;height:${34 * o.s}%;
+.hero img{width:100%;height:100%;object-fit:cover;object-position:${o.heroPos};display:block;}
+.hero .fade{position:absolute;left:0;right:0;bottom:0;height:${o.fadeH * o.s}%;
   background:linear-gradient(to top,${GROUND} 0%,rgba(10,10,11,.55) 46%,rgba(10,10,11,0) 100%);}
 .hero .fadetop{position:absolute;left:0;right:0;top:0;height:${16 * o.s}%;
   background:linear-gradient(to bottom,${GROUND} 0%,rgba(10,10,11,0) 100%);}
@@ -141,11 +151,11 @@ ${SHARED_CSS(o)}
   </div>
 
   <div class="hero">
-    <img src="${HERO}">
+    <img src="${o.heroImg}">
     <div class="fadetop"></div>
     <div class="fade"></div>
   </div>
-${BOT_HTML}
+${BOT_HTML(o.footRight)}
 
 </div></body></html>`;
 
@@ -176,17 +186,29 @@ ${SHARED_CSS(o)}
   </div>
 
   <div class="pwrap"><img src="${POSTER}"><i></i></div>
-${BOT_HTML}
+${BOT_HTML(o.footRight)}
 
 </div></body></html>`;
 
+const AWARD = "Winner &middot; Jim Harbin Student Festival";
+
 const VARIANTS = [
   { name: "feed",  w: 1080, h: 1350, s: 1,    heroH: 570, padT: 76,  padB: 64,
+    heroImg: HERO, heroPos: "50% 46%", fadeH: 34, footRight: AWARD,
     out: "846am-25th-feed.jpg" },
   { name: "story", w: 1080, h: 1920, s: 1.06, heroH: 720, padT: 168, padB: 288,
+    heroImg: HERO, heroPos: "50% 46%", fadeH: 34, footRight: AWARD,
     out: "846am-25th-story.jpg" },
   { name: "poster", layout: "poster", w: 1080, h: 1350, s: 1,
-    posterW: 625, padT: 60, padB: 56, out: "846am-25th-poster.jpg" },
+    posterW: 625, padT: 60, padB: 56, footRight: AWARD,
+    out: "846am-25th-poster.jpg" },
+  /* The banner carries "WINNER OF MANATEE FILM RUSH, JIM HARBIN STUDENT
+     FESTIVAL" inside the artwork, so repeating the award in the footer a couple
+     of hundred pixels below it would just say the same thing twice. The runtime
+     goes there instead — it is the one fact none of the other type states. */
+  { name: "banner", w: 1080, h: 1350, s: 1, heroH: 570, padT: 76, padB: 64,
+    heroImg: BANNER, heroPos: "50% 50%", fadeH: 20, footRight: "Short &middot; 7 min",
+    out: "846am-25th-banner.jpg" },
 ];
 
 const browser = await chromium.launch({
