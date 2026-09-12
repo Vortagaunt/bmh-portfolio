@@ -302,3 +302,22 @@ ${BADGES.map(([slug, alt]) => `          <td style="padding-right:9px;vertical-a
 
 fs.writeFileSync(path.join(OUT, "bronx-signature.html"), html);
 console.log(`  html  ${(Buffer.byteLength(html) / 1024).toFixed(1)}KB  bronx-signature.html`);
+
+/* A second copy with the badges inlined as data URIs.
+   The hosted version above is the smaller of the two and is what Outlook's
+   renderer is happiest with, but it only works once the site has actually
+   deployed the badge files — until then it shows three broken images. This one
+   carries its own pixels and renders the moment it is pasted, which also makes
+   it the one to use offline or from a client that cannot reach the site. */
+let inlineHtml = html;
+for (const [slug] of BADGES) {
+  const uri = "data:image/png;base64," +
+    fs.readFileSync(path.join(BADGE_PUB, `${slug}.png`)).toString("base64");
+  inlineHtml = inlineHtml.split(`${BADGE_BASE}/${slug}.png`).join(uri);
+}
+inlineHtml = inlineHtml.replace(
+  "<!-- Bronx Hanratty — email signature.",
+  "<!-- Bronx Hanratty — email signature (self-contained: badges inlined).");
+fs.writeFileSync(path.join(OUT, "bronx-signature-inline.html"), inlineHtml);
+console.log(`  html  ${(Buffer.byteLength(inlineHtml) / 1024).toFixed(1)}KB  ` +
+  `bronx-signature-inline.html`);
