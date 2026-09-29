@@ -49,13 +49,13 @@ img{display:block;width:100%;height:auto;}
 
 const VARIANTS = [
   { name: "LRHS-wallpaper-4k", w: 3840, h: 2160,
-    horseW: 3200, horseRight: -880, horseTop: 470, emblemW: 1560, emblemTop: "48%" },
+    horseW: 3200, horseRight: -880, horseTop: 470, emblemW: 1290, emblemTop: "48%" },
   { name: "LRHS-wallpaper-1440p", w: 2560, h: 1440,
-    horseW: 2130, horseRight: -585, horseTop: 315, emblemW: 1040, emblemTop: "48%" },
+    horseW: 2130, horseRight: -585, horseTop: 315, emblemW: 860, emblemTop: "48%" },
   /* Deck variant: emblem raised and a touch smaller so the lower third stays
      clear for the caption scrim. Same field, same horse. */
   { name: "LRHS-wallpaper-slide", w: 3840, h: 2160,
-    horseW: 3200, horseRight: -880, horseTop: 270, emblemW: 1320, emblemTop: "35%" },
+    horseW: 3200, horseRight: -880, horseTop: 270, emblemW: 1092, emblemTop: "35%" },
   /* The field and the ghosted horse on their own, no emblem. It is the 4K
      layout drawn at 3x device scale rather than a bigger layout, so every
      element — gradients, horse, grid hairlines, vignette — grows together and
@@ -67,7 +67,7 @@ const VARIANTS = [
      38.4 x 21.6in, instead of letting it assume 72dpi and 160in. */
   { name: "LRHS-wallpaper-no-emblem-12k", w: 3840, h: 2160, scale: 3, dpi: 300,
     horseW: 3200, horseRight: -880, horseTop: 470, emblem: false,
-    horseSrc: "../public/images/lrhs-marks/LRHS%20Horse.svg" },
+    horseSrc: "../public/images/lrhs-marks/LRHS%20Mustang%204.svg" },
 ];
 
 const browser = await chromium.launch({

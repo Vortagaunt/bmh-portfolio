@@ -5,7 +5,7 @@ const fs = require("fs"), path = require("path");
 const sharp = require("sharp");
 
 const here = __dirname;
-const OUT = path.join(here, "Bronx-Hanratty-LRHS-Pitch.pptx");
+const OUT = path.join(here, "Bronx-Hanratty-LRHS-Principal.pptx");
 
 (async () => {
   const srcDir = path.join(here, "slides-png");
@@ -23,7 +23,7 @@ const OUT = path.join(here, "Bronx-Hanratty-LRHS-Pitch.pptx");
   const p = new pptx();
   p.layout = "LAYOUT_WIDE";
   p.author = "Bronx Hanratty";
-  p.title = "Lakewood Ranch High School — A Mustang Brand System";
+  p.title = "Lakewood Ranch High School — A Mustang Brand System, for the Principal";
 
   const jpgs = fs.readdirSync(jpgDir).filter((f) => f.endsWith(".jpg")).sort();
   jpgs.forEach((f, i) => {
