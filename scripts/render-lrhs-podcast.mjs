@@ -142,7 +142,7 @@ if (!Number.isFinite(tightest) || tightest < 90) {
 
 /* ---- the horse: the mark's own paths, recoloured ---- */
 const horseSrc = fs.readFileSync(
-  path.join(root, "public", "images", "lrhs-marks", "LRHS Horse.svg"), "utf8");
+  path.join(root, "public", "images", "lrhs-marks", "LRHS Mustang 4.svg"), "utf8");
 if (/transform=/.test(horseSrc)) {
   console.error("FAIL: horse SVG carries transforms this script does not apply");
   process.exit(1);

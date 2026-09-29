@@ -18,34 +18,31 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const OUT = path.join(here, "Bronx-Hanratty-LRHS-Pitch-and-Marks.pdf");
+const OUT = path.join(here, "Bronx-Hanratty-LRHS-Principal-and-Marks.pdf");
 const PW = 1056, PH = 594;
 
 const RED = "#A82424", GREEN = "#003C24", GREEN_DEEP = "#05281A";
 const PAPER = "#F1F2F0", INK = "#0C0C0C", GREY = "#5A6A61";
 const ONGREEN = "#D6E2DA", LR_MUTED = "#7E958A";
 
-/* file, display name, category, note, ground, status */
+/* Read from src/data/lrhs-marks.json — the same catalogue the slides and the site
+   use — rather than kept as a second hand-written list here. The old list was a
+   copy, and copies are how the deck and the PDF would drift apart.
+   Row shape: file slug, display name, category, note, ground, status. */
+const CAT = JSON.parse(fs.readFileSync(path.join(here, "..", "src", "data", "lrhs-marks.json"), "utf8"));
+const slugOf = (file) => file.replace(/\.svg$/, "").replace(/ /g, "-");
+const famName = (id) => CAT.families.find((f) => f.id === id).name;
 const MARKS = [
-  ["LRHS-Full-Logo-1","Full Logo 1","Primary lockup","The stacked lockup. Default for official and formal use — letterheads, programmes, anything that speaks for the school as a whole.","light","live"],
-  ["LRHS-Full-Logo-2","Full Logo 2","Horizontal lockup","The horizontal alternative, for wide and shallow spaces: banners, web headers, the top of a form.","light","live"],
-  ["LRHS-Full-Logo-3","Full Logo 3","Horizontal — wide","The widest lockup. For the shallowest spaces, where even the horizontal is too tall.","light","live"],
-  ["LRHS-Emblem","Emblem","Athletics","The everyday mark, and the one most people will recognise. Full colour, on light grounds.","light","live"],
-  ["LRHS-Emblem-Black","Emblem — Black","One colour","Single-colour reproduction: embroidery, etching, laser, and any print that cannot hold two inks.","light","live"],
-  ["LRHS-Emblem-White","Emblem — White","Reversed","For dark and green grounds only. Never place the reversed mark on a light background.","dark","live"],
-  ["LRHS-Emblem-No-Horse","Emblem — No Horse","Reduction","For sizes where the horse would not survive — small embroidery, favicons, stitched tags.","light","live"],
-  ["LRHS-Horse","Horse","Icon / watermark","The mustang alone. App icons, award glyphs, and large-scale watermarks behind other artwork.","light","live"],
-  ["LRHS-Band-1","Band 1","Programme lockup","The band programme lockup. Uniforms, trailers, concert programmes, travel cases.","light","live"],
-  ["LRHS-Band-2","Band 2","Programme — short","A shorter band lockup for narrow applications where the full version will not fit.","light","live"],
-  ["LRHS-Mustangs-Ahead-1","Mustangs Ahead I","Spirit mark","Square spirit mark. Social avatars, stickers, spirit wear, anywhere a badge is wanted.","light","live"],
-  ["LRHS-Mustangs-Ahead-2","Mustangs Ahead II","Spirit mark","The circular cut of the same mark, for round crops and stamps.","light","live"],
-  ["LRHS-Retro","Retro","Heritage","Heritage wordmark. Occasional and throwback use — reunions, anniversaries, vintage spirit wear.","light","live"],
-  ["I-Love-LRHS","I ♥ LRHS","Community","Community and spirit use only. Not a substitute for the emblem on official material.","light","live"],
-  ["Old-LRHS-Emblem","Old Emblem","Retired","The previous emblem. Kept on file so it can be recognised and replaced — not for use in new work.","light","retired"],
-  ["Old-LRHS-Horse","Old Horse","Retired","A previous horse drawing. Reference only.","light","retired"],
-  ["Old-LRHS-Horse-2","Old Horse II","Retired","A previous horse drawing. Reference only.","light","retired"],
-  ["Old-LRHS-Horse-3","Old Horse III","Retired","A previous horse drawing. Reference only.","light","retired"],
+  ...CAT.marks.map((m) => [slugOf(m.file), m.name, `${famName(m.family)} · ${m.use}`, m.note, m.ground, "live"]),
+  ...CAT.retired.map((m) => [slugOf(m.file), m.name, "Retired", m.note, "light", "retired"]),
 ];
+const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+  "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
+  "eighteen", "nineteen"];
+const TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+const words = (k) => (k < 20 ? ONES[k] : TENS[Math.floor(k / 10)] + (k % 10 ? "-" + ONES[k % 10] : ""));
+const capw = (k) => { const w = words(k); return w[0].toUpperCase() + w.slice(1); };
+const LIVE = CAT.marks.length, RETIRED = CAT.retired.length, FAMS = CAT.families.length;
 
 const CSS = `
 @font-face{font-family:'Bricolage';src:url('fonts/BricolageGrotesque.ttf');font-weight:200 800;}
@@ -110,7 +107,7 @@ const dividerPage = () => `<div class="pg div">
   <div class="note">The full set at reproduction size, each with the ground it belongs on,
     what it is for, and whether it is live or retired. Supplied as SVG — never redrawn,
     recoloured or stretched.</div>
-  <div class="ital">Eighteen marks. Thirteen live, five retired and kept for reference.</div>
+  <div class="ital">${capw(LIVE)} live marks in ${words(FAMS)} families, and ${words(RETIRED)} retired ones kept for reference.</div>
 </div>`;
 
 const markPage = ([file, name, cat, note, ground, status], i) => `

@@ -107,22 +107,25 @@ const markTile = (file, name, use, onGreen) => `
 const marks = board("02", "The marks",
   "Always use supplied artwork. Never redraw, recolour, or stretch the mascot.",
   `<div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr);gap:26px;">
-    ${markTile("LRHS-Full-Logo-1","Primary","Official",false)}
+    ${markTile("LRHS-Wordmark-2","Wordmark","Official",false)}
     ${markTile("LRHS-Emblem","Emblem","Athletics",false)}
-    ${markTile("LRHS-Emblem-White","Reverse","On green",true)}
-    ${markTile("LRHS-Horse","Mustang","Icon / WM",false)}
+    ${markTile("LRHS-Emblem-Mono","Reverse","On green",true)}
+    ${markTile("LRHS-Mustang-2","Mustang","Icon",false)}
   </div>
-  <div style="flex:0 0 auto;display:flex;align-items:center;gap:34px;">
-    <div style="width:150px;height:104px;border-radius:14px;background:#F0F2F0;flex:0 0 auto;
-         display:flex;align-items:center;justify-content:center;padding:18px;">
-      <img src="img/marks/I-Love-LRHS.png" style="max-width:100%;max-height:100%;object-fit:contain;">
-    </div>
-    <div class="bd" style="font-size:24px;">
-      Spirit mark &mdash; <strong style="color:${PAPER};font-weight:600;">I &#9829; Lakewood Ranch</strong>
-      &mdash; community and spirit use only. Legacy &ldquo;Old LR&rdquo; marks are retired; do not use in new work.
+  <div style="flex:0 0 auto;display:flex;align-items:center;gap:18px;">
+    ${["LRHS-Band","LRHS-Grad-Mark","LRHS-Mustangs-Ahead","LRHS-Retro-Logo-2"].map((f) => `
+    <div style="width:124px;height:104px;border-radius:14px;background:#F0F2F0;flex:0 0 auto;
+         display:flex;align-items:center;justify-content:center;padding:12px;">
+      <img src="img/marks/${f}.png" style="max-width:100%;max-height:100%;object-fit:contain;">
+    </div>`).join("")}
+    <div class="bd" style="font-size:24px;margin-left:14px;">
+      Plus the <strong style="color:${PAPER};font-weight:600;">band</strong>, the
+      <strong style="color:${PAPER};font-weight:600;">graduation crest</strong>,
+      <strong style="color:${PAPER};font-weight:600;">Mustangs Ahead</strong> and the
+      <strong style="color:${PAPER};font-weight:600;">retro</strong> marks. Legacy &ldquo;Old LR&rdquo; marks are retired.
     </div>
   </div>`,
-  `<span>Eighteen marks &middot; each with its own permitted use</span><span>SVG only</span>`);
+  `<span>Twenty-five marks &middot; seven families</span><span>SVG only</span>`);
 
 /* 03 colour */
 const SW = [
@@ -242,7 +245,7 @@ const inUse = board("07", "In use",
       <div style="position:relative;flex:1;min-height:0;border-radius:18px 18px 0 0;overflow:hidden;
            background:linear-gradient(150deg,#0A5733,#003C24 60%,#021C11);
            display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
-        <img src="img/marks/LRHS-Horse.png" style="position:absolute;right:-60px;top:0;height:100%;
+        <img src="img/marks/LRHS-Mustang-4.png" style="position:absolute;right:-60px;top:0;height:100%;
              opacity:.10;filter:brightness(0) invert(1);">
         <div style="position:relative;font-size:21px;letter-spacing:.24em;text-transform:uppercase;
              color:#84C9A2;font-weight:600;">Game day</div>
@@ -260,7 +263,7 @@ const inUse = board("07", "In use",
       <div style="flex:1;min-height:0;border-radius:18px 18px 0 0;overflow:hidden;background:#FBFBF9;
            display:flex;flex-direction:column;">
         <div style="background:#003C24;padding:20px 28px;display:flex;align-items:center;gap:18px;">
-          <img src="img/marks/LRHS-Emblem-White.png" style="height:38px;">
+          <img src="img/marks/LRHS-Emblem-Mono.png" style="height:40px;">
           <span style="font-family:'Industry',sans-serif;font-weight:900;font-size:22px;
                 letter-spacing:.03em;color:#fff;line-height:1.15;">LAKEWOOD RANCH<br>
             <span style="font-size:14px;letter-spacing:.2em;color:#84C9A2;">HIGH SCHOOL</span></span>

@@ -39,8 +39,8 @@ const svg = (name) =>
   "data:image/svg+xml;base64," +
   fs.readFileSync(path.join(marks, name)).toString("base64");
 
-const LOCKUP = svg("LRHS Full Logo 3.svg");   // the wide horizontal lockup
-const HORSE = svg("LRHS Horse.svg");
+const LOCKUP = svg("LRHS Wordmark 3.svg");    // the wide left-aligned lockup (was Full Logo 3)
+const HORSE = svg("LRHS Mustang 4.svg");
 
 /* Mustang Green with a lit corner and a deep one, so the field has somewhere to
    travel instead of sitting flat. Same recipe as the deck's hero slide. */
