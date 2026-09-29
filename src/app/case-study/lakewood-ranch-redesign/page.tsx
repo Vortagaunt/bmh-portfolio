@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { CaseStudyLayout, type CaseStudyData } from "@/components/CaseStudyLayout";
+import { CaseStudyLayout, type CaseStudyData, type MarkLibraryItem } from "@/components/CaseStudyLayout";
+import LRHS_MARKS from "@/data/lrhs-marks.json";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GridBackdrop } from "@/components/GridBackdrop";
 import { Footer } from "@/components/Footer";
@@ -23,6 +24,19 @@ export const metadata: Metadata = {
     images: ["/og/lakewood-ranch-redesign.jpg"],
   },
 };
+
+/* The mark library is read from the same catalogue the pitch deck and the
+   printable PDF are built from (src/data/lrhs-marks.json), so the three can
+   never list different marks. Reverse marks get the dark tile. */
+const markSrc = (file: string) => `/images/lrhs-marks/${encodeURI(file)}`;
+const markItems: MarkLibraryItem[] = [
+  ...LRHS_MARKS.marks.map((m) => ({
+    src: markSrc(m.file),
+    label: m.name,
+    ...(m.ground === "dark" ? { bg: "ink" as const } : {}),
+  })),
+  ...LRHS_MARKS.retired.map((m) => ({ src: markSrc(m.file), label: `${m.name} — retired` })),
+];
 
 const data: CaseStudyData = {
   index: "03",
@@ -55,9 +69,9 @@ const data: CaseStudyData = {
     },
     {
       heading: "Marks, color & type",
-      body: "Five marks for every situation — primary lockup, the *LR* emblem for athletics, a reverse lockup for on-green applications, the Mustang icon, and a stacked wordmark. *Mustang Green* (#033922) leads — the school's own dark green — partnered with black and a clean white that stands in for the traditional silver. *Spirit Red* is the only true accent, and it stays rare. Headlines are set in *Industry Black* — uppercase, tracked, unapologetically athletic. *Hanken Grotesk* carries body and UI.",
+      body: "Twenty-five marks in seven families — the *LR* emblem for athletics, wordmarks for the front office, the Mustang on its own, the band, a graduation crest, the *Mustangs Ahead* newsletter and podcast, and retro marks for spirit wear. *Mustang Green* (#033922) leads — the school's own dark green — partnered with black and a clean white that stands in for the traditional silver. *Spirit Red* is the only true accent, and it stays rare. Headlines are set in *Industry Black* — uppercase, tracked, unapologetically athletic. *Hanken Grotesk* carries body and UI.",
       image: "/images/lrhs-marks.png",
-      imageAlt: "The five Mustang marks",
+      imageAlt: "The Mustang marks — wordmark, emblem, reversed emblem and the mustang, with the band, crest, Mustangs Ahead and retro families",
     },
     {
       heading: "The system, applied",
@@ -77,31 +91,8 @@ const data: CaseStudyData = {
     kicker: "Mark Library",
     heading: "Every mark, every variant",
     intro:
-      "The full set of *Mustang* marks — current lockups, athletic emblems, and the retired *legacy* artwork kept here for reference. Use the supplied SVGs only; never redraw, recolor, or stretch.",
-    items: [
-      // current lockups
-      { src: "/images/lrhs-marks/LRHS%20Full%20Logo%201.svg", label: "LRHS Full Logo 1" },
-      { src: "/images/lrhs-marks/LRHS%20Full%20Logo%202.svg", label: "LRHS Full Logo 2" },
-      { src: "/images/lrhs-marks/LRHS%20Full%20Logo%203.svg", label: "LRHS Full Logo 3" },
-      // emblems
-      { src: "/images/lrhs-marks/LRHS%20Emblem.svg", label: "LRHS Emblem" },
-      { src: "/images/lrhs-marks/LRHS%20Emblem%20Black.svg", label: "LRHS Emblem Black" },
-      { src: "/images/lrhs-marks/LRHS%20Emblem%20White.svg", label: "LRHS Emblem White", bg: "ink" },
-      { src: "/images/lrhs-marks/LRHS%20Emblem%20No%20Horse.svg", label: "LRHS Emblem No Horse" },
-      { src: "/images/lrhs-marks/LRHS%20Horse.svg", label: "LRHS Horse" },
-      // programme + spirit marks
-      { src: "/images/lrhs-marks/LRHS%20Band%201.svg", label: "LRHS Band 1" },
-      { src: "/images/lrhs-marks/LRHS%20Band%202.svg", label: "LRHS Band 2" },
-      { src: "/images/lrhs-marks/LRHS%20Mustangs%20Ahead%201.svg", label: "LRHS Mustangs Ahead 1" },
-      { src: "/images/lrhs-marks/LRHS%20Mustangs%20Ahead%202.svg", label: "LRHS Mustangs Ahead 2" },
-      { src: "/images/lrhs-marks/LRHS%20Retro.svg", label: "LRHS Retro" },
-      // retired legacy artwork, kept for reference
-      { src: "/images/lrhs-marks/I%20Love%20LRHS.svg", label: "I Love LRHS" },
-      { src: "/images/lrhs-marks/Old%20LRHS%20Emblem.svg", label: "Old LRHS Emblem" },
-      { src: "/images/lrhs-marks/Old%20LRHS%20Horse.svg", label: "Old LRHS Horse" },
-      { src: "/images/lrhs-marks/Old%20LRHS%20Horse%202.svg", label: "Old LRHS Horse 2" },
-      { src: "/images/lrhs-marks/Old%20LRHS%20Horse%203.svg", label: "Old LRHS Horse 3" },
-    ],
+      "The full set of *Mustang* marks — twenty-five in seven families, from the *LR* emblem to the graduation crest — plus the retired *legacy* artwork, kept here for reference. Use the supplied SVGs only; never redraw, recolor, or stretch.",
+    items: markItems,
   },
   photoSets: [
     {

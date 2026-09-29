@@ -378,7 +378,7 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                       className={`relative w-full overflow-hidden rounded-[20px] transition-colors duration-500 ${
                         dark
                           ? "media-elevated border border-ink/40 bg-[#0a0a0a] group-hover:border-ink/60"
-                          : "glass"
+                          : "glass mark-paper"
                       }`}
                       style={{ aspectRatio: "1 / 1" }}
                     >
