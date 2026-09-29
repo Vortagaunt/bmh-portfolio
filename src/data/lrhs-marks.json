@@ -1,0 +1,278 @@
+{
+  "_about": "The LRHS mark library: one source of truth read by the deck (deck/slides-lrhs.js, deck/render-boards.mjs), the printable PDF (deck/build-pdf.mjs) and the site (src/app/case-study/lakewood-ranch-redesign). Files live in public/images/lrhs-marks. ground is the background a mark is shown on: light = paper, dark = Mustang Green.",
+  "families": [
+    {
+      "id": "emblem",
+      "name": "Emblem",
+      "dept": "Athletics and the whole school",
+      "hero": "LRHS Emblem.svg",
+      "blurb": "The LR and the mustang. The mark most people will think of as the school."
+    },
+    {
+      "id": "wordmark",
+      "name": "Wordmark",
+      "dept": "Front office and signage",
+      "hero": "LRHS Wordmark 2.svg",
+      "blurb": "The school's full name with the mustang, for anything that speaks for the school as a whole."
+    },
+    {
+      "id": "mustang",
+      "name": "Mustang",
+      "dept": "Icons, avatars and watermarks",
+      "hero": "LRHS Mustang 3.svg",
+      "blurb": "The horse on its own — the smallest, most flexible piece of the system."
+    },
+    {
+      "id": "band",
+      "name": "Band",
+      "dept": "The Mustang Band",
+      "hero": "LRHS Band.svg",
+      "blurb": "The emblem in band uniform, so the programme reads as part of the school."
+    },
+    {
+      "id": "crest",
+      "name": "Grad Mark",
+      "dept": "Graduation and ceremonies",
+      "hero": "LRHS Grad Mark.svg",
+      "blurb": "A ceremonial crest, founded 1998, for the moments that should feel permanent."
+    },
+    {
+      "id": "ahead",
+      "name": "Mustangs Ahead",
+      "dept": "Newsletter and podcast",
+      "hero": "LRHS Mustangs Ahead.svg",
+      "blurb": "One name across the school's own publications, in print and in audio."
+    },
+    {
+      "id": "retro",
+      "name": "Retro",
+      "dept": "Spirit wear and reunions",
+      "hero": "LRHS Retro Logo 2.svg",
+      "blurb": "Collegiate throwbacks for heritage merchandise and anniversaries."
+    }
+  ],
+  "marks": [
+    {
+      "file": "LRHS Emblem.svg",
+      "family": "emblem",
+      "name": "Emblem",
+      "use": "Primary mark",
+      "ground": "light",
+      "note": "The LR and the mustang in full colour. The default wherever the school needs one mark — athletics, uniforms, the website, anything official."
+    },
+    {
+      "file": "LRHS Emblem 2.svg",
+      "family": "emblem",
+      "name": "Emblem — large mustang",
+      "use": "Alternate",
+      "ground": "light",
+      "note": "The same lockup with the mustang drawn larger and further over the R, for places where the horse should lead the mark."
+    },
+    {
+      "file": "LRHS Emblem 3.svg",
+      "family": "emblem",
+      "name": "Emblem — letters only",
+      "use": "Reduction",
+      "ground": "light",
+      "note": "The LR without the mustang, for sizes the horse will not survive — small embroidery, favicons, stitched tags."
+    },
+    {
+      "file": "LRHS Emblem Mono 2.svg",
+      "family": "emblem",
+      "name": "Emblem — one colour",
+      "use": "Single ink",
+      "ground": "light",
+      "note": "Single-ink reproduction: embroidery, etching, laser, and any print that cannot hold two colours."
+    },
+    {
+      "file": "LRHS Emblem Mono.svg",
+      "family": "emblem",
+      "name": "Emblem — reversed",
+      "use": "Dark grounds",
+      "ground": "dark",
+      "note": "For green and dark grounds only. Never place the reversed emblem on a light background."
+    },
+    {
+      "file": "LRHS Wordmark 2.svg",
+      "family": "wordmark",
+      "name": "Wordmark — stacked",
+      "use": "Official",
+      "ground": "light",
+      "note": "The mustang above the school name. The formal lockup for anything that speaks for the school as a whole."
+    },
+    {
+      "file": "LRHS Wordmark.svg",
+      "family": "wordmark",
+      "name": "Wordmark — horizontal",
+      "use": "Official",
+      "ground": "light",
+      "note": "The mustang and the school name side by side, centred. Letterhead, email, the website header — anywhere wide."
+    },
+    {
+      "file": "LRHS Wordmark 3.svg",
+      "family": "wordmark",
+      "name": "Wordmark — left-aligned",
+      "use": "Wide lockup",
+      "ground": "light",
+      "note": "The mustang beside the school name, set left-aligned. For the shallowest spaces: banners, pole signs, the top of a form."
+    },
+    {
+      "file": "LRHS Mustang 2.svg",
+      "family": "mustang",
+      "name": "Mustang — two colour",
+      "use": "Light grounds",
+      "ground": "light",
+      "note": "The full-detail mustang in black and white, for paper and light backgrounds."
+    },
+    {
+      "file": "LRHS Mustang 4.svg",
+      "family": "mustang",
+      "name": "Mustang — one colour",
+      "use": "Silhouette",
+      "ground": "light",
+      "note": "The single-ink mustang. Also the watermark ghosted behind other artwork."
+    },
+    {
+      "file": "LRHS Mustang 3.svg",
+      "family": "mustang",
+      "name": "Mustang — badge",
+      "use": "Round crops",
+      "ground": "light",
+      "note": "The mustang in a Mustang Green disc. Social avatars, app icons, stickers — anywhere the crop is a circle."
+    },
+    {
+      "file": "LRHS Mustang.svg",
+      "family": "mustang",
+      "name": "Mustang — keylined",
+      "use": "Dark grounds",
+      "ground": "dark",
+      "note": "The two-colour mustang inside a white keyline, so it holds on green, black and photographs."
+    },
+    {
+      "file": "LRHS Band Emblem.svg",
+      "family": "band",
+      "name": "Band emblem",
+      "use": "Mustang Band",
+      "ground": "light",
+      "note": "The emblem with the mustang in a band shako. Uniforms, drum heads, instrument cases."
+    },
+    {
+      "file": "LRHS Band.svg",
+      "family": "band",
+      "name": "Band lockup",
+      "use": "Mustang Band",
+      "ground": "light",
+      "note": "The band emblem with the staff and the Mustang Band name. Trailers, banners, concert programmes."
+    },
+    {
+      "file": "LRHS Grad Mark.svg",
+      "family": "crest",
+      "name": "Crest",
+      "use": "Ceremonial",
+      "ground": "light",
+      "note": "The rearing mustang and shield, founded 1998. Diplomas, graduation programmes, awards — anything that should feel permanent."
+    },
+    {
+      "file": "LRHS Grad Mark Alt.svg",
+      "family": "crest",
+      "name": "Crest — light",
+      "use": "Ceremonial",
+      "ground": "light",
+      "note": "The crest in a lighter colourway, with a paler mustang and a grey top banner, where the full-colour crest reads too heavy."
+    },
+    {
+      "file": "LRHS Grad Mark Mono.svg",
+      "family": "crest",
+      "name": "Crest — one colour",
+      "use": "Emboss and foil",
+      "ground": "light",
+      "note": "The crest in Mustang Green alone, for embossing, foil stamping and single-ink print."
+    },
+    {
+      "file": "LRHS Mustangs Ahead.svg",
+      "family": "ahead",
+      "name": "Newsletter — disc",
+      "use": "Publication",
+      "ground": "light",
+      "note": "The newsletter's round mark on the Mustang Green field. Covers, avatars, the top of every issue."
+    },
+    {
+      "file": "LRHS Mustangs Ahead 3.svg",
+      "family": "ahead",
+      "name": "Newsletter — horizontal",
+      "use": "Masthead",
+      "ground": "dark",
+      "note": "The newsletter mark set wide in white, for mastheads and headers on dark grounds."
+    },
+    {
+      "file": "LRHS Mustangs Ahead 2.svg",
+      "family": "ahead",
+      "name": "Podcast — disc",
+      "use": "Publication",
+      "ground": "light",
+      "note": "The podcast's round cover mark. Show artwork and episode thumbnails."
+    },
+    {
+      "file": "LRHS Mustangs Ahead 4.svg",
+      "family": "ahead",
+      "name": "Podcast — horizontal",
+      "use": "Masthead",
+      "ground": "dark",
+      "note": "The podcast mark set wide in white, for banners and video end cards on dark grounds."
+    },
+    {
+      "file": "LRHS Mustangs Ahead Alt.svg",
+      "family": "ahead",
+      "name": "Podcast — black",
+      "use": "Alternate",
+      "ground": "light",
+      "note": "The podcast disc on black, for dark interfaces and anywhere the green disc would sit on more green."
+    },
+    {
+      "file": "LRHS Mustangs Ahead 5.svg",
+      "family": "ahead",
+      "name": "Mustangs Ahead — tile",
+      "use": "Square",
+      "ground": "light",
+      "note": "The Mustangs Ahead name on a green tile, est. 1998. Square avatars and the corner of a page."
+    },
+    {
+      "file": "LRHS Retro Logo.svg",
+      "family": "retro",
+      "name": "Retro — mustang head",
+      "use": "Heritage",
+      "ground": "light",
+      "note": "The mustang head beside LRHS in collegiate block letters. Throwback spirit wear and reunion merchandise."
+    },
+    {
+      "file": "LRHS Retro Logo 2.svg",
+      "family": "retro",
+      "name": "Retro — rearing mustang",
+      "use": "Heritage",
+      "ground": "light",
+      "note": "The classic rearing mustang beside LRHS. Heritage use — reunions, anniversaries, vintage-style apparel."
+    }
+  ],
+  "retired": [
+    {
+      "file": "Old LRHS Emblem.svg",
+      "name": "Old emblem",
+      "note": "The previous emblem. Kept on file so it can be recognised and replaced — not for use in new work."
+    },
+    {
+      "file": "Old LRHS Horse.svg",
+      "name": "Old horse",
+      "note": "A previous horse drawing. Reference only."
+    },
+    {
+      "file": "Old LRHS Horse 2.svg",
+      "name": "Old horse II",
+      "note": "A previous horse drawing. Reference only."
+    },
+    {
+      "file": "Old LRHS Horse 3.svg",
+      "name": "Old horse III",
+      "note": "A previous horse drawing. Reference only."
+    }
+  ]
+}
