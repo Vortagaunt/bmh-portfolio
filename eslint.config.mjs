@@ -18,6 +18,12 @@ const eslintConfig = defineConfig([
     // third-party game engines in there (36 modules of 1996-era globals) —
     // our rules have nothing useful to say about them.
     "public/**",
+    // deck/ is a separate CommonJS package with its own package.json and
+    // node_modules. Its slide engine uses require() and module.exports, which
+    // the site's TypeScript rules rightly forbid in app code but which is the
+    // correct idiom for that package. Linting it here failed CI on every push
+    // from the commit that added it.
+    "deck/**",
   ]),
 ]);
 
