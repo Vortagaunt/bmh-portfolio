@@ -310,5 +310,33 @@ for (const [name, html] of BOARDS) {
   fs.unlinkSync(tmp);
   console.log("  " + name);
 }
+/* The site shows these boards in frames that are not 16:9 — 3:2 for the case
+   study's section images, 7:5 and 2:1 in its gallery — and fits them with
+   object-fit: cover. A 16:9 board in a 3:2 frame loses 16% of its width, which
+   cut the title off every board (the old black boards only survived it because
+   they were mostly empty margin). So the site gets its own renders, drawn at
+   each frame's own proportions; the board layouts are flex, so they simply
+   take the extra height instead of being cropped. */
+const SITE_ASPECT = {
+  "lrhs-identity": 1.5, "lrhs-marks": 1.5, "lrhs-in-use": 1.5,
+  "lrhs-color": 1.4, "lrhs-type": 1.4, "lrhs-voice": 1.4, "lrhs-icons": 2.0,
+};
+fs.mkdirSync(path.join(OUT, "site"), { recursive: true });
+for (const [name, html] of BOARDS) {
+  const aspect = SITE_ASPECT[name];
+  if (!aspect) continue;
+  const h = Math.round(W / aspect);
+  const sized = html.split(`height:${H}px`).join(`height:${h}px`);
+  if (sized === html) throw new Error(`${name}: no fixed height to resize`);
+  await page.setViewportSize({ width: W, height: h });
+  const tmp = path.join(here, `_board_site_${name}.html`);
+  fs.writeFileSync(tmp, sized);
+  await page.goto("file:///" + tmp.split(path.sep).join("/"), { waitUntil: "load" });
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(320);
+  await page.screenshot({ path: path.join(OUT, "site", `${name}.png`), clip: { x: 0, y: 0, width: W, height: h } });
+  fs.unlinkSync(tmp);
+  console.log(`  site ${name} ${W}x${h}`);
+}
 console.log("missing assets:", missing.length ? [...new Set(missing)] : "none");
 await browser.close();
