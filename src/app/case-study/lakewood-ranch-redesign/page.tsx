@@ -85,6 +85,18 @@ const data: CaseStudyData = {
       image: "/images/lrhs-in-use.png",
       imageAlt: "The system applied — game-day social and website header",
     },
+    {
+      heading: "Signage",
+      body: "The sign on campus today lays the old mustang straight over grey block letters, so the horse and the name fight for the same space. The concept keeps the *same wall* and the *same words*, sets them in the brand's type on *Mustang Green*, and moves the horse back into the field so the name can actually be read.",
+      image: "/images/lrhs-signage.jpg",
+      imageAlt: "The school sign before and after — the current sign beside the redrawn concept on the same wall",
+    },
+    {
+      heading: "Poster concepts",
+      body: "Two posters built from the same parts as the wallpaper — the *Mustang Green* field and the horse. One carries the name for walls, entrances and the stadium; the other, *Go Mustangs!*, is for game week and the student section. A poster, a banner and the sign all read as one school.",
+      image: "/images/lrhs-posters.jpg",
+      imageAlt: "Two poster concepts — the school name repeated, and Go Mustangs!",
+    },
   ],
   gallery: [
     { src: "/images/lrhs-color.png", alt: "Color system — Mustang Green, Spirit Red, Ink, Paper" },

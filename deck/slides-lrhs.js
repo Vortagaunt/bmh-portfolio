@@ -330,6 +330,54 @@ const inUse = section("In use", "The system on real surfaces",
   "Signage, print, apparel and social applied from the same rules — the test of a system is whether it still looks like one school once other people start using it.",
   "lrhs-in-use.jpg", { dark: true });
 
+/* Signage: the real sign on campus beside the concept on the same wall. Laid
+   out like the emblem's before/after — one ground for both, so it is a
+   comparison rather than two pictures. */
+const signage = (n) => page("greend", `
+  ${kicker(n, "Signage", true)}
+  <div class="display" style="font-size:150px;margin:56px 0 64px;">
+    The same wall, redrawn
+  </div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:110px;">
+    ${[["sign-before.jpg", "Before", "The sign as it hangs today — the old mustang laid over grey block letters, the two fighting for the same space."],
+       ["sign-after.jpg", "After", "The same words and the same wall, set in the brand's type on Mustang Green, with the horse moved back into the field so the name can be read."]]
+      .map(([f, tag, note], i) => `
+      <div style="display:flex;flex-direction:column;min-height:0;">
+        <div style="flex:1;min-height:0;overflow:hidden;
+             ${i ? "box-shadow:0 40px 120px rgba(0,0,0,.45);" : ""}">
+          <img src="img/signage/${f}" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div style="font-size:34px;letter-spacing:.24em;text-transform:uppercase;
+             color:${i ? RED : LR_MUTED};margin-top:44px;font-weight:600;">${tag}</div>
+        <div style="font-size:40px;line-height:1.5;color:${ONGREEN};margin-top:20px;">${note}</div>
+      </div>`).join("")}
+  </div>`);
+
+/* Poster concepts, straight from the two print files */
+const posters = (n) => page("lrpaper", `
+  ${kicker(n, "Poster concepts", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">
+    Two posters, one system
+  </div>
+  <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3200px;margin-bottom:70px;">
+    Both built on the same Mustang Green field and horse as the wallpaper, so a
+    poster, a banner and the sign all read as one school.
+  </div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start;align-content:center;">
+    ${[["poster-name.jpg", "The name", "Walls, entrances and the stadium"],
+       ["poster-go-mustangs.jpg", "Go Mustangs!", "Game week and the student section"]]
+      .map(([f, name, use]) => `
+      <figure style="margin:0;">
+        <img src="img/signage/${f}" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
+             box-shadow:0 40px 100px -30px rgba(12,12,12,.55);">
+        <figcaption style="margin-top:40px;">
+          <div style="font-size:44px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;">${name}</div>
+          <div style="font-size:28px;letter-spacing:.14em;text-transform:uppercase;
+               color:${GREY};margin-top:12px;">${use}</div>
+        </figcaption>
+      </figure>`).join("")}
+  </div>`);
+
 const APPAREL = [
   ["cap", "Cap", "Embroidered"],
   ["hoodie", "Hoodie", "One-colour print"],
@@ -449,6 +497,7 @@ const ORDER = [
   brief, evidence,
   identity, library, departments, fullSet, crest, beforeAfter, result,
   colour, type, icons, voice, inUse,
+  signage, posters,
   apparel, gameDay,
   ask, qr,
   outro,
@@ -460,6 +509,6 @@ for (const make of ORDER) {
   S.push(make(numbered ? ++n : undefined));
 }
 
-S.extras = { "lrhs-crest": crest() };
+S.extras = { "lrhs-crest": crest(), "lrhs-signage": signage(), "lrhs-posters": posters() };
 
 module.exports = S;
