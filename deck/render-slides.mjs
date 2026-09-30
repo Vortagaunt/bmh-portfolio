@@ -41,5 +41,19 @@ for (let i = 0; i < SLIDES.length; i++) {
   fs.unlinkSync(tmp);
   process.stdout.write(` ${i + 1}`);
 }
+/* pages that live outside the deck — the site's copy of a slide, without its
+   number — rendered by the same engine so they cannot drift from the slide */
+const EXTRAS = path.join(here, "extras");
+fs.mkdirSync(EXTRAS, { recursive: true });
+for (const [name, html] of Object.entries(SLIDES.extras || {})) {
+  const tmp = path.join(here, `_extra_${name}.html`);
+  fs.writeFileSync(tmp, html);
+  await page.goto("file:///" + tmp.split(path.sep).join("/"), { waitUntil: "load" });
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(260);
+  await page.screenshot({ path: path.join(EXTRAS, `${name}.png`), clip: { x: 0, y: 0, width: 3840, height: 2160 } });
+  fs.unlinkSync(tmp);
+  process.stdout.write(` +${name}`);
+}
 console.log("\nmissing assets:", missing.length ? [...new Set(missing)] : "none");
 await browser.close();

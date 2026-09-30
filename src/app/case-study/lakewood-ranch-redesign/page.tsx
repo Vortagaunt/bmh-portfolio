@@ -74,6 +74,12 @@ const data: CaseStudyData = {
       imageAlt: "The Mustang marks — wordmark, emblem, reversed emblem and the mustang, with the band, crest, Mustangs Ahead and retro families",
     },
     {
+      heading: "The crest",
+      body: "For the moments that should feel permanent — *diplomas*, *graduation programmes*, *awards* and ceremonies. The crest is the most formal mark in the system, so it is kept for those: full colour for print, a lighter colourway where that reads too heavy, and a single *Mustang Green* for embossing and foil.",
+      image: "/images/lrhs-crest.jpg",
+      imageAlt: "The crest in three versions — full colour, light, and one colour",
+    },
+    {
       heading: "The system, applied",
       body: "Everything above, rolled into a working website mockup. The homepage opens on a single hero photo, then routes *students*, *families*, and *faculty* into the content they actually came for — bell schedule, lunch, calendar, athletics. Voice rules carry through: headlines shout in caps, body stays warm and plain. Less depth, less guessing.",
       image: "/images/lrhs-in-use.png",

@@ -12,3 +12,4 @@ _*.html
 # Industry Black is licensed and must not be committed. The scripts find it in
 # public/fonts or where Windows installs per-user fonts.
 fonts/industry-black.otf
+extras/
