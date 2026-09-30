@@ -308,9 +308,9 @@ const result = (n) => page("greend", `
   <div style="position:relative;max-width:2900px;">
     <div class="display" style="font-size:190px;margin-bottom:52px;">One horse, drawn once</div>
     <div style="font-size:52px;line-height:1.55;color:${ONGREEN};">
-      Every mark in the campus audit carried its own outline, its own shading and
-      its own green. This is one silhouette in one colour &mdash; the same file on
-      a scoreboard, a jersey and a favicon.
+      The horses on campus today each carry their own outline, their own shading
+      and their own green. This is one silhouette in one colour &mdash; the same
+      file on a scoreboard, a jersey and a favicon.
     </div>
   </div>`, false);
 
@@ -461,9 +461,9 @@ const qr = (n) => page("greend", `
       <div class="display" style="font-size:170px;margin-bottom:52px;">
         The whole system, online
       </div>
-      <div style="font-size:50px;line-height:1.55;color:${ONGREEN};margin-bottom:64px;">
+      <div style="font-size:50px;line-height:1.55;color:${ONGREEN};margin-bottom:64px;text-wrap:balance;">
         Every mark, the full guidelines, and the case study behind them &mdash;
-        including the campus photographs from earlier.
+        including photographs of the horses on campus today.
       </div>
       <div class="display" style="font-size:76px;color:#FCFCFC;">bronxhanratty.me</div>
       <div style="font-size:34px;letter-spacing:.2em;text-transform:uppercase;
@@ -490,17 +490,19 @@ const outro = () => page("green", `
   </div>`);
 
 /* ---------------- the order ----------------
-   The two portfolio slides from slides.js come first. Title and outro carry no
-   badge; everything between them is numbered in the order it appears. */
+   Bronx's cut for the principal (Sep 30): it opens on the title and ends on the
+   QR. The two portfolio slides from slides.js, the brief, the evidence, the ask
+   and the outro are left out; put them back here to restore them. The title
+   carries no badge; everything after it is numbered in the order it appears. */
+S.splice(0);   // drop the portfolio slides slides.js pushed
+
 const ORDER = [
   title,
-  brief, evidence,
   identity, library, departments, fullSet, crest, beforeAfter, result,
   colour, type, icons, voice, inUse,
   signage, posters,
   apparel, gameDay,
-  ask, qr,
-  outro,
+  qr,
 ];
 
 let n = 0;
