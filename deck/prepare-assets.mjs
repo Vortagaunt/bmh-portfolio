@@ -22,7 +22,7 @@ const mk = (d) => fs.mkdirSync(d, { recursive: true });
 /* cleared first: the library was renamed, and stale PNGs of removed marks would
    otherwise keep rendering on any slide that still referred to them */
 fs.rmSync(path.join(IMG, "marks"), { recursive: true, force: true });
-mk(IMG); mk(path.join(IMG, "marks")); mk(path.join(IMG, "audit")); mk(path.join(IMG, "apparel"));
+mk(IMG); mk(path.join(IMG, "marks")); mk(path.join(IMG, "audit")); mk(path.join(IMG, "apparel")); mk(path.join(IMG, "signage"));
 
 /* ---- 1. marks: SVG -> PNG at deck resolution ---- */
 const marksDir = pub("lrhs-marks");
@@ -74,7 +74,7 @@ for (const [from, to] of copies) {
 console.log(`photos    : ${copies.length}`);
 
 /* ---- 4. campus audit + apparel, straight from the site ---- */
-for (const [src, dst] of [["lrhs-audit", "audit"], ["lrhs-apparel", "apparel"]]) {
+for (const [src, dst] of [["lrhs-audit", "audit"], ["lrhs-apparel", "apparel"], ["lrhs-signage", "signage"]]) {
   const from = pub(src);
   let c = 0;
   for (const f of fs.readdirSync(from)) { fs.copyFileSync(path.join(from, f), path.join(IMG, dst, f)); c++; }

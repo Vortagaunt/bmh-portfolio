@@ -32,7 +32,7 @@ node prepare-assets.mjs              # img/ from public/images
 node render-boards.mjs               # the seven brand-system boards
 node build-wallpaper.mjs             # wallpapers, incl. the deck variant
 node build-qr.mjs                    # site QR, decode-verified before it is kept
-node render-slides.mjs               # 21 slides at 3840x2160
+node render-slides.mjs               # 24 slides at 3840x2160, plus extras/ for the site
 node assemble.js                     # -> Bronx-Hanratty-LRHS-Principal.pptx
 node build-pdf.mjs                   # -> ...-Principal-and-Marks.pdf (reads slides-jpg)
 ```
