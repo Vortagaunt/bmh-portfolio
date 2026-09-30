@@ -38,7 +38,7 @@ const badge = (n, onDark) => `
 
 const kicker = (n, text, onDark) => `
   <div style="display:flex;align-items:center;gap:44px;">
-    ${badge(n, onDark)}
+    ${n === undefined ? "" : badge(n, onDark)}
     <span style="font-size:30px;font-weight:600;letter-spacing:.28em;
           text-transform:uppercase;color:${onDark ? LR_MUTED : GREY};">${text}</span>
   </div>`;
@@ -239,6 +239,39 @@ const fullSet = (n) => page("lrpaper", `
       </div>`).join("")}
   </div>`);
 
+/* The crest, big. On the full-set slide the three crests are the smallest
+   marks in the grid — tall artwork in wide tiles — and they carry the most
+   detail in the system, so they get a page of their own: the use at the top,
+   then the crests as large as the slide allows. */
+const CREST_USE = {
+  "LRHS Grad Mark.svg": ["Full colour", "Diplomas, programmes and awards"],
+  "LRHS Grad Mark Alt.svg": ["Light", "Where the full crest reads too heavy"],
+  "LRHS Grad Mark Mono.svg": ["One colour", "Embossing, foil and single-ink print"],
+};
+const crest = (n) => page("lrpaper", `
+  ${kicker(n, "The crest", false)}
+  <div class="display" style="font-size:130px;color:#0C0C0C;margin:48px 0 26px;">
+    For the moments that should feel permanent
+  </div>
+  <div style="font-size:44px;line-height:1.5;color:${GREY};max-width:3200px;margin-bottom:56px;">
+    The most formal mark in the system &mdash; diplomas, graduation programmes,
+    awards and ceremonies. Keep it for those, so it keeps its weight.
+  </div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:90px;">
+    ${inFamily("crest").map((m) => {
+      const [label, use] = CREST_USE[m.file] || [m.name, m.use];
+      return `
+      <div style="display:flex;flex-direction:column;min-height:0;">
+        ${fit(markImg(m.file))}
+        <div style="text-align:center;margin-top:34px;">
+          <div style="font-size:40px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;">${label}</div>
+          <div style="font-size:28px;letter-spacing:.14em;text-transform:uppercase;
+               color:${GREY};margin-top:12px;">${use}</div>
+        </div>
+      </div>`;
+    }).join("")}
+  </div>`);
+
 const beforeAfter = (n) => page("greend", `
   ${kicker(n, "Before / after", true)}
   <div class="display" style="font-size:150px;margin:56px 0 70px;">
@@ -414,7 +447,7 @@ const outro = () => page("green", `
 const ORDER = [
   title,
   brief, evidence,
-  identity, library, departments, fullSet, beforeAfter, result,
+  identity, library, departments, fullSet, crest, beforeAfter, result,
   colour, type, icons, voice, inUse,
   apparel, gameDay,
   ask, qr,
@@ -426,5 +459,7 @@ for (const make of ORDER) {
   const numbered = make !== title && make !== outro;
   S.push(make(numbered ? ++n : undefined));
 }
+
+S.extras = { "lrhs-crest": crest() };
 
 module.exports = S;
