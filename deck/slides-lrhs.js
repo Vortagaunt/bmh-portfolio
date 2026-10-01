@@ -272,6 +272,42 @@ const crest = (n) => page("lrpaper", `
     }).join("")}
   </div>`);
 
+/* Academic Powerhouse: the badge on campus today is an AI-generated picture.
+   Bronx's two vector versions sit beside it, the same size, so the slide is a
+   straight comparison. All three go in white cards because the original is a
+   flat image with its own white ground (254, so the cards match it). */
+const POWERHOUSE = [
+  ["powerhouse-ai-original.png", "Today", "The original", "AI-generated · in use now"],
+  ["powerhouse-lr.svg", "Redrawn", "With the LR", "The system's mustang inside the LR"],
+  ["powerhouse-mustang.svg", "Redrawn", "The mustang", "The horse alone, drawn larger"],
+];
+const powerhouse = (n) => page("lrpaper", `
+  ${kicker(n, "Academic Powerhouse", false)}
+  <div class="display" style="font-size:130px;color:#0C0C0C;margin:48px 0 26px;">
+    From a generated image to a real mark
+  </div>
+  <div style="font-size:44px;line-height:1.5;color:${GREY};max-width:3300px;margin-bottom:56px;">
+    The badge in use today began as an AI-generated picture &mdash; a flat image that
+    blurs when it is enlarged and can't be recoloured. Both new versions are vector
+    artwork built on the system's mustang, so they print sharp at any size.
+  </div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:90px;">
+    ${POWERHOUSE.map(([f, tag, label, use], i) => `
+      <div style="display:flex;flex-direction:column;min-height:0;">
+        <div style="flex:1;min-height:0;display:flex;position:relative;background:#FEFEFE;border-radius:36px;
+             box-shadow:0 40px 100px -40px rgba(12,12,12,.35);">
+          ${fit(`img/powerhouse/${f}`, 60)}
+        </div>
+        <div style="text-align:center;margin-top:34px;">
+          <div style="font-size:26px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
+               color:${i ? RED : GREY};">${tag}</div>
+          <div style="font-size:40px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;margin-top:12px;">${label}</div>
+          <div style="font-size:28px;letter-spacing:.14em;text-transform:uppercase;
+               color:${GREY};margin-top:12px;">${use}</div>
+        </div>
+      </div>`).join("")}
+  </div>`);
+
 const beforeAfter = (n) => page("greend", `
   ${kicker(n, "Before / after", true)}
   <div class="display" style="font-size:150px;margin:56px 0 70px;">
@@ -498,7 +534,7 @@ S.splice(0);   // drop the portfolio slides slides.js pushed
 
 const ORDER = [
   title,
-  identity, library, departments, fullSet, crest, beforeAfter, result,
+  identity, library, departments, fullSet, crest, powerhouse, beforeAfter, result,
   colour, type, icons, voice, inUse,
   signage, posters,
   apparel, gameDay,
@@ -511,6 +547,6 @@ for (const make of ORDER) {
   S.push(make(numbered ? ++n : undefined));
 }
 
-S.extras = { "lrhs-crest": crest(), "lrhs-signage": signage(), "lrhs-posters": posters() };
+S.extras = { "lrhs-crest": crest(), "lrhs-powerhouse": powerhouse(), "lrhs-signage": signage(), "lrhs-posters": posters() };
 
 module.exports = S;

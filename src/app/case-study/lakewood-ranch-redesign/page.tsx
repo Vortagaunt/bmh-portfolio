@@ -80,6 +80,12 @@ const data: CaseStudyData = {
       imageAlt: "The crest in three versions — full colour, light, and one colour",
     },
     {
+      heading: "Academic Powerhouse",
+      body: "The *Academic Powerhouse* badge in use on campus began as an AI-generated picture — a flat image that blurs when it's enlarged and can't be recoloured. It's rebuilt here as vector artwork in two versions, one with the *LR* and one with the *mustang* on its own, both on the system's horse so they print sharp at any size.",
+      image: "/images/lrhs-powerhouse.jpg",
+      imageAlt: "The AI-generated Academic Powerhouse badge beside the two redrawn vector versions",
+    },
+    {
       heading: "The system, applied",
       body: "Everything above, rolled into a working website mockup. The homepage opens on a single hero photo, then routes *students*, *families*, and *faculty* into the content they actually came for — bell schedule, lunch, calendar, athletics. Voice rules carry through: headlines shout in caps, body stays warm and plain. Less depth, less guessing.",
       image: "/images/lrhs-in-use.png",
