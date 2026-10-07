@@ -1,12 +1,16 @@
 // Round the corners of the LR emblem, identically in every file that carries it.
 //
 // The LR is drawn as stacked outlines: a black silhouette, a white ring and the
-// green letter, each an offset of the one inside it. Rounding them with one
-// radius would leave the outlines lumpy at every corner, so the corners are
-// rounded concentrically instead: the green core gets R_CORE, and each outer
-// layer's arc shares the core's centre (core + offset on outside corners,
-// core - offset on inside corners, never below R_MIN). The result is what an
-// offset path with round joins would give — outline widths stay even.
+// green letter, each an offset of the one inside it. Each layer's radius grows
+// with its offset from the green core: R_CORE + K x offset on outside corners,
+// R_CORE - K x offset on inside corners (never below R_MIN). K = 1 is fully
+// concentric (an offset path with round joins: outline widths stay exactly
+// even); K < 1 keeps the outside subtle, with the outlines a touch heavier at
+// the corners — still less than the square originals, where a mitred corner
+// is 41% heavier than the straight.
+//
+// Current settings (Oct 2026, "subtle, like Apple's"): R_CORE 10, K 0.4,
+// R_MIN 6 — about 30 on the outer silhouette of the 1944-wide Emblem.
 //
 // The radii are worked out once on the full-colour Emblem, where every layer is
 // present, then matched by position and edge direction in each file (allowing
@@ -15,13 +19,14 @@
 // tucks under the R, is a junction rather than a corner and stays square.
 //
 // Run:  OUT="C:/Users/B M H/Downloads/SVG" node scripts/round-lrhs-emblem.mjs
-//       SRC defaults to the square-cornered originals; R_CORE / R_MIN tune it.
+//       SRC defaults to the square-cornered originals; R_CORE / K / R_MIN tune it.
 import fs from "node:fs";
 import path from "node:path";
 import { parse, polygonToD, serialize } from "./svgpath.mjs";
 
-const R_CORE = +(process.env.R_CORE || 30);   // radius on the green core, canonical units
-const R_MIN = +(process.env.R_MIN || 10);     // floor for inside corners on the outer layers
+const R_CORE = +(process.env.R_CORE || 10);   // radius on the green core, canonical units
+const K = +(process.env.K || 0.4);            // how much each outer layer's radius grows with its offset
+const R_MIN = +(process.env.R_MIN || 6);      // floor for inside corners on the outer layers
 const LONG = 20, MICRO_RUN = 16, TOL = 3, LOOSE = +(process.env.LOOSE || 7);
 
 const sub = (a, b) => [a[0] - b[0], a[1] - b[1]], add = (a, b) => [a[0] + b[0], a[1] + b[1]];
@@ -201,7 +206,8 @@ for (const members of clusters.values()) {
   const P = add(core.V, mul(n, R_CORE / Math.abs(Math.cos(core.alpha / 2))));
   for (const k of members) {
     const s = dot(sub(P, k.V), bis(k));
-    k.rho = Math.max(s * Math.abs(Math.cos(k.alpha / 2)), R_MIN);
+    const offset = s * Math.abs(Math.cos(k.alpha / 2)) - R_CORE;     // +d outside corners, -d inside
+    k.rho = Math.max(R_CORE + K * offset, R_MIN);
     k.convex = convex; k.size = members.length;
   }
 }
@@ -259,5 +265,5 @@ for (const file of FILES) {
   report.push(`${file.padEnd(24)} scale ${T.s.toFixed(4)}  filleted ${String(matched).padStart(3)}  loose ${loose.length}${loose.length ? " [" + loose.join(" ") + "]" : ""}  sharp in letter area ${unmatched.length}${unmatched.length ? "  [" + unmatched.join(" ") + "]" : ""}`);
 }
 const conv = canonCorners.filter((k) => k.convex).length;
-console.log(`canonical corners ${canonCorners.length} (${conv} convex) in ${clusters.size} clusters; R_CORE ${R_CORE} R_MIN ${R_MIN}`);
+console.log(`canonical corners ${canonCorners.length} (${conv} convex) in ${clusters.size} clusters; R_CORE ${R_CORE} K ${K} R_MIN ${R_MIN}`);
 console.log(report.join("\n"));
