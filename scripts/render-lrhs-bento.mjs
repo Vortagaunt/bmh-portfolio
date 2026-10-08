@@ -52,7 +52,7 @@ function icon(name, size) {
     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
 }
 
-const GREEN = "#033922", PINE = "#1C6E40", BRIGHT = "#2EA866", RED = "#AA2121";
+const GREEN = "#033922", BRIGHT = "#2EA866", RED = "#AA2121";
 const INK = "#0B0B0B", PAPER = "#FBFBF9";
 const FIELD = `radial-gradient(120% 95% at 18% 10%, #0A5733 0%, rgba(10,87,51,0) 62%),
   radial-gradient(110% 100% at 88% 96%, #021A10 0%, rgba(2,26,16,0) 58%),
