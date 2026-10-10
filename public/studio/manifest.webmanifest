@@ -1,0 +1,21 @@
+{
+  "name": "Mustang Studio",
+  "short_name": "Mustang Studio",
+  "description": "A brand-locked design tool for the Lakewood Ranch High School brand system. Student concept work, not affiliated with the school district.",
+  "id": "/studio/",
+  "start_url": "/studio/",
+  "scope": "/studio/",
+  "display": "standalone",
+  "background_color": "#0b100d",
+  "theme_color": "#0b100d",
+  "categories": ["design", "education", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "file_handlers": [
+    { "action": "/studio/", "accept": { "application/x-mustang-studio": [".mustang"] } }
+  ],
+  "launch_handler": { "client_mode": "focus-existing" }
+}
