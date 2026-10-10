@@ -73,3 +73,6 @@ temp/
 public/games/hl2-web/
 public/games/vice-dos/
 .design-shots/
+
+# one-folder copy of every Claude-made image (local only)
+/_claude-images/

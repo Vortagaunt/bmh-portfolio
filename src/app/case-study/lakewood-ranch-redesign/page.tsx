@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CaseStudyLayout, type CaseStudyData, type MarkLibraryItem } from "@/components/CaseStudyLayout";
 import LRHS_MARKS from "@/data/lrhs-marks.json";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GridBackdrop } from "@/components/GridBackdrop";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Lakewood Ranch HS — Redesign Concept — Bronx Hanratty",
@@ -24,6 +26,12 @@ export const metadata: Metadata = {
     images: ["/og/lakewood-ranch-redesign.jpg"],
   },
 };
+
+// ─────────────────────────────────────────────────────────────────────
+//  TOGGLE: flip to false to bring the full case study back. Same switch
+//  as the yearbook page — everything below is kept intact and ready.
+// ─────────────────────────────────────────────────────────────────────
+const COMING_SOON = true;
 
 /* The mark library is read from the same catalogue the pitch deck and the
    printable PDF are built from (src/data/lrhs-marks.json), so the three can
@@ -56,6 +64,7 @@ const data: CaseStudyData = {
   ],
   links: [
     { label: "Explore the brand system", href: "/lrhs-brand-refresh.html", external: true, exitBg: "#0e0e10" },
+    { label: "Open Mustang Studio", href: "/studio/", external: true, exitBg: "#0b100d" },
   ],
   linksDecorated: true,
   overview:
@@ -86,6 +95,12 @@ const data: CaseStudyData = {
       imageAlt: "The AI-generated Academic Powerhouse badge beside the two redrawn vector versions",
     },
     {
+      heading: "Softer corners",
+      body: "Every corner on the *LR* is now very slightly rounded — about the softness of an app icon — and the same change runs through all *seven files* that carry it, from the full-colour emblem to the band marks. The outline, the white keyline and the green letter round together, so the outline stays even. Where one letter tucks under the other, the corner stays sharp.",
+      image: "/images/lrhs-corners.jpg",
+      imageAlt: "The LR emblem with square corners beside the subtly rounded version, with a close-up of the top of the L before and after",
+    },
+    {
       heading: "The system, applied",
       body: "Everything above, rolled into a working website mockup. The homepage opens on a single hero photo, then routes *students*, *families*, and *faculty* into the content they actually came for — bell schedule, lunch, calendar, athletics. Voice rules carry through: headlines shout in caps, body stays warm and plain. Less depth, less guessing.",
       image: "/images/lrhs-in-use.png",
@@ -102,6 +117,43 @@ const data: CaseStudyData = {
       body: "Two posters built from the same parts as the wallpaper — the *Mustang Green* field and the horse. One carries the name for walls, entrances and the stadium; the other, *Go Mustangs!*, is for game week and the student section. A poster, a banner and the sign all read as one school.",
       image: "/images/lrhs-posters.jpg",
       imageAlt: "Two poster concepts — the school name repeated, and Go Mustangs!",
+    },
+    {
+      heading: "Student ID",
+      body: "The one piece of the system every student carries. *Credit-card size* and vertical, for the lanyard: the photo and name lead, and the barcode sits clear at the bottom so it scans first time. The back keeps the *24/7 support lines* from today's card and adds a return address. The number on this concept is a sample, not a real student ID.",
+      image: "/images/lrhs-ids-student.jpg",
+      imageAlt: "Student ID concept, front and back — photo, name, grade and barcode on the front; support lines and return address on the back",
+    },
+    {
+      heading: "Staff ID",
+      body: "*Horizontal* and full *Mustang Green*, so staff read differently from students across a corridor. The front carries the photo, name, title and department; the back carries the return address, the same support lines and an employee ID.",
+      image: "/images/lrhs-ids-staff.jpg",
+      imageAlt: "Staff ID concept, front and back — a horizontal green card with photo and name, and a back with the return address, support lines and employee ID",
+    },
+    {
+      heading: "Mustang Studio",
+      body: "A brand only works if people can actually use it, so I built the app for it. *Mustang Studio* is a design editor that only speaks Mustang: a coach, a club sponsor or the front office picks a template, changes the words and exports — and it comes out on brand every time. Every mark, colour and type style is already inside, and a *brand check* flags anything that's off (text that's hard to read, a mark on the wrong ground, too much Spirit Red) with a one-click fix. It runs on *Windows*, a *Mac*, a *Chromebook* or in any browser — open it at bronxhanratty.me/studio.",
+      image: "/images/lrhs-studio.jpg",
+      imageAlt: "Mustang Studio, the brand-locked design app, open on a game-day post with the templates drawer and the brand check",
+    },
+    {
+      heading: "Forty-one templates",
+      body: "Ready on day one and sorted by department — *Athletics*, *Events & clubs*, *News & podcast*, *School & awards* and the *ID cards* — plus a set for every season: *Homecoming*, *Pink Out*, *Halloween* and the *winter holidays*, each with two planned colours the brand check accepts. Seventeen sizes, from an Instagram story to a 24 × 36 poster and a six-foot fence banner. Everything in them stays editable.",
+      image: "/images/lrhs-studio-templates.jpg",
+      imageAlt: "All forty-one Mustang Studio templates, grouped by department: athletics, events and clubs, news and podcast, school and awards, ID cards and seasons",
+    },
+    {
+      heading: "Made for people who aren't designers",
+      body: "Version 1.6 is built around the people who'll actually use it. *Fill in the blanks* turns a design into a form, so nothing can slide off brand. A *batch from a spreadsheet* turns a pasted staff list into every ID card, ganged on Letter sheets with cut marks. Designs can have pages — an *Instagram carousel* exports as a ZIP, a newsletter as one PDF — and they can *move*, as an MP4 or a GIF. Anyone can save a design as their own template, and a *Who are you?* start screen puts the right templates first.",
+      image: "/images/lrhs-studio-new.jpg",
+      imageAlt: "Mustang Studio 1.6 — fill-in-the-blanks mode, a sheet of staff ID cards made from a spreadsheet, and a four-page Instagram carousel",
+    },
+    {
+      heading: "One more thing…",
+      body: "*Mustangs Ahead* — everything above on a single sheet, laid out like a keynote recap, and built in like one: the *LR*, the new *student ID*, the *mark library*, the colours, type, crest, posters and apparel, *Mustang Studio*, and a code that leads to this site. It's the page to send when someone asks what the system actually is.",
+      image: "/images/lrhs-bento.jpg",
+      video: "/videos/lrhs-bento-motion.mp4",
+      imageAlt: "A one-page bento of the Mustang brand system — the LR emblem, the student ID front and back, the mark library, colour strips, type, the crest, the band and podcast marks, Spirit Red, posters, apparel, the voice, the Mustang Studio design app and a QR code to the site",
     },
   ],
   gallery: [
@@ -166,6 +218,83 @@ const data: CaseStudyData = {
   },
 };
 
+function ComingSoon() {
+  return (
+    <section className="relative flex min-h-[78vh] items-center justify-center px-5 sm:px-8">
+      <div className="relative mx-auto flex max-w-[1100px] flex-col items-center text-center">
+        {/* Big outline serif backdrop — "Ahead", as in Mustangs Ahead */}
+        <Reveal
+          variant="fade"
+          duration={2200}
+          as="span"
+          className="serif-outline absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap"
+          style={{
+            fontSize: "clamp(180px, 26vw, 360px)",
+            lineHeight: 1,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Ahead
+        </Reveal>
+
+        <Reveal variant="up" duration={1000}>
+          <div className="relative z-10 flex items-baseline gap-4 text-[12px] tracking-[0.16em] uppercase text-ink/60">
+            <span>(03)</span>
+            <span className="h-px w-10 bg-ink/30" />
+            <span>Brand · Web Concept</span>
+          </div>
+        </Reveal>
+
+        <Reveal variant="blur" delay={150} duration={1600}>
+          <h1
+            className="relative z-10 mt-6 font-display text-ink"
+            style={{
+              fontSize: "clamp(64px, 11vw, 168px)",
+              fontWeight: 600,
+              letterSpacing: "-0.04em",
+              lineHeight: 0.95,
+            }}
+          >
+            More to{" "}
+            <span
+              className="font-serif italic"
+              style={{ fontWeight: 400, letterSpacing: "-0.02em" }}
+            >
+              come
+            </span>
+            <span aria-hidden className="motion-safe:animate-pulse">
+              &hellip;
+            </span>
+          </h1>
+        </Reveal>
+
+        <Reveal variant="up" delay={280} duration={1100}>
+          <p className="relative z-10 mt-10 max-w-[560px] text-[18px] leading-[1.55] text-ink/80">
+            The{" "}
+            <span className="font-serif italic tracking-[-0.01em]">
+              Lakewood Ranch
+            </span>{" "}
+            case study has gone dark while something bigger takes shape.
+            Updating soon.
+          </p>
+        </Reveal>
+
+        <Reveal variant="up" delay={420} duration={1100}>
+          <Link
+            href="/#works"
+            className="group relative z-10 mt-12 inline-flex items-center gap-2 rounded-full border border-ink/15 bg-ink/[0.03] px-6 py-3 text-[14px] font-medium tracking-tight text-ink transition-all duration-500 hover:bg-ink/[0.08] hover:scale-[1.02]"
+          >
+            <span className="transition-transform duration-500 group-hover:-translate-x-1">
+              ←
+            </span>
+            Back to Work
+          </Link>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export default function LakewoodRanchCaseStudy() {
   return (
     <main className="relative isolate min-h-screen w-full bg-paper text-ink">
@@ -176,7 +305,7 @@ export default function LakewoodRanchCaseStudy() {
       </div>
       <SiteHeader />
       <div className="relative z-10">
-        <CaseStudyLayout data={data} />
+        {COMING_SOON ? <ComingSoon /> : <CaseStudyLayout data={data} />}
         <Footer />
       </div>
     </main>

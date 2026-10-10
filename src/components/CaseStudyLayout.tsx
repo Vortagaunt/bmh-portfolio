@@ -2,6 +2,7 @@ import { ZoomImage } from "./ZoomImage";
 import { FilmPlayer } from "./FilmPlayer";
 import Link from "next/link";
 import { Reveal } from "./Reveal";
+import { BuildVideo } from "./BuildVideo";
 
 /**
  * Render a string with *word* markers converted to italic serif spans —
@@ -35,6 +36,8 @@ export interface CaseStudySection {
   body: string;
   image?: string;
   imageAlt?: string;
+  /** Optional build of the image: plays once in view and settles on `image` */
+  video?: string;
 }
 
 export interface CaseStudyLink {
@@ -311,13 +314,17 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
                     className="media-elevated relative w-full overflow-hidden bg-[#cfcfcf]"
                     style={{ aspectRatio: "1.5 / 1" }}
                   >
-                    <ZoomImage
-                      src={s.image}
-                      alt={s.imageAlt ?? s.heading}
-                      fill
-                      sizes="(min-width: 1024px) 800px, 100vw"
-                      className="object-cover"
-                    />
+                    {s.video ? (
+                      <BuildVideo src={s.video} still={s.image} alt={s.imageAlt ?? s.heading} />
+                    ) : (
+                      <ZoomImage
+                        src={s.image}
+                        alt={s.imageAlt ?? s.heading}
+                        fill
+                        sizes="(min-width: 1024px) 800px, 100vw"
+                        className="object-cover"
+                      />
+                    )}
                   </div>
                 </Reveal>
               )}
