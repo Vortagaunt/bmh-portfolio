@@ -22,8 +22,12 @@ export type ZoomItem = {
   /** Backing surface for transparent vector art, mirroring the tile the item
    *  came from. Logo marks are black or white with a transparent ground, so
    *  on the bare scrim half of them would be invisible. */
-  panel?: "paper" | "ink";
+  panel?: "paper" | "ink" | "green";
 };
+
+/** What each backing surface paints. "green" is Mustang Green, the ground the
+ *  LRHS catalogue specifies for its reversed marks. */
+const PANEL_BG = { paper: "#F4F4F2", ink: "#0a0a0a", green: "#033922" } as const;
 
 type ZoomImageProps = ImageProps & {
   /** The set this image belongs to (for ‹ › navigation). Defaults to just itself. */
@@ -161,13 +165,22 @@ export function ZoomImage({ zoomItems, zoomIndex = 0, ...imgProps }: ZoomImagePr
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="flex shrink-0 items-center justify-center bg-black/40 p-4 sm:p-7 md:w-[58%]">
+                {/* Transparent vector marks get their tile's ground here too —
+                    on the dark pane a black mark simply vanished. */}
+                <div
+                  className={`flex shrink-0 items-center justify-center p-4 sm:p-7 md:w-[58%] ${panel ? "" : "bg-black/40"}`}
+                  style={panel ? { background: PANEL_BG[panel] } : undefined}
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     key={cur.src}
                     src={cur.src}
                     alt={cur.alt}
-                    className="max-h-[42vh] w-auto max-w-full object-contain md:max-h-[76vh]"
+                    className={
+                      isVector
+                        ? "h-[36vh] w-full object-contain p-[4%] md:h-[66vh]"
+                        : "max-h-[42vh] w-auto max-w-full object-contain md:max-h-[76vh]"
+                    }
                     draggable={false}
                   />
                 </div>
@@ -230,7 +243,7 @@ export function ZoomImage({ zoomItems, zoomIndex = 0, ...imgProps }: ZoomImagePr
                     style={{
                       width: "min(1080px, 90vw)",
                       height: "min(74vh, 780px)",
-                      background: panel === "ink" ? "#0a0a0a" : "#F4F4F2",
+                      background: PANEL_BG[panel],
                       boxShadow: "0 24px 80px rgba(0,0,0,.55)",
                       animation: "lightbox-in .28s cubic-bezier(.2,.7,.1,1) both",
                     }}

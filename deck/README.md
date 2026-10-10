@@ -41,10 +41,19 @@ node build-pdf.mjs                   # -> ...-Presentation-and-Marks.pdf and ...
 Every script finds Chrome at its Windows install path; set `CHROME` to use
 another browser binary.
 
+### Mustang Studio is the surprise
+
+The principal hasn't seen the app. Nothing before slide 22, "One more thing…",
+mentions it — not the slides, not the speaker notes, and not the section names
+(the reveal's section is called "One more thing"). The Studio slides follow the
+black slide, then "Mustang Studio, on one page", then the system bento (which
+has a Studio tile, so it has to come after) and the QR. Keep it that way when
+adding slides.
+
 ### What the PowerPoint does by itself
 
 - **Two bentos build themselves in.** "Mustang Studio, on one page" closes the
-  Studio section and the system bento follows "One more thing…". `assemble.js`
+  Studio reveal and the system bento follows it, just before the QR. `assemble.js`
   lays each video over its still and sets it to start on its own, then hold.
   The videos come from `node ../scripts/render-bento-motion.mjs lrhs` and
   `... studio-wide` (run before `prepare-assets.mjs` whenever a bento changes).
@@ -61,7 +70,7 @@ another browser binary.
 - **Sections and titles**: each `ORDER` entry has a title and a section; they
   become PowerPoint sections, the slides' alt text and the PDF's bookmarks.
 - **Transitions**: a fade between slides, a slow fade through black into
-  "One more thing…", and a straight cut from it into the bento.
+  "One more thing…", and a straight cut from it into Mustang Studio.
 
 After changing anything in `assemble.js`, check the file with the pptx skill's
 `validate.py`.

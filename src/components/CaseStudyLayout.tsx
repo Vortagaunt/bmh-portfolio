@@ -8,7 +8,7 @@ import { BuildVideo } from "./BuildVideo";
  * Render a string with *word* markers converted to italic serif spans —
  * matches the home page's "roots / exploring / moving" emphasis style.
  */
-function RichText({ children }: { children: string }) {
+export function RichText({ children }: { children: string }) {
   const parts = children.split(/(\*[^*]+\*)/g);
   return (
     <>
@@ -104,9 +104,16 @@ export interface CaseStudyData {
   film?: { videoId: string; poster: string; title: string; caption?: string };
 }
 
-export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
+/** The top of a case study: the index and category, the name, the
+ *  description, the meta row, the cover (or the film) and the links under it.
+ *  Exported so a custom case study page can open exactly like the others. */
+export function CaseStudyHero({
+  data,
+}: {
+  data: Pick<CaseStudyData, "index" | "category" | "title" | "subtitle" | "hero" | "meta" | "links" | "linksDecorated" | "film">;
+}) {
   return (
-    <article className="relative pt-24 pb-24 sm:pt-32 sm:pb-32">
+    <>
       {/* Hero */}
       <header className="relative mx-auto max-w-[1280px] px-5 sm:px-8">
         <Reveal variant="up" duration={1000}>
@@ -252,6 +259,14 @@ export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
           </div>
         </Reveal>
       )}
+    </>
+  );
+}
+
+export function CaseStudyLayout({ data }: { data: CaseStudyData }) {
+  return (
+    <article className="relative pt-24 pb-24 sm:pt-32 sm:pb-32">
+      <CaseStudyHero data={data} />
 
       {/* Overview row */}
       <section className="relative mx-auto mt-20 grid max-w-[1280px] grid-cols-12 gap-6 px-5 sm:mt-32 sm:gap-8 sm:px-8">
