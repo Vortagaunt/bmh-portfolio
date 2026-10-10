@@ -1,25 +1,17 @@
 /**
- * The LRHS brand system on one page — a keynote-style bento of every major part
- * of the guidelines, for after the principal approved the logos.
+ * The LRHS brand system on one page, standing up — the vertical (9:16) cut of the
+ * keynote-style bento (scripts/render-lrhs-bento.mjs), for stories, phones and
+ * a portrait print. Same tiles, same type, same rules; laid out on a 4 x 8 grid.
+ * The Mustang Studio tile shows the 1.6 app (assets/studio/ui-gameday.jpg).
  *
- * v2 (Oct 8): reworked to read like Apple's keynote recap slides — true-black
- * canvas, flat graphite and paper tiles, sentence-case two-tone headlines, big
- * gradient numerals, v1's colour strips — and a new Student ID tile
- * (front + back, the repo's sample-number art). Signage dropped for room;
- * Mustang Studio added (screenshot: assets/studio/mustang-studio-ui.png).
+ * Emits 8K only:
+ *   assets/flyer/lrhs-bento-vertical-8k.jpg   4320x7680
  *
- * Emits (the v1 files are kept):
- *   assets/flyer/lrhs-bento-v2.jpg      3840x2160, for sharing and the deck
- *   assets/flyer/lrhs-bento-v2-8k.jpg   7680x4320, for print
+ * Fonts: Industry Black (licensed, never committed) and Hanken Grotesk are read
+ * from where Windows installs per-user fonts and inlined into the throwaway
+ * render HTML, so neither ships. Every mark is the catalogue's own SVG.
  *
- * Set in the brand's own type: Industry Black for the hero, numerals and the
- * type specimen; Hanken Grotesk for everything else. Fonts are read from where
- * Windows installs per-user fonts (Industry Black is licensed and never
- * committed) and inlined into the throwaway render HTML, so neither ships.
- *
- * Every mark is the catalogue's own SVG, inlined — nothing is redrawn.
- *
- * Run: node scripts/render-lrhs-bento.mjs
+ * Run: node scripts/render-lrhs-bento-vertical.mjs
  *   optional env: LRHS_ROOT, OUT_DIR, CHROME, HANKEN_FONT, INDUSTRY_FONT
  */
 import { chromium } from "playwright-core";
@@ -81,7 +73,7 @@ const SWATCHES = [  // name, hex, role, (unused), text colour — the v1 strips,
   ["Paper", "#FBFBF9", "Background", 17, "#3A4A42"],
 ];
 
-const W = 3840, H = 2160;
+const W = 2160, H = 3840;   // CSS px; rendered at 2x = 4320 x 7680
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:'Industry';src:${INDUSTRY};font-weight:900;}
 @font-face{font-family:'Hanken';src:${HANKEN};font-weight:100 900;}
@@ -90,7 +82,7 @@ html,body{width:${W}px;height:${H}px;overflow:hidden;background:#000;}
 body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;
   --fg:#F5F5F7;--mute:#8B938E;color:var(--fg);}
 .grid{position:absolute;inset:88px;display:grid;gap:26px;
-  grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(4,1fr);}
+  grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(8,1fr);}
 
 /* tiles: flat, no strokes, big radius — the keynote look */
 .t{position:relative;border-radius:50px;overflow:hidden;padding:50px;display:flex;flex-direction:column;min-width:0;min-height:0;}
@@ -131,20 +123,20 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- student ID — new -->
-<div class="t dark c" style="grid-area:1/4/3/6;padding-bottom:0;">
+<div class="t dark c" style="grid-area:3/1/5/3;padding-bottom:0;">
   <div class="lab"><span class="new">New</span>Student ID</div>
   <div class="h" style="margin-top:18px;">A card every student <span class="m">carries.</span></div>
   <div class="sub" style="margin-top:14px;">Front and back, with 24/7 support lines.</div>
   <div class="art" style="margin-top:10px;">
-    <img src="${img("public", "images", "lrhs-ids", "student-back.png")}" style="position:absolute;height:640px;left:50%;top:50%;
-      transform:translate(-50%,-50%) translate(-160px,-6px) rotate(-7deg);filter:drop-shadow(0 30px 50px rgba(0,0,0,.6));">
-    <img src="${img("public", "images", "lrhs-ids", "student-front.png")}" style="position:absolute;height:640px;left:50%;top:50%;
-      transform:translate(-50%,-50%) translate(150px,16px) rotate(4deg);filter:drop-shadow(0 40px 60px rgba(0,0,0,.7));">
+    <img src="${img("public", "images", "lrhs-ids", "student-back.png")}" style="position:absolute;height:560px;left:50%;top:50%;
+      transform:translate(-50%,-50%) translate(-150px,-4px) rotate(-7deg);filter:drop-shadow(0 30px 50px rgba(0,0,0,.6));">
+    <img src="${img("public", "images", "lrhs-ids", "student-front.png")}" style="position:absolute;height:560px;left:50%;top:50%;
+      transform:translate(-50%,-50%) translate(140px,14px) rotate(4deg);filter:drop-shadow(0 40px 60px rgba(0,0,0,.7));">
   </div>
 </div>
 
 <!-- one horse -->
-<div class="t paper" style="grid-area:1/6/2/8;flex-direction:row;gap:20px;padding-right:36px;">
+<div class="t paper" style="grid-area:3/3/4/5;flex-direction:row;gap:20px;padding-right:36px;">
   <div style="flex:0 0 430px;display:flex;flex-direction:column;">
     <div class="lab">The mustang</div><div class="sp"></div>
     <div class="h">One horse, <span class="m">drawn once.</span></div>
@@ -154,7 +146,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- crest -->
-<div class="t paper c" style="grid-area:1/8/3/9;">
+<div class="t paper c" style="grid-area:1/4/3/5;">
   <div class="lab">The crest</div>
   <div class="art" style="margin:26px 0 30px;"><img class="fit" src="${mark("LRHS Grad Mark.svg")}"></div>
   <div class="h" style="font-size:50px;">Founded <span class="g">1998.</span></div>
@@ -162,7 +154,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- the library -->
-<div class="t dark" style="grid-area:2/6/3/8;flex-direction:row;gap:40px;align-items:stretch;">
+<div class="t dark" style="grid-area:4/3/5/5;flex-direction:row;gap:40px;align-items:stretch;">
   <div style="display:flex;flex-direction:column;flex:0 0 auto;">
     <div class="lab">The mark library</div><div class="sp"></div>
     <div class="ind" style="font-size:300px;line-height:.78;margin-bottom:-6px;"><span class="g">25</span></div>
@@ -178,7 +170,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- type + icons -->
-<div class="t dark" style="grid-area:3/1/4/3;">
+<div class="t dark" style="grid-area:5/1/6/3;">
   <div style="display:flex;justify-content:space-between;align-items:center;">
     <div class="lab">Type &amp; icons</div>
     <div style="display:flex;gap:18px;color:#46C27E;">
@@ -192,7 +184,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- the emblem, softened -->
-<div class="t paper" style="grid-area:3/3/4/4;padding:0;">
+<div class="t paper" style="grid-area:5/3/6/4;padding:0;">
   <div style="position:relative;flex:1;min-height:0;overflow:hidden;background:#ECEDEA;">
     <img src="${mark("LRHS Emblem.svg")}" style="position:absolute;width:${1944.33 * 0.5}px;left:${-30 * 0.5 + 44}px;top:${-30 * 0.5 + 40}px;">
   </div>
@@ -203,7 +195,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- colour — v1's full-bleed strips -->
-<div class="t" style="grid-area:3/4/4/6;padding:0;flex-direction:row;">
+<div class="t" style="grid-area:6/1/7/3;padding:0;flex-direction:row;">
   ${SWATCHES.map(([n, hex, role, , fg], i) => `
     <div class="sw" style="flex:1 1 0;min-width:0;background:${hex};color:${fg};padding:44px 22px;display:flex;flex-direction:column;">
       ${i === 0 ? `<div class="lab" style="color:rgba(255,255,255,.8);">Colour</div>` : ""}
@@ -215,42 +207,42 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- band -->
-<div class="t paper c" style="grid-area:3/6/4/7;">
+<div class="t paper c" style="grid-area:6/3/7/4;">
   <div class="art"><img class="fit" src="${mark("LRHS Band Emblem.svg")}"></div>
   <div class="hs" style="font-size:36px;margin-top:22px;">The Mustang Band</div>
 </div>
 
 <!-- mustangs ahead -->
-<div class="t dark c" style="grid-area:3/7/4/8;">
+<div class="t dark c" style="grid-area:6/4/7/5;">
   <div class="art"><img class="fit" src="${img("assets", "podcast", "lrhs-podcasts-mustangs-ahead.svg")}"></div>
   <div class="hs" style="font-size:36px;margin-top:22px;">Newsletter <span class="m">+ podcast</span></div>
 </div>
 
 <!-- game day -->
-<div class="t red" style="grid-area:3/8/4/9;">
+<div class="t red" style="grid-area:5/4/6/5;">
   <div class="lab">Game day</div><div class="sp"></div>
   <div class="ind" style="font-size:74px;">Spirit Red</div>
   <div class="sub" style="margin-top:14px;font-size:25px;color:rgba(255,255,255,.86);">Full volume on game day. Rare everywhere else.</div>
 </div>
 
 <!-- Mustang Studio — new: the brand-locked design app, screenshot from the app itself -->
-<div class="t paper" style="grid-area:4/1/5/3;">
+<div class="t paper" style="grid-area:7/1/8/3;">
   <div style="position:relative;z-index:1;width:300px;display:flex;flex-direction:column;flex:1;">
     <div class="lab"><span class="new">New</span>Mustang Studio</div>
     <div class="sp"></div>
     <div class="h" style="font-size:52px;">On brand, <span class="m">every time.</span></div>
-    <div class="sub" style="font-size:24px;margin-top:14px;">A design app with every mark, template and rule built in.</div>
+    <div class="sub" style="font-size:24px;margin-top:14px;">A design app with 41 templates, every mark and every rule built in.</div>
   </div>
   <div style="position:absolute;inset:0;overflow:hidden;">   <!-- clip the bleed without growing the tile -->
-    <div style="position:absolute;left:376px;top:54px;width:592px;border-radius:16px;overflow:hidden;
+    <div style="position:absolute;left:390px;top:58px;width:700px;border-radius:16px;overflow:hidden;
          box-shadow:0 0 0 1px rgba(0,0,0,.2),0 30px 70px -20px rgba(12,12,12,.55);">
-      <img src="${img("assets", "studio", "mustang-studio-ui.png")}" style="display:block;width:100%;">
+      <img src="${img("assets", "studio", "ui-gameday.jpg")}" style="display:block;width:100%;">
     </div>
   </div>
 </div>
 
 <!-- posters -->
-<div class="t dark c" style="grid-area:4/3/5/5;">
+<div class="t dark c" style="grid-area:7/3/8/5;">
   <div class="art">
     <img src="${img("public", "images", "lrhs-signage", "poster-name.jpg")}" style="position:absolute;left:0;top:14px;width:52%;border-radius:16px;
       transform:rotate(-2.5deg);box-shadow:0 20px 50px -20px rgba(0,0,0,.7);">
@@ -261,7 +253,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- apparel -->
-<div class="t paper c" style="grid-area:4/5/5/6;">
+<div class="t paper c" style="grid-area:8/1/9/2;">
   <div class="art" style="display:flex;gap:10px;">
     <div style="flex:1;min-width:0;"><img class="fit" src="${img("public", "images", "lrhs-apparel", "jersey.png")}"></div>
     <div style="flex:1;min-width:0;"><img class="fit" src="${img("public", "images", "lrhs-apparel", "hoodie.png")}"></div>
@@ -270,14 +262,14 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- voice -->
-<div class="t dark" style="grid-area:4/6/5/7;">
+<div class="t dark" style="grid-area:8/2/9/3;">
   <div class="lab">Voice</div><div class="sp"></div>
-  <div class="h" style="font-size:66px;line-height:1.02;">Proud.<br><span class="g">Grounded.</span><br>Together.</div>
+  <div class="h" style="font-size:58px;line-height:1.02;">Proud.<br><span class="g">Grounded.</span><br>Together.</div>
   <div class="sub" style="font-size:25px;margin-top:16px;">Written for staff, not designers.</div>
 </div>
 
 <!-- academic powerhouse -->
-<div class="t paper c" style="grid-area:4/7/5/8;">
+<div class="t paper c" style="grid-area:8/3/9/4;">
   <div class="art" style="display:flex;gap:14px;">
     <div style="flex:1;min-width:0;"><img class="fit" src="${img("public", "images", "lrhs-powerhouse", "powerhouse-lr.svg")}"></div>
     <div style="flex:1;min-width:0;"><img class="fit" src="${img("public", "images", "lrhs-powerhouse", "powerhouse-mustang.svg")}"></div>
@@ -287,7 +279,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- see it all -->
-<div class="t field c" style="grid-area:4/8/5/9;padding:40px 30px 38px;">
+<div class="t field c" style="grid-area:8/4/9/5;padding:40px 30px 38px;">
   <div class="vig"></div>
   <div class="lab rel">See it all</div>
   <div class="sp"></div>
@@ -305,7 +297,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 if (process.env.BENTO_HTML) { fs.writeFileSync(process.env.BENTO_HTML, html); process.exit(0); }
 
 fs.mkdirSync(OUT, { recursive: true });
-const tmp = path.join(os.tmpdir(), "lrhs-bento.html");
+const tmp = path.join(os.tmpdir(), "lrhs-bento-vertical.html");
 fs.writeFileSync(tmp, html);
 const browser = await chromium.launch({
   executablePath: process.env.CHROME || "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true,
@@ -328,7 +320,6 @@ const shot = await page.screenshot({ type: "png" });
 await browser.close();
 fs.unlinkSync(tmp);
 
-await sharp(shot).jpeg({ quality: 92, mozjpeg: true }).toFile(path.join(OUT, "lrhs-bento-v2-8k.jpg"));
-await sharp(shot).resize(W, H, { kernel: "lanczos3" }).jpeg({ quality: 92, mozjpeg: true }).toFile(path.join(OUT, "lrhs-bento-v2.jpg"));
+await sharp(shot).jpeg({ quality: 92, mozjpeg: true }).toFile(path.join(OUT, "lrhs-bento-vertical-8k.jpg"));
 console.log(problems.length ? "PROBLEMS:\n  " + problems.join("\n  ") : "no overflow, no broken images, fonts loaded");
-console.log(`wrote ${OUT}/lrhs-bento-v2.jpg (3840x2160) and lrhs-bento-v2-8k.jpg (7680x4320)`);
+console.log(`wrote ${OUT}/lrhs-bento-vertical-8k.jpg (4320x7680)`);
