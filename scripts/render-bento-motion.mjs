@@ -21,10 +21,13 @@
  *               lrhs-bento-vertical-reel.mp4          1080x1920  Instagram Reel / Story
  *   studio      mustang-studio-bento-motion-4k.mp4    2160x3840  master
  *               mustang-studio-bento-reel.mp4         1080x1920  Instagram Reel / Story
+ *   studio-wide mustang-studio-bento-wide-motion-4k.mp4    3840x2160  master
+ *               mustang-studio-bento-wide-motion-1080.mp4  1920x1080  the deck (end of the Studio section)
+ *               public/videos/mustang-studio-bento-motion.mp4  1920x1280  the case study (3:2)
  * 10 s at 30 fps. Reels carry a silent audio track (some uploaders insist);
  * add a sound from Instagram's own library when posting.
  *
- * Run: node scripts/render-bento-motion.mjs [lrhs|vertical|studio|all]
+ * Run: node scripts/render-bento-motion.mjs [lrhs|vertical|studio|studio-wide|all]
  *   optional env: LRHS_ROOT, OUT_DIR, CHROME, FFMPEG, HANKEN_FONT, INDUSTRY_FONT,
  *   MUSTANG_STUDIO (the app's HTML with Industry Black built in, for the
  *   game-day frames; without it the Motion tile steps through its four stills),
@@ -58,14 +61,7 @@ const x264 = (crf, level, more = []) => ["-c:v", "libx264", "-preset", "slow", "
 const BENTOS = {
   lrhs: {
     script: "render-lrhs-bento.mjs", W: 3840, H: 2160, sweep: 0.72,
-    outputs: (o) => ({
-      filter: `[0:v]split=3[a][b][c];[a]${yuv(3840, 2160)}[m];[b]${yuv(1920, 1080)}[d];[c]${yuv(1920, 1080, ",pad=1920:1280:0:100:black")}[s]`,
-      args: [
-        "-map", "[m]", ...x264(16, "5.1"), "-an", path.join(o, "lrhs-bento-motion-4k.mp4"),
-        "-map", "[d]", ...x264(17, "4.1", ["-maxrate", "16M", "-bufsize", "32M"]), "-an", path.join(o, "lrhs-bento-motion-1080.mp4"),
-        "-map", "[s]", ...x264(23, "4.1", ["-maxrate", "6M", "-bufsize", "12M"]), "-an", path.join(SITE, "lrhs-bento-motion.mp4"),
-      ],
-    }),
+    outputs: (o) => wideOutputs(o, "lrhs-bento-motion", "lrhs-bento-motion"),
   },
   vertical: {
     script: "render-lrhs-bento-vertical.mjs", W: 2160, H: 3840, sweep: 0.22,
@@ -75,7 +71,22 @@ const BENTOS = {
     script: "render-studio-bento.mjs", W: 2160, H: 3840, sweep: 0.22,
     outputs: (o) => reelOutputs(o, "mustang-studio-bento"),
   },
+  "studio-wide": {
+    script: "render-studio-bento.mjs", env: { BENTO_LAYOUT: "wide" }, W: 3840, H: 2160, sweep: 0.72, gameday: true,
+    outputs: (o) => wideOutputs(o, "mustang-studio-bento-wide-motion", "mustang-studio-bento-motion"),
+  },
 };
+/* a 16:9 bento: the 4K master, the deck's 1080p cut, and the site's 3:2 copy */
+function wideOutputs(o, base, site) {
+  return {
+    filter: `[0:v]split=3[a][b][c];[a]${yuv(3840, 2160)}[m];[b]${yuv(1920, 1080)}[d];[c]${yuv(1920, 1080, ",pad=1920:1280:0:100:black")}[s]`,
+    args: [
+      "-map", "[m]", ...x264(16, "5.1"), "-an", path.join(o, `${base}-4k.mp4`),
+      "-map", "[d]", ...x264(17, "4.1", ["-maxrate", "16M", "-bufsize", "32M"]), "-an", path.join(o, `${base}-1080.mp4`),
+      "-map", "[s]", ...x264(23, "4.1", ["-maxrate", "6M", "-bufsize", "12M"]), "-an", path.join(SITE, `${site}.mp4`),
+    ],
+  };
+}
 function reelOutputs(o, base) {
   return {
     filter: `[0:v]split=2[a][b];[a]${yuv(2160, 3840)}[m];[b]${yuv(1080, 1920)}[r]`,
@@ -252,10 +263,10 @@ async function render(name, browser) {
   const B = BENTOS[name];
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `bento-motion-${name}-`));
   const htmlFile = path.join(tmp, "bento.html");
-  const r = spawnSync(process.execPath, [path.join(here, B.script)], { env: { ...process.env, BENTO_HTML: htmlFile }, stdio: "inherit" });
+  const r = spawnSync(process.execPath, [path.join(here, B.script)], { env: { ...process.env, ...(B.env || {}), BENTO_HTML: htmlFile }, stdio: "inherit" });
   if (r.status !== 0 || !fs.existsSync(htmlFile)) throw new Error(`${B.script} did not hand over its page`);
 
-  const gameday = name === "studio" ? await gamedayFrames(browser, path.join(tmp, "gameday")) : null;
+  const gameday = name === "studio" || B.gameday ? await gamedayFrames(browser, path.join(tmp, "gameday")) : null;
   const page = await browser.newPage({ viewport: { width: B.W, height: B.H }, deviceScaleFactor: 1 });
   await page.goto(pathToFileURL(htmlFile).href);
   await page.evaluate(() => document.fonts.ready);
@@ -311,7 +322,7 @@ const which = process.argv[2] || "all";
 const names = which === "all" ? Object.keys(BENTOS) : [which];
 const browser = await chromium.launch({ executablePath: CHROME, headless: true });
 for (const n of names) {
-  if (!BENTOS[n]) { console.error(`unknown bento "${n}" (lrhs, vertical, studio or all)`); process.exit(1); }
+  if (!BENTOS[n]) { console.error(`unknown bento "${n}" (lrhs, vertical, studio, studio-wide or all)`); process.exit(1); }
   await render(n, browser);
 }
 await browser.close();

@@ -64,16 +64,10 @@ const FIELD = `radial-gradient(120% 95% at 18% 10%, #0A5733 0%, rgba(10,87,51,0)
 const DISCLAIMER = "Concept work · not affiliated with the school district";
 
 /* the library, in catalogue order; true = reversed mark, sits on green */
-const LIBRARY = [
-  ["LRHS-Emblem"], ["LRHS-Emblem-2"], ["LRHS-Emblem-3"], ["LRHS-Emblem-Mono-2"], ["LRHS-Emblem-Mono", true],
-  ["LRHS-Wordmark-2"], ["LRHS-Wordmark"], ["LRHS-Wordmark-3"],
-  ["LRHS-Mustang-2"], ["LRHS-Mustang-4"], ["LRHS-Mustang-3"], ["LRHS-Mustang", true],
-  ["LRHS-Band-Emblem"], ["LRHS-Band"],
-  ["LRHS-Grad-Mark"], ["LRHS-Grad-Mark-Alt"], ["LRHS-Grad-Mark-Mono"],
-  ["LRHS-Mustangs-Ahead"], ["LRHS-Mustangs-Ahead-3", true], ["LRHS-Mustangs-Ahead-2"], ["LRHS-Mustangs-Ahead-4", true],
-  ["LRHS-Mustangs-Ahead-Alt"], ["LRHS-Mustangs-Ahead-5"],
-  ["LRHS-Retro-Logo"], ["LRHS-Retro-Logo-2"],
-];
+const CAT = JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-marks.json"), "utf8"));
+const LIBRARY = CAT.marks.map((m) => [m.file.replace(/\.svg$/, "").replace(/ /g, "-"), m.ground === "dark"]);
+const NUM = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+const LIB_COLS = Math.ceil(Math.sqrt(LIBRARY.length));   // 5 for 25 marks, 6 for 27
 const SWATCHES = [
   ["Mustang Green", "#033922", "Primary", "#fff"],
   ["Field Green", "#144B2C", "Depth", "#fff"],
@@ -124,10 +118,10 @@ const SLIDES = [
 <div class="t dark">
   <div class="lab">The mark library</div>
   <div style="display:flex;align-items:flex-end;gap:40px;margin-top:26px;">
-    <div class="ind" style="font-size:250px;line-height:.78;"><span class="g">25</span></div>
-    <div class="h" style="font-size:66px;padding-bottom:2px;">Marks.<br><span class="m">Seven families.</span></div>
+    <div class="ind" style="font-size:250px;line-height:.78;"><span class="g">${LIBRARY.length}</span></div>
+    <div class="h" style="font-size:66px;padding-bottom:2px;">Marks.<br><span class="m">${NUM[CAT.families.length][0].toUpperCase() + NUM[CAT.families.length].slice(1)} families.</span></div>
   </div>
-  <div class="art" style="margin-top:44px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);gap:12px;">
+  <div class="art" style="margin-top:44px;display:grid;grid-template-columns:repeat(${LIB_COLS},1fr);grid-template-rows:repeat(${Math.ceil(LIBRARY.length / LIB_COLS)},1fr);gap:12px;">
     ${LIBRARY.map(([s, dark]) => `<div style="position:relative;border-radius:20px;background:${dark ? "#033922" : "#EEF0EE"};">
       <img src="${png(s)}" style="position:absolute;inset:14px;width:calc(100% - 28px);height:calc(100% - 28px);object-fit:contain;"></div>`).join("")}
   </div>
@@ -238,8 +232,8 @@ const SLIDES = [
     </div>
     <div style="position:relative;display:flex;gap:30px;">
       <span class="chip" style="background:${RED};left:50%;transform:translateX(-50%);top:-6px;">Redrawn · vector</span>
-      <div style="flex:1;min-width:0;position:relative;"><img class="fit abs" src="${img("deck", "img", "powerhouse", "powerhouse-lr.svg")}" style="top:40px;height:calc(100% - 40px);"></div>
-      <div style="flex:1;min-width:0;position:relative;"><img class="fit abs" src="${img("deck", "img", "powerhouse", "powerhouse-mustang.svg")}" style="top:40px;height:calc(100% - 40px);"></div>
+      <div style="flex:1;min-width:0;position:relative;"><img class="fit abs" src="${mark("LRHS Academic Powerhouse.svg")}" style="top:40px;height:calc(100% - 40px);"></div>
+      <div style="flex:1;min-width:0;position:relative;"><img class="fit abs" src="${mark("LRHS Academic Powerhouse 2.svg")}" style="top:40px;height:calc(100% - 40px);"></div>
     </div>
   </div>
   <div class="h" style="font-size:76px;">From an AI image <span class="m">to a real mark.</span></div>

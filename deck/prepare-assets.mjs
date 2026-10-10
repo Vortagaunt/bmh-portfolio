@@ -68,6 +68,8 @@ const copies = [
   [path.join(root, "assets", "deck", "lrhs-go-mustangs.jpg"), "lrhs-go-mustangs.jpg"],
   [path.join(root, "assets", "flyer", "lrhs-bento-v2.jpg"), "lrhs-bento.jpg"],
   [path.join(root, "assets", "motion", "lrhs-bento-motion-1080.mp4"), "lrhs-bento-motion.mp4"],   // the bento building in (render-bento-motion.mjs)
+  [path.join(root, "assets", "flyer", "mustang-studio-bento-wide.jpg"), "mustang-studio-bento.jpg"],   // Mustang Studio on one page, 16:9
+  [path.join(root, "assets", "motion", "mustang-studio-bento-wide-motion-1080.mp4"), "mustang-studio-bento-motion.mp4"],
 ];
 for (const [from, to] of copies) {
   if (!fs.existsSync(from)) { console.log("  ! missing", from); continue; }

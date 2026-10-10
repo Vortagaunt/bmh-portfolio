@@ -11,6 +11,11 @@
  * Emits 8K only:
  *   assets/flyer/mustang-studio-bento-8k.jpg   4320x7680
  *
+ * BENTO_LAYOUT=wide lays the same tiles out 16:9 (8 x 4 instead of 4 x 8), for
+ * the deck's Mustang Studio section and the case study:
+ *   assets/flyer/mustang-studio-bento-wide-8k.jpg   7680x4320
+ *   assets/flyer/mustang-studio-bento-wide.jpg      3840x2160  (the deck slide)
+ *
  * Fonts: Industry Black (licensed, never committed) and Hanken Grotesk, read from
  * the per-user font folder and inlined into the throwaway render HTML. Icons are
  * the app's own Lucide set (assets/studio/icons.json).
@@ -70,7 +75,18 @@ const ROLES = [["trophy", "Coach or athlete"], ["users", "Club or activity"], ["
 const STAFF = [["Name", "Title"], ["Ms. Rivera", "Math · Mathematics"], ["Mr. Okafor", "Director · Mustang Band"], ["Dr. Patel", "Principal · Administration"],
   ["Ms. Kim", "Counselor · Student Services"], ["Mr. Diaz", "Coach · Athletics"], ["Ms. Lee", "Librarian · Media Center"]];
 
-const W = 2160, H = 3840;   // CSS px; rendered at 2x = 4320 x 7680
+const WIDE = process.env.BENTO_LAYOUT === "wide";
+const W = WIDE ? 3840 : 2160, H = WIDE ? 2160 : 3840;   // CSS px; rendered at 2x = 8K
+/* where each tile sits: grid-area row / column / row-end / column-end */
+const AREA = WIDE ? {
+  hero: "1/1/3/5", fill: "1/5/3/7", batch: "1/7/3/9",
+  templates: "3/1/4/5", pages: "3/5/4/7", motion: "3/7/4/9",
+  seasons: "4/1/5/3", check: "4/3/5/4", who: "4/4/5/5", runs: "4/5/5/7", export: "4/7/5/8", signoff: "4/8/5/9",
+} : {
+  hero: "1/1/3/5", fill: "3/1/5/3", batch: "3/3/5/5", templates: "5/1/6/5", pages: "6/1/7/3", motion: "6/3/7/5",
+  seasons: "7/1/8/3", check: "7/3/8/4", who: "7/4/8/5", runs: "8/1/9/3", export: "8/3/9/4", signoff: "8/4/9/5",
+};
+const w = (wide, tall) => (WIDE ? wide : tall);   // a value that differs between the two layouts
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:'Industry';src:${INDUSTRY};font-weight:900;}
 @font-face{font-family:'Hanken';src:${HANKEN};font-weight:100 900;}
@@ -78,7 +94,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 html,body{width:${W}px;height:${H}px;overflow:hidden;background:#000;}
 body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;
   --fg:#F5F5F7;--mute:#8B938E;color:var(--fg);}
-.grid{position:absolute;inset:88px;display:grid;gap:26px;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(8,1fr);}
+.grid{position:absolute;inset:88px;display:grid;gap:26px;grid-template-columns:repeat(${w(8, 4)},1fr);grid-template-rows:repeat(${w(4, 8)},1fr);}
 .t{position:relative;border-radius:50px;overflow:hidden;padding:50px;display:flex;flex-direction:column;min-width:0;min-height:0;}
 .dark{background:#161917;}
 .app{background:#0b100d;}
@@ -108,7 +124,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </style></head><body><div class="grid">
 
 <!-- hero: the app, big -->
-<div class="t app" style="grid-area:1/1/3/5;padding:64px;">
+<div class="t app" style="grid-area:${AREA.hero};padding:64px;">
   <div style="position:absolute;inset:0;background:radial-gradient(80% 90% at 0% 0%,rgba(46,168,102,.22) 0%,rgba(46,168,102,0) 60%);"></div>
   <div style="position:relative;z-index:1;width:760px;display:flex;flex-direction:column;flex:1;">
     <img src="${uri(path.join(STUDIO, "app-icon-1024.png"))}" style="width:124px;height:124px;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6));">
@@ -120,43 +136,43 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
       ${["41 templates", "17 sizes", "25 marks", "28 brand checks"].map((t) => `<span class="chip" style="font-size:22px;padding:10px 18px;">${t}</span>`).join("")}
     </div>
   </div>
-  <div style="position:absolute;left:880px;top:118px;width:1400px;border-radius:24px;overflow:hidden;
+  <div style="position:absolute;left:${w(840, 880)}px;top:${w(150, 118)}px;width:${w(1240, 1400)}px;border-radius:24px;overflow:hidden;
        box-shadow:0 0 0 2px rgba(255,255,255,.08),0 60px 120px -40px rgba(0,0,0,.9);">
     <img src="${st("ui-gameday.jpg")}" style="display:block;width:100%;"></div>
 </div>
 
 <!-- fill in the blanks -->
-<div class="t dark" style="grid-area:3/1/5/3;">
+<div class="t dark" style="grid-area:${AREA.fill};">
   <div class="lab">${icon("pen-line", 30)} &nbsp;Fill in the blanks</div>
   <div class="h" style="margin-top:18px;">A form, <span class="m">not a canvas.</span></div>
   <div class="sub" style="margin-top:14px;">Type the details. Long lines shrink to fit, and nothing can slide off brand.</div>
   <div class="art" style="margin-top:38px;">
-    <div style="position:absolute;left:0;bottom:-50px;">${crop("ui-fill.jpg", [250, 40, 1190, 735], 979, "border-radius:18px 18px 0 0;")}</div>
+    <div style="position:absolute;left:0;bottom:-50px;">${crop("ui-fill.jpg", [250, 40, 1190, 735], w(1010, 979), "border-radius:18px 18px 0 0;")}</div>
   </div>
 </div>
 
 <!-- batch from a spreadsheet -->
-<div class="t paper" style="grid-area:3/3/5/5;">
+<div class="t paper" style="grid-area:${AREA.batch};">
   <div class="lab">${icon("list-checks", 30)} &nbsp;Batch from a spreadsheet</div>
   <div class="h" style="margin-top:18px;">The whole staff, <span class="m">in one go.</span></div>
   <div class="sub" style="margin-top:14px;">Paste a list from Sheets or Excel. Every ID comes back on Letter sheets, with cut marks.</div>
   <div class="art" style="margin-top:34px;">
-    <div style="position:absolute;left:0;top:70px;width:396px;background:#fff;border-radius:14px;overflow:hidden;
-         box-shadow:0 0 0 1px rgba(0,0,0,.08),0 24px 50px -20px rgba(0,0,0,.35);font-size:19px;z-index:2;">
+    <div style="position:absolute;left:0;top:${w(118, 70)}px;width:${w(340, 396)}px;background:#fff;border-radius:14px;overflow:hidden;
+         box-shadow:0 0 0 1px rgba(0,0,0,.08),0 24px 50px -20px rgba(0,0,0,.35);font-size:${w(17, 19)}px;z-index:2;">
       ${STAFF.map((r, i) => `<div style="display:grid;grid-template-columns:44px 1fr 1.25fr;border-top:${i ? "1px solid #E3E6E3" : "0"};
         ${i ? "" : "background:#EEF1EE;font-weight:700;color:#3B423D;"}">
         <div style="padding:12px 0;text-align:center;color:#8B938E;border-right:1px solid #E3E6E3;font-size:16px;">${i + 1}</div>
         <div style="padding:12px 12px;border-right:1px solid #E3E6E3;white-space:nowrap;overflow:hidden;">${r[0]}</div>
         <div style="padding:12px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:${i ? "#3B423D" : "inherit"};">${r[1]}</div></div>`).join("")}
     </div>
-    <div style="position:absolute;left:404px;top:240px;width:44px;color:#1C6E40;z-index:3;">${icon("arrow-right", 44, 2.4)}</div>
-    <img src="${uri(path.join(STUDIO, "sheet-staff-ids-300.jpg"))}" style="position:absolute;right:6px;top:10px;height:556px;border-radius:6px;
+    <div style="position:absolute;left:${w(346, 404)}px;top:${w(278, 240)}px;width:44px;color:#1C6E40;z-index:3;">${icon("arrow-right", 44, 2.4)}</div>
+    <img src="${uri(path.join(STUDIO, "sheet-staff-ids-300.jpg"))}" style="position:absolute;right:${w(0, 6)}px;top:${w(66, 10)}px;height:${w(528, 556)}px;border-radius:6px;
       transform:rotate(2deg);box-shadow:0 0 0 1px rgba(0,0,0,.08),0 30px 60px -20px rgba(0,0,0,.45);">
   </div>
 </div>
 
 <!-- forty-one templates -->
-<div class="t dark" style="grid-area:5/1/6/5;flex-direction:row;gap:56px;align-items:stretch;padding-right:0;">
+<div class="t dark" style="grid-area:${AREA.templates};flex-direction:row;gap:56px;align-items:stretch;padding-right:0;">
   <div style="flex:0 0 auto;display:flex;flex-direction:column;">
     <div class="lab">${icon("layout-template", 30)} &nbsp;Templates</div>
     <div class="sp"></div>
@@ -176,7 +192,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- carousels -->
-<div class="t paper" style="grid-area:6/1/7/3;flex-direction:row;gap:30px;">
+<div class="t paper" style="grid-area:${AREA.pages};flex-direction:row;gap:30px;">
   <div style="flex:0 0 330px;display:flex;flex-direction:column;">
     <div class="lab">${icon("layers", 30)} &nbsp;Pages</div>
     <div class="sp"></div>
@@ -185,12 +201,12 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
   </div>
   <div class="art" style="flex:1;width:auto;">
     ${[1, 2, 3, 4].map((n, i) => `<img class="card" src="${uri(path.join(STUDIO, `recap-${n}.png`))}" style="position:absolute;height:280px;top:50%;
-      left:${i * 88}px;transform:translateY(-50%) rotate(${(i - 1.5) * 2.5}deg);z-index:${4 - i};border-radius:12px;">`).join("")}
+      left:${i * w(72, 88)}px;transform:translateY(-50%) rotate(${(i - 1.5) * 2.5}deg);z-index:${4 - i};border-radius:12px;">`).join("")}
   </div>
 </div>
 
 <!-- motion -->
-<div class="t dark" style="grid-area:6/3/7/5;">
+<div class="t dark" style="grid-area:${AREA.motion};">
   <div style="display:flex;justify-content:space-between;align-items:baseline;">
     <div class="lab">${icon("play", 30)} &nbsp;Motion</div>
     <div class="hs" style="font-size:40px;">It moves. <span class="m">MP4 and GIF.</span></div>
@@ -204,7 +220,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- seasons -->
-<div class="t paper" style="grid-area:7/1/8/3;">
+<div class="t paper" style="grid-area:${AREA.seasons};">
   <div style="display:flex;justify-content:space-between;align-items:baseline;">
     <div class="lab">${icon("calendar", 30)} &nbsp;Seasons</div>
     <div class="hs" style="font-size:40px;">Four seasons, <span class="m">planned.</span></div>
@@ -221,18 +237,18 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- brand check -->
-<div class="t field" style="grid-area:7/3/8/4;">
+<div class="t field" style="grid-area:${AREA.check};">
   <div class="vig"></div>
   <div class="lab rel">${icon("badge-check", 30)} &nbsp;Brand check</div>
   <div class="sp"></div>
   <div class="ind rel" style="font-size:150px;line-height:.8;"><span class="g">28</span></div>
   <div class="hs rel" style="font-size:36px;margin-top:16px;">rules, <span class="m">checked as you work.</span></div>
   <div class="rel" style="display:inline-flex;gap:10px;align-items:center;margin-top:20px;padding:10px 16px;border-radius:14px;
-       background:rgba(46,168,102,.18);color:#7FE0A8;font-size:20px;font-weight:700;align-self:flex-start;">${icon("badge-check", 24, 2)}On brand. Nothing to fix.</div>
+       background:rgba(46,168,102,.18);color:#7FE0A8;font-size:${w(18, 20)}px;font-weight:700;align-self:flex-start;white-space:nowrap;">${icon("badge-check", 24, 2)}On brand. Nothing to fix.</div>
 </div>
 
 <!-- who are you -->
-<div class="t dark" style="grid-area:7/4/8/5;">
+<div class="t dark" style="grid-area:${AREA.who};">
   <div class="lab">Start screen</div>
   <div class="hs" style="font-size:40px;margin-top:14px;">“Who are <span class="m">you?”</span></div>
   <div class="sp"></div>
@@ -243,7 +259,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- runs anywhere -->
-<div class="t paper" style="grid-area:8/1/9/3;">
+<div class="t paper" style="grid-area:${AREA.runs};">
   <div style="display:flex;justify-content:space-between;align-items:baseline;">
     <div class="lab">Where it runs</div>
     <div class="hs" style="font-size:40px;">Free. <span class="m">Runs anywhere.</span></div>
@@ -251,15 +267,15 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
   <div class="sp"></div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
     ${[["monitor", "Windows", "app"], ["laptop", "Mac", "app"], ["laptop", "Chromebook", "installs from the site"], ["globe", "Any browser", "one file"]].map(([ic, t, d]) => `
-      <div style="background:#fff;border-radius:26px;padding:26px 22px;box-shadow:0 0 0 1px rgba(0,0,0,.05);">
-        <span style="color:#1C6E40;display:block;">${icon(ic, 52, 1.6)}</span>
-        <div style="font-size:28px;font-weight:700;margin-top:18px;letter-spacing:-.02em;white-space:nowrap;">${t}</div>
-        <div style="font-size:19px;color:#6C736E;margin-top:4px;white-space:nowrap;">${d}</div></div>`).join("")}
+      <div style="background:#fff;border-radius:26px;padding:${w("24px 16px", "26px 22px")};box-shadow:0 0 0 1px rgba(0,0,0,.05);">
+        <span style="color:#1C6E40;display:block;">${icon(ic, w(46, 52), 1.6)}</span>
+        <div style="font-size:${w(24, 28)}px;font-weight:700;margin-top:18px;letter-spacing:-.02em;white-space:nowrap;">${t}</div>
+        <div style="font-size:${w(16, 19)}px;color:#6C736E;margin-top:4px;${w("line-height:1.3;", "white-space:nowrap;")}">${d}</div></div>`).join("")}
   </div>
 </div>
 
 <!-- export -->
-<div class="t dark" style="grid-area:8/3/9/4;">
+<div class="t dark" style="grid-area:${AREA.export};">
   <div class="lab">${icon("download", 30)} &nbsp;Export</div>
   <div class="sp"></div>
   <div style="display:flex;flex-wrap:wrap;gap:10px;">
@@ -269,13 +285,13 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 </div>
 
 <!-- sign-off -->
-<div class="t field c" style="grid-area:8/4/9/5;padding:44px 30px 40px;">
+<div class="t field c" style="grid-area:${AREA.signoff};padding:44px 30px 40px;">
   <div class="vig"></div>
   <div class="lab rel">Try it</div>
   <div class="sp"></div>
   <img class="rel" src="${uri(path.join(STUDIO, "app-icon-1024.png"))}" style="width:120px;height:120px;filter:drop-shadow(0 16px 30px rgba(0,0,0,.5));">
   <div class="sp"></div>
-  <div class="ind rel" style="font-size:31px;white-space:nowrap;">bronxhanratty.me/studio</div>
+  <div class="ind rel" style="font-size:${w(28, 31)}px;white-space:nowrap;">bronxhanratty.me/studio</div>
   <div class="rel" style="font-size:15.5px;color:#A9C9B6;margin-top:12px;line-height:1.45;">Designed and built by Bronx Hanratty<br>Class of 2030 · Concept work · not<br>affiliated with the school district</div>
 </div>
 
@@ -286,7 +302,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 if (process.env.BENTO_HTML) { fs.writeFileSync(process.env.BENTO_HTML, html); process.exit(0); }
 
 fs.mkdirSync(OUT, { recursive: true });
-const tmp = path.join(os.tmpdir(), "mustang-studio-bento.html");
+const tmp = path.join(os.tmpdir(), WIDE ? "mustang-studio-bento-wide.html" : "mustang-studio-bento.html");
 fs.writeFileSync(tmp, html);
 const browser = await chromium.launch({
   executablePath: process.env.CHROME || "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true,
@@ -306,6 +322,8 @@ const problems = await page.evaluate(() => {
 const shot = await page.screenshot({ type: "png" });
 await browser.close();
 fs.unlinkSync(tmp);
-await sharp(shot).jpeg({ quality: 92, mozjpeg: true }).toFile(path.join(OUT, "mustang-studio-bento-8k.jpg"));
+const base = WIDE ? "mustang-studio-bento-wide" : "mustang-studio-bento";
+await sharp(shot).jpeg({ quality: 92, mozjpeg: true }).toFile(path.join(OUT, `${base}-8k.jpg`));
+if (WIDE) await sharp(shot).resize(W, H, { kernel: "lanczos3" }).jpeg({ quality: 92, mozjpeg: true }).toFile(path.join(OUT, `${base}.jpg`));
 console.log(problems.length ? "PROBLEMS:\n  " + problems.join("\n  ") : "no overflow, no broken images, fonts loaded");
-console.log(`wrote ${OUT}/mustang-studio-bento-8k.jpg (4320x7680)`);
+console.log(`wrote ${OUT}/${base}-8k.jpg (${W * 2}x${H * 2})${WIDE ? ` and ${base}.jpg (${W}x${H})` : ""}`);

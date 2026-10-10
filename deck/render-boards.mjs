@@ -8,6 +8,13 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
+/* counts come from the catalogue, so the board cannot fall behind the library */
+const CAT = JSON.parse(fs.readFileSync(path.join(here, "..", "src", "data", "lrhs-marks.json"), "utf8"));
+const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
+  "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+const TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+const words = (k) => (k < 20 ? ONES[k] : TENS[Math.floor(k / 10)] + (k % 10 ? "-" + ONES[k % 10] : ""));
+const capw = (k) => { const w = words(k); return w[0].toUpperCase() + w.slice(1); };
 const W = 2400, H = 1350;
 const OUT = path.join(here, "img");
 
@@ -113,7 +120,7 @@ const marks = board("02", "The marks",
     ${markTile("LRHS-Mustang-2","Mustang","Icon",false)}
   </div>
   <div style="flex:0 0 auto;display:flex;align-items:center;gap:18px;">
-    ${["LRHS-Band","LRHS-Grad-Mark","LRHS-Mustangs-Ahead","LRHS-Retro-Logo-2"].map((f) => `
+    ${["LRHS-Band","LRHS-Grad-Mark","LRHS-Academic-Powerhouse","LRHS-Mustangs-Ahead","LRHS-Retro-Logo-2"].map((f) => `
     <div style="width:124px;height:104px;border-radius:14px;background:#F0F2F0;flex:0 0 auto;
          display:flex;align-items:center;justify-content:center;padding:12px;">
       <img src="img/marks/${f}.png" style="max-width:100%;max-height:100%;object-fit:contain;">
@@ -121,11 +128,12 @@ const marks = board("02", "The marks",
     <div class="bd" style="font-size:24px;margin-left:14px;">
       Plus the <strong style="color:${PAPER};font-weight:600;">band</strong>, the
       <strong style="color:${PAPER};font-weight:600;">graduation crest</strong>,
+      <strong style="color:${PAPER};font-weight:600;">Academic Powerhouse</strong>,
       <strong style="color:${PAPER};font-weight:600;">Mustangs Ahead</strong> and the
       <strong style="color:${PAPER};font-weight:600;">retro</strong> marks. Legacy &ldquo;Old LR&rdquo; marks are retired.
     </div>
   </div>`,
-  `<span>Twenty-five marks &middot; seven families</span><span>SVG only</span>`);
+  `<span>${capw(CAT.marks.length)} marks &middot; ${words(CAT.families.length)} families</span><span>SVG only</span>`);
 
 /* 03 colour */
 const SW = [
@@ -292,7 +300,7 @@ const BOARDS = [
 ];
 
 const browser = await chromium.launch({
-  executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  executablePath: process.env.CHROME || "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
 });
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
