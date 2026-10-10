@@ -22,7 +22,7 @@ const mk = (d) => fs.mkdirSync(d, { recursive: true });
 /* cleared first: the library was renamed, and stale PNGs of removed marks would
    otherwise keep rendering on any slide that still referred to them */
 fs.rmSync(path.join(IMG, "marks"), { recursive: true, force: true });
-mk(IMG); mk(path.join(IMG, "marks")); mk(path.join(IMG, "audit")); mk(path.join(IMG, "apparel")); mk(path.join(IMG, "signage")); mk(path.join(IMG, "powerhouse"));
+mk(IMG); mk(path.join(IMG, "marks")); mk(path.join(IMG, "audit")); mk(path.join(IMG, "apparel")); mk(path.join(IMG, "signage")); mk(path.join(IMG, "powerhouse")); mk(path.join(IMG, "ids"));
 
 /* ---- 1. marks: SVG -> PNG at deck resolution ---- */
 const marksDir = pub("lrhs-marks");
@@ -66,6 +66,8 @@ const copies = [
   [pub("lrhs-hero.png"), "lrhs-hero.png"],
   [pub("bronx-portrait.png"), "portrait.png"],
   [path.join(root, "assets", "deck", "lrhs-go-mustangs.jpg"), "lrhs-go-mustangs.jpg"],
+  [path.join(root, "assets", "flyer", "lrhs-bento-v2.jpg"), "lrhs-bento.jpg"],
+  [path.join(root, "assets", "motion", "lrhs-bento-motion-1080.mp4"), "lrhs-bento-motion.mp4"],   // the bento building in (render-bento-motion.mjs)
 ];
 for (const [from, to] of copies) {
   if (!fs.existsSync(from)) { console.log("  ! missing", from); continue; }
@@ -73,8 +75,23 @@ for (const [from, to] of copies) {
 }
 console.log(`photos    : ${copies.length}`);
 
+/* ---- 3b. the LR before and after its corners were rounded ---- */
+mk(path.join(IMG, "corners"));
+fs.copyFileSync(pub("lrhs-corners", "LRHS-Emblem-square.svg"), path.join(IMG, "corners", "emblem-square.svg"));
+fs.copyFileSync(pub("lrhs-marks", "LRHS Emblem.svg"), path.join(IMG, "corners", "emblem-rounded.svg"));
+console.log("corners   : emblem-square, emblem-rounded");
+
+/* ---- 3c. Mustang Studio: screens and template exports captured from the app ---- */
+mk(path.join(IMG, "studio"));
+{
+  const from = path.join(root, "assets", "studio");
+  let c = 0;
+  for (const f of fs.readdirSync(from)) if (/\.(jpg|png)$/.test(f)) { fs.copyFileSync(path.join(from, f), path.join(IMG, "studio", f)); c++; }
+  console.log(`studio    : ${c}`);
+}
+
 /* ---- 4. campus audit + apparel, straight from the site ---- */
-for (const [src, dst] of [["lrhs-audit", "audit"], ["lrhs-apparel", "apparel"], ["lrhs-signage", "signage"], ["lrhs-powerhouse", "powerhouse"]]) {
+for (const [src, dst] of [["lrhs-audit", "audit"], ["lrhs-apparel", "apparel"], ["lrhs-signage", "signage"], ["lrhs-powerhouse", "powerhouse"], ["lrhs-ids", "ids"]]) {
   const from = pub(src);
   let c = 0;
   for (const f of fs.readdirSync(from)) { fs.copyFileSync(path.join(from, f), path.join(IMG, dst, f)); c++; }

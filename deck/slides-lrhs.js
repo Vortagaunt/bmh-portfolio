@@ -331,6 +331,51 @@ const beforeAfter = (n) => page("greend", `
       </div>`).join("")}
   </div>`);
 
+/* Softer corners: the square-cornered emblem beside the rounded one, at the
+   same size on the same ground, plus a close-up of the L's top corners at the
+   same zoom so the change can actually be seen. The square original lives in
+   public/images/lrhs-corners; prepare-assets copies both into img/corners. */
+const cornerCard = (f) => `<div style="position:relative;background:#FEFEFE;border-radius:36px;height:100%;
+  display:flex;align-items:center;justify-content:center;padding:80px;
+  box-shadow:0 40px 100px -40px rgba(12,12,12,.35);">
+  <img src="img/corners/${f}" style="max-width:100%;max-height:100%;object-fit:contain;"></div>`;
+/* the L's top edge, units 0-600 of the 1944-wide artboard, at 2.1x */
+const cornerZoom = (f) => `<div style="position:relative;overflow:hidden;background:#FEFEFE;border-radius:36px;
+  height:100%;box-shadow:0 40px 100px -40px rgba(12,12,12,.35);">
+  <img src="img/corners/${f}" style="position:absolute;left:63px;top:63px;width:4083px;max-width:none;"></div>`;
+const cornerCap = (tag, name, use, red) => `
+  <div style="margin-top:40px;">
+    <div style="font-size:26px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:${red ? RED : GREY};">${tag}</div>
+    <div style="font-size:40px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;margin-top:12px;">${name}</div>
+    <div style="font-size:28px;letter-spacing:.14em;text-transform:uppercase;color:${GREY};margin-top:10px;">${use}</div>
+  </div>`;
+const corners = (n) => page("lrpaper", `
+  ${kicker(n, "Corners", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">
+    Softer corners, same LR
+  </div>
+  <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3100px;text-wrap:balance;">
+    Every corner on the LR is now very slightly rounded &mdash; about the softness of an
+    app icon &mdash; and the same change runs through all seven files that carry it.
+    Where one letter tucks under the other, the corner stays sharp.
+  </div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr 1.26fr;gap:90px;margin-top:70px;">
+    <div style="display:flex;flex-direction:column;min-height:0;">
+      <div style="flex:1;min-height:0;">${cornerCard("emblem-square.svg")}</div>
+      ${cornerCap("Before", "Square corners", "The emblem as first drawn", false)}
+    </div>
+    <div style="display:flex;flex-direction:column;min-height:0;">
+      <div style="flex:1;min-height:0;">${cornerCard("emblem-rounded.svg")}</div>
+      ${cornerCap("After", "Subtly rounded", "All seven LR files", true)}
+    </div>
+    <div style="display:flex;flex-direction:column;min-height:0;">
+      <div style="flex:1;min-height:0;display:grid;grid-template-rows:1fr 1fr;gap:40px;">
+        ${cornerZoom("emblem-square.svg")}${cornerZoom("emblem-rounded.svg")}
+      </div>
+      ${cornerCap("Close-up", "The top of the L", "Before above, after below", false)}
+    </div>
+  </div>`);
+
 /* the result: full-bleed wallpaper with a soft scrim */
 const result = (n) => page("greend", `
   <img src="wallpaper/LRHS-wallpaper-slide.png"
@@ -414,6 +459,46 @@ const posters = (n) => page("lrpaper", `
       </figure>`).join("")}
   </div>`);
 
+/* ID cards — student (vertical) and staff (horizontal), both double sided.
+   Card art: public/images/lrhs-ids, rendered from the ID concept build. The
+   student card carries a sample ID number and barcode, never a real one: the
+   repo is public. */
+const idCaption = (tag, name, use) => `
+  <figcaption style="margin-top:48px;">
+    <div style="font-size:26px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:${GREY};">${tag}</div>
+    <div style="font-size:40px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;margin-top:12px;">${name}</div>
+    <div style="font-size:28px;letter-spacing:.14em;text-transform:uppercase;color:${GREY};margin-top:10px;">${use}</div>
+  </figcaption>`;
+const idCard = (f, w) => `<img src="img/ids/${f}.png" style="width:${w}px;height:auto;display:block;
+  filter:drop-shadow(0 40px 60px rgba(12,12,12,.24)) drop-shadow(0 8px 16px rgba(12,12,12,.10));">`;
+const studentIds = (n) => page("lrpaper", `
+  ${kicker(n, "Student ID", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">
+    A card every student carries
+  </div>
+  <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3100px;text-wrap:balance;">
+    Credit-card size and vertical, for the lanyard. The photo and name lead, the
+    barcode sits clear so it scans first time, and the 24/7 support lines stay on the back.
+  </div>
+  <div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-end;gap:240px;">
+    <figure style="margin:0;">${idCard("student-front", 680)}${idCaption("Front", "Photo, name, grade and barcode", "Shown at the door and the library")}</figure>
+    <figure style="margin:0;">${idCard("student-back", 680)}${idCaption("Back", "Support lines and return address", "The same helplines as today's card")}</figure>
+  </div>`);
+const staffIds = (n) => page("lrpaper", `
+  ${kicker(n, "Staff ID", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">
+    Staff, at a glance
+  </div>
+  <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3100px;text-wrap:balance;">
+    Horizontal and full Mustang Green, so staff read differently from students
+    across a corridor. The back carries the return address, the same support
+    lines and an employee ID.
+  </div>
+  <div style="flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-end;gap:160px;">
+    <figure style="margin:0;">${idCard("staff-front", 1560)}${idCaption("Front", "Photo, name, title and department", "Worn on campus all day")}</figure>
+    <figure style="margin:0;">${idCard("staff-back", 1560)}${idCaption("Back", "Return address, support lines, employee ID", "Printed for each member of staff")}</figure>
+  </div>`);
+
 const APPAREL = [
   ["cap", "Cap", "Embroidered"],
   ["hoodie", "Hoodie", "One-colour print"],
@@ -489,6 +574,244 @@ const ask = (n) => page("lrpaper", `
     <div class="cap">Concept work · not affiliated with the school district</div>
   </div>`);
 
+/* ---------------- Mustang Studio ----------------
+   The brand-locked design app Bronx built, shown with its own screens and its
+   own template exports (assets/studio — captured from the app by
+   scripts/capture-mustang-studio.mjs). prepare-assets copies them to img/studio.
+   Facts on these slides are read from the app (1.6): 41 templates in 6 groups
+   (the sixth is Seasons), 17 sizes, 25 marks, 6 type styles, 134 icons,
+   28 brand-check rules, 4 seasonal themes. */
+const STUDIO = "img/studio";
+const STUDIO_TPL = require("../assets/studio/templates.json");
+const STUDIO_FMT = {
+  "ig-post": [1080, 1080, "Instagram", "1080 × 1080"], "ig-portrait": [1080, 1350, "Portrait", "1080 × 1350"],
+  story: [1080, 1920, "Story", "1080 × 1920"], "x-post": [1600, 900, "X / Facebook", "1600 × 900"],
+  "fb-event": [1920, 1005, "Facebook event", "1920 × 1005"], "yt-thumb": [1280, 720, "YouTube", "1280 × 720"],
+  "x-header": [1500, 500, "X header", "1500 × 500"], slide: [1920, 1080, "Slide", "16 : 9"],
+  letter: [8.5, 11, "Flyer", "8.5 × 11 in"], half: [5.5, 8.5, "Half-letter", "5.5 × 8.5 in"],
+  tabloid: [11, 17, "Poster", "11 × 17 in"], poster18: [18, 24, "Poster", "18 × 24 in"],
+  poster24: [24, 36, "Poster", "24 × 36 in"], banner: [72, 24, "Banner", "6 × 2 ft"],
+  postcard: [6, 4, "Postcard", "6 × 4 in"], "id-v": [2.125, 3.375, "ID card", "Vertical"],
+  "id-h": [3.375, 2.125, "ID card", "Horizontal"],
+};
+const studioIcon = (paths, size, color) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"
+  stroke="${color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+const ICO = {
+  monitor: '<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>',
+  laptop: '<path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/>',
+  globe: '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+};
+/* part of a 1440 x 900 app screenshot, [x, y, w, h] in screenshot points, shown `width` px wide */
+const studioCrop = (src, [x, y, w, h], width, extra = "") => {
+  const k = width / w;
+  return `<div style="position:relative;width:${width}px;height:${Math.round(h * k)}px;overflow:hidden;border-radius:26px;
+    box-shadow:0 40px 100px -40px rgba(12,12,12,.55);${extra}">
+    <img src="${STUDIO}/${src}" style="position:absolute;left:${-x * k}px;top:${-y * k}px;width:${1440 * k}px;max-width:none;"></div>`;
+};
+const studioCap = (title, use, onDark) => `
+  <div style="margin-top:38px;">
+    <div style="font-size:44px;font-weight:600;letter-spacing:-.01em;color:${onDark ? "#FCFCFC" : "#0C0C0C"};">${title}</div>
+    <div style="font-size:30px;line-height:1.45;color:${onDark ? ONGREEN : GREY};margin-top:12px;">${use}</div>
+  </div>`;
+
+/* 1 — the reveal: the app, big */
+const studioIntro = (n) => page("greend", `
+  <div style="position:relative;z-index:1;">${kicker(n, "Mustang Studio", true)}</div>
+  <div style="position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1380px;">
+    <img src="${STUDIO}/app-icon.png" style="width:200px;height:200px;margin-bottom:60px;filter:drop-shadow(0 30px 50px rgba(0,0,0,.45));">
+    <div class="display" style="font-size:240px;line-height:.9;margin-bottom:64px;">Mustang<br>Studio</div>
+    <div style="font-size:54px;line-height:1.45;color:${ONGREEN};text-wrap:balance;">
+      A design app that only speaks Mustang. Anyone at school can make a flyer, a post or a poster
+      &mdash; and it comes out on brand every time.</div>
+    <div style="display:flex;flex-wrap:wrap;gap:22px;margin-top:72px;">
+      ${["41 templates", "17 sizes", "25 marks", "28 brand checks"].map((t) => `<span style="padding:20px 38px;border-radius:999px;
+        background:rgba(255,255,255,.1);font-size:36px;font-weight:600;color:#FCFCFC;">${t}</span>`).join("")}
+    </div>
+  </div>
+  <div style="position:absolute;right:-300px;top:310px;width:2420px;border-radius:30px;overflow:hidden;
+       box-shadow:0 0 0 2px rgba(255,255,255,.08),0 80px 160px -50px rgba(0,0,0,.8);">
+    <img src="${STUDIO}/ui-gameday.jpg" style="display:block;width:100%;"></div>`);
+
+/* 2 — how it works, in three real screens */
+const STUDIO_STEPS = [
+  ["ui-templates.jpg", [0, 40, 1080, 810], "Pick a template", "Forty-one of them, sorted by department and season."],
+  ["ui-fill.jpg", [280, 30, 1160, 870], "Fill in the blanks", "Type the details into a form. The type, colours and spacing stay locked to the brand."],
+  ["ui-export.jpg", [300, 120, 840, 630], "Export", "PNG or JPG for screens, a print-ready PDF, or a video and a GIF when it moves."],
+];
+const studioSteps = (n) => page("lrpaper", `
+  ${kicker(n, "How it works", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">Three steps, no designer</div>
+  <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3100px;text-wrap:balance;">
+    A coach, a club sponsor or the front office picks a template, changes the words and exports.
+    The brand is already built in, so there is nothing to get wrong.</div>
+  <div style="flex:1;min-height:0;display:flex;align-items:center;">
+  <div style="width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:110px;align-items:start;">
+    ${STUDIO_STEPS.map(([src, box, title, use], i) => `
+      <div>
+        ${studioCrop(src, box, 1006)}
+        <div style="display:flex;gap:30px;align-items:flex-start;">
+          <span style="flex:0 0 auto;margin-top:40px;display:inline-flex;align-items:center;justify-content:center;width:76px;height:76px;
+            border-radius:50%;background:${GREEN};color:#fff;font-size:34px;font-weight:700;">${i + 1}</span>
+          ${studioCap(title, use, false)}
+        </div>
+      </div>`).join("")}
+  </div></div>`);
+
+/* 3 — every template, by department, as the app exports them */
+const STUDIO_GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "ID cards", "Seasons"];
+const studioTemplates = (n) => page("lrpaper", `
+  ${kicker(n, "Templates", false)}
+  <div class="display" style="font-size:130px;color:#0C0C0C;margin:48px 0 20px;">Forty-one templates, ready on day one</div>
+  <div style="font-size:42px;line-height:1.5;color:${GREY};">Built from the brand system, one set for every part of the school &mdash; and one for every season. Everything stays editable.</div>
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:26px;">
+    ${STUDIO_GROUPS.map((g) => {
+      const items = STUDIO_TPL.filter((t) => t.group === g);
+      return `<div style="display:flex;align-items:center;gap:60px;">
+        <div style="flex:0 0 420px;">
+          <div style="font-size:44px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;">${g}</div>
+          <div style="font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:${GREY};margin-top:10px;">${items.length} templates</div>
+        </div>
+        <div style="display:flex;gap:22px;align-items:center;height:214px;">
+          ${items.map((t) => `<img src="${STUDIO}/tpl-${t.id}.jpg" alt="${t.name}" style="height:214px;width:auto;display:block;border-radius:8px;
+            box-shadow:0 0 0 1px rgba(12,12,12,.08),0 18px 40px -20px rgba(12,12,12,.5);">`).join("")}
+        </div>
+      </div>`;
+    }).join("")}
+  </div>`);
+
+/* 4 — the brand check, before and after one click each */
+const STUDIO_CHECKS = ["Text that’s hard to read", "A mark on the wrong ground", "Tilted or faded marks", "Off-brand colours",
+  "Too much Spirit Red", "Text too small to print", "Too close to the trim", "QR codes and barcodes"];
+const studioCheck = (n) => page("greend", `
+  ${kicker(n, "Brand check", true)}
+  <div class="display" style="font-size:150px;margin:56px 0 70px;">It checks the work for you</div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr .8fr;gap:90px;">
+    ${[["ui-check-before.jpg", "Before", "Two mistakes: the emblem is tilted, and the headline is green on green. Both are flagged, each with a fix."],
+       ["ui-check-after.jpg", "After", "One click each, and it reads “On brand. Nothing to fix.”"]].map(([src, tag, note], i) => `
+      <div style="display:flex;flex-direction:column;min-height:0;">
+        ${studioCrop(src, [429, 52, 1011, 820], 1136, i ? "box-shadow:0 40px 120px rgba(0,0,0,.45);" : "")}
+        <div style="font-size:34px;letter-spacing:.24em;text-transform:uppercase;color:${i ? RED : LR_MUTED};margin-top:44px;font-weight:600;">${tag}</div>
+        <div style="font-size:38px;line-height:1.5;color:${ONGREEN};margin-top:18px;">${note}</div>
+      </div>`).join("")}
+    <div style="display:flex;flex-direction:column;justify-content:flex-start;">
+      <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:${LR_MUTED};font-weight:600;">28 rules, including</div>
+      <div style="display:flex;flex-direction:column;gap:30px;margin-top:44px;">
+        ${STUDIO_CHECKS.map((c) => `<div style="display:flex;gap:24px;align-items:center;font-size:40px;color:#FCFCFC;">
+          ${studioIcon(ICO.check, 44, "#2EA866")}<span>${c}</span></div>`).join("")}
+      </div>
+    </div>
+  </div>`);
+
+/* 5 — every size the app makes, drawn to shape */
+const STUDIO_ROWS = [
+  [["Social", ["ig-post", "ig-portrait", "story", "x-post", "fb-event", "yt-thumb", "x-header"]], ["Screen", ["slide"]]],
+  [["Print", ["letter", "half", "tabloid", "poster18", "poster24", "banner", "postcard", "id-v", "id-h"]]],
+];
+const studioShape = (id) => {
+  const [w, h, name, dims] = STUDIO_FMT[id], H = 230, W = Math.round(H * w / h), card = id.startsWith("id-");
+  return `<div style="display:flex;flex-direction:column;align-items:center;min-width:190px;">
+    <div style="width:${W}px;height:${H}px;background:${GREEN};border-radius:${card ? 22 : 10}px;display:flex;align-items:center;justify-content:center;
+         box-shadow:0 22px 50px -24px rgba(12,12,12,.55);">
+      <img src="img/emblem-white.png" style="width:${Math.round(Math.min(W, H) * .5)}px;opacity:.95;"></div>
+    <div style="font-size:28px;font-weight:600;color:#0C0C0C;margin-top:26px;white-space:nowrap;">${name}</div>
+    <div style="font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:${GREY};margin-top:8px;white-space:nowrap;">${dims}</div>
+  </div>`;
+};
+const studioSizes = (n) => page("lrpaper", `
+  ${kicker(n, "Every size", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">Seventeen sizes, one system</div>
+  <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3200px;text-wrap:balance;">
+    Posts and stories, a screen slide, flyers, posters up to 24 × 36, a six-foot fence banner &mdash; and
+    the ID cards. Print sizes export as print-ready PDFs at 300 dpi.</div>
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:90px;">
+    ${STUDIO_ROWS.map((row) => `<div style="display:flex;gap:120px;align-items:flex-end;">
+      ${row.map(([label, ids]) => `<div>
+        <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:${GREY};font-weight:600;margin-bottom:34px;">${label}</div>
+        <div style="display:flex;gap:40px;align-items:flex-end;">${ids.map(studioShape).join("")}</div>
+      </div>`).join("")}
+    </div>`).join("")}
+  </div>`);
+
+/* 6 — what's already inside, straight from the app's drawers */
+const STUDIO_INSIDE = [
+  ["ui-marks.jpg", [0, 40, 368, 520], "Every mark", "All twenty-five, sorted by family, each labelled with where it belongs."],
+  ["ui-text.jpg", [0, 40, 368, 520], "Six type styles", "Industry Black, Hanken Grotesk, Space Mono and Yellowtail, set up once."],
+  ["ui-icons.jpg", [0, 40, 368, 520], "134 icons", "One line weight, ready to drop in."],
+  ["ui-gameday.jpg", [1140, 40, 300, 424], "Brand colours only", "The palette is built in. Anything off-brand gets flagged."],
+];
+const studioInside = (n) => page("lrpaper", `
+  ${kicker(n, "Built in", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 0;">Everything is already inside</div>
+  <div style="flex:1;min-height:0;display:flex;align-items:center;">
+  <div style="width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:90px;align-items:start;">
+    ${STUDIO_INSIDE.map(([src, box, title, use]) => `<div>${studioCrop(src, box, 792)}${studioCap(title, use, false)}</div>`).join("")}
+  </div></div>`);
+
+/* 7 — new in 1.6: made for the people who'll use it, not for designers */
+const STUDIO_NEW = [
+  ["Motion", "Everything can rise, pop or slide in. Export an MP4 for Reels or a GIF that loops."],
+  ["Seasons", "Homecoming gold, Pink Out, Halloween and winter colours, planned and checked."],
+  ["Your own templates", "Save any design as a template. Next week, just fill it in."],
+  ["“Who are you?”", "Coach, club, band, newsletter or front office: your templates come first."],
+];
+const studioNew = (n) => page("lrpaper", `
+  ${kicker(n, "New in Mustang Studio 1.6", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 0;">Made for people who aren’t designers</div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:1.18fr .72fr 1.18fr;gap:90px;align-items:center;">
+    <div>${studioCrop("ui-fill.jpg", [190, 30, 1250, 850], 1100)}${studioCap("Fill in the blanks", "A form instead of a canvas. Type the details; long lines shrink to fit and nothing slides off brand.", false)}</div>
+    <div>
+      <div style="width:100%;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(12,12,12,.08),0 40px 100px -40px rgba(12,12,12,.55);">
+        <img src="${STUDIO}/sheet-staff-ids.jpg" style="display:block;width:100%;"></div>
+      ${studioCap("A batch from a spreadsheet", "Paste a staff list: every ID comes out ganged on Letter sheets with cut marks.", false)}
+    </div>
+    <div>${studioCrop("ui-carousel.jpg", [110, 70, 1150, 790], 1100)}${studioCap("Carousels and multi-page files", "Pages along the bottom. An Instagram carousel exports as a ZIP; a newsletter as one PDF.", false)}</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:70px;padding-top:20px;border-top:2px solid rgba(12,12,12,.08);">
+    ${STUDIO_NEW.map(([t, d]) => `<div style="padding-top:44px;">
+      <div style="display:flex;gap:18px;align-items:center;font-size:40px;font-weight:600;color:#0C0C0C;">${studioIcon(ICO.check, 44, GREEN)}${t}</div>
+      <div style="font-size:30px;line-height:1.45;color:${GREY};margin-top:14px;">${d}</div></div>`).join("")}
+  </div>`);
+
+/* 8 — where it runs, and what it hands back */
+const studioAnywhere = (n) => page("greend", `
+  ${kicker(n, "Where it runs", true)}
+  <div class="display" style="font-size:150px;margin:56px 0 30px;">Free, and it runs anywhere</div>
+  <div style="font-size:50px;line-height:1.55;color:${ONGREEN};max-width:3000px;">
+    No licence, no account, no subscription. Install it, or open it at bronxhanratty.me/studio.</div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:70px;align-items:center;">
+    ${[["monitor", "Windows app", "Installs in a minute, like any other program."],
+       ["laptop", "Mac app", "For Apple silicon and Intel Macs."],
+       ["globe", "Chromebooks", "Install it from bronxhanratty.me/studio."]].map(([ic, t, d]) => `
+      <div style="background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 2px rgba(255,255,255,.07);border-radius:52px;padding:110px 96px 104px;">
+        ${studioIcon(ICO[ic], 168, "#FCFCFC")}
+        <div style="font-size:84px;font-weight:600;letter-spacing:-.025em;color:#FCFCFC;margin-top:70px;">${t}</div>
+        <div style="font-size:44px;line-height:1.45;color:${ONGREEN};margin-top:22px;">${d}</div>
+      </div>`).join("")}
+  </div>
+  <div style="display:flex;gap:80px;flex-wrap:wrap;">
+    ${["PNG, JPG, PDF, MP4 and GIF", "Bleed and crop marks for the print shop", "Saves projects and templates", "Works offline"].map((t) => `
+      <div style="display:flex;gap:22px;align-items:center;font-size:42px;color:#FCFCFC;">${studioIcon(ICO.check, 50, "#2EA866")}${t}</div>`).join("")}
+  </div>`);
+
+/* The whole system on one page — the keynote-style bento rendered by
+   scripts/render-lrhs-bento.mjs (assets/flyer/lrhs-bento-v2.jpg), full bleed.
+   It is already a finished 3840x2160 composition with its own type, so it gets
+   no kicker or badge, and the slides around it keep their numbers.
+   prepare-assets copies it in as img/lrhs-bento.jpg. */
+const bento = () => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head>
+<body><div class="slide" style="padding:0;background:#000;">
+  <img src="img/lrhs-bento.jpg" style="width:3840px;height:2160px;object-fit:cover;">
+</div></body></html>`;
+
+/* Apple-style "One more thing…" — black, centred, nothing else. It sets up the
+   bento, which opens on the same black, so the reveal is a straight cut. */
+const oneMore = () => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head>
+<body><div class="slide" style="padding:0;background:#000;align-items:center;justify-content:center;">
+  <div style="font-weight:600;font-size:210px;letter-spacing:-.04em;color:#F5F5F7;
+       font-variation-settings:'opsz' 32;">One more thing&hellip;</div>
+</div></body></html>`;
+
 /* the QR. Code generated and decode-verified by build-qr.mjs */
 const qr = (n) => page("greend", `
   ${kicker(n, "See it live", true)}
@@ -534,19 +857,31 @@ S.splice(0);   // drop the portfolio slides slides.js pushed
 
 const ORDER = [
   title,
-  identity, library, departments, fullSet, crest, powerhouse, beforeAfter, result,
+  identity, library, departments, fullSet, crest, powerhouse, beforeAfter, corners, result,
   colour, type, icons, voice, inUse,
-  signage, posters,
+  signage, posters, studentIds, staffIds,
   apparel, gameDay,
+  studioIntro, studioSteps, studioTemplates, studioCheck, studioSizes, studioInside, studioNew, studioAnywhere,
+  oneMore, bento,
   qr,
 ];
 
 let n = 0;
 for (const make of ORDER) {
-  const numbered = make !== title && make !== outro;
+  const numbered = make !== title && make !== outro && make !== oneMore && make !== bento;
   S.push(make(numbered ? ++n : undefined));
 }
 
-S.extras = { "lrhs-crest": crest(), "lrhs-powerhouse": powerhouse(), "lrhs-signage": signage(), "lrhs-posters": posters() };
+/* Slides that move. The bento builds itself in after "One more thing…": the
+   video is scripts/render-bento-motion.mjs's 1080p cut, which prepare-assets
+   copies in. render-slides.mjs writes this map beside the PNGs and assemble.js
+   lays the video over that slide's still, playing by itself. The still stays
+   underneath, so the PDF and the site's slide copies are unchanged. */
+S.motion = { [ORDER.indexOf(bento) + 1]: "img/lrhs-bento-motion.mp4" };
+
+S.extras = { "lrhs-crest": crest(), "lrhs-powerhouse": powerhouse(), "lrhs-signage": signage(), "lrhs-posters": posters(),
+  "lrhs-ids-student": studentIds(), "lrhs-ids-staff": staffIds(),
+  "lrhs-corners": corners(),
+  "lrhs-studio": studioIntro(), "lrhs-studio-templates": studioTemplates(), "lrhs-studio-new": studioNew() };
 
 module.exports = S;

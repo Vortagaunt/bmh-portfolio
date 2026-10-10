@@ -18,7 +18,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const OUT = path.join(here, "Bronx-Hanratty-LRHS-Principal-and-Marks.pdf");
+const OUT = path.join(here, "Bronx-Hanratty-LRHS-Presentation-and-Marks.pdf");
 const PW = 1056, PH = 594;
 
 const RED = "#A82424", GREEN = "#003C24", GREEN_DEEP = "#05281A";
