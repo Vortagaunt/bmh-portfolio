@@ -71,7 +71,8 @@ After changing anything in `assemble.js`, check the file with the pptx skill's
 `Bronx-Hanratty-LRHS-Presentation-and-Marks.pdf` is the presenter edition: the
 slides, the mark library one to a page, then the presenter script.
 `Bronx-Hanratty-LRHS-Leave-Behind.pdf` is the same without the script — the
-copy to hand over. Both have bookmarks (sections, slides, families, marks),
+copy to hand over. Its slides are 2560px JPGs (still ~230dpi on the page), so it
+stays under the 25MB most mail services accept; the presenter edition keeps 4K. Both have bookmarks (sections, slides, families, marks),
 document properties, and links: anything marked `data-link` on a slide (the QR
 code, bronxhanratty.me, bronxhanratty.me/studio) is clickable.
 
