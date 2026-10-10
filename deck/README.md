@@ -32,10 +32,16 @@ node prepare-assets.mjs              # img/ from public/images
 node render-boards.mjs               # the seven brand-system boards
 node build-wallpaper.mjs             # wallpapers, incl. the deck variant
 node build-qr.mjs                    # site QR, decode-verified before it is kept
-node render-slides.mjs               # 19 slides at 3840x2160, plus extras/ for the site
-node assemble.js                     # -> Bronx-Hanratty-LRHS-Principal.pptx
-node build-pdf.mjs                   # -> ...-Principal-and-Marks.pdf (reads slides-jpg)
+node render-slides.mjs               # every slide at 3840x2160, plus extras/ for the site
+node assemble.js                     # -> Bronx-Hanratty-LRHS-Presentation.pptx
+node build-pdf.mjs                   # -> ...-Presentation-and-Marks.pdf (reads slides-jpg)
 ```
+
+The bento slide (after "One more thing…") builds itself in: `assemble.js` lays
+`img/lrhs-bento-motion.mp4` over its still and sets it to start on its own, then
+hold. That video comes from `node ../scripts/render-bento-motion.mjs lrhs` (run
+it before `prepare-assets.mjs` whenever the bento changes). The PDF keeps the
+still.
 
 `build-pdf.mjs` must run **after** `assemble.js` — it reads the JPGs that step
 writes. The slide order is the `ORDER` list at the bottom of `slides-lrhs.js`;

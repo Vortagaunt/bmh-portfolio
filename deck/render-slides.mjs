@@ -41,6 +41,8 @@ for (let i = 0; i < SLIDES.length; i++) {
   fs.unlinkSync(tmp);
   process.stdout.write(` ${i + 1}`);
 }
+/* which slides carry a video over their still (see S.motion in slides-lrhs.js) */
+fs.writeFileSync(path.join(OUT, "motion.json"), JSON.stringify(SLIDES.motion || {}, null, 2));
 /* pages that live outside the deck — the site's copy of a slide, without its
    number — rendered by the same engine so they cannot drift from the slide */
 const EXTRAS = path.join(here, "extras");
