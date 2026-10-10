@@ -1,0 +1,415 @@
+{
+  "_about": "Mustang Studio 1.6's 41 templates, as shown on the LRHS case study. Thumbnails in public/images/lrhs-studio/templates, made from assets/studio/tpl-*.jpg (720px on the long side). Order and groups come from assets/studio/templates.json.",
+  "templates": [
+    {
+      "id": "gameday",
+      "name": "Game day",
+      "group": "Athletics",
+      "fmt": "ig-post",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "gomustangs",
+      "name": "Go Mustangs!",
+      "group": "Athletics",
+      "fmt": "slide",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "ridetogether",
+      "name": "Ride together",
+      "group": "Events & clubs",
+      "fmt": "story",
+      "season": null,
+      "pages": 1,
+      "w": 405,
+      "h": 720
+    },
+    {
+      "id": "news",
+      "name": "Mustang News",
+      "group": "News & podcast",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 1,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "podcast",
+      "name": "Podcast episode",
+      "group": "News & podcast",
+      "fmt": "ig-post",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "header",
+      "name": "Profile header",
+      "group": "School & awards",
+      "fmt": "x-header",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 240
+    },
+    {
+      "id": "name",
+      "name": "The name",
+      "group": "School & awards",
+      "fmt": "poster18",
+      "season": null,
+      "pages": 1,
+      "w": 540,
+      "h": 720
+    },
+    {
+      "id": "grad",
+      "name": "Graduation",
+      "group": "School & awards",
+      "fmt": "letter",
+      "season": null,
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "band",
+      "name": "Band concert",
+      "group": "Events & clubs",
+      "fmt": "letter",
+      "season": null,
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "spirit",
+      "name": "Spirit week",
+      "group": "Athletics",
+      "fmt": "tabloid",
+      "season": null,
+      "pages": 1,
+      "w": 466,
+      "h": 720
+    },
+    {
+      "id": "final",
+      "name": "Final score",
+      "group": "Athletics",
+      "fmt": "ig-post",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "schedule",
+      "name": "Home schedule",
+      "group": "Athletics",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 1,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "gamestory",
+      "name": "Game day story",
+      "group": "Athletics",
+      "fmt": "story",
+      "season": null,
+      "pages": 1,
+      "w": 405,
+      "h": 720
+    },
+    {
+      "id": "spotlight",
+      "name": "Mustang spotlight",
+      "group": "Athletics",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 1,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "fence",
+      "name": "Fence banner",
+      "group": "Athletics",
+      "fmt": "banner",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 240
+    },
+    {
+      "id": "club",
+      "name": "Club meeting",
+      "group": "Events & clubs",
+      "fmt": "half",
+      "season": null,
+      "pages": 1,
+      "w": 466,
+      "h": 720
+    },
+    {
+      "id": "event",
+      "name": "Event cover",
+      "group": "Events & clubs",
+      "fmt": "fb-event",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 377
+    },
+    {
+      "id": "savedate",
+      "name": "Save the date",
+      "group": "Events & clubs",
+      "fmt": "postcard",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 480
+    },
+    {
+      "id": "bandpost",
+      "name": "Band concert post",
+      "group": "Events & clubs",
+      "fmt": "ig-post",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "poster24",
+      "name": "Photo poster",
+      "group": "Events & clubs",
+      "fmt": "poster24",
+      "season": null,
+      "pages": 1,
+      "w": 480,
+      "h": 720
+    },
+    {
+      "id": "issue",
+      "name": "Newsletter cover",
+      "group": "News & podcast",
+      "fmt": "letter",
+      "season": null,
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "podstory",
+      "name": "Podcast story",
+      "group": "News & podcast",
+      "fmt": "story",
+      "season": null,
+      "pages": 1,
+      "w": 405,
+      "h": 720
+    },
+    {
+      "id": "ytthumb",
+      "name": "Video thumbnail",
+      "group": "News & podcast",
+      "fmt": "yt-thumb",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "announce",
+      "name": "Announcement screen",
+      "group": "News & podcast",
+      "fmt": "slide",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "welcome",
+      "name": "Welcome back",
+      "group": "School & awards",
+      "fmt": "x-post",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "honor",
+      "name": "Honor roll",
+      "group": "School & awards",
+      "fmt": "ig-post",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "certificate",
+      "name": "Award certificate",
+      "group": "School & awards",
+      "fmt": "letter",
+      "season": null,
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "id-student-front",
+      "name": "Student ID · front",
+      "group": "ID cards",
+      "fmt": "id-v",
+      "season": null,
+      "pages": 1,
+      "w": 454,
+      "h": 720
+    },
+    {
+      "id": "id-student-back",
+      "name": "Student ID · back",
+      "group": "ID cards",
+      "fmt": "id-v",
+      "season": null,
+      "pages": 1,
+      "w": 454,
+      "h": 720
+    },
+    {
+      "id": "id-staff-front",
+      "name": "Staff ID · front",
+      "group": "ID cards",
+      "fmt": "id-h",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 454
+    },
+    {
+      "id": "id-staff-back",
+      "name": "Staff ID · back",
+      "group": "ID cards",
+      "fmt": "id-h",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 454
+    },
+    {
+      "id": "homecoming-week",
+      "name": "Homecoming week",
+      "group": "Seasons",
+      "fmt": "ig-portrait",
+      "season": "homecoming",
+      "pages": 1,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "homecoming-dance",
+      "name": "Homecoming dance",
+      "group": "Seasons",
+      "fmt": "letter",
+      "season": "homecoming",
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "pinkout-game",
+      "name": "Pink Out game",
+      "group": "Seasons",
+      "fmt": "ig-post",
+      "season": "pinkout",
+      "pages": 1,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "pinkout-story",
+      "name": "Pink Out story",
+      "group": "Seasons",
+      "fmt": "story",
+      "season": "pinkout",
+      "pages": 1,
+      "w": 405,
+      "h": 720
+    },
+    {
+      "id": "halloween-trunk",
+      "name": "Trunk or treat",
+      "group": "Seasons",
+      "fmt": "ig-portrait",
+      "season": "halloween",
+      "pages": 1,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "halloween-costume",
+      "name": "Costume day",
+      "group": "Seasons",
+      "fmt": "story",
+      "season": "halloween",
+      "pages": 1,
+      "w": 405,
+      "h": 720
+    },
+    {
+      "id": "winter-concert",
+      "name": "Winter concert",
+      "group": "Seasons",
+      "fmt": "letter",
+      "season": "winter",
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "winter-break",
+      "name": "Winter break",
+      "group": "Seasons",
+      "fmt": "x-post",
+      "season": "winter",
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "recap",
+      "name": "Game recap carousel",
+      "group": "Athletics",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 4,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "newsdeck",
+      "name": "Mustang News carousel",
+      "group": "News & podcast",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 3,
+      "w": 576,
+      "h": 720
+    }
+  ]
+}

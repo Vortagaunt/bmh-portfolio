@@ -6,10 +6,10 @@
    - Speaker notes on every slide, read out of the presenter script
      (assets/script/presenter-script.html, via notes.js), so Presenter View
      shows the lines to say. Bold = say it, italic = do it.
-   - Sections (Opening, The system, Guidelines, Applied, Mustang Studio,
+   - Sections (Opening, The system, Guidelines, Applied, One more thing,
      Finale) and real slide titles as alt text, from S.meta in slides-lrhs.js.
    - A fade between slides; "One more thing…" fades through black, and the
-     finale cuts straight from it to the bento.
+     reveal cuts straight from it to Mustang Studio.
    - Slides that move (slides-png/motion.json): the video is laid over the
      still, full bleed, starts on its own and holds its last frame. The still
      stays underneath, so the PDF and anything that can't play video still
@@ -114,7 +114,7 @@ function transition(i, meta) {
   if (i === 0) return "";
   const t = meta[i]?.title || "";
   if (/^One more thing/.test(t)) return `<p:transition spd="slow"><p:fade thruBlk="1"/></p:transition>`;
-  if (/^One more thing/.test(meta[i - 1]?.title || "")) return "";   // the finale is a straight cut from black
+  if (/^One more thing/.test(meta[i - 1]?.title || "")) return "";   // the reveal is a straight cut from black
   return `<p:transition spd="med"><p:fade/></p:transition>`;
 }
 

@@ -554,7 +554,7 @@ const gameDay = (n) => `<!doctype html><html><head><meta charset="utf-8"><style>
       Where Spirit Red earns its keep
     </div>
     <div style="font-size:50px;line-height:1.55;color:${ONGREEN};max-width:3100px;">
-      Social templates and match-day graphics &mdash; the one place the accent runs
+      Social posts and match-day graphics &mdash; the one place the accent runs
       at full volume.
     </div>
   </div>
@@ -819,15 +819,16 @@ const bento = () => `<!doctype html><html><head><meta charset="utf-8"><style>${C
 
 /* Mustang Studio on one page — the wide cut of scripts/render-studio-bento.mjs
    (BENTO_LAYOUT=wide → assets/flyer/mustang-studio-bento-wide.jpg), full bleed,
-   closing the Studio section. Like the system bento it is a finished
+   closing the Studio reveal before the system bento. Like the system bento it is a finished
    composition, so no kicker or badge; it builds itself in (see S.motion). */
 const studioBento = () => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head>
 <body><div class="slide" style="padding:0;background:#000;">
   <img src="img/mustang-studio-bento.jpg" style="width:3840px;height:2160px;object-fit:cover;">
 </div></body></html>`;
 
-/* Apple-style "One more thing…" — black, centred, nothing else. It sets up the
-   bento, which opens on the same black, so the reveal is a straight cut. */
+/* Apple-style "One more thing…" — black, centred, nothing else. It is the
+   reveal: Mustang Studio is kept secret until here, and its first slide follows
+   as a straight cut from the black. */
 const oneMore = () => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head>
 <body><div class="slide" style="padding:0;background:#000;align-items:center;justify-content:center;">
   <div style="font-weight:600;font-size:210px;letter-spacing:-.04em;color:#F5F5F7;
@@ -874,7 +875,13 @@ const outro = () => page("green", `
    Bronx's cut for the principal (Sep 30): it opens on the title and ends on the
    QR. The two portfolio slides from slides.js, the brief, the evidence, the ask
    and the outro are left out; put them back here to restore them. The title
-   carries no badge; everything after it is numbered in the order it appears. */
+   carries no badge; everything after it is numbered in the order it appears.
+
+   Mustang Studio is a surprise (Oct 10): nothing before "One more thing…"
+   mentions the app, and the black slide reveals it. The system bento — which
+   has a Studio tile — comes after the Studio slides, as the recap before the
+   QR. The section is called "One more thing" rather than "Mustang Studio" so
+   the name doesn't show in PowerPoint's slide list before the reveal. */
 S.splice(0);   // drop the portfolio slides slides.js pushed
 
 /* Each entry: the slide, its title (alt text, speaker-note heading and PDF
@@ -901,16 +908,16 @@ const ORDER = [
   [staffIds, "Staff ID — staff, at a glance", "Applied"],
   [apparel, "Apparel — the part students actually wear", "Applied"],
   [gameDay, "Game day — where Spirit Red earns its keep", "Applied"],
-  [studioIntro, "Mustang Studio — a design app that only speaks Mustang", "Mustang Studio"],
-  [studioSteps, "How it works — three steps, no designer", "Mustang Studio"],
-  [studioTemplates, "Templates — forty-one, ready on day one", "Mustang Studio"],
-  [studioCheck, "Brand check — it checks the work for you", "Mustang Studio"],
-  [studioSizes, "Every size — seventeen sizes, one system", "Mustang Studio"],
-  [studioInside, "Built in — everything is already inside", "Mustang Studio"],
-  [studioNew, "New in 1.6 — made for people who aren't designers", "Mustang Studio"],
-  [studioAnywhere, "Where it runs — free, and it runs anywhere", "Mustang Studio"],
-  [studioBento, "Mustang Studio, on one page", "Mustang Studio"],
-  [oneMore, "One more thing…", "Finale"],
+  [oneMore, "One more thing…", "One more thing"],
+  [studioIntro, "Mustang Studio — a design app that only speaks Mustang", "One more thing"],
+  [studioSteps, "How it works — three steps, no designer", "One more thing"],
+  [studioTemplates, "Templates — forty-one, ready on day one", "One more thing"],
+  [studioCheck, "Brand check — it checks the work for you", "One more thing"],
+  [studioSizes, "Every size — seventeen sizes, one system", "One more thing"],
+  [studioInside, "Built in — everything is already inside", "One more thing"],
+  [studioNew, "New in 1.6 — made for people who aren't designers", "One more thing"],
+  [studioAnywhere, "Where it runs — free, and it runs anywhere", "One more thing"],
+  [studioBento, "Mustang Studio, on one page", "One more thing"],
   [bento, "Mustangs Ahead — the whole system on one page", "Finale"],
   [qr, "See it live — bronxhanratty.me", "Finale"],
 ];
