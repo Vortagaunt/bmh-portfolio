@@ -5,6 +5,7 @@
   "description": "Build scripts for the Lakewood Ranch pitch deck, printable PDF and their assets.",
   "dependencies": {
     "jsqr": "^1.4.0",
+    "pdf-lib": "^1.17.1",
     "pptxgenjs": "^3.12.0",
     "qrcode": "^1.5.4"
   }

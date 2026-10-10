@@ -10,15 +10,31 @@
  * Slides go in as the JPGs assemble.js already wrote — 3840px across an 11in
  * page is ~350dpi. Mark pages are real HTML so their type stays vector.
  *
+ * Two files come out of one render:
+ *   Bronx-Hanratty-LRHS-Presentation-and-Marks.pdf  slides, marks, then the
+ *       presenter script at the back (for Bronx — it has the Q&A and the stage
+ *       directions in it)
+ *   Bronx-Hanratty-LRHS-Leave-Behind.pdf            the same without the script:
+ *       the copy to hand the principal
+ * Both carry bookmarks (every section, slide, family and mark), a clickable QR
+ * code and links (anything marked data-link on a slide, read from
+ * slides-png/links.json), and real document properties. The script pages are
+ * assets/script/presenter-script.pdf (node ../scripts/build-presenter-script.mjs).
+ *
  * Run: node build-pdf.mjs        (after assemble.js — it reads slides-jpg)
  */
 import { chromium } from "playwright-core";
+import { PDFDocument, PDFName, PDFHexString, PDFString } from "pdf-lib";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(here, "Bronx-Hanratty-LRHS-Presentation-and-Marks.pdf");
+const LEAVE = path.join(here, "Bronx-Hanratty-LRHS-Leave-Behind.pdf");
+const SCRIPT_PDF = path.join(here, "..", "assets", "script", "presenter-script.pdf");
+const readJson = (f, d) => { const p = path.join(here, "slides-png", f); return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : d; };
+const META = readJson("meta.json", []), LINKS = readJson("links.json", {});
 const PW = 1056, PH = 594;
 
 const RED = "#A82424", GREEN = "#003C24", GREEN_DEEP = "#05281A";
@@ -33,8 +49,8 @@ const CAT = JSON.parse(fs.readFileSync(path.join(here, "..", "src", "data", "lrh
 const slugOf = (file) => file.replace(/\.svg$/, "").replace(/ /g, "-");
 const famName = (id) => CAT.families.find((f) => f.id === id).name;
 const MARKS = [
-  ...CAT.marks.map((m) => [slugOf(m.file), m.name, `${famName(m.family)} · ${m.use}`, m.note, m.ground, "live"]),
-  ...CAT.retired.map((m) => [slugOf(m.file), m.name, "Retired", m.note, "light", "retired"]),
+  ...CAT.marks.map((m) => [slugOf(m.file), m.name, `${famName(m.family)} · ${m.use}`, m.note, m.ground, "live", m.family]),
+  ...CAT.retired.map((m) => [slugOf(m.file), m.name, "Retired", m.note, "light", "retired", "retired"]),
 ];
 const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
   "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
@@ -110,6 +126,15 @@ const dividerPage = () => `<div class="pg div">
   <div class="ital">${capw(LIVE)} live marks in ${words(FAMS)} families, and ${words(RETIRED)} retired ones kept for reference.</div>
 </div>`;
 
+const scriptDivider = () => `<div class="pg div">
+  <div class="kick"><span class="dot">S</span><span class="kt" style="color:${LR_MUTED}">Presenter script</span></div>
+  <div class="nm">For Bronx &mdash; not for handing out</div>
+  <div class="note">What to say on every slide, what to do while you say it, the questions to
+    expect and what to offer if the room goes quiet. The same lines are in the deck's speaker
+    notes, so Presenter View shows them slide by slide.</div>
+  <div class="ital">The copy for the principal is Bronx-Hanratty-LRHS-Leave-Behind.pdf &mdash; everything before this page.</div>
+</div>`;
+
 const markPage = ([file, name, cat, note, ground, status], i) => `
 <div class="pg mk ${ground}">
   <div class="col">
@@ -129,34 +154,128 @@ const markPage = ([file, name, cat, note, ground, status], i) => `
 </div>`;
 
 const slides = fs.readdirSync(path.join(here, "slides-jpg")).filter((f) => f.endsWith(".jpg")).sort();
-const html = `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>
-${slides.map(slidePage).join("\n")}
-${dividerPage()}
-${MARKS.map(markPage).join("\n")}
+const doc = (pages) => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>
+${pages}
 </body></html>`;
-
-const tmp = path.join(here, "_pdf.html");
-fs.writeFileSync(tmp, html);
+const html = doc(`${slides.map(slidePage).join("\n")}
+${dividerPage()}
+${MARKS.map(markPage).join("\n")}`);
 
 const browser = await chromium.launch({
-  executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  executablePath: process.env.CHROME || "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
 });
 const page = await browser.newPage({ viewport: { width: PW, height: PH } });
 const missing = [];
 page.on("requestfailed", (r) => missing.push(r.url().split("/").pop()));
-
-await page.goto("file:///" + tmp.split(path.sep).join("/"), { waitUntil: "networkidle" });
-await page.evaluate(() => document.fonts.ready);
-await page.waitForTimeout(700);
-
-await page.pdf({
-  path: OUT, width: `${PW}px`, height: `${PH}px`, printBackground: true,
-  margin: { top: "0", right: "0", bottom: "0", left: "0" },
-});
-
-if (process.env.KEEP) console.log("kept:", tmp); else fs.unlinkSync(tmp);
-const mb = (fs.statSync(OUT).size / 1048576).toFixed(2);
-console.log(`${path.basename(OUT)}  ${slides.length} slides + 1 divider + ${MARKS.length} marks = ${slides.length + 1 + MARKS.length} pages  ${mb}MB`);
-console.log("missing assets:", missing.length ? [...new Set(missing)] : "none");
+async function print(name, content) {
+  const tmp = path.join(here, `_pdf_${name}.html`);
+  fs.writeFileSync(tmp, content);
+  await page.goto("file:///" + tmp.split(path.sep).join("/"), { waitUntil: "networkidle" });
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(700);
+  const buf = await page.pdf({ width: `${PW}px`, height: `${PH}px`, printBackground: true,
+    margin: { top: "0", right: "0", bottom: "0", left: "0" } });
+  if (process.env.KEEP) console.log("kept:", tmp); else fs.unlinkSync(tmp);
+  return buf;
+}
+const mainPdf = await print("main", html);
+const dividerPdf = await print("script", doc(scriptDivider()));
 await browser.close();
+
+/* ---- bookmarks: sections → slides, then the library → families → marks ---- */
+function addOutline(pdf, items) {
+  const ctx = pdf.context, pages = pdf.getPages();
+  const rootRef = ctx.nextRef();
+  const make = (list, parentRef) => {
+    const refs = list.map(() => ctx.nextRef());
+    let count = 0;
+    list.forEach((it, i) => {
+      const f = { Title: PDFHexString.fromText(it.title), Parent: parentRef, Dest: [pages[it.page].ref, "Fit"] };
+      if (i > 0) f.Prev = refs[i - 1];
+      if (i < list.length - 1) f.Next = refs[i + 1];
+      if (it.children && it.children.length) {
+        const sub = make(it.children, refs[i]);
+        f.First = sub.first; f.Last = sub.last; f.Count = it.open ? sub.count : -sub.count;
+        if (it.open) count += sub.count;
+      }
+      ctx.assign(refs[i], ctx.obj(f));
+      count += 1;
+    });
+    return { first: refs[0], last: refs[refs.length - 1], count };
+  };
+  const top = make(items, rootRef);
+  ctx.assign(rootRef, ctx.obj({ Type: "Outlines", First: top.first, Last: top.last, Count: top.count }));
+  pdf.catalog.set(PDFName.of("Outlines"), rootRef);
+  pdf.catalog.set(PDFName.of("PageMode"), PDFName.of("UseOutlines"));
+}
+function outlineItems(withScript) {
+  const items = [];
+  slides.forEach((f, i) => {
+    const m = META[i] || { title: `Slide ${i + 1}`, section: "Slides" };
+    let sec = items[items.length - 1];
+    if (!sec || sec.title !== m.section) items.push((sec = { title: m.section, page: i, open: true, children: [] }));
+    sec.children.push({ title: `${i + 1}  ${m.title}`, page: i });
+  });
+  const lib = { title: "The mark library", page: slides.length, open: false, children: [] };
+  MARKS.forEach((row, k) => {
+    const famId = row[6], pageNo = slides.length + 1 + k;
+    let fam = lib.children[lib.children.length - 1];
+    if (!fam || fam.id !== famId) {
+      const name = famId === "retired" ? "Retired" : famName(famId);
+      lib.children.push((fam = { id: famId, title: name, page: pageNo, children: [] }));
+    }
+    fam.children.push({ title: row[1], page: pageNo });
+  });
+  for (const fam of lib.children) fam.title += `  (${fam.children.length})`;
+  items.push(lib);
+  if (withScript) items.push({ title: "Presenter script", page: slides.length + 1 + MARKS.length });
+  return items;
+}
+/* the QR code and the addresses on the slides, as links */
+function addLinks(pdf) {
+  const ctx = pdf.context, pages = pdf.getPages();
+  let n = 0;
+  for (const [num, list] of Object.entries(LINKS)) {
+    const pg = pages[Number(num) - 1];
+    if (!pg) continue;
+    const { width, height } = pg.getSize();
+    for (const l of list) {
+      const x1 = (l.x / 3840) * width, x2 = ((l.x + l.w) / 3840) * width;
+      const y1 = height - ((l.y + l.h) / 2160) * height, y2 = height - (l.y / 2160) * height;
+      const annot = ctx.obj({ Type: "Annot", Subtype: "Link", Rect: [x1, y1, x2, y2], Border: [0, 0, 0],
+        A: { Type: "Action", S: "URI", URI: PDFString.of(l.href) } });
+      pg.node.addAnnot(ctx.register(annot));
+      n++;
+    }
+  }
+  return n;
+}
+async function build(file, withScript) {
+  const pdf = await PDFDocument.create();
+  const add = async (bytes) => { const src = await PDFDocument.load(bytes); (await pdf.copyPages(src, src.getPageIndices())).forEach((p) => pdf.addPage(p)); };
+  await add(mainPdf);
+  if (withScript) {
+    await add(dividerPdf);
+    if (fs.existsSync(SCRIPT_PDF)) await add(fs.readFileSync(SCRIPT_PDF));
+    else console.log("  ! no presenter-script.pdf — run node ../scripts/build-presenter-script.mjs");
+  }
+  const links = addLinks(pdf);
+  addOutline(pdf, outlineItems(withScript));
+  pdf.setTitle(withScript ? "Lakewood Ranch High School — A Mustang Brand System (presenter edition)"
+    : "Lakewood Ranch High School — A Mustang Brand System", { showInWindowTitleBar: true });
+  pdf.setAuthor("Bronx Hanratty");
+  pdf.setSubject(`The presentation for the principal, then all ${LIVE} marks one to a page. Concept work · not affiliated with the school district.`);
+  pdf.setKeywords(["Lakewood Ranch High School", "Mustangs", "brand system", "Mustang Studio", "bronxhanratty.me"]);
+  pdf.setCreator("deck/build-pdf.mjs");
+  pdf.setProducer("Chrome + pdf-lib");
+  pdf.setLanguage("en-US");
+  fs.writeFileSync(file, await pdf.save());
+  const mb = (fs.statSync(file).size / 1048576).toFixed(2);
+  console.log(`${path.basename(file)}  ${pdf.getPageCount()} pages, ${links} links, bookmarks  ${mb}MB`);
+}
+
+await build(OUT, true);
+await build(LEAVE, false);
+console.log(`  ${slides.length} slides + 1 divider + ${MARKS.length} marks` + (fs.existsSync(SCRIPT_PDF) ? " (+ script divider + presenter script in the presenter edition)" : ""));
+console.log("missing assets:", missing.length ? [...new Set(missing)] : "none");

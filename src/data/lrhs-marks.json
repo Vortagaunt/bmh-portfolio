@@ -37,6 +37,13 @@
       "blurb": "A ceremonial crest, founded 1998, for the moments that should feel permanent."
     },
     {
+      "id": "academics",
+      "name": "Academics",
+      "dept": "Academic honours and awards",
+      "hero": "LRHS Academic Powerhouse.svg",
+      "blurb": "The Academic Powerhouse badge, redrawn from an AI-generated picture as real artwork, for the work done in the classroom."
+    },
+    {
       "id": "ahead",
       "name": "Mustangs Ahead",
       "dept": "Newsletter and podcast",
@@ -187,6 +194,22 @@
       "use": "Emboss and foil",
       "ground": "light",
       "note": "The crest in Mustang Green alone, for embossing, foil stamping and single-ink print."
+    },
+    {
+      "file": "LRHS Academic Powerhouse.svg",
+      "family": "academics",
+      "name": "Academic Powerhouse",
+      "use": "Academic badge",
+      "ground": "light",
+      "note": "The Academic Powerhouse badge redrawn as vector artwork, with the system's mustang inside the LR. Honour rolls, academic awards and banners — it prints sharp at any size."
+    },
+    {
+      "file": "LRHS Academic Powerhouse 2.svg",
+      "family": "academics",
+      "name": "Academic Powerhouse — mustang",
+      "use": "Alternate",
+      "ground": "light",
+      "note": "The same badge with the horse alone, drawn larger. For places the LR already appears nearby, or where the horse should lead."
     },
     {
       "file": "LRHS Mustangs Ahead.svg",

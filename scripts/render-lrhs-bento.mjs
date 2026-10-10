@@ -68,10 +68,11 @@ const FIELD = `radial-gradient(120% 95% at 18% 10%, #0A5733 0%, rgba(10,87,51,0)
   radial-gradient(110% 100% at 88% 96%, #021A10 0%, rgba(2,26,16,0) 58%),
   linear-gradient(146deg, #04482A 0%, #003C24 44%, #05281A 100%)`;
 
-const FAMILIES = [
-  ["Emblem", 5], ["Wordmark", 3], ["Mustang", 4], ["Band", 2],
-  ["Crest", 3], ["Mustangs Ahead", 6], ["Retro", 2],
-];
+/* counts and families straight from the catalogue, so the bento can't fall behind the library */
+const CAT = JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-marks.json"), "utf8"));
+const NUM = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+const SHORT = { crest: "Crest" };   // the bento's chip names, where they differ from the catalogue's
+const FAMILIES = CAT.families.map((f) => [SHORT[f.id] || f.name, CAT.marks.filter((m) => m.family === f.id).length]);
 const SWATCHES = [  // name, hex, role, (unused), text colour — the v1 strips, now equal widths
   ["Mustang Green", "#033922", "Primary", 22, "#fff"],
   ["Field Green", "#144B2C", "Depth", 15.5, "#fff"],
@@ -165,11 +166,11 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 <div class="t dark" style="grid-area:2/6/3/8;flex-direction:row;gap:40px;align-items:stretch;">
   <div style="display:flex;flex-direction:column;flex:0 0 auto;">
     <div class="lab">The mark library</div><div class="sp"></div>
-    <div class="ind" style="font-size:300px;line-height:.78;margin-bottom:-6px;"><span class="g">25</span></div>
+    <div class="ind" style="font-size:300px;line-height:.78;margin-bottom:-6px;"><span class="g">${CAT.marks.length}</span></div>
   </div>
   <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
     <div class="sp"></div>
-    <div class="h" style="font-size:54px;">Marks.<br><span class="m">Seven families.</span></div>
+    <div class="h" style="font-size:54px;">Marks.<br><span class="m">${NUM[FAMILIES.length][0].toUpperCase() + NUM[FAMILIES.length].slice(1)} families.</span></div>
     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;">
       ${FAMILIES.map(([n, c]) => `<span style="display:inline-flex;gap:10px;align-items:baseline;padding:9px 16px;border-radius:999px;
         background:rgba(255,255,255,.08);font-size:22px;font-weight:600;white-space:nowrap;">${n}<span class="g" style="font-weight:800;">${c}</span></span>`).join("")}
@@ -279,8 +280,8 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 <!-- academic powerhouse -->
 <div class="t paper c" style="grid-area:4/7/5/8;">
   <div class="art" style="display:flex;gap:14px;">
-    <div style="flex:1;min-width:0;"><img class="fit" src="${img("public", "images", "lrhs-powerhouse", "powerhouse-lr.svg")}"></div>
-    <div style="flex:1;min-width:0;"><img class="fit" src="${img("public", "images", "lrhs-powerhouse", "powerhouse-mustang.svg")}"></div>
+    <div style="flex:1;min-width:0;"><img class="fit" src="${mark("LRHS Academic Powerhouse.svg")}"></div>
+    <div style="flex:1;min-width:0;"><img class="fit" src="${mark("LRHS Academic Powerhouse 2.svg")}"></div>
   </div>
   <div class="hs" style="font-size:34px;margin-top:22px;">Academic Powerhouse</div>
   <div class="sub" style="font-size:22px;margin-top:6px;">From an AI image to a real mark.</div>

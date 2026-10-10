@@ -107,7 +107,7 @@ console.log(`       ${path.relative(root, HTML_OUT)}  ${(fs.statSync(HTML_OUT).s
 
 /* ---- print it, the way the resume is printed ---- */
 const browser = await chromium.launch({
-  executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  executablePath: process.env.CHROME || "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
 });
 const page = await browser.newPage({ viewport: { width: 900, height: 1200 } });

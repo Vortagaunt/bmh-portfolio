@@ -71,7 +71,7 @@ const VARIANTS = [
 ];
 
 const browser = await chromium.launch({
-  executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  executablePath: process.env.CHROME || "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
 });
 const missing = [];

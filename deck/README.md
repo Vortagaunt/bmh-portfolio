@@ -26,22 +26,54 @@ longer matches it byte for byte.
 
 ```bash
 cd deck
-npm install                          # once — qrcode, jsqr, pptxgenjs
+npm install                          # once — qrcode, jsqr, pptxgenjs, pdf-lib
 node ../scripts/render-lrhs-splash.mjs   # first: prepare-assets copies it in
+node ../scripts/build-presenter-script.mjs   # the script PDF that goes at the back
 node prepare-assets.mjs              # img/ from public/images
 node render-boards.mjs               # the seven brand-system boards
 node build-wallpaper.mjs             # wallpapers, incl. the deck variant
 node build-qr.mjs                    # site QR, decode-verified before it is kept
 node render-slides.mjs               # every slide at 3840x2160, plus extras/ for the site
 node assemble.js                     # -> Bronx-Hanratty-LRHS-Presentation.pptx
-node build-pdf.mjs                   # -> ...-Presentation-and-Marks.pdf (reads slides-jpg)
+node build-pdf.mjs                   # -> ...-Presentation-and-Marks.pdf and ...-Leave-Behind.pdf
 ```
 
-The bento slide (after "One more thing…") builds itself in: `assemble.js` lays
-`img/lrhs-bento-motion.mp4` over its still and sets it to start on its own, then
-hold. That video comes from `node ../scripts/render-bento-motion.mjs lrhs` (run
-it before `prepare-assets.mjs` whenever the bento changes). The PDF keeps the
-still.
+Every script finds Chrome at its Windows install path; set `CHROME` to use
+another browser binary.
+
+### What the PowerPoint does by itself
+
+- **Two bentos build themselves in.** "Mustang Studio, on one page" closes the
+  Studio section and the system bento follows "One more thing…". `assemble.js`
+  lays each video over its still and sets it to start on its own, then hold.
+  The videos come from `node ../scripts/render-bento-motion.mjs lrhs` and
+  `... studio-wide` (run before `prepare-assets.mjs` whenever a bento changes).
+  `S.motion` in `slides-lrhs.js` says which slides move.
+- **The ID cards fan in.** Anything marked `data-layer` on a slide listed in
+  `S.layers` is cut out by `render-slides.mjs` (shadow and all, on a
+  transparent ground), the slide is rendered again without it, and
+  `assemble.js` puts the cards back in place as separate pictures with a
+  native entrance: they rise in as one stack and spread to where they sit.
+- **Speaker notes** on every slide come from
+  `assets/script/presenter-script.html` (`notes.js` reads it). Bold lines are
+  to say, italic lines are what to do. The last slide also carries the Q&A.
+  Edit the script, rebuild, and the notes follow.
+- **Sections and titles**: each `ORDER` entry has a title and a section; they
+  become PowerPoint sections, the slides' alt text and the PDF's bookmarks.
+- **Transitions**: a fade between slides, a slow fade through black into
+  "One more thing…", and a straight cut from it into the bento.
+
+After changing anything in `assemble.js`, check the file with the pptx skill's
+`validate.py`.
+
+### The two PDFs
+
+`Bronx-Hanratty-LRHS-Presentation-and-Marks.pdf` is the presenter edition: the
+slides, the mark library one to a page, then the presenter script.
+`Bronx-Hanratty-LRHS-Leave-Behind.pdf` is the same without the script — the
+copy to hand over. Both have bookmarks (sections, slides, families, marks),
+document properties, and links: anything marked `data-link` on a slide (the QR
+code, bronxhanratty.me, bronxhanratty.me/studio) is clickable.
 
 `build-pdf.mjs` must run **after** `assemble.js` — it reads the JPGs that step
 writes. The slide order is the `ORDER` list at the bottom of `slides-lrhs.js`;

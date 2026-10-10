@@ -27,8 +27,8 @@ const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "ei
   "eighteen", "nineteen"];
 const TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
 const words = (k) => (k < 20 ? ONES[k] : TENS[Math.floor(k / 10)] + (k % 10 ? "-" + ONES[k % 10] : ""));
-const TOTAL = CAT.marks.length;                      // 25
-const FAMILIES = CAT.families.length;                // 7
+const TOTAL = CAT.marks.length;                      // 27 (Oct 10: the Academics pair joined)
+const FAMILIES = CAT.families.length;                // 8
 
 const badge = (n, onDark) => `
   <span style="display:inline-flex;align-items:center;justify-content:center;
@@ -167,14 +167,17 @@ const identity = section("Identity", "The core lockup",
   "lrhs-identity.jpg", { dark: true, note: "Clear space equal to the height of the L on every side." });
 
 const library = section("The mark library", "Every Mustang, captioned",
-  "The emblem, the wordmarks, the mustang, the band, a graduation crest, the Mustangs Ahead publications and the retro marks. Supplied as SVG only.",
+  "The emblem, the wordmarks, the mustang, the band, a graduation crest, the Academic Powerhouse badge, the Mustangs Ahead publications and the retro marks. Supplied as SVG only.",
   "lrhs-marks.jpg", { note: `${cap(words(TOTAL))} marks in ${words(FAMILIES)} families, each with its own permitted use.` });
 
 function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
 /* NEW for the principal: which mark serves which part of the school. The
-   library grew from one family into seven, and this is the view of it a
-   principal actually needs — not the files, but who uses them for what. */
+   library grew from one family into eight, and this is the view of it a
+   principal actually needs — not the files, but who uses them for what.
+   Five to a row; the count tile takes whatever is left of the last row, so a
+   new family only ever shrinks it. */
+const DEPT_COLS = 5;
 const departments = (n) => page("lrpaper", `
   ${kicker(n, "Where each mark lives", false)}
   <div class="display" style="font-size:160px;color:#0C0C0C;margin:56px 0 30px;">
@@ -184,8 +187,8 @@ const departments = (n) => page("lrpaper", `
     Each part of the school gets a mark built for it &mdash; and every one of
     them still reads as the same school.
   </div>
-  <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr);
-       grid-template-rows:1fr 1fr;gap:36px;">
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(${DEPT_COLS},1fr);
+       grid-auto-rows:1fr;gap:36px;">
     ${CAT.families.map((f) => {
       const hero = CAT.marks.find((m) => m.file === f.hero);
       const count = inFamily(f.id).length;
@@ -202,7 +205,8 @@ const departments = (n) => page("lrpaper", `
       </div>`;
     }).join("")}
     <div style="background:${GREEN};color:#FCFCFC;padding:56px 60px;display:flex;
-         flex-direction:column;justify-content:center;">
+         flex-direction:column;justify-content:center;
+         grid-column:span ${DEPT_COLS - (CAT.families.length % DEPT_COLS) || DEPT_COLS};">
       <div class="display" style="font-size:190px;line-height:.9;">${TOTAL}</div>
       <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;
            color:#84C9A2;font-weight:600;margin-top:18px;">marks</div>
@@ -217,27 +221,34 @@ const fullSet = (n) => page("lrpaper", `
   <div class="display" style="font-size:130px;color:#0C0C0C;margin:44px 0 16px;">
     Every mark, in one family
   </div>
-  <div style="font-size:40px;line-height:1.45;color:${GREY};max-width:3300px;margin-bottom:44px;">
+  <div style="font-size:40px;line-height:1.45;color:${GREY};max-width:3300px;margin-bottom:44px;text-wrap:balance;">
     ${cap(words(TOTAL))} marks in ${words(FAMILIES)} families &mdash;
     the emblem and its reductions, three wordmarks, the mustang, the band, the
-    graduation crest, Mustangs Ahead and the retro marks.
+    graduation crest, Academic Powerhouse, Mustangs Ahead and the retro marks.
   </div>
-  <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,1fr);
-       grid-auto-rows:1fr;gap:26px 30px;">
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(${SET_COLS},1fr);
+       grid-auto-rows:1fr;gap:24px 30px;">
     ${CAT.marks.map((m) => `
       <div style="display:flex;flex-direction:column;min-height:0;">
-        <div style="flex:1;min-height:0;background:${m.ground === "dark" ? GREEN : "#E3E8E4"};display:flex;padding:22px 30px;">
+        <div style="flex:1;min-height:0;background:${m.ground === "dark" ? GREEN : "#E3E8E4"};display:flex;padding:20px 26px;">
           ${fit(markImg(m.file))}
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:baseline;
-             gap:14px;margin-top:12px;">
-          <span style="font-size:23px;font-weight:600;color:#0C0C0C;white-space:nowrap;
-                overflow:hidden;text-overflow:ellipsis;">${m.name}</span>
-          <span style="font-size:18px;letter-spacing:.16em;text-transform:uppercase;
-                color:${GREY};white-space:nowrap;">${family(m.family).name}</span>
+        <div style="margin-top:12px;line-height:1.2;">
+          <div style="font-size:23px;font-weight:600;color:#0C0C0C;white-space:nowrap;
+               overflow:hidden;text-overflow:ellipsis;">${m.name}</div>
+          <div style="font-size:16px;letter-spacing:.16em;text-transform:uppercase;
+               color:${GREY};white-space:nowrap;margin-top:5px;">${family(m.family).name}</div>
         </div>
       </div>`).join("")}
+    ${TOTAL % SET_COLS ? `
+      <div style="grid-column:span ${SET_COLS - (TOTAL % SET_COLS)};background:${GREEN};color:#FCFCFC;
+           display:flex;flex-direction:column;justify-content:center;padding:30px 40px;">
+        <div class="display" style="font-size:120px;line-height:.9;">${TOTAL}</div>
+        <div style="font-size:22px;letter-spacing:.24em;text-transform:uppercase;color:#84C9A2;
+             font-weight:600;margin-top:14px;">marks &middot; ${words(FAMILIES)} families</div>
+      </div>` : ""}
   </div>`);
+const SET_COLS = 7;
 
 /* The crest, big. On the full-set slide the three crests are the smallest
    marks in the grid — tall artwork in wide tiles — and they carry the most
@@ -276,10 +287,12 @@ const crest = (n) => page("lrpaper", `
    Bronx's two vector versions sit beside it, the same size, so the slide is a
    straight comparison. All three go in white cards because the original is a
    flat image with its own white ground (254, so the cards match it). */
+/* Since Oct 10 the two redrawn badges are catalogued marks — the Academics
+   family — so they come from the same PNGs as every other mark. */
 const POWERHOUSE = [
-  ["powerhouse-ai-original.png", "Today", "The original", "AI-generated · in use now"],
-  ["powerhouse-lr.svg", "Redrawn", "With the LR", "The system's mustang inside the LR"],
-  ["powerhouse-mustang.svg", "Redrawn", "The mustang", "The horse alone, drawn larger"],
+  ["img/powerhouse/powerhouse-ai-original.png", "Today", "The original", "AI-generated · in use now"],
+  [markImg("LRHS Academic Powerhouse.svg"), "Redrawn", "With the LR", "The system's mustang inside the LR"],
+  [markImg("LRHS Academic Powerhouse 2.svg"), "Redrawn", "The mustang", "The horse alone, drawn larger"],
 ];
 const powerhouse = (n) => page("lrpaper", `
   ${kicker(n, "Academic Powerhouse", false)}
@@ -296,7 +309,7 @@ const powerhouse = (n) => page("lrpaper", `
       <div style="display:flex;flex-direction:column;min-height:0;">
         <div style="flex:1;min-height:0;display:flex;position:relative;background:#FEFEFE;border-radius:36px;
              box-shadow:0 40px 100px -40px rgba(12,12,12,.35);">
-          ${fit(`img/powerhouse/${f}`, 60)}
+          ${fit(f, 60)}
         </div>
         <div style="text-align:center;margin-top:34px;">
           <div style="font-size:26px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
@@ -356,7 +369,7 @@ const corners = (n) => page("lrpaper", `
   </div>
   <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3100px;text-wrap:balance;">
     Every corner on the LR is now very slightly rounded &mdash; about the softness of an
-    app icon &mdash; and the same change runs through all seven files that carry it.
+    app icon &mdash; and the same change runs through all seven emblem files.
     Where one letter tucks under the other, the corner stays sharp.
   </div>
   <div style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr 1.26fr;gap:90px;margin-top:70px;">
@@ -366,7 +379,7 @@ const corners = (n) => page("lrpaper", `
     </div>
     <div style="display:flex;flex-direction:column;min-height:0;">
       <div style="flex:1;min-height:0;">${cornerCard("emblem-rounded.svg")}</div>
-      ${cornerCap("After", "Subtly rounded", "All seven LR files", true)}
+      ${cornerCap("After", "Subtly rounded", "All seven emblem files", true)}
     </div>
     <div style="display:flex;flex-direction:column;min-height:0;">
       <div style="flex:1;min-height:0;display:grid;grid-template-rows:1fr 1fr;gap:40px;">
@@ -398,9 +411,9 @@ const result = (n) => page("greend", `
 const colour = section("Colour", "Green leads, red accents",
   "Mustang Green is the school's own dark green and carries the system. Spirit Red is the single true accent, reserved for game day. Ink and Paper do everything else.",
   "lrhs-color.jpg", { dark: true, note: "One dominant, one accent, two neutrals. Nothing else." });
-const type = section("Typography", "A scholastic serif, a plain sans",
-  "A sturdy serif carries headlines and anything ceremonial — diplomas, banners, the yearbook. A plain sans handles everything functional.",
-  "lrhs-type.jpg", { note: "Two families, four weights, no exceptions." });
+const type = section("Typography", "An athletic display face, a plain sans",
+  "Industry Black — uppercase, tracked and unapologetically athletic — carries headlines, numbers and anything that should shout. Hanken Grotesk handles everything functional.",
+  "lrhs-type.jpg", { note: "Two families. Nothing else." });
 const icons = section("Iconography", "One line weight, drawn on a grid",
   "A small icon set for wayfinding, athletics and the site — every glyph on the same grid at the same stroke weight, so a new one can be added later without the set falling apart.",
   "lrhs-icons.jpg", { dark: true });
@@ -469,7 +482,7 @@ const idCaption = (tag, name, use) => `
     <div style="font-size:40px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;margin-top:12px;">${name}</div>
     <div style="font-size:28px;letter-spacing:.14em;text-transform:uppercase;color:${GREY};margin-top:10px;">${use}</div>
   </figcaption>`;
-const idCard = (f, w) => `<img src="img/ids/${f}.png" style="width:${w}px;height:auto;display:block;
+const idCard = (f, w) => `<img src="img/ids/${f}.png" data-layer="${f}" style="width:${w}px;height:auto;display:block;
   filter:drop-shadow(0 40px 60px rgba(12,12,12,.24)) drop-shadow(0 8px 16px rgba(12,12,12,.10));">`;
 const studentIds = (n) => page("lrpaper", `
   ${kicker(n, "Student ID", false)}
@@ -778,11 +791,11 @@ const studioAnywhere = (n) => page("greend", `
   ${kicker(n, "Where it runs", true)}
   <div class="display" style="font-size:150px;margin:56px 0 30px;">Free, and it runs anywhere</div>
   <div style="font-size:50px;line-height:1.55;color:${ONGREEN};max-width:3000px;">
-    No licence, no account, no subscription. Install it, or open it at bronxhanratty.me/studio.</div>
+    No licence, no account, no subscription. Install it, or open it at <span data-link="https://bronxhanratty.me/studio/">bronxhanratty.me/studio</span>.</div>
   <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:70px;align-items:center;">
     ${[["monitor", "Windows app", "Installs in a minute, like any other program."],
        ["laptop", "Mac app", "For Apple silicon and Intel Macs."],
-       ["globe", "Chromebooks", "Install it from bronxhanratty.me/studio."]].map(([ic, t, d]) => `
+       ["globe", "Chromebooks", `Install it from <span data-link="https://bronxhanratty.me/studio/">bronxhanratty.me/studio</span>.`]].map(([ic, t, d]) => `
       <div style="background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 2px rgba(255,255,255,.07);border-radius:52px;padding:110px 96px 104px;">
         ${studioIcon(ICO[ic], 168, "#FCFCFC")}
         <div style="font-size:84px;font-weight:600;letter-spacing:-.025em;color:#FCFCFC;margin-top:70px;">${t}</div>
@@ -802,6 +815,15 @@ const studioAnywhere = (n) => page("greend", `
 const bento = () => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head>
 <body><div class="slide" style="padding:0;background:#000;">
   <img src="img/lrhs-bento.jpg" style="width:3840px;height:2160px;object-fit:cover;">
+</div></body></html>`;
+
+/* Mustang Studio on one page — the wide cut of scripts/render-studio-bento.mjs
+   (BENTO_LAYOUT=wide → assets/flyer/mustang-studio-bento-wide.jpg), full bleed,
+   closing the Studio section. Like the system bento it is a finished
+   composition, so no kicker or badge; it builds itself in (see S.motion). */
+const studioBento = () => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head>
+<body><div class="slide" style="padding:0;background:#000;">
+  <img src="img/mustang-studio-bento.jpg" style="width:3840px;height:2160px;object-fit:cover;">
 </div></body></html>`;
 
 /* Apple-style "One more thing…" — black, centred, nothing else. It sets up the
@@ -824,11 +846,11 @@ const qr = (n) => page("greend", `
         Every mark, the full guidelines, and the case study behind them &mdash;
         including photographs of the horses on campus today.
       </div>
-      <div class="display" style="font-size:76px;color:#FCFCFC;">bronxhanratty.me</div>
+      <div class="display" style="font-size:76px;color:#FCFCFC;"><span data-link="https://bronxhanratty.me">bronxhanratty.me</span></div>
       <div style="font-size:34px;letter-spacing:.2em;text-transform:uppercase;
            color:${LR_MUTED};margin-top:26px;">Point a camera at the code</div>
     </div>
-    <div style="flex:0 0 auto;background:#FFFFFF;border-radius:44px;padding:52px;
+    <div data-link="https://bronxhanratty.me" style="flex:0 0 auto;background:#FFFFFF;border-radius:44px;padding:52px;
          box-shadow:0 50px 120px -40px rgba(0,0,0,.8);">
       <img src="img/qr-site.png" style="width:620px;height:620px;display:block;">
     </div>
@@ -855,29 +877,72 @@ const outro = () => page("green", `
    carries no badge; everything after it is numbered in the order it appears. */
 S.splice(0);   // drop the portfolio slides slides.js pushed
 
+/* Each entry: the slide, its title (alt text, speaker-note heading and PDF
+   bookmark) and the section it sits in (PowerPoint sections, PDF outline). */
 const ORDER = [
-  title,
-  identity, library, departments, fullSet, crest, powerhouse, beforeAfter, corners, result,
-  colour, type, icons, voice, inUse,
-  signage, posters, studentIds, staffIds,
-  apparel, gameDay,
-  studioIntro, studioSteps, studioTemplates, studioCheck, studioSizes, studioInside, studioNew, studioAnywhere,
-  oneMore, bento,
-  qr,
+  [title, "Lakewood Ranch High School — a Mustang brand system", "Opening"],
+  [identity, "Identity — the core lockup", "The system"],
+  [library, "The mark library — every Mustang, captioned", "The system"],
+  [departments, "Departments — one family, every department", "The system"],
+  [fullSet, "The full set — every mark, in one family", "The system"],
+  [crest, "The crest — for the moments that should feel permanent", "The system"],
+  [powerhouse, "Academic Powerhouse — from a generated image to a real mark", "The system"],
+  [beforeAfter, "Before / after — the emblem, redrawn", "The system"],
+  [corners, "Corners — softer corners, same LR", "The system"],
+  [result, "The result — one horse, drawn once", "The system"],
+  [colour, "Colour — green leads, red accents", "Guidelines"],
+  [type, "Typography — an athletic display face, a plain sans", "Guidelines"],
+  [icons, "Iconography — one line weight, drawn on a grid", "Guidelines"],
+  [voice, "Voice — how the school sounds", "Guidelines"],
+  [inUse, "In use — the system on real surfaces", "Guidelines"],
+  [signage, "Signage — the same wall, redrawn", "Applied"],
+  [posters, "Poster concepts — two posters, one system", "Applied"],
+  [studentIds, "Student ID — a card every student carries", "Applied"],
+  [staffIds, "Staff ID — staff, at a glance", "Applied"],
+  [apparel, "Apparel — the part students actually wear", "Applied"],
+  [gameDay, "Game day — where Spirit Red earns its keep", "Applied"],
+  [studioIntro, "Mustang Studio — a design app that only speaks Mustang", "Mustang Studio"],
+  [studioSteps, "How it works — three steps, no designer", "Mustang Studio"],
+  [studioTemplates, "Templates — forty-one, ready on day one", "Mustang Studio"],
+  [studioCheck, "Brand check — it checks the work for you", "Mustang Studio"],
+  [studioSizes, "Every size — seventeen sizes, one system", "Mustang Studio"],
+  [studioInside, "Built in — everything is already inside", "Mustang Studio"],
+  [studioNew, "New in 1.6 — made for people who aren't designers", "Mustang Studio"],
+  [studioAnywhere, "Where it runs — free, and it runs anywhere", "Mustang Studio"],
+  [studioBento, "Mustang Studio, on one page", "Mustang Studio"],
+  [oneMore, "One more thing…", "Finale"],
+  [bento, "Mustangs Ahead — the whole system on one page", "Finale"],
+  [qr, "See it live — bronxhanratty.me", "Finale"],
 ];
+const UNNUMBERED = new Set([title, outro, oneMore, bento, studioBento]);
 
 let n = 0;
-for (const make of ORDER) {
-  const numbered = make !== title && make !== outro && make !== oneMore && make !== bento;
-  S.push(make(numbered ? ++n : undefined));
+S.meta = [];
+for (const [make, name, sectionName] of ORDER) {
+  S.push(make(UNNUMBERED.has(make) ? undefined : ++n));
+  S.meta.push({ title: name, section: sectionName });
 }
+const at = (make) => ORDER.findIndex(([m]) => m === make) + 1;   // 1-based slide number
 
-/* Slides that move. The bento builds itself in after "One more thing…": the
-   video is scripts/render-bento-motion.mjs's 1080p cut, which prepare-assets
-   copies in. render-slides.mjs writes this map beside the PNGs and assemble.js
-   lays the video over that slide's still, playing by itself. The still stays
+/* Slides that move. The two bentos build themselves in: each video is
+   scripts/render-bento-motion.mjs's 1080p cut, which prepare-assets copies in.
+   render-slides.mjs writes this map beside the PNGs and assemble.js lays the
+   video over that slide's still, playing by itself. The still stays
    underneath, so the PDF and the site's slide copies are unchanged. */
-S.motion = { [ORDER.indexOf(bento) + 1]: "img/lrhs-bento-motion.mp4" };
+S.motion = {
+  [at(studioBento)]: "img/mustang-studio-bento-motion.mp4",
+  [at(bento)]: "img/lrhs-bento-motion.mp4",
+};
+
+/* Slides whose pieces animate natively in PowerPoint. render-slides.mjs cuts
+   every element marked data-layer out of the slide (shadow included, on a
+   transparent ground) and renders the slide once more without them; assemble.js
+   puts the cut-outs back in exactly the same place and gives them an entrance.
+   "fan": the cards rise in as one stack, then spread to where they sit. */
+S.layers = {
+  [at(studentIds)]: { effect: "fan" },
+  [at(staffIds)]: { effect: "fan" },
+};
 
 S.extras = { "lrhs-crest": crest(), "lrhs-powerhouse": powerhouse(), "lrhs-signage": signage(), "lrhs-posters": posters(),
   "lrhs-ids-student": studentIds(), "lrhs-ids-staff": staffIds(),

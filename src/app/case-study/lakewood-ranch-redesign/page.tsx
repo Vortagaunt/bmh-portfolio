@@ -78,9 +78,9 @@ const data: CaseStudyData = {
     },
     {
       heading: "Marks, color & type",
-      body: "Twenty-five marks in seven families — the *LR* emblem for athletics, wordmarks for the front office, the Mustang on its own, the band, a graduation crest, the *Mustangs Ahead* newsletter and podcast, and retro marks for spirit wear. *Mustang Green* (#033922) leads — the school's own dark green — partnered with black and a clean white that stands in for the traditional silver. *Spirit Red* is the only true accent, and it stays rare. Headlines are set in *Industry Black* — uppercase, tracked, unapologetically athletic. *Hanken Grotesk* carries body and UI.",
+      body: "Twenty-seven marks in eight families — the *LR* emblem for athletics, wordmarks for the front office, the Mustang on its own, the band, a graduation crest, the *Academic Powerhouse* badge, the *Mustangs Ahead* newsletter and podcast, and retro marks for spirit wear. *Mustang Green* (#033922) leads — the school's own dark green — partnered with black and a clean white that stands in for the traditional silver. *Spirit Red* is the only true accent, and it stays rare. Headlines are set in *Industry Black* — uppercase, tracked, unapologetically athletic. *Hanken Grotesk* carries body and UI.",
       image: "/images/lrhs-marks.png",
-      imageAlt: "The Mustang marks — wordmark, emblem, reversed emblem and the mustang, with the band, crest, Mustangs Ahead and retro families",
+      imageAlt: "The Mustang marks — wordmark, emblem, reversed emblem and the mustang, with the band, crest, Academic Powerhouse, Mustangs Ahead and retro families",
     },
     {
       heading: "The crest",
@@ -90,13 +90,13 @@ const data: CaseStudyData = {
     },
     {
       heading: "Academic Powerhouse",
-      body: "The *Academic Powerhouse* badge in use on campus began as an AI-generated picture — a flat image that blurs when it's enlarged and can't be recoloured. It's rebuilt here as vector artwork in two versions, one with the *LR* and one with the *mustang* on its own, both on the system's horse so they print sharp at any size.",
+      body: "The *Academic Powerhouse* badge in use on campus began as an AI-generated picture — a flat image that blurs when it's enlarged and can't be recoloured. It's rebuilt here as vector artwork in two versions, one with the *LR* and one with the *mustang* on its own, both on the system's horse so they print sharp at any size. Both are now in the mark library as their own family, *Academics*.",
       image: "/images/lrhs-powerhouse.jpg",
       imageAlt: "The AI-generated Academic Powerhouse badge beside the two redrawn vector versions",
     },
     {
       heading: "Softer corners",
-      body: "Every corner on the *LR* is now very slightly rounded — about the softness of an app icon — and the same change runs through all *seven files* that carry it, from the full-colour emblem to the band marks. The outline, the white keyline and the green letter round together, so the outline stays even. Where one letter tucks under the other, the corner stays sharp.",
+      body: "Every corner on the *LR* is now very slightly rounded — about the softness of an app icon — and the same change runs through all *seven emblem files*, from the full-colour emblem to the band marks. The outline, the white keyline and the green letter round together, so the outline stays even. Where one letter tucks under the other, the corner stays sharp.",
       image: "/images/lrhs-corners.jpg",
       imageAlt: "The LR emblem with square corners beside the subtly rounded version, with a close-up of the top of the L before and after",
     },
@@ -149,6 +149,13 @@ const data: CaseStudyData = {
       imageAlt: "Mustang Studio 1.6 — fill-in-the-blanks mode, a sheet of staff ID cards made from a spreadsheet, and a four-page Instagram carousel",
     },
     {
+      heading: "Mustang Studio, on one page",
+      body: "Everything the app does on a single sheet, built in the same way as the system's own recap: the *game-day editor*, *fill in the blanks*, a *staff list* turned into ID cards, *forty-one templates*, carousels, motion, the four *seasons*, the *brand check*, the *Who are you?* start screen, where it runs and what it exports — and the address to try it.",
+      image: "/images/lrhs-studio-bento.jpg",
+      video: "/videos/mustang-studio-bento-motion.mp4",
+      imageAlt: "A one-page bento of Mustang Studio — the app open on a game-day post, fill-in-the-blanks mode, a staff list becoming a sheet of ID cards, the forty-one templates, carousels, motion, seasons, the brand check, the start screen, platforms, export formats and bronxhanratty.me/studio",
+    },
+    {
       heading: "One more thing…",
       body: "*Mustangs Ahead* — everything above on a single sheet, laid out like a keynote recap, and built in like one: the *LR*, the new *student ID*, the *mark library*, the colours, type, crest, posters and apparel, *Mustang Studio*, and a code that leads to this site. It's the page to send when someone asks what the system actually is.",
       image: "/images/lrhs-bento.jpg",
@@ -167,7 +174,7 @@ const data: CaseStudyData = {
     kicker: "Mark Library",
     heading: "Every mark, every variant",
     intro:
-      "The full set of *Mustang* marks — twenty-five in seven families, from the *LR* emblem to the graduation crest — plus the retired *legacy* artwork, kept here for reference. Use the supplied SVGs only; never redraw, recolor, or stretch.",
+      "The full set of *Mustang* marks — twenty-seven in eight families, from the *LR* emblem to the graduation crest and the *Academic Powerhouse* badge — plus the retired *legacy* artwork, kept here for reference. Use the supplied SVGs only; never redraw, recolor, or stretch.",
     items: markItems,
   },
   photoSets: [
