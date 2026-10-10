@@ -26,6 +26,7 @@
 import { chromium } from "playwright-core";
 import { PDFDocument, PDFName, PDFHexString, PDFString } from "pdf-lib";
 import fs from "node:fs";
+import sharp from "sharp";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -115,7 +116,7 @@ body{font-family:'InterV',sans-serif;-webkit-font-smoothing:antialiased;}
 .div .kick{margin:0 0 24px;}
 `;
 
-const slidePage = (f) => `<div class="pg"><img class="full" src="slides-jpg/${f}"></div>`;
+const slidePage = (f, dir = "slides-jpg") => `<div class="pg"><img class="full" src="${dir}/${f}"></div>`;
 
 const dividerPage = () => `<div class="pg div">
   <div class="kick"><span class="dot">M</span><span class="kt" style="color:${LR_MUTED}">The mark library</span></div>
@@ -157,7 +158,7 @@ const slides = fs.readdirSync(path.join(here, "slides-jpg")).filter((f) => f.end
 const doc = (pages) => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>
 ${pages}
 </body></html>`;
-const html = doc(`${slides.map(slidePage).join("\n")}
+const html = doc(`${slides.map((f) => slidePage(f)).join("\n")}
 ${dividerPage()}
 ${MARKS.map(markPage).join("\n")}`);
 
@@ -180,6 +181,18 @@ async function print(name, content) {
   return buf;
 }
 const mainPdf = await print("main", html);
+/* The leave-behind is the copy that gets emailed, so its slides are lighter:
+   2560px across the 11in page is still ~230dpi, and it keeps the file under the
+   25MB most mail services allow. The presenter edition keeps the 4K JPGs. */
+const LIGHT = path.join(here, "slides-jpg", "light");
+fs.mkdirSync(LIGHT, { recursive: true });
+for (const f of slides) {
+  await sharp(path.join(here, "slides-jpg", f)).resize({ width: 2560, kernel: "lanczos3" })
+    .jpeg({ quality: 84, chromaSubsampling: "4:4:4", mozjpeg: true }).toFile(path.join(LIGHT, f));
+}
+const lightPdf = await print("light", doc(`${slides.map((f) => slidePage(f, "slides-jpg/light")).join("\n")}
+${dividerPage()}
+${MARKS.map(markPage).join("\n")}`));
 const dividerPdf = await print("script", doc(scriptDivider()));
 await browser.close();
 
@@ -254,7 +267,7 @@ function addLinks(pdf) {
 async function build(file, withScript) {
   const pdf = await PDFDocument.create();
   const add = async (bytes) => { const src = await PDFDocument.load(bytes); (await pdf.copyPages(src, src.getPageIndices())).forEach((p) => pdf.addPage(p)); };
-  await add(mainPdf);
+  await add(withScript ? mainPdf : lightPdf);
   if (withScript) {
     await add(dividerPdf);
     if (fs.existsSync(SCRIPT_PDF)) await add(fs.readFileSync(SCRIPT_PDF));
