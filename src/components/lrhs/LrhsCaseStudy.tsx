@@ -257,12 +257,106 @@ export function LrhsCaseStudy() {
       {/* The case study's own name, cover and description, kept as they were. */}
       <CaseStudyHero data={HERO} />
 
+      {/* ── Mustangs Ahead: the LR on Mustang Green ──────────────────
+          The green banner from the rebuild, kept just under the case study's
+          own name, cover and description (Bronx wanted both). No mention of
+          the app in here — Mustang Studio is the surprise further down. */}
+      <section aria-label="Mustangs Ahead" className="relative mx-auto mt-16 max-w-[1440px] px-3 sm:mt-24 sm:px-6">
+        <div className="relative isolate overflow-hidden rounded-[28px] text-white sm:rounded-[36px]" style={{ background: GREEN }}>
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{ background: "radial-gradient(85% 75% at 74% 38%, #0c5232 0%, #033922 52%, #011f14 100%)" }}
+          />
+          {/* the wallpaper's ghosted mustang — a mask, so it stays one flat tint in either theme */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-[16%] -left-[14%] aspect-[1.6/1] w-[110%] opacity-[0.075] sm:w-[88%]"
+            style={{
+              background: "#ffffff",
+              WebkitMaskImage: `url("${mark("LRHS Mustang 4.svg")}")`,
+              maskImage: `url("${mark("LRHS Mustang 4.svg")}")`,
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+              WebkitMaskSize: "contain",
+              maskSize: "contain",
+              WebkitMaskPosition: "left bottom",
+              maskPosition: "left bottom",
+            }}
+          />
+
+          <div className="relative flex min-h-[640px] flex-col px-6 py-6 sm:px-10 sm:py-9 lg:min-h-[min(860px,calc(100vh-100px))] lg:px-14 lg:py-12">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/[0.09] py-1.5 pr-3.5 pl-2 text-[13px] font-medium tracking-tight ring-1 ring-white/15">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#2EA866] text-[#032414]">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden>
+                    <path d="M1 4.2 3.6 6.6 9 1.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+                Logos approved by the principal, October 2026
+              </span>
+              <span className="text-[13px] tracking-tight text-white/60">Lakewood Ranch High School, Bradenton, Florida</span>
+            </div>
+
+            {/* the emblem */}
+            <div className="relative mx-auto mt-10 w-[68%] max-w-[400px] lg:absolute lg:top-1/2 lg:right-[7%] lg:mt-0 lg:w-[38%] lg:max-w-[540px] lg:-translate-y-[56%]">
+              {/* the shadow sits on the wrapper: the dark theme's img filter would replace it */}
+              <Reveal variant="scale" delay={150} duration={1500}>
+                <div className="relative aspect-[1944/1873] w-full drop-shadow-[0_30px_60px_rgba(0,0,0,0.35)]">
+                  <Image
+                    src={mark("LRHS Emblem Mono.svg")}
+                    alt="The LR emblem, reversed on Mustang Green"
+                    fill
+                    sizes="(min-width: 1024px) 540px, 68vw"
+                    className="object-contain"
+                  />
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="relative mt-10 lg:mt-auto lg:max-w-[56%]">
+              <Reveal variant="blur" delay={120} duration={1300}>
+                <h2
+                  className="font-display text-white"
+                  style={{ fontSize: "clamp(56px, 9.6vw, 156px)", fontWeight: 600, letterSpacing: "-0.05em", lineHeight: 0.88 }}
+                >
+                  Mustangs Ahead
+                </h2>
+              </Reveal>
+              <Reveal variant="up" delay={260} duration={1100}>
+                <p className="mt-6 max-w-[34em] text-[17px] leading-[1.5] text-white/80 sm:mt-8 sm:text-[19px]">
+                  A brand system for my school, home of the Mustangs since 1998 — {say(MARKS.length)} marks in{" "}
+                  {say(FAMILIES.length)} families, the colour, type and voice that hold them together, and the cards
+                  every student carries.
+                </p>
+              </Reveal>
+            </div>
+
+            <dl className="relative mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/15 pt-6 sm:grid-cols-4 lg:mt-12">
+              {[
+                [MARKS.length, "marks"],
+                [FAMILIES.length, "families, one per department"],
+                [6, "colours, with green in the lead"],
+                [2, "ID cards, student and staff"],
+              ].map(([n, label]) => (
+                <div key={label} className="flex flex-col-reverse gap-1">
+                  <dt className="text-[13px] leading-[1.35] text-white/60">{label}</dt>
+                  <dd className="font-display text-[34px] leading-none font-semibold tracking-[-0.04em] tabular-nums sm:text-[44px]">
+                    {n}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
       <section className="relative mx-auto mt-20 grid max-w-[1440px] grid-cols-12 gap-6 px-5 sm:mt-28 sm:gap-8 sm:px-8">
         <Reveal variant="up" duration={1100} className="col-span-12 lg:col-span-9">
           <p className="text-[21px] leading-[1.4] tracking-[-0.01em] text-ink sm:text-[28px] sm:leading-[1.35]">
             <RichText>
               {
-                "Walk around Lakewood Ranch High and you can count at least *five different horses* — on the scoreboard, the banners, the band trailer — each drawn differently, in a different green. None of them are wrong; each one was someone doing their best with whatever file they could find. This project draws one horse, builds a system around it, and puts it on the things the school actually uses — the signs, the posters, the shirts and the cards in everyone's pocket. In October 2026, the principal approved the logos."
+                "Walk around Lakewood Ranch High and you can count at least *five different horses* — on the scoreboard, the banners, the band trailer — each drawn differently, in a different green. None of them are wrong; each one was someone doing their best with whatever file they could find. This project draws one horse, builds a system around it, and puts it on the things the school actually uses — the signs, the posters, the shirts and the cards in everyone's pocket."
               }
             </RichText>
           </p>
