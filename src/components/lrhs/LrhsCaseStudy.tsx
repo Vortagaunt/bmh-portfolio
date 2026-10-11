@@ -841,7 +841,7 @@ export function LrhsCaseStudy() {
               <CtaLink href="/studio/" exitBg={STUDIO_BG}>
                 Open Mustang Studio
               </CtaLink>
-              <CtaLink href="/lrhs-brand-refresh.html" exitBg="#0e0e10">
+              <CtaLink href="/lrhs-brand-guidelines">
                 Read the brand guidelines
               </CtaLink>
             </div>

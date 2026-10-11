@@ -95,6 +95,11 @@ Industry Black is licensed and is not committed. The scripts look for it in
 ## Keeping the three surfaces in step
 
 A change to the deck also belongs in the printable PDF and on the site
-(`/case-study/lakewood-ranch-redesign`, `public/lrhs-brand-refresh.html` and
-`public/lrhs-brand-system/website-concept.html`). The two bundled pages take
-new marks through `scripts/update-lrhs-bundles.mjs`.
+(`/case-study/lakewood-ranch-redesign`, the brand guidelines at
+`/lrhs-brand-guidelines` and `public/lrhs-brand-system/website-concept.html`).
+The guidelines page is built from the deck's own words and reads the mark
+catalogue, so new marks show up there by themselves; its text lives in
+`src/components/lrhs/guidelines/BrandGuidelines.tsx`. The website concept is
+still a bundled page and takes new marks through
+`scripts/update-lrhs-bundles.mjs`. (`public/lrhs-brand-refresh.html`, the old
+bundled guidelines, now just forwards to the new page.)

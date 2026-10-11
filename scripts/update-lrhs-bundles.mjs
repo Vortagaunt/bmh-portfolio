@@ -1,6 +1,7 @@
 /**
  * Swap the new LRHS marks into the two bundled pages on the site:
- *   public/lrhs-brand-refresh.html                 brand guidelines
+ *   public/lrhs-brand-refresh.html                 brand guidelines (now only a
+ *                                                  forwarder — skipped, see below)
  *   public/lrhs-brand-system/website-concept.html  the clickable site concept
  *
  * Both are single-file bundler exports. Their images live in a manifest of
@@ -121,8 +122,13 @@ const unpack = (e) => { let b = Buffer.from(e.data, "base64"); if (e.compressed)
 const pack = (e, text) => ({ ...e, data: (e.compressed ? zlib.gzipSync(Buffer.from(text, "utf8")) : Buffer.from(text, "utf8")).toString("base64") });
 const pct = (a, b) => `${Math.round((100 * a) / b)}%`;
 
-/* ---------- the guidelines page ---------- */
-{
+/* ---------- the guidelines page ----------
+   Since Oct 11 the guidelines are a page of the site (/lrhs-brand-guidelines,
+   which reads the marks straight from public/images/lrhs-marks), and this file
+   only forwards there. The old bundle is in git history. */
+if (!fs.readFileSync(BRAND, "utf8").includes('type="__bundler/manifest"')) {
+  console.log("  brand   skipped — lrhs-brand-refresh.html now forwards to /lrhs-brand-guidelines");
+} else {
   let html = fs.readFileSync(BRAND, "utf8");
   const man = readBlock(html, "manifest");
   for (const [id, [file, colour]] of Object.entries(BRAND_MAP)) {

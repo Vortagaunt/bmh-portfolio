@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 type Swatch = { name: string; hex: string; role: string; share: number; light?: boolean };
 
-/* From the brand guidelines (public/lrhs-brand-refresh.html). `share` is how
+/* From the brand guidelines (/lrhs-brand-guidelines). `share` is how
    much of a typical piece each colour covers — green leads, red stays rare —
    and it sets each swatch's width, so the strip reads as the rule itself. */
 const SWATCHES: Swatch[] = [
