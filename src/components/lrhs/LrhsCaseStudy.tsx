@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import LRHS_MARKS from "@/data/lrhs-marks.json";
 import STUDIO_TEMPLATES from "@/data/mustang-studio-templates.json";
-import { CaseStudyHero, RichText, type CaseStudyData } from "../CaseStudyLayout";
+import { RichText } from "../CaseStudyLayout";
 import { Reveal } from "../Reveal";
 import { ZoomImage } from "../ZoomImage";
 import { BuildVideo } from "../BuildVideo";
@@ -48,30 +48,6 @@ const WORDS: Record<number, string> = {
 };
 const say = (n: number) => WORDS[n] ?? String(n);
 const Say = (n: number) => say(n).charAt(0).toUpperCase() + say(n).slice(1);
-
-/* The top of the page — name, cover and description — exactly as the case
-   study has always opened. The "Open Mustang Studio" button that used to sit
-   beside the guidelines link is left out on purpose: the app is the surprise
-   further down the page. */
-const HERO: Pick<CaseStudyData, "index" | "category" | "title" | "subtitle" | "hero" | "meta" | "links" | "linksDecorated"> = {
-  index: "03",
-  category: "Brand · Web Concept",
-  title: "Lakewood Ranch HS — Redesign Concept",
-  subtitle:
-    "A speculative rebrand and website concept for *Lakewood Ranch High School* — my school, home of the *Mustangs* in Bradenton, Florida since 1998. Rebuilding the identity from the ground up: marks, color, type, voice, and a working website mockup you can actually click through.",
-  hero: {
-    src: "/images/lrhs-hero.png",
-    alt: "The Mustang Brand System — hero",
-  },
-  meta: [
-    { label: "Year", value: "2026" },
-    { label: "Role", value: "Designer" },
-    { label: "Tools", value: "*Figma*, *Illustrator*" },
-    { label: "Type", value: "Concept · Self-initiated" },
-  ],
-  links: [{ label: "Explore the brand system", href: "/lrhs-brand-refresh.html", external: true, exitBg: "#0e0e10" }],
-  linksDecorated: true,
-};
 
 /* ── Small building blocks ─────────────────────────────────────────── */
 
@@ -253,15 +229,14 @@ const CRIES = ["Go Mustangs", "Home of the Mustangs", "Ride together", "Mustang 
 
 export function LrhsCaseStudy() {
   return (
-    <article className="relative pt-24 pb-24 sm:pt-32 sm:pb-32">
-      {/* The case study's own name, cover and description, kept as they were. */}
-      <CaseStudyHero data={HERO} />
-
+    <article className="relative pb-24 sm:pb-32">
       {/* ── Mustangs Ahead: the LR on Mustang Green ──────────────────
-          The green banner from the rebuild, kept just under the case study's
-          own name, cover and description (Bronx wanted both). No mention of
-          the app in here — Mustang Studio is the surprise further down. */}
-      <section aria-label="Mustangs Ahead" className="relative mx-auto mt-16 max-w-[1440px] px-3 sm:mt-24 sm:px-6">
+          The page opens straight on the green banner (Bronx took the old
+          name / description / cover header off the page on Oct 11; the
+          browser title, home card and share image still use them). No
+          mention of the app in here — Mustang Studio is the surprise
+          further down. */}
+      <header className="relative mx-auto max-w-[1440px] px-3 pt-3 sm:px-6 sm:pt-6">
         <div className="relative isolate overflow-hidden rounded-[28px] text-white sm:rounded-[36px]" style={{ background: GREEN }}>
           <div
             aria-hidden
@@ -316,12 +291,12 @@ export function LrhsCaseStudy() {
 
             <div className="relative mt-10 lg:mt-auto lg:max-w-[56%]">
               <Reveal variant="blur" delay={120} duration={1300}>
-                <h2
+                <h1
                   className="font-display text-white"
                   style={{ fontSize: "clamp(56px, 9.6vw, 156px)", fontWeight: 600, letterSpacing: "-0.05em", lineHeight: 0.88 }}
                 >
                   Mustangs Ahead
-                </h2>
+                </h1>
               </Reveal>
               <Reveal variant="up" delay={260} duration={1100}>
                 <p className="mt-6 max-w-[34em] text-[17px] leading-[1.5] text-white/80 sm:mt-8 sm:text-[19px]">
@@ -349,7 +324,7 @@ export function LrhsCaseStudy() {
             </dl>
           </div>
         </div>
-      </section>
+      </header>
 
       <section className="relative mx-auto mt-20 grid max-w-[1440px] grid-cols-12 gap-6 px-5 sm:mt-28 sm:gap-8 sm:px-8">
         <Reveal variant="up" duration={1100} className="col-span-12 lg:col-span-9">
