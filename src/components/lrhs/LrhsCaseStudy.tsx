@@ -23,7 +23,7 @@ import { Swatches } from "./Swatches";
    Counts come from the catalogues, never typed in: the marks and families
    from src/data/lrhs-marks.json (the same file the deck and the PDF read),
    the templates from src/data/mustang-studio-templates.json. The only
-   hand-kept numbers are Mustang Studio 1.6's sizes, checks and icons.
+   hand-kept numbers are Mustang Studio 1.7's sizes, checks and icons.
    ───────────────────────────────────────────────────────────────────── */
 
 const GREEN = "#033922";
@@ -34,17 +34,17 @@ const MARKS = LRHS_MARKS.marks;
 const FAMILIES = LRHS_MARKS.families;
 const RETIRED = LRHS_MARKS.retired;
 const TEMPLATES = STUDIO_TEMPLATES.templates.length;
-const STUDIO_SIZES = 17;
-const STUDIO_CHECKS = 28;
+const STUDIO_SIZES = 19;
+const STUDIO_CHECKS = 33;
 const STUDIO_ICONS = 134;
 
 const mark = (file: string) => `/images/lrhs-marks/${encodeURI(file)}`;
 
 /* Numbers written out where they open a sentence or a heading. */
 const WORDS: Record<number, string> = {
-  5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten", 25: "twenty-five",
-  26: "twenty-six", 27: "twenty-seven", 28: "twenty-eight", 29: "twenty-nine", 30: "thirty",
-  40: "forty", 41: "forty-one", 42: "forty-two",
+  5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten", 19: "nineteen", 25: "twenty-five",
+  26: "twenty-six", 27: "twenty-seven", 28: "twenty-eight", 29: "twenty-nine", 30: "thirty", 33: "thirty-three",
+  40: "forty", 41: "forty-one", 42: "forty-two", 45: "forty-five",
 };
 const say = (n: number) => WORDS[n] ?? String(n);
 const Say = (n: number) => say(n).charAt(0).toUpperCase() + say(n).slice(1);
@@ -742,7 +742,7 @@ export function LrhsCaseStudy() {
                   It checks the work for you
                 </h3>
                 <p className="mt-4 max-w-[46ch] text-[16px] leading-[1.6] text-white/75 sm:text-[17px]">
-                  {`${Say(STUDIO_CHECKS)} rules run while you work: text that’s hard to read, a mark on the wrong ground, a tilted or faded mark, off-brand colours, too much Spirit Red, text too small to print or too close to the trim. Each one comes with a one-click fix.`}
+                  {`${Say(STUDIO_CHECKS)} rules run while you work: text that’s hard to read, a mark on the wrong ground, a tilted or faded mark, off-brand colours, too much Spirit Red, text too small to print or too close to the trim, and words in a banner’s pole pocket. Most come with a one-click fix.`}
                 </p>
               </div>
               <div className="col-span-12 lg:col-span-8">
@@ -770,8 +770,8 @@ export function LrhsCaseStudy() {
                   {Say(TEMPLATES)} templates, ready on day one
                 </h3>
                 <p className="col-span-12 max-w-[56ch] text-[16px] leading-[1.6] text-white/75 sm:text-[17px] lg:col-span-6">
-                  Sorted by department, plus a set for every season — Homecoming, Pink Out, Halloween and the winter
-                  holidays. These are the templates exactly as the app opens them, and everything in them stays editable.
+                  Sorted by department, with pole banners for the street and a set for every season — Homecoming, Pink Out,
+                  Halloween and the winter holidays. These are the templates exactly as the app opens them, and everything in them stays editable.
                 </p>
               </div>
               <div className="mt-8">

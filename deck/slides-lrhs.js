@@ -591,9 +591,9 @@ const ask = (n) => page("lrpaper", `
    The brand-locked design app Bronx built, shown with its own screens and its
    own template exports (assets/studio — captured from the app by
    scripts/capture-mustang-studio.mjs). prepare-assets copies them to img/studio.
-   Facts on these slides are read from the app (1.6): 41 templates in 6 groups
-   (the sixth is Seasons), 17 sizes, 25 marks, 6 type styles, 134 icons,
-   28 brand-check rules, 4 seasonal themes. */
+   Facts on these slides are read from the app (1.7): 45 templates in 7 groups
+   (Seasons and Banners among them), 19 sizes, 25 marks, 6 type styles, 134 icons,
+   33 brand-check rules, 4 seasonal themes. */
 const STUDIO = "img/studio";
 const STUDIO_TPL = require("../assets/studio/templates.json");
 const STUDIO_FMT = {
@@ -603,7 +603,8 @@ const STUDIO_FMT = {
   "x-header": [1500, 500, "X header", "1500 × 500"], slide: [1920, 1080, "Slide", "16 : 9"],
   letter: [8.5, 11, "Flyer", "8.5 × 11 in"], half: [5.5, 8.5, "Half-letter", "5.5 × 8.5 in"],
   tabloid: [11, 17, "Poster", "11 × 17 in"], poster18: [18, 24, "Poster", "18 × 24 in"],
-  poster24: [24, 36, "Poster", "24 × 36 in"], banner: [72, 24, "Banner", "6 × 2 ft"],
+  poster24: [24, 36, "Poster", "24 × 36 in"], banner: [72, 24, "Fence banner", "6 × 2 ft"],
+  pole4: [24, 48, "Pole banner", "2 × 4 ft"], pole5: [24, 60, "Pole banner", "2 × 5 ft"],
   postcard: [6, 4, "Postcard", "6 × 4 in"], "id-v": [2.125, 3.375, "ID card", "Vertical"],
   "id-h": [3.375, 2.125, "ID card", "Horizontal"],
 };
@@ -638,7 +639,7 @@ const studioIntro = (n) => page("greend", `
       A design app that only speaks Mustang. Anyone at school can make a flyer, a post or a poster
       &mdash; and it comes out on brand every time.</div>
     <div style="display:flex;flex-wrap:wrap;gap:22px;margin-top:72px;">
-      ${["41 templates", "17 sizes", "25 marks", "28 brand checks"].map((t) => `<span style="padding:20px 38px;border-radius:999px;
+      ${["45 templates", "19 sizes", "25 marks", "33 brand checks"].map((t) => `<span style="padding:20px 38px;border-radius:999px;
         background:rgba(255,255,255,.1);font-size:36px;font-weight:600;color:#FCFCFC;">${t}</span>`).join("")}
     </div>
   </div>
@@ -648,7 +649,7 @@ const studioIntro = (n) => page("greend", `
 
 /* 2 — how it works, in three real screens */
 const STUDIO_STEPS = [
-  ["ui-templates.jpg", [0, 40, 1080, 810], "Pick a template", "Forty-one of them, sorted by department and season."],
+  ["ui-templates.jpg", [0, 40, 1080, 810], "Pick a template", "Forty-five of them, sorted by department and season."],
   ["ui-fill.jpg", [280, 30, 1160, 870], "Fill in the blanks", "Type the details into a form. The type, colours and spacing stay locked to the brand."],
   ["ui-export.jpg", [300, 120, 840, 630], "Export", "PNG or JPG for screens, a print-ready PDF, or a video and a GIF when it moves."],
 ];
@@ -672,12 +673,12 @@ const studioSteps = (n) => page("lrpaper", `
   </div></div>`);
 
 /* 3 — every template, by department, as the app exports them */
-const STUDIO_GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "ID cards", "Seasons"];
+const STUDIO_GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Banners", "ID cards", "Seasons"];
 const studioTemplates = (n) => page("lrpaper", `
   ${kicker(n, "Templates", false)}
-  <div class="display" style="font-size:130px;color:#0C0C0C;margin:48px 0 20px;">Forty-one templates, ready on day one</div>
+  <div class="display" style="font-size:130px;color:#0C0C0C;margin:48px 0 20px;">Forty-five templates, ready on day one</div>
   <div style="font-size:42px;line-height:1.5;color:${GREY};">Built from the brand system, one set for every part of the school &mdash; and one for every season. Everything stays editable.</div>
-  <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:26px;">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:20px;">
     ${STUDIO_GROUPS.map((g) => {
       const items = STUDIO_TPL.filter((t) => t.group === g);
       return `<div style="display:flex;align-items:center;gap:60px;">
@@ -685,8 +686,8 @@ const studioTemplates = (n) => page("lrpaper", `
           <div style="font-size:44px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;">${g}</div>
           <div style="font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:${GREY};margin-top:10px;">${items.length} templates</div>
         </div>
-        <div style="display:flex;gap:22px;align-items:center;height:214px;">
-          ${items.map((t) => `<img src="${STUDIO}/tpl-${t.id}.jpg" alt="${t.name}" style="height:214px;width:auto;display:block;border-radius:8px;
+        <div style="display:flex;gap:22px;align-items:center;height:184px;">
+          ${items.map((t) => `<img src="${STUDIO}/tpl-${t.id}.jpg" alt="${t.name}" style="height:184px;width:auto;display:block;border-radius:8px;
             box-shadow:0 0 0 1px rgba(12,12,12,.08),0 18px 40px -20px rgba(12,12,12,.5);">`).join("")}
         </div>
       </div>`;
@@ -695,7 +696,7 @@ const studioTemplates = (n) => page("lrpaper", `
 
 /* 4 — the brand check, before and after one click each */
 const STUDIO_CHECKS = ["Text that’s hard to read", "A mark on the wrong ground", "Tilted or faded marks", "Off-brand colours",
-  "Too much Spirit Red", "Text too small to print", "Too close to the trim", "QR codes and barcodes"];
+  "Too much Spirit Red", "Text too small to print", "Too close to the trim", "Words in a pole pocket", "QR codes and barcodes"];
 const studioCheck = (n) => page("greend", `
   ${kicker(n, "Brand check", true)}
   <div class="display" style="font-size:150px;margin:56px 0 70px;">It checks the work for you</div>
@@ -708,7 +709,7 @@ const studioCheck = (n) => page("greend", `
         <div style="font-size:38px;line-height:1.5;color:${ONGREEN};margin-top:18px;">${note}</div>
       </div>`).join("")}
     <div style="display:flex;flex-direction:column;justify-content:flex-start;">
-      <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:${LR_MUTED};font-weight:600;">28 rules, including</div>
+      <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:${LR_MUTED};font-weight:600;">33 rules, including</div>
       <div style="display:flex;flex-direction:column;gap:30px;margin-top:44px;">
         ${STUDIO_CHECKS.map((c) => `<div style="display:flex;gap:24px;align-items:center;font-size:40px;color:#FCFCFC;">
           ${studioIcon(ICO.check, 44, "#2EA866")}<span>${c}</span></div>`).join("")}
@@ -719,7 +720,7 @@ const studioCheck = (n) => page("greend", `
 /* 5 — every size the app makes, drawn to shape */
 const STUDIO_ROWS = [
   [["Social", ["ig-post", "ig-portrait", "story", "x-post", "fb-event", "yt-thumb", "x-header"]], ["Screen", ["slide"]]],
-  [["Print", ["letter", "half", "tabloid", "poster18", "poster24", "banner", "postcard", "id-v", "id-h"]]],
+  [["Print", ["letter", "half", "tabloid", "poster18", "poster24", "postcard", "id-v", "id-h"]], ["Banners", ["banner", "pole4", "pole5"]]],
 ];
 const studioShape = (id) => {
   const [w, h, name, dims] = STUDIO_FMT[id], H = 230, W = Math.round(H * w / h), card = id.startsWith("id-");
@@ -733,10 +734,10 @@ const studioShape = (id) => {
 };
 const studioSizes = (n) => page("lrpaper", `
   ${kicker(n, "Every size", false)}
-  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">Seventeen sizes, one system</div>
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">Nineteen sizes, one system</div>
   <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3200px;text-wrap:balance;">
-    Posts and stories, a screen slide, flyers, posters up to 24 × 36, a six-foot fence banner &mdash; and
-    the ID cards. Print sizes export as print-ready PDFs at 300 dpi.</div>
+    Posts and stories, a screen slide, flyers, posters up to 24 × 36, the ID cards, a six-foot fence banner
+    &mdash; and the pole banners out front. Print sizes export as print-ready PDFs.</div>
   <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:90px;">
     ${STUDIO_ROWS.map((row) => `<div style="display:flex;gap:120px;align-items:flex-end;">
       ${row.map(([label, ids]) => `<div>
@@ -761,7 +762,7 @@ const studioInside = (n) => page("lrpaper", `
     ${STUDIO_INSIDE.map(([src, box, title, use]) => `<div>${studioCrop(src, box, 792)}${studioCap(title, use, false)}</div>`).join("")}
   </div></div>`);
 
-/* 7 — new in 1.6: made for the people who'll use it, not for designers */
+/* 7 — made for the people who'll use it, not for designers (the 1.6 features) */
 const STUDIO_NEW = [
   ["Motion", "Everything can rise, pop or slide in. Export an MP4 for Reels or a GIF that loops."],
   ["Seasons", "Homecoming gold, Pink Out, Halloween and winter colours, planned and checked."],
@@ -769,7 +770,7 @@ const STUDIO_NEW = [
   ["“Who are you?”", "Coach, club, band, newsletter or front office: your templates come first."],
 ];
 const studioNew = (n) => page("lrpaper", `
-  ${kicker(n, "New in Mustang Studio 1.6", false)}
+  ${kicker(n, "Mustang Studio 1.7", false)}
   <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 0;">Made for people who aren’t designers</div>
   <div style="flex:1;min-height:0;display:grid;grid-template-columns:1.18fr .72fr 1.18fr;gap:90px;align-items:center;">
     <div>${studioCrop("ui-fill.jpg", [190, 30, 1250, 850], 1100)}${studioCap("Fill in the blanks", "A form instead of a canvas. Type the details; long lines shrink to fit and nothing slides off brand.", false)}</div>
@@ -911,11 +912,11 @@ const ORDER = [
   [oneMore, "One more thing…", "One more thing"],
   [studioIntro, "Mustang Studio — a design app that only speaks Mustang", "One more thing"],
   [studioSteps, "How it works — three steps, no designer", "One more thing"],
-  [studioTemplates, "Templates — forty-one, ready on day one", "One more thing"],
+  [studioTemplates, "Templates — forty-five, ready on day one", "One more thing"],
   [studioCheck, "Brand check — it checks the work for you", "One more thing"],
-  [studioSizes, "Every size — seventeen sizes, one system", "One more thing"],
+  [studioSizes, "Every size — nineteen sizes, one system", "One more thing"],
   [studioInside, "Built in — everything is already inside", "One more thing"],
-  [studioNew, "New in 1.6 — made for people who aren't designers", "One more thing"],
+  [studioNew, "Made for people who aren't designers — fill in, batch, carousels", "One more thing"],
   [studioAnywhere, "Where it runs — free, and it runs anywhere", "One more thing"],
   [studioBento, "Mustang Studio, on one page", "One more thing"],
   [bento, "Mustangs Ahead — the whole system on one page", "Finale"],

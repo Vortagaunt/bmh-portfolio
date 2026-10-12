@@ -5,13 +5,13 @@ import { ZoomImage } from "../ZoomImage";
 
 type Stop = { id: string; label: string; text: string; alt: string };
 
-/* Real screens from Mustang Studio 1.6 (assets/studio/ui-*.jpg, cut to 1920
-   wide in public/images/lrhs-studio). */
+/* Real screens from Mustang Studio 1.7 (assets/studio/ui-*.jpg, cut to 1920
+   wide in public/images/lrhs-studio by scripts/studio-site-images.mjs). */
 const STOPS: Stop[] = [
   {
     id: "templates",
     label: "Pick a template",
-    text: "Forty-one of them, sorted by department and season. The ones for whoever's using it — a coach, the band, the front office — come first.",
+    text: "Forty-five of them, sorted by department and season. The ones for whoever's using it — a coach, the band, the front office — come first.",
     alt: "Mustang Studio with the templates panel open beside a game-day post",
   },
   {
@@ -47,13 +47,13 @@ const STOPS: Stop[] = [
   {
     id: "sizes",
     label: "Resize it",
-    text: "Seventeen sizes, from an Instagram story to a 24 × 36 poster and a six-foot fence banner.",
+    text: "Nineteen sizes, from an Instagram story to a 24 × 36 poster, a six-foot fence banner and the pole banners out front.",
     alt: "The change-size dialog listing social, screen and print sizes",
   },
   {
     id: "export",
     label: "Export",
-    text: "PNG, JPG, PDF, MP4 or GIF. Print sizes come out as print-ready PDFs at 300 dpi, with bleed and crop marks when the print shop wants them.",
+    text: "PNG, JPG, PDF, MP4 or GIF. Print sizes come out as print-ready PDFs — 300 dpi, or 150 for the pole banners — with bleed and crop marks when the print shop wants them.",
     alt: "The export dialog with PNG, JPG, PDF, video and GIF options",
   },
 ];

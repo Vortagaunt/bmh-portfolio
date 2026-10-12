@@ -92,6 +92,22 @@ badge numbers are derived from it.
 Industry Black is licensed and is not committed. The scripts look for it in
 `public/fonts/industry-black.otf`, then where Windows installs per-user fonts.
 
+### Mustang Studio's pictures
+
+Everything on the Studio slides, the Studio bentos and the case study's Studio
+section is the app's own output. After a new Mustang Studio build:
+
+```bash
+node scripts/capture-mustang-studio.mjs "<path to Mustang Studio (Industry Black).html>"   # assets/studio
+node scripts/studio-site-images.mjs ui-templates ui-sizes          # the site's copies + the template wall's list
+node scripts/render-studio-bento.mjs && BENTO_LAYOUT=wide node scripts/render-studio-bento.mjs
+node scripts/render-bento-motion.mjs studio-wide                    # then studio, and vertical for the LRHS bento
+```
+
+The template count is read from `assets/studio/templates.json` everywhere it can
+be. Hand-kept: the sizes (19) and brand-check rules (33) of Mustang Studio 1.7 in
+`slides-lrhs.js`, `scripts/render-studio-bento.mjs` and `LrhsCaseStudy.tsx`.
+
 ## Keeping the three surfaces in step
 
 A change to the deck also belongs in the printable PDF and on the site

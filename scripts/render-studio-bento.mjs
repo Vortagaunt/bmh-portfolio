@@ -66,7 +66,9 @@ const FIELD = `radial-gradient(120% 95% at 18% 10%, #0A5733 0%, rgba(10,87,51,0)
   radial-gradient(110% 100% at 88% 96%, #021A10 0%, rgba(2,26,16,0) 58%),
   linear-gradient(146deg, #04482A 0%, #003C24 44%, #05281A 100%)`;
 const TPL = JSON.parse(fs.readFileSync(path.join(STUDIO, "templates.json"), "utf8"));
-const STRIP = ["gameday", "news", "story-podcast", "podstory", "spotlight", "certificate", "id-student-front", "band", "final", "ridetogether", "honor", "schedule", "issue", "gamestory"]
+/* Mustang Studio 1.7: 19 sizes and 33 brand-check rules (28 from 1.5, the two seasonal ones from 1.6, three for banners) */
+const SIZES = 19, CHECKS = 33;
+const STRIP = ["gameday", "pole-gomustangs", "news", "story-podcast", "podstory", "spotlight", "certificate", "id-student-front", "band", "final", "ridetogether", "honor", "schedule", "issue", "gamestory"]
   .filter((id) => TPL.some((t) => t.id === id));
 const SEASONS = [["homecoming-week", "Homecoming", ["#C9A227", "#EAD9A0"]], ["pinkout-game", "Pink Out", ["#EC5C8D", "#F8D3DF"]],
   ["halloween-trunk", "Halloween", ["#E8731C", "#F6C453"]], ["winter-break", "Winter", ["#B9C2C6", "#E7EEF1"]]];
@@ -128,12 +130,12 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
   <div style="position:absolute;inset:0;background:radial-gradient(80% 90% at 0% 0%,rgba(46,168,102,.22) 0%,rgba(46,168,102,0) 60%);"></div>
   <div style="position:relative;z-index:1;width:760px;display:flex;flex-direction:column;flex:1;">
     <img src="${uri(path.join(STUDIO, "app-icon-1024.png"))}" style="width:124px;height:124px;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6));">
-    <div class="lab" style="margin-top:38px;"><span class="new">New</span>Version 1.6</div>
+    <div class="lab" style="margin-top:38px;"><span class="new">New</span>Version 1.7</div>
     <div class="ind" style="font-size:142px;margin-top:22px;">Mustang<br><span class="g">Studio</span></div>
     <div class="sub" style="font-size:31px;margin-top:28px;color:#C9D6CE;">A design app that only speaks Mustang. Anyone at school makes a flyer, a post or a poster &mdash; and it comes out on brand every time.</div>
     <div class="sp"></div>
     <div style="display:flex;flex-wrap:wrap;gap:12px;">
-      ${["41 templates", "17 sizes", "25 marks", "28 brand checks"].map((t) => `<span class="chip" style="font-size:22px;padding:10px 18px;">${t}</span>`).join("")}
+      ${[`${TPL.length} templates`, `${SIZES} sizes`, "25 marks", `${CHECKS} brand checks`].map((t) => `<span class="chip" style="font-size:22px;padding:10px 18px;">${t}</span>`).join("")}
     </div>
   </div>
   <div style="position:absolute;left:${w(840, 880)}px;top:${w(150, 118)}px;width:${w(1240, 1400)}px;border-radius:24px;overflow:hidden;
@@ -171,17 +173,17 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
   </div>
 </div>
 
-<!-- forty-one templates -->
+<!-- every template -->
 <div class="t dark" style="grid-area:${AREA.templates};flex-direction:row;gap:56px;align-items:stretch;padding-right:0;">
   <div style="flex:0 0 auto;display:flex;flex-direction:column;">
     <div class="lab">${icon("layout-template", 30)} &nbsp;Templates</div>
     <div class="sp"></div>
-    <div class="ind" style="font-size:250px;line-height:.78;margin-bottom:-4px;"><span class="g">41</span></div>
+    <div class="ind" style="font-size:250px;line-height:.78;margin-bottom:-4px;"><span class="g">${TPL.length}</span></div>
   </div>
   <div style="flex:0 0 330px;display:flex;flex-direction:column;">
     <div class="sp"></div>
     <div class="h" style="font-size:50px;">Ready on <span class="m">day one.</span></div>
-    <div class="sub" style="font-size:25px;margin-top:12px;">Sorted by department and season. Everything stays editable.</div>
+    <div class="sub" style="font-size:25px;margin-top:12px;">Sorted by department and season, down to the pole banners. Everything stays editable.</div>
   </div>
   <div style="flex:1;min-width:0;position:relative;overflow:hidden;
        -webkit-mask-image:linear-gradient(90deg,#000 80%,transparent);mask-image:linear-gradient(90deg,#000 80%,transparent);">
@@ -241,7 +243,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
   <div class="vig"></div>
   <div class="lab rel">${icon("badge-check", 30)} &nbsp;Brand check</div>
   <div class="sp"></div>
-  <div class="ind rel" style="font-size:150px;line-height:.8;"><span class="g">28</span></div>
+  <div class="ind rel" style="font-size:150px;line-height:.8;"><span class="g">${CHECKS}</span></div>
   <div class="hs rel" style="font-size:36px;margin-top:16px;">rules, <span class="m">checked as you work.</span></div>
   <div class="rel" style="display:inline-flex;gap:10px;align-items:center;margin-top:20px;padding:10px 16px;border-radius:14px;
        background:rgba(46,168,102,.18);color:#7FE0A8;font-size:${w(18, 20)}px;font-weight:700;align-self:flex-start;white-space:nowrap;">${icon("badge-check", 24, 2)}On brand. Nothing to fix.</div>

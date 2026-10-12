@@ -2785,7 +2785,7 @@ function processedImage(asset, f) {
   const key = asset.id + '|' + filterKey(f);
   if (processed.has(key)) return processed.get(key);
   if (!f || (!f.brightness && !f.contrast && !f.saturation && (!f.duotone || f.duotone === 'none') && !f.warmth)) { return asset.img; }
-  const max = 2048, sc = Math.min(1, max / Math.max(asset.w, asset.h));
+  const max = window.photoCap17 ? window.photoCap17('filter') : 2048, sc = Math.min(1, max / Math.max(asset.w, asset.h));
   const W = Math.max(1, Math.round(asset.w * sc)), H = Math.max(1, Math.round(asset.h * sc));
   const c = document.createElement('canvas'); c.width = W; c.height = H;
   const x = c.getContext('2d', { willReadFrequently: true });
@@ -3188,7 +3188,7 @@ function drawSafe() {
     if (sl.w * s > 70) { cx.save(); cx.fillStyle = 'rgba(234,241,236,.75)'; cx.textAlign = 'center'; cx.font = '600 9px "Space Mono", monospace'; cx.fillText('SLOT PUNCH', X + (sl.x + sl.w / 2) * s, Y + (sl.y + sl.h) * s + 4); cx.restore(); }
   }
   if (isPrint(f)) {
-    const m = (f.trim || 0.25) * 150 * (doc.w / f.w);
+    const m = (f.trim || 0.25) * (f.w / f.inch[0]) * (doc.w / f.w);
     cx.strokeStyle = 'rgba(46,168,102,.55)'; cx.setLineDash([5, 5]); cx.lineWidth = 1;
     cx.strokeRect(view.ox + m * s, view.oy + m * s, (doc.w - 2 * m) * s, (doc.h - 2 * m) * s);
   }
@@ -3671,7 +3671,7 @@ async function importFiles(files, frameId) {
   for (const f of list) {
     try {
       const src = await readAsDataURL(f);
-      const small = await downscale(src, 3200);
+      const small = await downscale(src, window.photoCap17 ? window.photoCap17('import') : 3200);
       const a = await addAsset(small, f.name.replace(/\.[^.]+$/, ''));
       addImageLayer(a, frameId); frameId = null;
     } catch (e) { toast(e.message || 'That image could not be opened.'); }
@@ -4078,7 +4078,7 @@ function inspectDocument(p) {
   p.append(h('h2', {}, 'Design'));
   p.append(h('div', { class: 'sec' }, h('h3', {}, 'Size'),
     h('button', { class: 'btn full', onclick: () => openFormatModal(false) }, `${f ? f.name : 'Custom'} · ${doc.w} × ${doc.h}`),
-    h('p', { class: 'note' }, isPrint(f) ? `${f.inch[0]} × ${f.inch[1]} in. Exports at 300 dpi. Keep words inside the dashed line.` : 'Pixels. Exports at 1× or 2×.')));
+    h('p', { class: 'note' }, isPrint(f) ? `${f.inch[0]} × ${f.inch[1]} in. Exports at ${Math.round(f.w / f.inch[0]) * 2} dpi. Keep words inside the dashed line.` : 'Pixels. Exports at 1× or 2×.')));
   const bgSec = h('div', { class: 'sec' }, h('h3', {}, 'Ground')); backgroundControls(bgSec); p.append(bgSec);
   p.append(h('div', { class: 'sec' }, h('h3', {}, 'View'), toggleRow('Safe areas', showSafe, v => { showSafe = v; requestRender(); }), toggleRow('Brand colours only', brandLock, v => { brandLock = v; renderInspector(); })));
   const chk = h('div', { class: 'sec' }, h('h3', {}, 'Brand check'), h('div', { class: 'issues', id: 'issueList' }));
@@ -4784,7 +4784,7 @@ function openFormatModal(fresh) {
   const body = h('div', { style: { display: 'flex', flexDirection: 'column', gap: '14px' } });
   const grid = () => {
     const wrap = h('div', { style: { display: 'flex', flexDirection: 'column', gap: '12px' } });
-    for (const g of ['Social', 'Screen', 'Print']) {
+    for (const g of ['Social', 'Screen', 'Print', 'Banners']) {
       wrap.append(h('h3', { style: { margin: '0', font: '700 11px var(--f-ui)', letterSpacing: '.16em', textTransform: 'uppercase', color: 'var(--ui-muted)' } }, g));
       wrap.append(h('div', { class: 'choice' }, FORMATS.filter(f => f.group === g).map(f => h('button', { 'aria-pressed': String(pick === f.id), onclick: () => { pick = f.id; cw.value = f.w; ch.value = f.h; redraw(); } }, h('b', {}, f.name), h('small', {}, f.inch ? `${f.inch[0]}×${f.inch[1]} in` : `${f.w} × ${f.h}`)))));
     }
@@ -4997,7 +4997,7 @@ async function boot() {
    1.5 projects open unchanged: a design with one page has no `pages`.
    =================================================================== */
 const MS16 = (() => {
-const VERSION = '1.6';
+const VERSION = '1.7';
 const LS16 = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) { } } };
 const clone = o => JSON.parse(JSON.stringify(o));
 const pause = (ms = 0) => new Promise(r => setTimeout(r, ms));
@@ -5219,7 +5219,9 @@ function buildPdf(pages, title) {
 /* ---------------------------------------------------------------
    Print extras: bleed, crop marks and gang-up on Letter sheets
    --------------------------------------------------------------- */
-const bleedIn = f => f && f.card ? 0.0625 : 0.125;
+const bleedIn = f => f && f.bleed ? f.bleed : f && f.card ? 0.0625 : 0.125;
+/* ⅛, ¹⁄₁₆ or ½ inch, for the export notes */
+const bleedLabel = b => b === 0.125 ? '⅛' : b === 0.0625 ? '¹⁄₁₆' : b === 0.5 ? '½' : String(b);
 /* the design grown by b units on every side; things that touch an edge grow into the bleed */
 function bleedDoc(d, b) {
   const o = clone(d); o.w = d.w + 2 * b; o.h = d.h + 2 * b;
@@ -5248,7 +5250,8 @@ function printPages(pieces, wIn, hIn, o) {
   const b = o.marks ? o.b : 0, P = 72, out = [];
   const slug = (i, n) => `Mustang Studio | ${o.title} | ${wIn} x ${hIn} in trim${b ? ` | ${b} in bleed` : ''} | ${o.sheet ? 'sheet' : 'page'} ${i + 1} of ${n}`;
   if (!o.sheet) {
-    const m = o.marks ? 0.5 : 0;
+    // banners carry ½ inch of bleed, so their crop marks sit further out
+    const m = o.marks ? (b > 0.25 ? b + 0.5 : 0.5) : 0;
     pieces.forEach((pc, i) => {
       const W = wIn + 2 * m, H = hIn + 2 * m, pg = { w: W * P, h: H * P, items: [{ img: pc.img, x: (m - b) * P, y: (m - b) * P, w: (wIn + 2 * b) * P, h: (hIn + 2 * b) * P }] };
       if (o.marks) {
@@ -5769,12 +5772,12 @@ pagebar.addEventListener('wheel', e => e.stopPropagation());
    "Who are you?" — the start screen picks the templates you see first
    --------------------------------------------------------------- */
 const ROLES = [
-  { id: 'coach', name: 'Coach or athlete', sub: 'Game days, final scores, schedules', icon: 'trophy', picks: ['gameday', 'recap', 'final', 'schedule', 'gamestory', 'spotlight', 'fence', 'pinkout-game'] },
-  { id: 'club', name: 'Club or activity', sub: 'Meetings, events, sign-ups', icon: 'users', picks: ['club', 'event', 'savedate', 'ridetogether', 'poster24', 'halloween-trunk', 'homecoming-dance'] },
-  { id: 'band', name: 'Mustang Band', sub: 'Concerts, shows and the band mark', icon: 'music', picks: ['band', 'bandpost', 'winter-concert', 'event', 'savedate'] },
-  { id: 'news', name: 'Newsletter or podcast', sub: 'Mustangs Ahead issues and episodes', icon: 'podcast', picks: ['news', 'newsdeck', 'podcast', 'issue', 'podstory', 'ytthumb'] },
-  { id: 'office', name: 'Front office or teacher', sub: 'Announcements, awards, IDs', icon: 'school', picks: ['announce', 'welcome', 'honor', 'certificate', 'grad', 'winter-break', 'id-staff-front'] },
-  { id: 'student', name: 'Student', sub: 'Spirit week, SGA, class events', icon: 'star', picks: ['spirit', 'homecoming-week', 'pinkout-game', 'gomustangs', 'gamestory', 'halloween-costume'] },
+  { id: 'coach', name: 'Coach or athlete', sub: 'Game days, final scores, schedules', icon: 'trophy', picks: ['gameday', 'recap', 'final', 'pole-gomustangs', 'schedule', 'gamestory', 'spotlight', 'fence', 'pole-department', 'pinkout-game'] },
+  { id: 'club', name: 'Club or activity', sub: 'Meetings, events, sign-ups', icon: 'users', picks: ['club', 'event', 'savedate', 'pole-department', 'ridetogether', 'poster24', 'halloween-trunk', 'homecoming-dance'] },
+  { id: 'band', name: 'Mustang Band', sub: 'Concerts, shows and the band mark', icon: 'music', picks: ['band', 'bandpost', 'pole-department', 'winter-concert', 'event', 'savedate'] },
+  { id: 'news', name: 'Newsletter or podcast', sub: 'Mustangs Ahead issues and episodes', icon: 'podcast', picks: ['news', 'newsdeck', 'podcast', 'pole-department', 'issue', 'podstory', 'ytthumb'] },
+  { id: 'office', name: 'Front office or teacher', sub: 'Announcements, awards, IDs', icon: 'school', picks: ['announce', 'pole-welcome', 'welcome', 'pole-senior', 'honor', 'certificate', 'grad', 'winter-break', 'id-staff-front'] },
+  { id: 'student', name: 'Student', sub: 'Spirit week, SGA, class events', icon: 'star', picks: ['spirit', 'homecoming-week', 'pole-gomustangs', 'pinkout-game', 'gomustangs', 'pole-senior', 'gamestory', 'halloween-costume'] },
 ];
 const ROLE_BY_ID = Object.fromEntries(ROLES.map(r => [r.id, r]));
 const myRole = () => ROLE_BY_ID[LS16.get('ms-role')] || null;
@@ -6008,7 +6011,8 @@ openExport = function () {
         .map(([k, a, b]) => h('button', { 'aria-pressed': String(type === k), onclick: () => { type = k; redraw(); } }, h('b', {}, a), h('small', {}, b))))));
     if (n > 1) body.append(h('div', { class: 'sec' }, H3('Pages'), seg([['all', `All ${n} pages`], ['this', `Page ${doc.page + 1} only`]], which, v => { which = v; redraw(); })));
     if (type === 'png' || type === 'jpg' || type === 'pdf') {
-      const sizes = print ? [[1, `150 dpi · ${doc.w} × ${doc.h}`], [2, `300 dpi · ${doc.w * 2} × ${doc.h * 2}`]] : [[1, `1× · ${doc.w} × ${doc.h}`], [2, `2× · ${doc.w * 2} × ${doc.h * 2}`]];
+      const dpi = print ? Math.round(f.w / f.inch[0]) : 0;
+      const sizes = print ? [[1, `${dpi} dpi · ${doc.w} × ${doc.h}`], [2, `${dpi * 2} dpi · ${doc.w * 2} × ${doc.h * 2}`]] : [[1, `1× · ${doc.w} × ${doc.h}`], [2, `2× · ${doc.w * 2} × ${doc.h * 2}`]];
       body.append(h('div', { class: 'sec' }, H3('Size'), h('div', { class: 'choice' }, sizes.map(([k, lab]) => h('button', { 'aria-pressed': String(scale === k), onclick: () => { scale = k; redraw(); } }, h('b', {}, k === 2 ? (print ? 'Print quality' : 'High resolution') : (print ? 'Draft' : 'Standard')), h('small', {}, lab))))));
     }
     if (type === 'gif') {
@@ -6020,7 +6024,7 @@ openExport = function () {
       const b = bleedIn(f), fit = sheetFit(f.inch[0], f.inch[1], marks ? b : 0);
       body.append(h('div', { class: 'sec' }, H3('Print extras'),
         toggleRow('Bleed and crop marks', marks, v => { marks = v; redraw(); }),
-        h('p', { class: 'note' }, marks ? `Adds ${b === 0.125 ? '⅛' : '¹⁄₁₆'} inch of bleed on every side, crop marks and a slug line — what print shops ask for. Backgrounds and edge-to-edge photos run into the bleed.` : 'Print shops usually want bleed and crop marks. A home printer doesn’t need them.'),
+        h('p', { class: 'note' }, marks ? `Adds ${bleedLabel(b)} inch of bleed on every side, crop marks and a slug line — what print shops ask for. Backgrounds and edge-to-edge photos run into the bleed.` : 'Print shops usually want bleed and crop marks. A home printer doesn’t need them.'),
         fit.n >= 2 ? toggleRow(`Gang up on Letter sheets — ${fit.n} per sheet, with cut marks`, sheet, v => { sheet = v; redraw(); }) : null,
         fit.n >= 2 && sheet ? h('p', { class: 'note' }, many ? `Every page goes on the sheets in order, ${fit.n} to a sheet.` : `Fills a sheet with ${fit.n} copies. For a different name on each, use Make a batch.`) : null));
     }
@@ -6112,7 +6116,7 @@ function openBatch() {
   file.addEventListener('change', async e => { const fl = e.target.files[0]; e.target.value = ''; if (!fl) return; ta.value = await fl.text(); parse(); });
   pfile.addEventListener('change', async e => {
     const list = [...e.target.files]; e.target.value = '';
-    for (const fl of list) { try { const src = await downscale(await readAsDataURL(fl), 2000); const a = await addAsset(src, fl.name.replace(/\.[^.]+$/, '')); photos.set(norm(fl.name), a); } catch (err) { } }
+    for (const fl of list) { try { const src = await downscale(await readAsDataURL(fl), window.photoCap17 ? window.photoCap17('batch') : 2000); const a = await addAsset(src, fl.name.replace(/\.[^.]+$/, '')); photos.set(norm(fl.name), a); } catch (err) { } }
     toast(`${list.length} photo${list.length === 1 ? '' : 's'} added`); draw();
   });
   const rowDoc = r => {
@@ -6157,7 +6161,7 @@ function openBatch() {
       const fit = sheetFit(f.inch[0], f.inch[1], marks ? bleedIn(f) : 0);
       outSec.append(toggleRow('Bleed and crop marks', marks, v => { marks = v; draw(); }));
       if (fit.n >= 2) outSec.append(toggleRow(`Gang up on Letter sheets — ${fit.n} per sheet`, sheet, v => { sheet = v; draw(); }));
-      outSec.append(h('div', { class: 'row' }, h('span', { class: 'lbl' }, 'Quality'), seg([[1, 'Draft'], [2, 'Print (300 dpi)']], scale, v => { scale = v; })));
+      outSec.append(h('div', { class: 'row' }, h('span', { class: 'lbl' }, 'Quality'), seg([[1, 'Draft'], [2, `Print (${Math.round(f.w / f.inch[0]) * 2} dpi)`]], scale, v => { scale = v; })));
     }
     body.append(outSec);
     btn.textContent = `Make ${list.length} design${list.length === 1 ? '' : 's'}`;
@@ -6178,7 +6182,8 @@ function openBatch() {
         const mime = fmt === 'jpg' ? 'image/jpeg' : 'image/png', files = [];
         for (let i = 0; i < docs.length; i++) {
           if (pm.cancelled()) return;
-          const c = renderSync(docs[i], 1, { mime });
+          // banners go to the print shop as images too, so they render at print quality (150 dpi)
+          const c = renderSync(docs[i], print && f.pocket ? 2 : 1, { mime });
           const bl = await canvasBlob(c, mime, 0.92); if (!bl) throw tooBig();
           files.push({ name: `${names[i]}.${fmt}`, data: await blobBytes(bl) });
           pm.set((i + 1) / docs.length, `${i + 1} of ${docs.length}`);
@@ -6474,6 +6479,269 @@ return {
   saveTemplate: openSaveTemplate, batch: openBatch, play: previewMotion,
   _: { syncTheme, parseTable, makeZip, buildPdf, makeGif, plan, blanks, sheetFit, printPages, timeline, bleedDoc, THEMES, renderSync, allPages, pageDoc, fitSlot, videoMime },
 };
+})();
+
+/* ===================================================================
+   Mustang Studio 1.7 — pole banners
+   Two banner sizes (2 × 4 ft and 2 × 5 ft) with pole-pocket guides,
+   banner rules in the brand check, and four templates that lay
+   themselves out again when you switch between the two sizes.
+   Wraps 1.6 the way 1.6 wraps 1.5: nothing older is rewritten.
+   =================================================================== */
+const MS17 = (() => {
+const VERSION = '1.7';
+/* Banners work at 75 units per inch: Draft exports at 75 dpi, Print quality at
+   150 dpi, which is what large-format printers ask for on vinyl. */
+const U = 75, POCKET = 4, SIDE = 1.5, MIN_LETTER = 1, MIN_PPI = 75, CAP = 0.7;
+const POLE = [
+  { id: 'pole4', group: 'Banners', name: 'Pole banner · 2×4 ft', w: 24 * U, h: 48 * U, inch: [24, 48], trim: SIDE, pocket: POCKET, bleed: 0.5, minPt: 9 },
+  { id: 'pole5', group: 'Banners', name: 'Pole banner · 2×5 ft', w: 24 * U, h: 60 * U, inch: [24, 60], trim: SIDE, pocket: POCKET, bleed: 0.5, minPt: 9 },
+];
+FMT_BY_ID.banner.group = 'Banners';
+FORMATS.splice(FORMATS.findIndex(f => f.id === 'banner') + 1, 0, ...POLE);
+POLE.forEach(f => { FMT_BY_ID[f.id] = f; });
+const isPole = (d = doc) => { const f = d && FMT_BY_ID[d.fmt]; return !!(f && f.pocket && d.w === f.w && d.h === f.h); };
+
+/* Photos for a banner are kept bigger than for a post, so they hold up at 24 × 60 in. */
+window.photoCap17 = kind => {
+  const pole = isPole();
+  if (kind === 'batch') return pole ? 3200 : 2000;
+  if (kind === 'filter') return pole ? 4800 : 2048;
+  return pole ? 4800 : 3200;
+};
+
+/* ---------------------------------------------------------------
+   Guides: the pole pockets and the side margin
+   --------------------------------------------------------------- */
+const _drawSafe = drawSafe;
+drawSafe = function () {
+  if (!showSafe || !isPole()) return _drawSafe();
+  const f = FMT_BY_ID[doc.fmt], s = view.scale, u = f.w / f.inch[0], P = f.pocket * u, M = f.trim * u;
+  const X = view.ox, Y = view.oy, Wd = doc.w * s, Hd = doc.h * s;
+  cx.save();
+  cx.fillStyle = 'rgba(226,92,82,0.16)';
+  cx.fillRect(X, Y, Wd, P * s); cx.fillRect(X, Y + Hd - P * s, Wd, P * s);
+  cx.strokeStyle = 'rgba(226,92,82,.75)'; cx.setLineDash([4, 4]); cx.lineWidth = 1;
+  cx.beginPath(); cx.moveTo(X, Y + P * s); cx.lineTo(X + Wd, Y + P * s); cx.moveTo(X, Y + Hd - P * s); cx.lineTo(X + Wd, Y + Hd - P * s); cx.stroke();
+  cx.strokeStyle = 'rgba(46,168,102,.6)'; cx.setLineDash([5, 5]);
+  cx.strokeRect(X + M * s, Y + P * s, Wd - 2 * M * s, Hd - 2 * P * s);
+  cx.setLineDash([]);
+  const label = Wd > 250 ? 'POLE POCKET · BACKGROUND ONLY' : 'POLE POCKET';
+  cx.font = '600 10px "Space Mono", monospace'; cx.textAlign = 'center'; cx.textBaseline = 'middle';
+  const tw = cx.measureText(label).width + 14;
+  if (P * s > 18 && tw < Wd) for (const cy0 of [Y + P * s / 2, Y + Hd - P * s / 2]) {
+    cx.fillStyle = 'rgba(11,16,13,.72)'; rrect(cx, X + Wd / 2 - tw / 2, cy0 - 9, tw, 18, 9); cx.fill();
+    cx.fillStyle = 'rgba(255,255,255,.85)'; cx.fillText(label, X + Wd / 2, cy0 + 0.5);
+  }
+  cx.restore();
+};
+
+/* ---------------------------------------------------------------
+   Brand check: three banner rules, and banner wording for the margin
+   --------------------------------------------------------------- */
+const _runCheck = runCheck;
+runCheck = function () {
+  _runCheck();
+  if (!doc || !isPole()) return;
+  const f = FMT_BY_ID[doc.fmt], u = f.w / f.inch[0], P = f.pocket * u, M = f.trim * u, S = shortSide();
+  // the banner versions replace the general print rules
+  for (let i = issues.length - 1; i >= 0; i--) if (issues[i].title === 'Small print' || issues[i].title === 'Too close to the trim') issues.splice(i, 1);
+  const add = (sev, title, detail, id, fix) => issues.push({ sev, title, detail, id, fix: fix || null });
+  for (const l of doc.layers) {
+    if (l.hidden || l.type === 'shape' || isGhost(l) || (l.type === 'image' && l.bleed)) continue;
+    const b = aabb(l), name = layerName(l), tall = b.b - b.y;
+    if (l.type === 'image' && !assets.get(l.asset)) continue;
+    if (b.r < 0 || b.x > doc.w || b.b < 0 || b.y > doc.h) continue;
+    const intoTop = b.y < P - 1, intoBottom = b.b > doc.h - P + 1;
+    if (intoTop || intoBottom) {
+      const where = intoTop && intoBottom ? 'both pole pockets' : intoTop ? 'the top pole pocket' : 'the bottom pole pocket';
+      const fits = tall <= doc.h - 2 * P - 0.5 * u;
+      add('warn', 'In the pole pocket', `“${name}” runs into ${where}. The top and bottom 4 inches fold over the poles, so keep words, marks and photos out of them.`, l.id,
+        fits && !(intoTop && intoBottom) ? { label: 'Move it out', run: () => { l.y += intoTop ? (P - b.y) + 0.25 * u : -((b.b - (doc.h - P)) + 0.25 * u); } } : null);
+    } else if ((l.type === 'text' || l.type === 'mark' || l.type === 'qr' || l.type === 'barcode') && !l.locked) {
+      const over = Math.max(0, -b.x, b.r - doc.w);
+      if (over <= S * 0.01 && (b.x < M - 0.5 || b.r > doc.w - M + 0.5)) add('warn', 'Too close to the trim', `“${name}” is inside the 1½-inch side margin. Banner edges are hemmed, so keep words and marks 1½ inches in from the sides.`, l.id);
+    }
+    if (l.type === 'text') {
+      const L = layoutText(l), inch = L.size * CAP / u;
+      if (inch < MIN_LETTER - 0.02) add('warn', 'Too small to read from the ground', `“${name}” is about ${(Math.floor(inch * 10) / 10).toFixed(1)} inch tall. People read pole banners from the sidewalk, so keep letters at least 1 inch tall.`, l.id);
+    }
+    if (l.type === 'image') {
+      const a = assets.get(l.asset), filt = l.filters && (l.filters.brightness || l.filters.contrast || l.filters.saturation || l.filters.warmth || (l.filters.duotone && l.filters.duotone !== 'none'));
+      const keep = filt ? Math.min(1, window.photoCap17('filter') / Math.max(a.w, a.h)) : 1;
+      const sc = Math.max(l.w / a.w, l.h / a.h) * (l.zoom || 1), ppi = u * keep / sc;
+      if (ppi < MIN_PPI) {
+        const need = Math.ceil(Math.max(a.w, a.h) * MIN_PPI / ppi / 100) * 100;
+        add('warn', 'Photo too small for the banner', `This photo prints at about ${Math.round(ppi)} dpi and will look soft from close up. Use a bigger original — about ${need.toLocaleString('en-US')} pixels on its long side — or make the frame smaller.`, l.id);
+      }
+    }
+  }
+  const order = { bad: 0, warn: 1, info: 2 };
+  issues.sort((a, b) => order[a.sev] - order[b.sev]);
+  updateCheckPill(); renderIssues();
+};
+
+/* ---------------------------------------------------------------
+   Template helpers
+   --------------------------------------------------------------- */
+const GREEN = '#033922', LIFTED = '#2EA866', PAPER = '#FBFBF9', FIELD = '#144B2C', ONGREEN = '#EAF1EC';
+function geo(fmt) {
+  const f = FMT_BY_ID[fmt], u = f.w / f.inch[0];
+  return { f, u, W: f.w, H: f.h, P: f.pocket * u, M: f.trim * u, CW: f.w - 2 * f.trim * u, long: f.inch[1] >= 60 };
+}
+const keyed = (l, key) => (l.key = key, l);
+/* centre a stack of items between y0 and y1, spreading the leftover room evenly */
+function spread(items, y0, y1, minGap = 0) {
+  const tot = items.reduce((s, it) => s + it.h, 0), gap = Math.max(minGap, (y1 - y0 - tot) / (items.length + 1));
+  let y = y0 + Math.max(0, (y1 - y0 - tot - gap * (items.length - 1)) / 2);
+  for (const it of items) { it.y = y; y += it.h + gap; }
+  return y;
+}
+const fitIn = (l, bw, bh) => { const m = MARK_BY_FILE[l.file], k = Math.min(bw / l.w, bh / l.h); l.w *= k; l.h = l.w / m.ar; return l; };
+
+/* Departments for the department banner. The mark is the family's full-colour
+   one, on a Paper plate, so every family sits on the ground it was drawn for. */
+const DEPTS = [
+  { id: 'athletics', name: 'Athletics', text: 'Mustang\nAthletics', mark: 'LRHS Emblem.svg' },
+  { id: 'band', name: 'Mustang Band', text: 'Mustang\nBand', mark: 'LRHS Band Emblem.svg' },
+  { id: 'grad', name: 'Graduation', text: 'Class of\n2027', mark: 'LRHS Grad Mark.svg' },
+  { id: 'news', name: 'Newsletter & podcast', text: 'News &\npodcast', mark: 'LRHS Mustangs Ahead.svg' },
+  { id: 'clubs', name: 'Clubs & activities', text: 'One Ranch,\none herd', mark: 'LRHS Emblem.svg' },
+];
+const DEPT_BY_ID = Object.fromEntries(DEPTS.map(x => [x.id, x]));
+const ROLE_DEPT = { coach: 'athletics', band: 'band', news: 'news', office: 'grad', club: 'clubs', student: 'clubs' };
+const roleDept = () => { const r = MS16.role(); return (r && ROLE_DEPT[r.id]) || 'athletics'; };
+
+const BANNERS = [
+  { id: 'pole-welcome', group: 'Banners', name: 'Welcome banner', fmt: 'pole5', build(fmt = 'pole5') {
+    const g = geo(fmt), d = tdoc(fmt, { type: 'solid', color: PAPER });
+    const band = g.long ? 1010 : 860;
+    keyed(shp(d, { x: 0, y: 0, w: g.W, h: band, fill: GREEN, locked: true, name: 'Top band' }), 'band-top');
+    keyed(shp(d, { x: 0, y: g.H - band, w: g.W, h: band, fill: GREEN, locked: true, name: 'Bottom band' }), 'band-bottom');
+    const wl = keyed(tx(d, 'display', 'Welcome\nto', { size: g.long ? 290 : 240, w: g.CW, leading: 0.94, balance: false, label: 'Welcome line' }), 'welcome');
+    spread([wl], g.P, band);
+    const em = keyed(mk(d, 'LRHS Emblem.svg', { w: g.long ? g.CW : 1240, name: 'LR emblem' }), 'emblem');
+    const nm = keyed(tx(d, 'eyebrow', 'Lakewood Ranch\nHigh School', { size: g.long ? 118 : 112, tracking: 0.12, color: GREEN, w: g.CW, leading: 1.18, fixed: true }), 'school');
+    const y = spread([em, nm], band, g.H - band, 60);
+    const hm = keyed(tx(d, 'display', 'Home of the\nMustangs', { size: g.long ? 226 : 200, w: g.CW, leading: 0.94, balance: false, fixed: true }), 'home');
+    spread([hm], g.H - band, g.H - g.P);
+    return d;
+  } },
+  { id: 'pole-gomustangs', group: 'Banners', name: 'Go Mustangs banner', fmt: 'pole5', build(fmt = 'pole5') {
+    const g = geo(fmt), d = tdoc(fmt);
+    keyed(ghost(d, { w: g.W * 2.1, x: -g.W * 0.55, y: g.long ? 2050 : 1500, opacity: 0.06 }), 'ghost');
+    const go = keyed(tx(d, 'display', 'Go', { size: g.long ? 420 : 340, color: LIFTED, w: g.CW, balance: false, leading: 0.9, label: 'Top line' }), 'go');
+    const mu = keyed(tx(d, 'display', 'Mustangs', { size: 296, w: g.CW, balance: false, leading: 0.9, label: 'Big line' }), 'mustangs');
+    const ho = keyed(mk(d, 'LRHS Mustang.svg', { w: g.CW, name: 'Mustang' }), 'mustang');
+    const em = keyed(mk(d, 'LRHS Emblem Mono.svg', { w: g.long ? 440 : 360, name: 'LR emblem' }), 'emblem');
+    const top = g.P + (g.long ? 150 : 110);
+    stack([go, mu], top, [g.long ? 10 : 6]);
+    spread([ho, em], mu.y + mu.h, g.H - g.P, g.long ? 140 : 90);
+    return d;
+  } },
+  { id: 'pole-department', group: 'Banners', name: 'Department banner', fmt: 'pole5', dept: true, build(fmt = 'pole5', o = {}) {
+    const g = geo(fmt), d = tdoc(fmt), dep = DEPT_BY_ID[o.dept] || DEPT_BY_ID[roleDept()];
+    d.dept = dep.id;
+    keyed(ghost(d, { w: g.W * 2.1, x: -g.W * 0.9, y: g.long ? 2500 : 1900, opacity: 0.06 }), 'ghost');
+    const nm = keyed(tx(d, 'display', dep.text, { size: g.long ? 260 : 232, w: g.CW, leading: 0.92, balance: false, label: 'Department' }), 'dept-name');
+    const plateH = g.long ? 1760 : 1300;
+    const plate = keyed(shp(d, { x: g.M, y: 0, w: g.CW, h: plateH, fill: PAPER, radius: 56, locked: true, name: 'Paper plate' }), 'plate');
+    const mkW = g.long ? 1300 : 1000, mkH = plateH - (g.long ? 300 : 220);
+    const mark = keyed(fitIn(mk(d, dep.mark, { w: 1000, name: dep.name + ' mark' }), mkW, mkH), 'dept-mark');
+    const sc = keyed(tx(d, 'eyebrow', 'Lakewood Ranch\nHigh School', { size: g.long ? 116 : 112, tracking: 0.14, color: LIFTED, w: g.CW, leading: 1.18, fixed: true }), 'school');
+    spread([nm, plate, sc], g.P, g.H - g.P, g.long ? 120 : 80);
+    mark.x = (g.W - mark.w) / 2; mark.y = plate.y + (plate.h - mark.h) / 2;
+    return d;
+  } },
+  { id: 'pole-senior', group: 'Banners', name: 'Senior banner', fmt: 'pole5', build(fmt = 'pole5') {
+    const g = geo(fmt), d = tdoc(fmt);
+    keyed(ghost(d, { w: g.W * 2.1, x: -g.W * 0.4, y: g.long ? 3000 : 2250, opacity: 0.05 }), 'ghost');
+    const em = keyed(mk(d, 'LRHS Emblem Mono.svg', { w: g.long ? 380 : 320, name: 'LR emblem' }), 'emblem');
+    const ph = g.long ? 2280 : 1640;
+    const back = keyed(shp(d, { x: g.M, y: 0, w: g.CW, h: ph, fill: FIELD, radius: 28, locked: true, name: 'Photo backing' }), 'backing');
+    const cam = keyed(ico(d, 'camera', { w: g.long ? 260 : 220, color: LIFTED, opacity: 0.5, stroke: 1.5, locked: true }), 'camera');
+    const fr = keyed(frame(d, { x: g.M, y: 0, w: g.CW, h: ph, radius: 28, label: 'Photo', name: 'Senior photo' }), 'photo');
+    const nm = keyed(tx(d, 'display', 'First\nLast', { size: g.long ? 236 : 196, w: g.CW, leading: 0.92, label: 'Name' }), 'name');
+    const yr = keyed(tx(d, 'eyebrow', 'Class of 2027', { size: g.long ? 124 : 112, tracking: 0.16, color: LIFTED, w: g.CW, label: 'Class of' }), 'year');
+    spread([em, fr, nm, yr], g.P, g.H - g.P, g.long ? 70 : 50);
+    yr.y = nm.y + nm.h + (g.long ? 60 : 44);
+    back.y = fr.y; cam.x = (g.W - cam.w) / 2; cam.y = fr.y + (fr.h - cam.h) / 2;
+    return d;
+  } },
+];
+const TPL17 = Object.fromEntries(BANNERS.map(t => [t.id, t]));
+/* remember which banner template a design came from, so it can lay itself out again */
+BANNERS.forEach(t => { const b0 = t.build; t.build = function (fmt, o) { const d = b0.call(this, fmt || t.fmt, o); d.tpl17 = t.id; return d; }; });
+TEMPLATES.push(...BANNERS);
+TEMPLATE_GROUPS.splice(TEMPLATE_GROUPS.indexOf('ID cards'), 0, 'Banners');
+
+/* ---------------------------------------------------------------
+   Switching size or department rebuilds the layout and carries over
+   everything the person filled in: words, photos, swapped marks.
+   --------------------------------------------------------------- */
+function rebuild(fid, dept) {
+  if (editingId) endEdit();
+  const t = TPL17[doc.tpl17]; if (!t) return false;
+  const old = doc, oldDept = old.dept, nd = t.build(fid, { dept: dept || oldDept });
+  const deptChanged = !!(t.dept && nd.dept !== oldDept);
+  const byKey = new Map(old.layers.filter(l => l.key).map(l => [l.key, l]));
+  for (const l of nd.layers) {
+    const o = byKey.get(l.key); if (!o) continue;
+    l.hidden = o.hidden; if (o.opacity != null) l.opacity = o.opacity;
+    if (l.type === 'text') {
+      if (deptChanged && l.key === 'dept-name' && o.text === (DEPT_BY_ID[oldDept] || {}).text) continue;
+      l.color = o.color; if (o.bg) l.bg = o.bg;
+      if (o.text !== l.text) { MS16._.fitSlot(l); l.text = o.text; MS16._.fitSlot(l); }
+    } else if (l.type === 'image') {
+      ['asset', 'zoom', 'px', 'py', 'filters', 'scrim', 'flip'].forEach(k => { if (o[k] !== undefined) l[k] = clone17(o[k]); });
+    } else if (l.type === 'mark') {
+      if (deptChanged && l.key === 'dept-mark') continue;
+      l.ink = o.ink;
+      if (o.file !== l.file && MARK_BY_FILE[o.file]) { const cxm = l.x + l.w / 2, cym = l.y + l.h / 2, m = MARK_BY_FILE[o.file], nw = Math.sqrt(l.w * l.h * m.ar); l.file = o.file; l.w = nw; l.h = nw / m.ar; l.x = cxm - l.w / 2; l.y = cym - l.h / 2; }
+    } else if (l.type === 'shape') { l.fill = o.fill; }
+    else if (l.type === 'icon') { l.color = o.color; }
+  }
+  // anything the person added keeps its place on the page, moved in step with the new height
+  const ky = nd.h / old.h;
+  for (const o of old.layers) if (!o.key) { const c = clone17(o); c.y = (o.y + o.h / 2) * ky - o.h / 2; nd.layers.push(c); }
+  nd.bg = clone17(old.bg); nd.name = old.name;
+  ['theme', 'motion'].forEach(k => { if (old[k] !== undefined) nd[k] = clone17(old[k]); });
+  doc = nd; sel.clear();
+  commit(); syncTop(); fitView(); renderInspector(); renderLayers(); scheduleCheck();
+  return true;
+}
+const clone17 = o => o == null ? o : JSON.parse(JSON.stringify(o));
+const _changeFormat = changeFormat;
+changeFormat = function (fid, w, h, scaleContent) {
+  const nf = FMT_BY_ID[fid];
+  if (doc.tpl17 && TPL17[doc.tpl17] && !doc.pages && nf && nf.pocket && w === nf.w && h === nf.h && fid !== doc.fmt && scaleContent !== false) { rebuild(fid); toast(`Laid out again for ${nf.name.split('·')[1].trim()}`, 1600); return; }
+  _changeFormat(fid, w, h, scaleContent);
+};
+function setDept(id) { if (doc.dept === id) return; rebuild(doc.fmt, id); }
+
+/* ---------------------------------------------------------------
+   The "Pole banner" panel: size, department, and what the pockets are
+   --------------------------------------------------------------- */
+function bannerPanel() {
+  const sizeSeg = seg(POLE.map(p => [p.id, p.name.split('·')[1].trim().replace('×', ' × ')]), doc.fmt, v => {
+    if (v === doc.fmt) return; const nf = FMT_BY_ID[v]; changeFormat(v, nf.w, nf.h, true);
+  });
+  const sec = h('div', { class: 'sec banner17' }, h('h3', {}, 'Pole banner'), h('div', { class: 'row' }, h('span', { class: 'lbl' }, 'Size'), sizeSeg));
+  if (doc.dept && TPL17[doc.tpl17] && TPL17[doc.tpl17].dept) sec.append(h('div', { class: 'row' }, h('span', { class: 'lbl' }, 'Department'),
+    h('select', { class: 'sel', 'aria-label': 'Department', onchange: e => setDept(e.target.value) }, DEPTS.map(x => h('option', { value: x.id, selected: doc.dept === x.id }, x.name)))));
+  sec.append(h('p', { class: 'note' }, 'The top and bottom 4 inches fold over the poles, so they hold background only. Keep words 1½ inches in from the sides and at least 1 inch tall.'));
+  return sec;
+}
+const _renderInspector = renderInspector;
+renderInspector = function () {
+  _renderInspector();
+  if (!doc || !isPole()) return;
+  const pane = $('#insp .pane'); if (!pane || pane.querySelector('.banner17')) return;
+  if (MS16.isFill()) { const head = pane.querySelector('.fillhead'); if (head) head.after(bannerPanel()); }
+  else if (!selected().length) { const secs = [...pane.querySelectorAll(':scope > .sec')]; const size = secs.find(s => (s.querySelector('h3') || {}).textContent === 'Size'); if (size) size.after(bannerPanel()); else pane.prepend(bannerPanel()); }
+};
+
+return { VERSION, POLE, DEPTS, BANNERS, rebuild, setDept, isPole };
 })();
 
 boot();

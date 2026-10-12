@@ -1,5 +1,5 @@
 {
-  "_about": "Mustang Studio 1.6's 41 templates, as shown on the LRHS case study. Thumbnails in public/images/lrhs-studio/templates, made from assets/studio/tpl-*.jpg (720px on the long side). Order and groups come from assets/studio/templates.json.",
+  "_about": "Mustang Studio's 45 templates, as shown on the LRHS case study. Thumbnails in public/images/lrhs-studio/templates, made from assets/studio/tpl-*.jpg (720px on the long side) by scripts/studio-site-images.mjs. Order and groups come from assets/studio/templates.json.",
   "templates": [
     {
       "id": "gameday",
@@ -409,6 +409,46 @@
       "season": null,
       "pages": 3,
       "w": 576,
+      "h": 720
+    },
+    {
+      "id": "pole-welcome",
+      "name": "Welcome banner",
+      "group": "Banners",
+      "fmt": "pole5",
+      "season": null,
+      "pages": 1,
+      "w": 288,
+      "h": 720
+    },
+    {
+      "id": "pole-gomustangs",
+      "name": "Go Mustangs banner",
+      "group": "Banners",
+      "fmt": "pole5",
+      "season": null,
+      "pages": 1,
+      "w": 288,
+      "h": 720
+    },
+    {
+      "id": "pole-department",
+      "name": "Department banner",
+      "group": "Banners",
+      "fmt": "pole5",
+      "season": null,
+      "pages": 1,
+      "w": 288,
+      "h": 720
+    },
+    {
+      "id": "pole-senior",
+      "name": "Senior banner",
+      "group": "Banners",
+      "fmt": "pole5",
+      "season": null,
+      "pages": 1,
+      "w": 288,
       "h": 720
     }
   ]

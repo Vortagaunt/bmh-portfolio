@@ -1,6 +1,6 @@
 /* Mustang Studio on Chromebooks: keeps the editor working offline.
    The page is fetched fresh when there's a connection, and the last copy is used when there isn't. */
-const CACHE = 'mustang-studio-1.6.0';
+const CACHE = 'mustang-studio-1.7.0';
 const ASSETS = ['./', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-maskable-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {
