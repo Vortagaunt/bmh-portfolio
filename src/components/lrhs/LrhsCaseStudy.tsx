@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import LRHS_MARKS from "@/data/lrhs-marks.json";
+import LRHS_HOLIDAYS from "@/data/lrhs-holidays.json";
 import STUDIO_TEMPLATES from "@/data/mustang-studio-templates.json";
 import { RichText } from "../CaseStudyLayout";
 import { Reveal } from "../Reveal";
@@ -205,6 +206,21 @@ const POWERHOUSE = [
     note: "The horse alone, drawn larger.",
   },
 ];
+
+/* The holiday editions of the LR, in school-year order — the same list the
+   deck's "Holiday emblems" slide reads (src/data/lrhs-holidays.json). They are
+   editions of the emblem, not extra marks, so the mark counts leave them out. */
+const HOLIDAYS = LRHS_HOLIDAYS.holidays.map((h) => ({
+  src: `/images/lrhs-holidays/${encodeURI(h.file)}`,
+  alt: `The LR emblem for ${h.name.replace(" Alt", "")} — ${h.detail.toLowerCase()}`,
+  title: h.name,
+  project: h.when,
+  description: h.detail,
+  panel: "paper" as const,
+  name: h.name,
+  when: h.when,
+  detail: h.detail,
+}));
 
 const PILLARS = [
   ["Proud", "We celebrate our scholars, athletes, and artists loudly and often. Game-day energy, all year."],
@@ -629,6 +645,34 @@ export function LrhsCaseStudy() {
                     />
                   </div>
                   <Caption title={a.name}>{a.how}</Caption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </Part>
+
+        <Part
+          title="The LR, all year round"
+          body={`${Say(HOLIDAYS.length)} holiday editions of the emblem, from *Pink Out* in October to the *Fourth of July*. The letters and the horse keep their shapes; only the colours and a few details change for the day — so it still reads as the school, whatever the date.`}
+        >
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+            {HOLIDAYS.map((h, i) => (
+              <li key={h.src}>
+                <figure>
+                  <div className="media-elevated relative w-full overflow-hidden bg-white" style={{ aspectRatio: "1 / 1" }}>
+                    <ZoomImage
+                      src={h.src}
+                      alt={h.alt}
+                      fill
+                      sizes="(min-width: 1024px) 200px, (min-width: 640px) 24vw, 48vw"
+                      className="object-contain p-[9%]"
+                      zoomItems={HOLIDAYS}
+                      zoomIndex={i}
+                    />
+                  </div>
+                  <Caption title={h.name}>
+                    {h.when} · {h.detail}
+                  </Caption>
                 </figure>
               </li>
             ))}

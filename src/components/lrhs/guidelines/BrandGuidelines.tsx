@@ -27,6 +27,7 @@ import {
   X,
 } from "lucide-react";
 import LRHS_MARKS from "@/data/lrhs-marks.json";
+import LRHS_HOLIDAYS from "@/data/lrhs-holidays.json";
 import { ZoomImage, type ZoomItem } from "../../ZoomImage";
 import { CompareSlider } from "../CompareSlider";
 import { IB, IB_CAP, type IbPhrase } from "./ib-type";
@@ -64,6 +65,7 @@ const SCENES: SceneInfo[] = [
   { id: "student-id", label: "Student ID", chapter: "In use", tone: "mist" },
   { id: "staff-id", label: "Staff ID", chapter: "In use", tone: "paper" },
   { id: "apparel", label: "Apparel", chapter: "In use", tone: "mist" },
+  { id: "holidays", label: "Holiday emblems", chapter: "In use", tone: "paper" },
   { id: "game-day", label: "Game day", chapter: "In use", tone: "green" },
   { id: "website", label: "The website", chapter: "In use", tone: "ink" },
   { id: "rules", label: "The rules, on one page", chapter: "The rules", tone: "paper" },
@@ -173,6 +175,9 @@ const APPAREL = [
   ["crewneck", "Crewneck", "Reversed on green"],
   ["polo", "Polo", "Embroidered patch"],
 ] as const;
+
+/* holiday editions of the LR, in school-year order — the deck's list */
+const HOLIDAYS = LRHS_HOLIDAYS.holidays;
 
 const RULES = [
   ["Use the supplied files", "Every mark comes as an SVG. Never redraw, recolour, stretch or tilt one."],
@@ -925,7 +930,40 @@ const Scenes = memo(function Scenes() {
         </div>
       </Scene>
 
-      {/* ── 22 Game day ───────────────────────────────────────────── */}
+      {/* ── 22 Holiday emblems ────────────────────────────────────── */}
+      <Scene id="holidays">
+        <Head
+          id="holidays"
+          kicker="Holiday emblems"
+          title="The LR, all year round"
+          lede={`${Say(HOLIDAYS.length)} holiday editions of the emblem, from Pink Out in October to the Fourth of July. The letters and the horse keep their shapes; only the colours and a few details change for the day.`}
+          size="m"
+          wide
+        />
+        <ul className="mt-8 grid flex-1 grid-cols-2 content-center gap-x-4 gap-y-6 lg:grid-cols-4 lg:gap-x-6">
+          {HOLIDAYS.map((h, i) => (
+            <li key={h.file} data-r="rise" style={d(200 + i * 70)}>
+              <figure>
+                <div className="relative aspect-[4/3] w-full rounded-[20px] bg-white shadow-[0_24px_60px_-30px_rgba(12,12,12,0.4)] lg:aspect-auto lg:h-[clamp(110px,calc((100svh-560px)/2),300px)]">
+                  <Image
+                    src={`/images/lrhs-holidays/${encodeURI(h.file)}`}
+                    alt={`The LR emblem for ${h.name.replace(" Alt", "")} — ${h.detail.toLowerCase()}`}
+                    fill
+                    sizes="(min-width: 1024px) 300px, 45vw"
+                    className="object-contain p-[7%]"
+                  />
+                </div>
+                <figcaption className="mt-3 flex flex-col gap-1 lg:flex-row lg:items-baseline lg:justify-between lg:gap-3">
+                  <span className={`${s.capName} !mt-0`}>{h.name}</span>
+                  <span className={s.label}>{h.when}</span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </Scene>
+
+      {/* ── 23 Game day ───────────────────────────────────────────── */}
       <Scene id="game-day" innerClassName="!pt-0 !px-0">
         <div className="relative h-[40svh] min-h-[220px] w-full overflow-hidden" data-r="fade">
           <Image src="/images/lrhs-go-mustangs.jpg" alt="Game-day graphic: the wordmark and GO MUSTANGS on Mustang Green" fill sizes="100vw" className="object-cover" />
@@ -946,7 +984,7 @@ const Scenes = memo(function Scenes() {
         </div>
       </Scene>
 
-      {/* ── 23 The website ────────────────────────────────────────── */}
+      {/* ── 24 The website ────────────────────────────────────────── */}
       <Scene id="website" center>
         <div
           aria-hidden
@@ -974,7 +1012,7 @@ const Scenes = memo(function Scenes() {
         </div>
       </Scene>
 
-      {/* ── 24 The rules ──────────────────────────────────────────── */}
+      {/* ── 25 The rules ──────────────────────────────────────────── */}
       <Scene id="rules">
         <Head id="rules" kicker="The rules" title="The whole system, in six rules" lede="If you remember nothing else from these pages, remember these." wide />
         <ol className="mt-8 grid flex-1 grid-cols-1 content-center gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
