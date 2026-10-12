@@ -10,8 +10,11 @@
  *   - a mark assigned to a ground it cannot be seen on (white ink on paper,
  *     dark ink on green), measured from the rendered artwork
  *
+ * It also checks the holiday emblems (src/data/lrhs-holidays.json) are all in
+ * public/images/lrhs-holidays, and nothing else is.
+ *
  * Optional: pass the source folder the marks were exported to, and it will also
- * check the library matches it byte for byte — the marks were renamed in that
+ * check the library (and the holiday SVGs) match it byte for byte — the marks were renamed in that
  * folder mid-rebuild once already, and a stale copy would otherwise ship.
  *
  * Run: node scripts/check-lrhs-marks.mjs ["C:/Users/B M H/Downloads/SVG"]
@@ -26,7 +29,15 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIR = path.join(root, "public", "images", "lrhs-marks");
 const cat = JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-marks.json"), "utf8"));
 
+/* the holiday editions of the emblem (src/data/lrhs-holidays.json) live in
+   their own folder and are not marks, but they come from the same export folder */
+const HOL_DIR = path.join(root, "public", "images", "lrhs-holidays");
+const holidays = JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-holidays.json"), "utf8")).holidays;
+const holFiles = holidays.map((h) => h.file);
+
 const problems = [];
+for (const f of holFiles) if (!fs.existsSync(path.join(HOL_DIR, f))) problems.push(`holiday emblem listed but missing: ${f}`);
+for (const f of fs.readdirSync(HOL_DIR)) if (!holFiles.includes(f)) problems.push(`in lrhs-holidays but not listed: ${f}`);
 const onDisk = fs.readdirSync(DIR).filter((f) => f.endsWith(".svg")).sort();
 const listed = [...cat.marks, ...cat.retired].map((m) => m.file);
 
@@ -61,15 +72,20 @@ if (source) {
   const hash = (p) => crypto.createHash("sha1").update(fs.readFileSync(p)).digest("hex");
   const src = fs.readdirSync(source).filter((f) => f.endsWith(".svg"));
   for (const f of src) {
+    if (holFiles.includes(f)) {
+      if (hash(path.join(source, f)) !== hash(path.join(HOL_DIR, f))) problems.push(`holiday emblem differs from source: ${f}`);
+      continue;
+    }
     if (!onDisk.includes(f)) problems.push(`in source folder, not in library: ${f}`);
     else if (hash(path.join(source, f)) !== hash(path.join(DIR, f))) problems.push(`differs from source: ${f}`);
   }
   for (const m of cat.marks) if (!src.includes(m.file)) problems.push(`live mark not in source folder: ${m.file}`);
+  for (const f of holFiles) if (f.endsWith(".svg") && !src.includes(f)) problems.push(`holiday emblem not in source folder: ${f}`);
 }
 
 const byFam = {};
 for (const m of cat.marks) byFam[m.family] = (byFam[m.family] || 0) + 1;
 console.log(`library: ${cat.marks.length} live + ${cat.retired.length} retired  ${JSON.stringify(byFam)}` +
-  (source ? `  (checked against ${source})` : ""));
+  `  + ${holFiles.length} holiday emblems` + (source ? `  (checked against ${source})` : ""));
 if (problems.length) { console.error("FAIL:\n  " + problems.join("\n  ")); process.exit(1); }
 console.log("ok: folder, catalogue, families and grounds all agree");

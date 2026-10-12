@@ -22,6 +22,16 @@ It fails on a file that is missing, uncatalogued or listed twice, a mark on a
 ground it cannot be seen on, and — given the export folder — any file that no
 longer matches it byte for byte.
 
+### Holiday emblems
+
+`src/data/lrhs-holidays.json` lists the holiday editions of the LR, in
+school-year order (October Pink to the Fourth of July); the files are in
+`public/images/lrhs-holidays`. They are editions of the emblem, not extra marks,
+so the mark counts leave them out. The deck's "Holiday emblems" slide (after
+Apparel, before Game day), the case study's Applied chapter and the guidelines
+page all read that list. The validator checks the SVGs against the export folder
+too. The Halloween photo version is a WebP (2000 px), since it is a picture.
+
 ## Build
 
 ```bash
@@ -43,7 +53,7 @@ another browser binary.
 
 ### Mustang Studio is the surprise
 
-The principal hasn't seen the app. Nothing before slide 22, "One more thing…",
+The principal hasn't seen the app. Nothing before slide 23, "One more thing…",
 mentions it — not the slides, not the speaker notes, and not the section names
 (the reveal's section is called "One more thing"). The Studio slides follow the
 black slide, then "Mustang Studio, on one page", then the system bento (which

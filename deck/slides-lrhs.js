@@ -544,6 +544,41 @@ const apparel = (n) => page("lrpaper", `
       </figure>`).join("")}
   </div>`);
 
+/* Holiday emblems (Oct 12): Bronx's seasonal editions of the LR, in school-year
+   order, from src/data/lrhs-holidays.json — the same list the case study and the
+   guidelines page read. They are editions of the emblem, not extra marks, so the
+   mark counts above don't include them. White cards, like the corners and
+   Academic Powerhouse slides, because each emblem carries its own white keyline.
+   Mustang Studio has seasonal themes too, but this slide comes before the
+   reveal, so it doesn't mention the app. */
+const HOLIDAYS = require("../src/data/lrhs-holidays.json").holidays;
+const holidays = (n) => page("lrpaper", `
+  ${kicker(n, "Holiday emblems", false)}
+  <div class="display" style="font-size:140px;color:#0C0C0C;margin:52px 0 28px;">
+    The LR, all year round
+  </div>
+  <div style="font-size:44px;line-height:1.5;color:${GREY};max-width:3300px;text-wrap:balance;">
+    ${cap(words(HOLIDAYS.length))} holiday editions of the emblem, from Pink Out in October to the
+    Fourth of July. The letters and the horse keep their shapes; only the colours and a few details
+    change for the day &mdash; so it still reads as the school, whatever the date.
+  </div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;
+       gap:52px 64px;margin-top:64px;">
+    ${HOLIDAYS.map((h) => `
+      <div style="display:flex;flex-direction:column;min-height:0;">
+        <div style="flex:1;min-height:0;display:flex;position:relative;background:#FEFEFE;border-radius:32px;
+             box-shadow:0 34px 80px -36px rgba(12,12,12,.35);">
+          ${fit(encodeURI(`img/holidays/${h.file}`), 34)}
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-top:24px;">
+          <div style="font-size:38px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;white-space:nowrap;">${h.name}</div>
+          <div style="font-size:24px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:${RED};white-space:nowrap;">${h.when}</div>
+        </div>
+        <div style="font-size:28px;line-height:1.35;color:${GREY};margin-top:8px;white-space:nowrap;
+             overflow:hidden;text-overflow:ellipsis;">${h.detail}</div>
+      </div>`).join("")}
+  </div>`);
+
 /* game day — image band on top, caption field below */
 const gameDay = (n) => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head>
 <body><div class="slide greend" style="padding:0;">
@@ -878,6 +913,9 @@ const outro = () => page("green", `
    and the outro are left out; put them back here to restore them. The title
    carries no badge; everything after it is numbered in the order it appears.
 
+   Holiday emblems (Oct 12) sit after the apparel and before game day, so game
+   day still lands as the "ending" that sets up the reveal.
+
    Mustang Studio is a surprise (Oct 10): nothing before "One more thing…"
    mentions the app, and the black slide reveals it. The system bento — which
    has a Studio tile — comes after the Studio slides, as the recap before the
@@ -908,6 +946,7 @@ const ORDER = [
   [studentIds, "Student ID — a card every student carries", "Applied"],
   [staffIds, "Staff ID — staff, at a glance", "Applied"],
   [apparel, "Apparel — the part students actually wear", "Applied"],
+  [holidays, "Holiday emblems — the LR, all year round", "Applied"],
   [gameDay, "Game day — where Spirit Red earns its keep", "Applied"],
   [oneMore, "One more thing…", "One more thing"],
   [studioIntro, "Mustang Studio — a design app that only speaks Mustang", "One more thing"],

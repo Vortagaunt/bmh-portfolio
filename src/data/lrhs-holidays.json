@@ -1,0 +1,13 @@
+{
+  "about": "Holiday editions of the LR emblem, in school-year order. Read by the deck (deck/slides-lrhs.js), the case study and the brand guidelines page. Files live in public/images/lrhs-holidays; the SVGs are Bronx's exports from Downloads/SVG, byte for byte (scripts/check-lrhs-marks.mjs checks them). They are seasonal editions of the emblem, not extra marks, so they are not counted in lrhs-marks.json.",
+  "holidays": [
+    { "file": "LRHS October Pink.svg", "name": "October Pink", "when": "October", "detail": "Pink Out, for Breast Cancer Awareness Month" },
+    { "file": "LRHS Halloween.webp", "name": "Halloween", "when": "October 31", "detail": "Photo-filled letters, for screens" },
+    { "file": "LRHS Halloween Alt.svg", "name": "Halloween Alt", "when": "October 31", "detail": "Flat colour, for print" },
+    { "file": "LRHS Thanksgiving.svg", "name": "Thanksgiving", "when": "November", "detail": "Harvest colours and a cornucopia" },
+    { "file": "LRHS Valentines.svg", "name": "Valentine’s Day", "when": "February 14", "detail": "Hearts and a pink bow" },
+    { "file": "LRHS St Patricks.svg", "name": "St. Patrick’s Day", "when": "March 17", "detail": "Kelly green and a gold shamrock" },
+    { "file": "LRHS Easter.svg", "name": "Easter", "when": "Spring", "detail": "Pastels and a bunny" },
+    { "file": "LRHS 4th July.svg", "name": "Fourth of July", "when": "July 4", "detail": "Stars and fireworks" }
+  ]
+}
