@@ -326,5 +326,37 @@
   "fmt": "ig-portrait",
   "season": null,
   "pages": 3
+ },
+ {
+  "id": "pole-welcome",
+  "name": "Welcome banner",
+  "group": "Banners",
+  "fmt": "pole5",
+  "season": null,
+  "pages": 1
+ },
+ {
+  "id": "pole-gomustangs",
+  "name": "Go Mustangs banner",
+  "group": "Banners",
+  "fmt": "pole5",
+  "season": null,
+  "pages": 1
+ },
+ {
+  "id": "pole-department",
+  "name": "Department banner",
+  "group": "Banners",
+  "fmt": "pole5",
+  "season": null,
+  "pages": 1
+ },
+ {
+  "id": "pole-senior",
+  "name": "Senior banner",
+  "group": "Banners",
+  "fmt": "pole5",
+  "season": null,
+  "pages": 1
  }
 ]

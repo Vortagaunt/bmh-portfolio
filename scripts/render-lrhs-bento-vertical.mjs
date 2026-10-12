@@ -2,7 +2,7 @@
  * The LRHS brand system on one page, standing up — the vertical (9:16) cut of the
  * keynote-style bento (scripts/render-lrhs-bento.mjs), for stories, phones and
  * a portrait print. Same tiles, same type, same rules; laid out on a 4 x 8 grid.
- * The Mustang Studio tile shows the 1.6 app (assets/studio/ui-gameday.jpg).
+ * The Mustang Studio tile shows the 1.7 app (assets/studio/ui-gameday.jpg).
  *
  * Emits 8K only:
  *   assets/flyer/lrhs-bento-vertical-8k.jpg   4320x7680
@@ -62,6 +62,7 @@ const FIELD = `radial-gradient(120% 95% at 18% 10%, #0A5733 0%, rgba(10,87,51,0)
 
 /* counts and families straight from the catalogue, so the bento can't fall behind the library */
 const CAT = JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-marks.json"), "utf8"));
+const STUDIO_TEMPLATES = JSON.parse(fs.readFileSync(path.join(root, "assets", "studio", "templates.json"), "utf8")).length;
 const NUM = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
 const SHORT = { crest: "Crest" };   // the bento's chip names, where they differ from the catalogue's
 const FAMILIES = CAT.families.map((f) => [SHORT[f.id] || f.name, CAT.marks.filter((m) => m.family === f.id).length]);
@@ -232,7 +233,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
     <div class="lab"><span class="new">New</span>Mustang Studio</div>
     <div class="sp"></div>
     <div class="h" style="font-size:52px;">On brand, <span class="m">every time.</span></div>
-    <div class="sub" style="font-size:24px;margin-top:14px;">A design app with 41 templates, every mark and every rule built in.</div>
+    <div class="sub" style="font-size:24px;margin-top:14px;">A design app with ${STUDIO_TEMPLATES} templates, every mark and every rule built in.</div>
   </div>
   <div style="position:absolute;inset:0;overflow:hidden;">   <!-- clip the bleed without growing the tile -->
     <div style="position:absolute;left:390px;top:58px;width:700px;border-radius:16px;overflow:hidden;
