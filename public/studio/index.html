@@ -210,6 +210,21 @@ input[type=range]{width:100%;accent-color:var(--accent);min-width:0}
 @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
 </style>
 
+<style id="studio-17-download">.dl17btn{border:1px solid var(--ui-line-2)}
+.dl17btn span{display:inline-flex}
+.dl17list{display:flex;flex-direction:column;gap:8px}
+.dl17opt{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--r-md);background:var(--ui-raise);border:1px solid transparent;color:var(--ui-text);text-decoration:none}
+.dl17opt:hover{background:var(--ui-raise-2)}
+.dl17opt.on{border-color:var(--accent);background:var(--accent-soft)}
+.dl17ico{display:flex;color:var(--accent)}
+.dl17txt{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.dl17txt b{font-size:14px}
+.dl17txt small{font:11px var(--f-mono);color:var(--ui-muted)}
+.dl17tag{font:700 10px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.dl17arrow{display:flex;color:var(--ui-muted)}
+.dl17 .sec h3{margin:0 0 6px}
+.dl17 .note b{color:var(--ui-text)}
+</style>
 <style id="studio-16">
 /* ---------- Mustang Studio 1.6: pages, fill in the blanks, start screen, themes, motion, batch ---------- */
 .stage .hint{bottom:auto;top:14px}
@@ -6742,6 +6757,59 @@ renderInspector = function () {
 };
 
 return { VERSION, POLE, DEPTS, BANNERS, rebuild, setDept, isPole };
+})();
+
+
+/* ===================================================================
+   Mustang Studio 1.7 — "Desktop app": download the Windows or Mac app.
+   Only in the public builds (bronxhanratty.me/studio and the no-font
+   web file). The downloads are the public desktop apps, which, like
+   this page, do not include Industry Black. They come from the latest
+   GitHub release, so the button never needs changing for a new version.
+   =================================================================== */
+(() => {
+const BASE = 'https://github.com/Vortagaunt/bmh-portfolio/releases/latest/download/';
+const APPS = [
+  { id: 'win', name: 'Windows', sub: 'Windows 10 or 11 · about 80 MB', file: 'Mustang-Studio-Setup.exe', icon: 'monitor' },
+  { id: 'mac-arm', name: 'Mac · Apple silicon', sub: 'M1, M2, M3 or M4 · about 95 MB', file: 'Mustang-Studio-Mac-Apple-Silicon.zip', icon: 'laptop' },
+  { id: 'mac-intel', name: 'Mac · Intel', sub: 'Older Macs · about 100 MB', file: 'Mustang-Studio-Mac-Intel.zip', icon: 'laptop' },
+];
+const ico = (name, size) => DATA.icons[name] ? iconSvg(DATA.icons[name], { size, stroke: 1.75 }) : ui('download', size);
+/* which download fits this computer; for a Mac, Chrome names the chip in its WebGL renderer (Safari doesn't) */
+function guess() {
+  const ua = navigator.userAgent || '', plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
+  if (/CrOS/.test(ua)) return 'cros';
+  if (/Win/i.test(plat) || /Windows/.test(ua)) return 'win';
+  const mac = /Mac/i.test(plat) || /Macintosh/.test(ua);
+  if (!mac || navigator.maxTouchPoints > 1) return null;   // an iPad says "Mac" too
+  try {
+    const gl = document.createElement('canvas').getContext('webgl'), ext = gl && gl.getExtension('WEBGL_debug_renderer_info');
+    const r = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : '';
+    if (/Apple M\d/i.test(r)) return 'mac-arm';
+    if (/Intel|AMD|Radeon|NVIDIA/i.test(r)) return 'mac-intel';
+  } catch (e) { }
+  return 'mac';
+}
+function openDownload() {
+  const g = guess();
+  const body = h('div', { class: 'dl17', style: { display: 'flex', flexDirection: 'column', gap: '14px' } });
+  body.append(h('p', {}, `Mustang Studio as an app on your computer: it works offline, saves .mustang files and opens them with a double-click. Free, version ${MS17.VERSION}.`));
+  if (g === 'cros') body.append(h('p', { class: 'note' }, 'On a Chromebook, use Install in the top bar (or the install icon in the address bar) instead — this page becomes the app.'));
+  const pick = id => g === id || (g === 'mac' && id.startsWith('mac'));
+  body.append(h('div', { class: 'dl17list' }, APPS.map(a => h('a', { class: 'dl17opt' + (pick(a.id) ? ' on' : ''), href: BASE + a.file, download: '', rel: 'noopener', onclick: () => setTimeout(closeModal, 400) },
+    h('span', { class: 'dl17ico', html: ico(a.icon, 22) }),
+    h('span', { class: 'dl17txt' }, h('b', {}, a.name), h('small', {}, a.sub)),
+    pick(a.id) && g !== 'mac' ? h('span', { class: 'dl17tag' }, 'This computer') : null,
+    h('span', { class: 'dl17arrow', html: ui('download', 16) })))));
+  body.append(h('div', { class: 'sec' }, h('h3', {}, 'The first time you open it'),
+    h('p', { class: 'note' }, h('b', {}, 'Windows: '), 'if it says Windows protected your PC, click More info, then Run anyway.'),
+    h('p', { class: 'note' }, h('b', {}, 'Mac: '), 'unzip it and drag Mustang Studio into Applications. macOS blocks it the first time because it isn’t registered with Apple: open System Settings → Privacy & Security and click Open Anyway (on macOS 14 or older, right-click the app and choose Open).')));
+  body.append(h('p', { class: 'note' }, 'The apps come without Industry Black, like this page. Add your school’s licensed copy once from the Text tab and the app keeps it.'));
+  openModal('Get the desktop app', body, [h('button', { class: 'btn', onclick: closeModal }, 'Close')]);
+}
+const btn = h('button', { class: 'tbtn dl17btn', id: 'dl17Btn', title: 'Download Mustang Studio for Windows or Mac', onclick: openDownload }, h('span', { html: ico('laptop', 16) }), h('span', { class: 'hide-sm' }, 'Desktop app'));
+const help = $('#helpBtn'); if (help) help.before(btn);
+if (location.hash === '#download') setTimeout(openDownload, 600);
 })();
 
 boot();
