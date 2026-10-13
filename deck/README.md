@@ -22,6 +22,16 @@ It fails on a file that is missing, uncatalogued or listed twice, a mark on a
 ground it cannot be seen on, and — given the export folder — any file that no
 longer matches it byte for byte.
 
+### The Clawed family, and the one PNG
+
+Added Oct 12: `LRHS Clawed.svg` (claw marks through the R) and
+`LRHS Claw Emblem.png` (the claws across both letters). The PNG is the
+library's only raster mark, a 4000 px export, so everything that reads the
+catalogue accepts `.png` as well as `.svg`, and the validator compares only the
+SVGs with the export folder. The family has its own page in the deck, after
+Academic Powerhouse. The same evening Bronx's new exports replaced the
+Academics pair: `LRHS Powerhouse 1.svg` and `LRHS Powerhouse 2.svg`.
+
 ### Holiday emblems
 
 `src/data/lrhs-holidays.json` lists the holiday editions of the LR, in
@@ -53,7 +63,7 @@ another browser binary.
 
 ### Mustang Studio is the surprise
 
-The principal hasn't seen the app. Nothing before slide 23, "One more thing…",
+The principal hasn't seen the app. Nothing before slide 24, "One more thing…",
 mentions it — not the slides, not the speaker notes, and not the section names
 (the reveal's section is called "One more thing"). The Studio slides follow the
 black slide, then "Mustang Studio, on one page", then the system bento (which

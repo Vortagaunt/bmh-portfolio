@@ -108,7 +108,7 @@ export function MarkExplorer({
           </p>
           <p className="mt-1 max-w-[60ch] text-[15px] leading-[1.5] text-ink/65">
             {filter === "all"
-              ? "Use the supplied SVGs only — never redraw, recolour or stretch them. Open any mark to see what it's for."
+              ? "Use the supplied files only — never redraw, recolour or stretch them. Open any mark to see what it's for."
               : filter === "retired"
                 ? "The drawings the system replaces, kept on file so they can be recognised and swapped out. Not for new work."
                 : active?.blurb}

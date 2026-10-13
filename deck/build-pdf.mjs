@@ -45,13 +45,13 @@ const ONGREEN = "#D6E2DA", LR_MUTED = "#7E958A";
 /* Read from src/data/lrhs-marks.json — the same catalogue the slides and the site
    use — rather than kept as a second hand-written list here. The old list was a
    copy, and copies are how the deck and the PDF would drift apart.
-   Row shape: file slug, display name, category, note, ground, status. */
+   Row shape: file slug, display name, category, note, ground, status, family, file name. */
 const CAT = JSON.parse(fs.readFileSync(path.join(here, "..", "src", "data", "lrhs-marks.json"), "utf8"));
-const slugOf = (file) => file.replace(/\.svg$/, "").replace(/ /g, "-");
+const slugOf = (file) => file.replace(/\.(svg|png)$/i, "").replace(/ /g, "-");   // one mark is a PNG (Oct 12)
 const famName = (id) => CAT.families.find((f) => f.id === id).name;
 const MARKS = [
-  ...CAT.marks.map((m) => [slugOf(m.file), m.name, `${famName(m.family)} · ${m.use}`, m.note, m.ground, "live", m.family]),
-  ...CAT.retired.map((m) => [slugOf(m.file), m.name, "Retired", m.note, "light", "retired", "retired"]),
+  ...CAT.marks.map((m) => [slugOf(m.file), m.name, `${famName(m.family)} · ${m.use}`, m.note, m.ground, "live", m.family, m.file]),
+  ...CAT.retired.map((m) => [slugOf(m.file), m.name, "Retired", m.note, "light", "retired", "retired", m.file]),
 ];
 const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
   "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
@@ -122,8 +122,8 @@ const dividerPage = () => `<div class="pg div">
   <div class="kick"><span class="dot">M</span><span class="kt" style="color:${LR_MUTED}">The mark library</span></div>
   <div class="nm">Every mark, one to a page</div>
   <div class="note">The full set at reproduction size, each with the ground it belongs on,
-    what it is for, and whether it is live or retired. Supplied as SVG — never redrawn,
-    recoloured or stretched.</div>
+    what it is for, and whether it is live or retired. Supplied as SVG (one as a 4000&nbsp;px PNG)
+    — never redrawn, recoloured or stretched.</div>
   <div class="ital">${capw(LIVE)} live marks in ${words(FAMS)} families, and ${words(RETIRED)} retired ones kept for reference.</div>
 </div>`;
 
@@ -136,7 +136,7 @@ const scriptDivider = () => `<div class="pg div">
   <div class="ital">The copy for the principal is Bronx-Hanratty-LRHS-Leave-Behind.pdf &mdash; everything before this page.</div>
 </div>`;
 
-const markPage = ([file, name, cat, note, ground, status], i) => `
+const markPage = ([file, name, cat, note, ground, status, , fileName], i) => `
 <div class="pg mk ${ground}">
   <div class="col">
     <div class="kick">
@@ -147,7 +147,7 @@ const markPage = ([file, name, cat, note, ground, status], i) => `
     <div class="cat">${cat}</div>
     <div class="note">${note}</div>
     <div class="meta">
-      <span class="file">${file.replace(/-/g, " ")}.svg</span>
+      <span class="file">${fileName}</span>
       <span class="pill ${status}">${status === "live" ? "Approved for use" : "Retired — reference only"}</span>
     </div>
   </div>

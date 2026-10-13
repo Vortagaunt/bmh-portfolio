@@ -65,7 +65,7 @@ const DISCLAIMER = "Concept work · not affiliated with the school district";
 
 /* the library, in catalogue order; true = reversed mark, sits on green */
 const CAT = JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-marks.json"), "utf8"));
-const LIBRARY = CAT.marks.map((m) => [m.file.replace(/\.svg$/, "").replace(/ /g, "-"), m.ground === "dark"]);
+const LIBRARY = CAT.marks.map((m) => [m.file.replace(/\.(svg|png)$/, "").replace(/ /g, "-"), m.ground === "dark"]);
 const NUM = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
 const LIB_COLS = Math.ceil(Math.sqrt(LIBRARY.length));   // 5 for 25 marks, 6 for 27
 const SWATCHES = [
@@ -232,8 +232,8 @@ const SLIDES = [
     </div>
     <div style="position:relative;display:flex;gap:30px;">
       <span class="chip" style="background:${RED};left:50%;transform:translateX(-50%);top:-6px;">Redrawn · vector</span>
-      <div style="flex:1;min-width:0;position:relative;"><img class="fit abs" src="${mark("LRHS Academic Powerhouse.svg")}" style="top:40px;height:calc(100% - 40px);"></div>
-      <div style="flex:1;min-width:0;position:relative;"><img class="fit abs" src="${mark("LRHS Academic Powerhouse 2.svg")}" style="top:40px;height:calc(100% - 40px);"></div>
+      <div style="flex:1;min-width:0;position:relative;"><img class="fit abs" src="${mark("LRHS Powerhouse 1.svg")}" style="top:40px;height:calc(100% - 40px);"></div>
+      <div style="flex:1;min-width:0;position:relative;"><img class="fit abs" src="${mark("LRHS Powerhouse 2.svg")}" style="top:40px;height:calc(100% - 40px);"></div>
     </div>
   </div>
   <div class="h" style="font-size:76px;">From an AI image <span class="m">to a real mark.</span></div>

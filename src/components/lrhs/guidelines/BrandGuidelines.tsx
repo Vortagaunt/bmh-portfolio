@@ -51,6 +51,7 @@ const SCENES: SceneInfo[] = [
   { id: "full-set", label: "Every mark, in one family", chapter: "Marks", tone: "ink" },
   { id: "crest", label: "The crest", chapter: "Marks", tone: "paper" },
   { id: "academics", label: "Academic Powerhouse", chapter: "Marks", tone: "mist" },
+  { id: "clawed", label: "The LR, clawed", chapter: "Marks", tone: "paper" },
   { id: "redrawn", label: "The emblem, redrawn", chapter: "Marks", tone: "green" },
   { id: "corners", label: "Softer corners, same LR", chapter: "Marks", tone: "paper" },
   { id: "one-horse", label: "One horse, drawn once", chapter: "Marks", tone: "green" },
@@ -120,9 +121,25 @@ const CRESTS = [
 
 const POWERHOUSE = [
   ["/images/lrhs-powerhouse/powerhouse-ai-original.png", "Today", "The original", "AI-generated · in use now"],
-  [mark("LRHS Academic Powerhouse.svg"), "Redrawn", "With the LR", "The system's mustang inside the LR"],
-  [mark("LRHS Academic Powerhouse 2.svg"), "Redrawn", "The mustang", "The horse alone, drawn larger"],
+  [mark("LRHS Powerhouse 1.svg"), "Redrawn", "With the LR", "The LR breaks out of the shield"],
+  [mark("LRHS Powerhouse 2.svg"), "Redrawn", "The mustang", "The horse alone, clawed"],
 ] as const;
+
+/* The Clawed family (Oct 12), from the catalogue: one vector, one 4000 px PNG */
+const CLAWED = MARKS.filter((m) => m.family === "clawed").map((m) =>
+  m.file.endsWith(".png")
+    ? ([m.file, "Raster · PNG", "Across both letters", "4000 px · screens and print"] as const)
+    : ([m.file, "Vector · SVG", "Through the R", "Prints at any size"] as const),
+);
+
+/* The departments grid ends on a count tile that fills whatever is left of
+   the last row, at each breakpoint (2, 3 and 5 columns). Literal class names,
+   so Tailwind sees them. */
+const fill = (cols: number) => cols - (LRHS_MARKS.families.length % cols) || cols;
+const SPAN_BASE: Record<number, string> = { 1: "col-span-1", 2: "col-span-2" };
+const SPAN_SM: Record<number, string> = { 1: "sm:col-span-1", 2: "sm:col-span-2", 3: "sm:col-span-3" };
+const SPAN_LG: Record<number, string> = { 1: "lg:col-span-1", 2: "lg:col-span-2", 3: "lg:col-span-3", 4: "lg:col-span-4", 5: "lg:col-span-5" };
+const COUNT_SPAN = `${SPAN_BASE[fill(2)]} ${SPAN_SM[fill(3)]} ${SPAN_LG[fill(5)]}`;
 
 type Swatch = { name: string; hex: string; role: string; share: number; light?: boolean };
 const SWATCHES: Swatch[] = [
@@ -180,7 +197,7 @@ const APPAREL = [
 const HOLIDAYS = LRHS_HOLIDAYS.holidays;
 
 const RULES = [
-  ["Use the supplied files", "Every mark comes as an SVG. Never redraw, recolour, stretch or tilt one."],
+  ["Use the supplied files", "Every mark comes as an SVG (one as a large PNG). Never redraw, recolour, stretch or tilt one."],
   ["Pick the mark for the job", "Each department has its family: the emblem for athletics, the wordmark for the front office, the crest for graduation."],
   ["Green leads", "Mustang Green carries everything. Spirit Red is the one accent, and it's saved for game day."],
   ["Two typefaces", "Industry Black for headlines and numbers, in capitals. Hanken Grotesk for everything else."],
@@ -441,7 +458,7 @@ const Scenes = memo(function Scenes() {
           id="library"
           kicker="The mark library"
           title="Every Mustang, captioned"
-          lede="The emblem, the wordmarks, the mustang, the band, a graduation crest, the Academic Powerhouse badge, the Mustangs Ahead publications and the retro marks. Supplied as SVG only."
+          lede="The emblem, the clawed emblems, the wordmarks, the mustang, the band, a graduation crest, the Academic Powerhouse badge, the Mustangs Ahead publications and the retro marks. Supplied as SVG, plus one PNG."
           note={`${Say(MARKS.length)} marks in ${say(FAMILIES.length)} families, each with its own permitted use.`}
           wide
         />
@@ -481,7 +498,7 @@ const Scenes = memo(function Scenes() {
               </div>
             </div>
           ))}
-          <div className="flex flex-col justify-center rounded-[18px] bg-[#033922] p-6 text-white sm:col-span-1 lg:col-span-2" data-r="up" style={d(200 + FAMILIES.length * 60)}>
+          <div className={`flex flex-col justify-center rounded-[18px] bg-[#033922] p-6 text-white ${COUNT_SPAN}`} data-r="up" style={d(200 + FAMILIES.length * 60)}>
             <span className="text-[clamp(56px,6vw,96px)] leading-[0.9] font-extrabold tracking-[-0.04em]">{MARKS.length}</span>
             <span className="mt-2 text-[11px] font-semibold tracking-[0.24em] text-[#84C9A2] uppercase">marks</span>
             <span className={`${s.note} !text-[#D6E2DA]`}>
@@ -501,11 +518,11 @@ const Scenes = memo(function Scenes() {
           wide
         />
         <div
-          className="mx-auto mt-8 grid w-full flex-1 grid-cols-3 content-center gap-x-3 gap-y-4 sm:grid-cols-6 lg:grid-cols-9"
-          style={{ maxWidth: "min(100%, calc((100svh - 420px) * 2.75))" }}
+          className="mx-auto mt-8 grid w-full flex-1 grid-cols-3 content-center gap-x-3 gap-y-4 sm:grid-cols-6 lg:grid-cols-10"
+          style={{ maxWidth: "min(100%, calc((100svh - 420px) * 3.05))" }}
         >
           {MARKS.map((m, i) => (
-            <figure key={m.file} className="group min-w-0" data-r="up" style={d(160 + (i % 9) * 40 + Math.floor(i / 9) * 90)}>
+            <figure key={m.file} className="group min-w-0" data-r="up" style={d(160 + (i % 10) * 40 + Math.floor(i / 10) * 90)}>
               <div className={`${s.tile} aspect-square !rounded-[14px]`} style={{ background: m.ground === "dark" ? GREEN : TILE }}>
                 <ZoomImage
                   src={mark(m.file)}
@@ -560,6 +577,27 @@ const Scenes = memo(function Scenes() {
                 <Image src={src} alt={`Academic Powerhouse — ${name.toLowerCase()}`} fill sizes="(min-width: 640px) 30vw, 80vw" className="object-contain p-[12%]" />
               </div>
               <Cap tag={tag} name={name} use={use} red={i > 0} />
+            </figure>
+          ))}
+        </div>
+      </Scene>
+
+      {/* ── 07b The LR, clawed (Oct 12) ───────────────────────────── */}
+      <Scene id="clawed">
+        <Head
+          id="clawed"
+          kicker="Clawed"
+          title="The LR, clawed"
+          lede="The emblem with claw marks torn through it, for the days the school should be loud — pep rallies and spirit week. The letters and the horse don't change; the claws do the shouting."
+          wide
+        />
+        <div className="mx-auto mt-8 grid w-full max-w-[1180px] flex-1 grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-10">
+          {CLAWED.map(([file, tag, name, use], i) => (
+            <figure key={file} className="flex min-h-[180px] flex-col text-center" data-r="up" style={d(220 + i * 140)}>
+              <div className="relative aspect-[4/3] min-h-0 rounded-[26px] bg-white shadow-[0_30px_70px_-34px_rgba(12,12,12,0.4)] sm:aspect-auto sm:flex-1">
+                <Image src={mark(file)} alt={`The LR emblem, clawed — ${name.toLowerCase()}`} fill sizes="(min-width: 640px) 45vw, 80vw" className={`object-contain ${file.endsWith(".png") ? "p-[6%]" : "p-[10%]"}`} />
+              </div>
+              <Cap tag={tag} name={name} use={use} red />
             </figure>
           ))}
         </div>

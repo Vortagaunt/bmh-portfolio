@@ -42,7 +42,7 @@ const HERO = { row: 5, col: 6, file: "LRHS Emblem.svg" };
 const RING = {
   "-1,-1": "LRHS Grad Mark.svg",
   "-1,0": "LRHS Mustangs Ahead 5.svg",
-  "-1,1": "LRHS Academic Powerhouse 2.svg",
+  "-1,1": "LRHS Powerhouse 2.svg",
   "0,-1": "LRHS Mustang 3.svg",
   "0,1": "LRHS Mustang.svg",
   "1,-1": "LRHS Wordmark 2.svg",

@@ -194,18 +194,30 @@ const POWERHOUSE = [
     note: "The original. AI-generated, a flat picture.",
   },
   {
-    src: mark("LRHS Academic Powerhouse.svg"),
-    alt: "The Academic Powerhouse badge redrawn as vector artwork, with the LR",
+    src: mark("LRHS Powerhouse 1.svg"),
+    alt: "The Academic Powerhouse badge redrawn as vector artwork, with the LR breaking out of the shield",
     title: "Redrawn, with the LR",
-    note: "The system's mustang inside the LR.",
+    note: "The LR breaks out of the top of the shield.",
   },
   {
-    src: mark("LRHS Academic Powerhouse 2.svg"),
-    alt: "The Academic Powerhouse badge redrawn as vector artwork, with the mustang alone",
+    src: mark("LRHS Powerhouse 2.svg"),
+    alt: "The Academic Powerhouse badge redrawn as vector artwork, with the mustang alone and claw marks through it",
     title: "Redrawn, the mustang",
-    note: "The horse alone, drawn larger.",
+    note: "The horse alone, drawn larger and clawed.",
   },
 ];
+
+/* The Clawed family (Oct 12): the LR with claw marks torn through it. Read
+   from the catalogue, like the mark explorer, so it follows the library. One
+   of the two is the library's only PNG, which the caption says. */
+const CLAWED = MARKS.filter((m) => m.family === "clawed").map((m) => ({
+  src: mark(m.file),
+  alt: `The LR emblem with claw marks — ${m.name.toLowerCase()}`,
+  title: m.file.endsWith(".png") ? "Across both letters" : "Through the R",
+  note: m.file.endsWith(".png") ? "A 4000 px PNG, for screens and print." : "Vector, so it prints at any size.",
+  /* the PNG has a transparent margin the SVG doesn't, so it gets less padding to sit the same size */
+  pad: m.file.endsWith(".png") ? "p-[5%]" : "p-[9%]",
+}));
 
 /* The holiday editions of the LR, in school-year order — the same list the
    deck's "Holiday emblems" slide reads (src/data/lrhs-holidays.json). They are
@@ -439,6 +451,32 @@ export function LrhsCaseStudy() {
         lede={`${Say(MARKS.length)} marks in ${say(FAMILIES.length)} families. Each part of the school gets marks built for its job, and every one still reads as the same school. Choose a department to see its marks, and open any mark for what it's for.`}
       >
         <MarkExplorer families={FAMILIES} marks={MARKS} retired={RETIRED} />
+
+        <Part
+          title="The LR, clawed"
+          body="The newest family: the emblem with claw marks torn through it, for the days the school should be loud — pep rallies and spirit week. The letters and the horse don't change; the claws do the shouting."
+        >
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+            {CLAWED.map((c, i) => (
+              <li key={c.src}>
+                <figure>
+                  <div className="media-elevated relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3", background: PAPER_TILE }}>
+                    <ZoomImage
+                      src={c.src}
+                      alt={c.alt}
+                      fill
+                      sizes="(min-width: 1024px) 420px, (min-width: 640px) 48vw, 100vw"
+                      className={`object-contain ${c.pad}`}
+                      zoomItems={CLAWED.map((x) => ({ src: x.src, alt: x.alt }))}
+                      zoomIndex={i}
+                    />
+                  </div>
+                  <Caption title={c.title}>{c.note}</Caption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </Part>
       </Chapter>
 
       {/* ── 04 Crest and Academics ────────────────────────────────── */}
