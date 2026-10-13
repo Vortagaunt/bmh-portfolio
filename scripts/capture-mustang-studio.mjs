@@ -8,6 +8,12 @@
  *   ui-*.jpg                  1440x900 screens at 2x (game day, edit, export, brand check before/after,
  *                             marks, text, icons, templates, sizes — and from 1.6: fill, batch, carousel, seasons)
  *   sheet-staff-ids.jpg       a batch of staff IDs ganged on a Letter sheet with cut marks, as the PDF lays them out
+ *   from 1.1 (apparel):
+ *   ui-apparel.jpg            the football jersey open, with the Jersey panel
+ *   ui-apparel-check.jpg      the brand check on a jersey (its dialog): a front number too small for the rules, and a leading zero
+ *   apparel-mockup.jpg        the mockup sheet the app exports (front and back, the colours, the lettering)
+ *   apparel-roster.jpg        six jersey backs from one pasted roster, drawn by the app's renderer
+ *   garment-<kind>.png        every garment in Mustang Green, nothing printed on it, on a transparent ground
  * Then: node deck/prepare-assets.mjs && node deck/render-slides.mjs && ...
  *
  * Run: node scripts/capture-mustang-studio.mjs "<path to Mustang Studio (Industry Black).html>"
@@ -137,6 +143,61 @@ const sheet = await p.evaluate(async (rows) => {
   return c.toDataURL("image/png");
 }, STAFF);
 await sharp(Buffer.from(sheet.split(",")[1], "base64")).jpeg({ quality: 90, mozjpeg: true }).toFile(path.join(OUT, "sheet-staff-ids.jpg"));
+
+/* 1.1: apparel — the football jersey, its panel, the brand check, the mockup sheet and a roster */
+await load("ap-football-home");
+await p.evaluate(() => {
+  sel.clear(); requestRender(); renderInspector();
+  const d = document.querySelector("#drawer"), h = [...d.querySelectorAll("h3")].find((x) => x.textContent === "Apparel");
+  if (h) d.scrollTop = h.offsetTop - 60;
+});
+await p.waitForTimeout(900); await ui("apparel");
+await p.evaluate(() => {
+  const n = doc.layers.find((l) => l.type === "text" && l.jersey === "number");
+  n.text = "07"; n.size *= 0.72; commit(); requestRender(); renderInspector(); runCheck();
+});
+await p.waitForTimeout(1200);
+await p.click("#checkBtn"); await p.waitForTimeout(900); await ui("apparel-check");
+await p.evaluate(() => closeModal()); await p.waitForTimeout(300);
+await load("ap-football-home");
+const mock = await p.evaluate(async () => {
+  const keep = offerFile; let got = null;
+  offerFile = async (name, blob) => { got = blob; };
+  try { await MS11.mockupSheet(); } finally { offerFile = keep; }
+  return got ? await new Promise((r) => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(got); }) : null;
+});
+if (mock) await sharp(Buffer.from(mock.split(",")[1], "base64")).resize(3000, 3000, { fit: "inside" }).jpeg({ quality: 90, mozjpeg: true }).toFile(path.join(OUT, "apparel-mockup.jpg"));
+else console.warn("no mockup sheet");
+const ROSTER = [["Hanratty", "27"], ["Rivera", "4"], ["Okafor", "88"], ["Nguyen", "12"], ["Castellano", "55"], ["Diaz", "3"]];
+const roster = await p.evaluate(async (rows) => {
+  const back = MS16._.pageDoc(MS16._.allPages(doc).findIndex((pg) => pg.layers.some((l) => l.type === "garment" && l.view === "back")));
+  const S = 0.42, cells = rows.map(([name, num]) => {
+    const d = JSON.parse(JSON.stringify(back)); d.bg = { type: "none" };
+    for (const l of d.layers) { if (l.type !== "text") continue; if (l.label === "Player name") { l.text = name; l.size = l.base || l.size; } if (l.label === "Number") l.text = num; }
+    return MS16._.renderSync(d, S, { transparent: true });
+  });
+  const cw = cells[0].width, chh = cells[0].height, cols = 3, gap = 30;
+  const c = document.createElement("canvas"); c.width = cols * cw + (cols - 1) * gap; c.height = 2 * chh + gap;
+  const x = c.getContext("2d");
+  cells.forEach((cv, i) => x.drawImage(cv, (i % cols) * (cw + gap), Math.floor(i / cols) * (chh + gap)));
+  return c.toDataURL("image/png");
+}, ROSTER);
+await sharp(Buffer.from(roster.split(",")[1], "base64")).flatten({ background: "#F1F2F0" }).jpeg({ quality: 90, mozjpeg: true }).toFile(path.join(OUT, "apparel-roster.jpg"));
+const garments = await p.evaluate(async () => {
+  const out = {};
+  for (const kind of MS11.KINDS) {
+    const t = MS11.APPAREL.find((a) => a.fmt === "ap-" + kind) || MS11.APPAREL[0];
+    const d = MS16._.pageDoc(0, t.build());
+    d.bg = { type: "none" };
+    d.layers = d.layers.filter((l) => l.type === "garment" || l.type === "fabric");
+    for (const l of d.layers) if (l.type === "garment") { l.kind = kind; l.colors = { body: "#033922", sleeves: "#033922", trim: "#033922", accent: "#033922" }; l.pattern = "none"; }
+    for (const l of d.layers) if (l.type === "fabric") l.kind = kind;
+    out[kind] = MS16._.renderSync(d, 0.5, { transparent: true }).toDataURL("image/png");
+  }
+  return out;
+});
+for (const [kind, url] of Object.entries(garments)) await sharp(Buffer.from(url.split(",")[1], "base64")).trim({ threshold: 1 }).png().toFile(path.join(OUT, `garment-${kind}.png`));
+console.log(`apparel   : ${Object.keys(garments).length} garments, mockup sheet, roster`);
 
 const facts = await p.evaluate(() => ({ version: MS16.VERSION, templates: TEMPLATES.length, formats: FORMATS.length, styles: Object.keys(STYLES).length,
   icons: Object.keys(DATA.icons || {}).length, seasons: MS16._.THEMES.length }));

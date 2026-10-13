@@ -10,18 +10,23 @@
  * Slides go in as the JPGs assemble.js already wrote — 3840px across an 11in
  * page is ~350dpi. Mark pages are real HTML so their type stays vector.
  *
- * Two files come out of one render:
+ * One file comes out by default (Oct 12, Bronx: "make the pdf just the pages
+ * where it is only the marks"):
+ *   Bronx-Hanratty-LRHS-Marks.pdf   every mark, one to a page — no slides, no
+ *       divider, no script. Bookmarks go family → mark; real document properties.
+ *
+ * The two older editions are still here, behind EDITIONS=1:
  *   Bronx-Hanratty-LRHS-Presentation-and-Marks.pdf  slides, marks, then the
  *       presenter script at the back (for Bronx — it has the Q&A and the stage
  *       directions in it)
- *   Bronx-Hanratty-LRHS-Leave-Behind.pdf            the same without the script:
- *       the copy to hand the principal
- * Both carry bookmarks (every section, slide, family and mark), a clickable QR
+ *   Bronx-Hanratty-LRHS-Leave-Behind.pdf            the same without the script
+ * Those carry bookmarks (every section, slide, family and mark), a clickable QR
  * code and links (anything marked data-link on a slide, read from
- * slides-png/links.json), and real document properties. The script pages are
- * assets/script/presenter-script.pdf (node ../scripts/build-presenter-script.mjs).
+ * slides-png/links.json). The script pages are assets/script/presenter-script.pdf
+ * (node ../scripts/build-presenter-script.mjs).
  *
- * Run: node build-pdf.mjs        (after assemble.js — it reads slides-jpg)
+ * Run: node build-pdf.mjs              the marks PDF (needs img/marks from prepare-assets)
+ *      EDITIONS=1 node build-pdf.mjs   also the two slide editions (after assemble.js — they read slides-jpg)
  */
 import { chromium } from "playwright-core";
 import { PDFDocument, PDFName, PDFHexString, PDFString } from "pdf-lib";
@@ -33,6 +38,8 @@ import { fileURLToPath } from "node:url";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(here, "Bronx-Hanratty-LRHS-Presentation-and-Marks.pdf");
 const LEAVE = path.join(here, "Bronx-Hanratty-LRHS-Leave-Behind.pdf");
+const MARKS_PDF = path.join(here, "Bronx-Hanratty-LRHS-Marks.pdf");
+const EDITIONS = !!process.env.EDITIONS;
 const SCRIPT_PDF = path.join(here, "..", "assets", "script", "presenter-script.pdf");
 const readJson = (f, d) => { const p = path.join(here, "slides-png", f); return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : d; };
 const META = readJson("meta.json", []), LINKS = readJson("links.json", {});
@@ -154,7 +161,7 @@ const markPage = ([file, name, cat, note, ground, status, , fileName], i) => `
   <div class="panel"><img src="img/marks/${file}.png" alt="${name}"></div>
 </div>`;
 
-const slides = fs.readdirSync(path.join(here, "slides-jpg")).filter((f) => f.endsWith(".jpg")).sort();
+const slides = EDITIONS ? fs.readdirSync(path.join(here, "slides-jpg")).filter((f) => f.endsWith(".jpg")).sort() : [];
 const doc = (pages) => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>
 ${pages}
 </body></html>`;
@@ -180,20 +187,24 @@ async function print(name, content) {
   if (process.env.KEEP) console.log("kept:", tmp); else fs.unlinkSync(tmp);
   return buf;
 }
-const mainPdf = await print("main", html);
-/* The leave-behind is the copy that gets emailed, so its slides are lighter:
-   2560px across the 11in page is still ~230dpi, and it keeps the file under the
-   25MB most mail services allow. The presenter edition keeps the 4K JPGs. */
-const LIGHT = path.join(here, "slides-jpg", "light");
-fs.mkdirSync(LIGHT, { recursive: true });
-for (const f of slides) {
-  await sharp(path.join(here, "slides-jpg", f)).resize({ width: 2560, kernel: "lanczos3" })
-    .jpeg({ quality: 84, chromaSubsampling: "4:4:4", mozjpeg: true }).toFile(path.join(LIGHT, f));
+const marksPdf = await print("marks", doc(MARKS.map(markPage).join("\n")));
+let mainPdf, lightPdf, dividerPdf;
+if (EDITIONS) {
+  mainPdf = await print("main", html);
+  /* The leave-behind is the copy that gets emailed, so its slides are lighter:
+     2560px across the 11in page is still ~230dpi, and it keeps the file under the
+     25MB most mail services allow. The presenter edition keeps the 4K JPGs. */
+  const LIGHT = path.join(here, "slides-jpg", "light");
+  fs.mkdirSync(LIGHT, { recursive: true });
+  for (const f of slides) {
+    await sharp(path.join(here, "slides-jpg", f)).resize({ width: 2560, kernel: "lanczos3" })
+      .jpeg({ quality: 84, chromaSubsampling: "4:4:4", mozjpeg: true }).toFile(path.join(LIGHT, f));
+  }
+  lightPdf = await print("light", doc(`${slides.map((f) => slidePage(f, "slides-jpg/light")).join("\n")}
+  ${dividerPage()}
+  ${MARKS.map(markPage).join("\n")}`));
+  dividerPdf = await print("script", doc(scriptDivider()));
 }
-const lightPdf = await print("light", doc(`${slides.map((f) => slidePage(f, "slides-jpg/light")).join("\n")}
-${dividerPage()}
-${MARKS.map(markPage).join("\n")}`));
-const dividerPdf = await print("script", doc(scriptDivider()));
 await browser.close();
 
 /* ---- bookmarks: sections → slides, then the library → families → marks ---- */
@@ -222,6 +233,21 @@ function addOutline(pdf, items) {
   pdf.catalog.set(PDFName.of("Outlines"), rootRef);
   pdf.catalog.set(PDFName.of("PageMode"), PDFName.of("UseOutlines"));
 }
+/* the marks PDF: families → marks, from page one */
+function markItems(first) {
+  const fams = [];
+  MARKS.forEach((row, k) => {
+    const famId = row[6], pageNo = first + k;
+    let fam = fams[fams.length - 1];
+    if (!fam || fam.id !== famId) {
+      const name = famId === "retired" ? "Retired" : famName(famId);
+      fams.push((fam = { id: famId, title: name, page: pageNo, open: false, children: [] }));
+    }
+    fam.children.push({ title: row[1], page: pageNo });
+  });
+  for (const fam of fams) fam.title += `  (${fam.children.length})`;
+  return fams;
+}
 function outlineItems(withScript) {
   const items = [];
   slides.forEach((f, i) => {
@@ -230,18 +256,7 @@ function outlineItems(withScript) {
     if (!sec || sec.title !== m.section) items.push((sec = { title: m.section, page: i, open: true, children: [] }));
     sec.children.push({ title: `${i + 1}  ${m.title}`, page: i });
   });
-  const lib = { title: "The mark library", page: slides.length, open: false, children: [] };
-  MARKS.forEach((row, k) => {
-    const famId = row[6], pageNo = slides.length + 1 + k;
-    let fam = lib.children[lib.children.length - 1];
-    if (!fam || fam.id !== famId) {
-      const name = famId === "retired" ? "Retired" : famName(famId);
-      lib.children.push((fam = { id: famId, title: name, page: pageNo, children: [] }));
-    }
-    fam.children.push({ title: row[1], page: pageNo });
-  });
-  for (const fam of lib.children) fam.title += `  (${fam.children.length})`;
-  items.push(lib);
+  items.push({ title: "The mark library", page: slides.length, open: false, children: markItems(slides.length + 1) });
   if (withScript) items.push({ title: "Presenter script", page: slides.length + 1 + MARKS.length });
   return items;
 }
@@ -288,7 +303,23 @@ async function build(file, withScript) {
   console.log(`${path.basename(file)}  ${pdf.getPageCount()} pages, ${links} links, bookmarks  ${mb}MB`);
 }
 
-await build(OUT, true);
-await build(LEAVE, false);
-console.log(`  ${slides.length} slides + 1 divider + ${MARKS.length} marks` + (fs.existsSync(SCRIPT_PDF) ? " (+ script divider + presenter script in the presenter edition)" : ""));
+{
+  const pdf = await PDFDocument.load(marksPdf);
+  addOutline(pdf, markItems(0));
+  pdf.setTitle("Lakewood Ranch High School — The Mustang Mark Library", { showInWindowTitleBar: true });
+  pdf.setAuthor("Bronx Hanratty");
+  pdf.setSubject(`All ${LIVE} marks in ${FAMS} families, one to a page, and the ${RETIRED} retired ones. Concept work · not affiliated with the school district.`);
+  pdf.setKeywords(["Lakewood Ranch High School", "Mustangs", "brand system", "mark library", "bronxhanratty.me"]);
+  pdf.setCreator("deck/build-pdf.mjs");
+  pdf.setProducer("Chrome + pdf-lib");
+  pdf.setLanguage("en-US");
+  fs.writeFileSync(MARKS_PDF, await pdf.save());
+  const mb = (fs.statSync(MARKS_PDF).size / 1048576).toFixed(2);
+  console.log(`${path.basename(MARKS_PDF)}  ${pdf.getPageCount()} pages (${LIVE} live + ${RETIRED} retired marks), bookmarks  ${mb}MB`);
+}
+if (EDITIONS) {
+  await build(OUT, true);
+  await build(LEAVE, false);
+  console.log(`  ${slides.length} slides + 1 divider + ${MARKS.length} marks` + (fs.existsSync(SCRIPT_PDF) ? " (+ script divider + presenter script in the presenter edition)" : ""));
+}
 console.log("missing assets:", missing.length ? [...new Set(missing)] : "none");

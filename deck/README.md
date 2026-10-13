@@ -48,14 +48,14 @@ too. The Halloween photo version is a WebP (2000 px), since it is a picture.
 cd deck
 npm install                          # once — qrcode, jsqr, pptxgenjs, pdf-lib
 node ../scripts/render-lrhs-splash.mjs   # first: prepare-assets copies it in
-node ../scripts/build-presenter-script.mjs   # the script PDF that goes at the back
+node ../scripts/build-presenter-script.mjs   # the script PDF (the speaker notes read the HTML)
 node prepare-assets.mjs              # img/ from public/images
 node render-boards.mjs               # the seven brand-system boards
 node build-wallpaper.mjs             # wallpapers, incl. the deck variant
 node build-qr.mjs                    # site QR, decode-verified before it is kept
 node render-slides.mjs               # every slide at 3840x2160, plus extras/ for the site
 node assemble.js                     # -> Bronx-Hanratty-LRHS-Presentation.pptx
-node build-pdf.mjs                   # -> ...-Presentation-and-Marks.pdf and ...-Leave-Behind.pdf
+node build-pdf.mjs                   # -> Bronx-Hanratty-LRHS-Marks.pdf (the mark pages only)
 ```
 
 Every script finds Chrome at its Windows install path; set `CHROME` to use
@@ -88,25 +88,30 @@ adding slides.
   to say, italic lines are what to do. The last slide also carries the Q&A.
   Edit the script, rebuild, and the notes follow.
 - **Sections and titles**: each `ORDER` entry has a title and a section; they
-  become PowerPoint sections, the slides' alt text and the PDF's bookmarks.
+  become PowerPoint sections and the slides' alt text.
 - **Transitions**: a fade between slides, a slow fade through black into
   "One more thing…", and a straight cut from it into Mustang Studio.
 
 After changing anything in `assemble.js`, check the file with the pptx skill's
 `validate.py`.
 
-### The two PDFs
+### The PDF
 
-`Bronx-Hanratty-LRHS-Presentation-and-Marks.pdf` is the presenter edition: the
-slides, the mark library one to a page, then the presenter script.
-`Bronx-Hanratty-LRHS-Leave-Behind.pdf` is the same without the script — the
-copy to hand over. Its slides are 2560px JPGs (still ~230dpi on the page), so it
-stays under the 25MB most mail services accept; the presenter edition keeps 4K. Both have bookmarks (sections, slides, families, marks),
-document properties, and links: anything marked `data-link` on a slide (the QR
-code, bronxhanratty.me, bronxhanratty.me/studio) is clickable.
+`Bronx-Hanratty-LRHS-Marks.pdf` is the mark library and nothing else: one mark
+to a page, live marks first by family, then the retired ones (Oct 12 — Bronx
+asked for "just the pages where it is only the marks"). No slides, no divider,
+no script. Bookmarks go family → mark. It only needs `img/marks` from
+`prepare-assets.mjs`, so it can be rebuilt without rendering the slides.
 
-`build-pdf.mjs` must run **after** `assemble.js` — it reads the JPGs that step
-writes. The slide order is the `ORDER` list at the bottom of `slides-lrhs.js`;
+The two older editions are still in `build-pdf.mjs`, behind `EDITIONS=1`
+(`EDITIONS=1 node build-pdf.mjs`, after `assemble.js`, since they read its JPGs):
+`Bronx-Hanratty-LRHS-Presentation-and-Marks.pdf` (slides, marks, then the
+presenter script — never hand it over) and `Bronx-Hanratty-LRHS-Leave-Behind.pdf`
+(the same without the script, 2560px slides to stay under 25MB). Those have
+bookmarks for every section and slide, and the QR code and addresses
+(`data-link` on a slide) are clickable.
+
+The slide order is the `ORDER` list at the bottom of `slides-lrhs.js`;
 badge numbers are derived from it.
 
 Industry Black is licensed and is not committed. The scripts look for it in
@@ -125,7 +130,7 @@ node scripts/render-bento-motion.mjs studio-wide                    # then studi
 ```
 
 The template count is read from `assets/studio/templates.json` everywhere it can
-be. Hand-kept: the sizes (19) and brand-check rules (33) of Mustang Studio 1.0 in
+be. Hand-kept: the sizes (27) and brand-check rules (45) of Mustang Studio 1.1 in
 `slides-lrhs.js`, `scripts/render-studio-bento.mjs` and `LrhsCaseStudy.tsx`.
 
 ## Keeping the three surfaces in step

@@ -666,11 +666,15 @@ const ask = (n) => page("lrpaper", `
    The brand-locked design app Bronx built, shown with its own screens and its
    own template exports (assets/studio — captured from the app by
    scripts/capture-mustang-studio.mjs). prepare-assets copies them to img/studio.
-   Facts on these slides are read from the app (1.7): 45 templates in 7 groups
-   (Seasons and Banners among them), 19 sizes, 25 marks, 6 type styles, 134 icons,
-   33 brand-check rules, 4 seasonal themes. */
+   Facts on these slides are read from the app (1.1, Oct 12): 54 templates in 8
+   groups (Seasons, Banners and Apparel among them), 27 sizes (8 of them garments),
+   29 marks, 7 type styles, 134 icons, 45 brand-check rules, 4 seasonal themes.
+   The template count comes from templates.json and the marks from the catalogue;
+   the sizes and rules are kept here by hand (capture-mustang-studio.mjs prints them). */
 const STUDIO = "img/studio";
 const STUDIO_TPL = require("../assets/studio/templates.json");
+const STUDIO_SIZES = 27, STUDIO_RULES = 45, STUDIO_STYLES = 7;
+const Words = (k) => { const w = words(k); return w[0].toUpperCase() + w.slice(1); };
 const STUDIO_FMT = {
   "ig-post": [1080, 1080, "Instagram", "1080 × 1080"], "ig-portrait": [1080, 1350, "Portrait", "1080 × 1350"],
   story: [1080, 1920, "Story", "1080 × 1920"], "x-post": [1600, 900, "X / Facebook", "1600 × 900"],
@@ -714,7 +718,7 @@ const studioIntro = (n) => page("greend", `
       A design app that only speaks Mustang. Anyone at school can make a flyer, a post or a poster
       &mdash; and it comes out on brand every time.</div>
     <div style="display:flex;flex-wrap:wrap;gap:22px;margin-top:72px;">
-      ${["45 templates", "19 sizes", "25 marks", "33 brand checks"].map((t) => `<span style="padding:20px 38px;border-radius:999px;
+      ${[`${STUDIO_TPL.length} templates`, `${STUDIO_SIZES} sizes`, `${TOTAL} marks`, `${STUDIO_RULES} brand checks`].map((t) => `<span style="padding:20px 38px;border-radius:999px;
         background:rgba(255,255,255,.1);font-size:36px;font-weight:600;color:#FCFCFC;">${t}</span>`).join("")}
     </div>
   </div>
@@ -724,7 +728,7 @@ const studioIntro = (n) => page("greend", `
 
 /* 2 — how it works, in three real screens */
 const STUDIO_STEPS = [
-  ["ui-templates.jpg", [0, 40, 1080, 810], "Pick a template", "Forty-five of them, sorted by department and season."],
+  ["ui-templates.jpg", [0, 40, 1080, 810], "Pick a template", `${Words(STUDIO_TPL.length)} of them, sorted by department and season.`],
   ["ui-fill.jpg", [280, 30, 1160, 870], "Fill in the blanks", "Type the details into a form. The type, colours and spacing stay locked to the brand."],
   ["ui-export.jpg", [300, 120, 840, 630], "Export", "PNG or JPG for screens, a print-ready PDF, or a video and a GIF when it moves."],
 ];
@@ -748,12 +752,12 @@ const studioSteps = (n) => page("lrpaper", `
   </div></div>`);
 
 /* 3 — every template, by department, as the app exports them */
-const STUDIO_GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Banners", "ID cards", "Seasons"];
+const STUDIO_GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Banners", "ID cards", "Seasons", "Apparel"];
 const studioTemplates = (n) => page("lrpaper", `
   ${kicker(n, "Templates", false)}
-  <div class="display" style="font-size:130px;color:#0C0C0C;margin:48px 0 20px;">Forty-five templates, ready on day one</div>
-  <div style="font-size:42px;line-height:1.5;color:${GREY};">Built from the brand system, one set for every part of the school &mdash; and one for every season. Everything stays editable.</div>
-  <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:20px;">
+  <div class="display" style="font-size:130px;color:#0C0C0C;margin:48px 0 20px;">${Words(STUDIO_TPL.length)} templates, ready on day one</div>
+  <div style="font-size:42px;line-height:1.5;color:${GREY};">Built from the brand system, one set for every part of the school, one for every season &mdash; and the jerseys. Everything stays editable.</div>
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:16px;">
     ${STUDIO_GROUPS.map((g) => {
       const items = STUDIO_TPL.filter((t) => t.group === g);
       return `<div style="display:flex;align-items:center;gap:60px;">
@@ -761,8 +765,8 @@ const studioTemplates = (n) => page("lrpaper", `
           <div style="font-size:44px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;">${g}</div>
           <div style="font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:${GREY};margin-top:10px;">${items.length} templates</div>
         </div>
-        <div style="display:flex;gap:22px;align-items:center;height:184px;">
-          ${items.map((t) => `<img src="${STUDIO}/tpl-${t.id}.jpg" alt="${t.name}" style="height:184px;width:auto;display:block;border-radius:8px;
+        <div style="display:flex;gap:22px;align-items:center;height:152px;">
+          ${items.map((t) => `<img src="${STUDIO}/tpl-${t.id}.jpg" alt="${t.name}" style="height:152px;width:auto;display:block;border-radius:8px;
             box-shadow:0 0 0 1px rgba(12,12,12,.08),0 18px 40px -20px rgba(12,12,12,.5);">`).join("")}
         </div>
       </div>`;
@@ -771,7 +775,7 @@ const studioTemplates = (n) => page("lrpaper", `
 
 /* 4 — the brand check, before and after one click each */
 const STUDIO_CHECKS = ["Text that’s hard to read", "A mark on the wrong ground", "Tilted or faded marks", "Off-brand colours",
-  "Too much Spirit Red", "Text too small to print", "Too close to the trim", "Words in a pole pocket", "QR codes and barcodes"];
+  "Too much Spirit Red", "Text too small to print", "Too close to the trim", "Words in a pole pocket", "QR codes and barcodes", "Jersey numbers, in inches"];
 const studioCheck = (n) => page("greend", `
   ${kicker(n, "Brand check", true)}
   <div class="display" style="font-size:150px;margin:56px 0 70px;">It checks the work for you</div>
@@ -784,7 +788,7 @@ const studioCheck = (n) => page("greend", `
         <div style="font-size:38px;line-height:1.5;color:${ONGREEN};margin-top:18px;">${note}</div>
       </div>`).join("")}
     <div style="display:flex;flex-direction:column;justify-content:flex-start;">
-      <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:${LR_MUTED};font-weight:600;">33 rules, including</div>
+      <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:${LR_MUTED};font-weight:600;">${STUDIO_RULES} rules, including</div>
       <div style="display:flex;flex-direction:column;gap:30px;margin-top:44px;">
         ${STUDIO_CHECKS.map((c) => `<div style="display:flex;gap:24px;align-items:center;font-size:40px;color:#FCFCFC;">
           ${studioIcon(ICO.check, 44, "#2EA866")}<span>${c}</span></div>`).join("")}
@@ -798,7 +802,7 @@ const STUDIO_ROWS = [
   [["Print", ["letter", "half", "tabloid", "poster18", "poster24", "postcard", "id-v", "id-h"]], ["Banners", ["banner", "pole4", "pole5"]]],
 ];
 const studioShape = (id) => {
-  const [w, h, name, dims] = STUDIO_FMT[id], H = 230, W = Math.round(H * w / h), card = id.startsWith("id-");
+  const [w, h, name, dims] = STUDIO_FMT[id], H = 200, W = Math.round(H * w / h), card = id.startsWith("id-");
   return `<div style="display:flex;flex-direction:column;align-items:center;min-width:190px;">
     <div style="width:${W}px;height:${H}px;background:${GREEN};border-radius:${card ? 22 : 10}px;display:flex;align-items:center;justify-content:center;
          box-shadow:0 22px 50px -24px rgba(12,12,12,.55);">
@@ -807,25 +811,38 @@ const studioShape = (id) => {
     <div style="font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:${GREY};margin-top:8px;white-space:nowrap;">${dims}</div>
   </div>`;
 };
+/* 1.1: the eight garments, drawn by the app in Mustang Green (assets/studio/garment-*.png) */
+const STUDIO_GARMENTS = [["football", "Football", "Jersey"], ["basketball", "Basketball", "Jersey"], ["baseball", "Baseball", "Jersey"],
+  ["soccer", "Soccer", "Jersey"], ["volleyball", "Volleyball", "Jersey"], ["tee", "Spirit tee", "T-shirt"], ["hoodie", "Hoodie", "Spirit wear"], ["polo", "Staff polo", "Polo"]];
+const studioGarment = ([kind, name, dims]) => `<div style="display:flex;flex-direction:column;align-items:center;min-width:190px;">
+    <div style="height:200px;display:flex;align-items:flex-end;justify-content:center;">
+      <img src="${STUDIO}/garment-${kind}.png" style="height:200px;width:auto;filter:drop-shadow(0 18px 26px rgba(12,12,12,.28));"></div>
+    <div style="font-size:28px;font-weight:600;color:#0C0C0C;margin-top:26px;white-space:nowrap;">${name}</div>
+    <div style="font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:${GREY};margin-top:8px;white-space:nowrap;">${dims}</div>
+  </div>`;
 const studioSizes = (n) => page("lrpaper", `
   ${kicker(n, "Every size", false)}
-  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">Nineteen sizes, one system</div>
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">${Words(STUDIO_SIZES)} sizes, one system</div>
   <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3200px;text-wrap:balance;">
-    Posts and stories, a screen slide, flyers, posters up to 24 × 36, the ID cards, a six-foot fence banner
-    &mdash; and the pole banners out front. Print sizes export as print-ready PDFs.</div>
-  <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:90px;">
+    Posts and stories, a screen slide, flyers, posters up to 24 × 36, the ID cards, a six-foot fence banner, the pole banners
+    out front &mdash; and a mockup for every jersey and shirt. Print sizes export as print-ready PDFs.</div>
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:64px;">
     ${STUDIO_ROWS.map((row) => `<div style="display:flex;gap:120px;align-items:flex-end;">
       ${row.map(([label, ids]) => `<div>
-        <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:${GREY};font-weight:600;margin-bottom:34px;">${label}</div>
+        <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:${GREY};font-weight:600;margin-bottom:30px;">${label}</div>
         <div style="display:flex;gap:40px;align-items:flex-end;">${ids.map(studioShape).join("")}</div>
       </div>`).join("")}
     </div>`).join("")}
+    <div>
+      <div style="font-size:30px;letter-spacing:.24em;text-transform:uppercase;color:${GREY};font-weight:600;margin-bottom:30px;">Apparel</div>
+      <div style="display:flex;gap:64px;align-items:flex-end;">${STUDIO_GARMENTS.map(studioGarment).join("")}</div>
+    </div>
   </div>`);
 
 /* 6 — what's already inside, straight from the app's drawers */
 const STUDIO_INSIDE = [
-  ["ui-marks.jpg", [0, 40, 368, 520], "Every mark", "All twenty-five, sorted by family, each labelled with where it belongs."],
-  ["ui-text.jpg", [0, 40, 368, 520], "Six type styles", "Industry Black, Hanken Grotesk, Space Mono and Yellowtail, set up once."],
+  ["ui-marks.jpg", [0, 40, 368, 520], "Every mark", `All ${words(TOTAL)}, sorted by family, each labelled with where it belongs.`],
+  ["ui-text.jpg", [0, 40, 368, 520], `${Words(STUDIO_STYLES)} type styles`, "Industry Black, Hanken Grotesk, Space Mono, Yellowtail and Freshman for the jerseys, set up once."],
   ["ui-icons.jpg", [0, 40, 368, 520], "134 icons", "One line weight, ready to drop in."],
   ["ui-gameday.jpg", [1140, 40, 300, 424], "Brand colours only", "The palette is built in. Anything off-brand gets flagged."],
 ];
@@ -845,7 +862,7 @@ const STUDIO_NEW = [
   ["“Who are you?”", "Coach, club, band, newsletter or front office: your templates come first."],
 ];
 const studioNew = (n) => page("lrpaper", `
-  ${kicker(n, "Mustang Studio 1.0", false)}
+  ${kicker(n, "Mustang Studio 1.1", false)}
   <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 0;">Made for people who aren’t designers</div>
   <div style="flex:1;min-height:0;display:grid;grid-template-columns:1.18fr .72fr 1.18fr;gap:90px;align-items:center;">
     <div>${studioCrop("ui-fill.jpg", [190, 30, 1250, 850], 1100)}${studioCap("Fill in the blanks", "A form instead of a canvas. Type the details; long lines shrink to fit and nothing slides off brand.", false)}</div>
@@ -858,6 +875,35 @@ const studioNew = (n) => page("lrpaper", `
   </div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:70px;padding-top:20px;border-top:2px solid rgba(12,12,12,.08);">
     ${STUDIO_NEW.map(([t, d]) => `<div style="padding-top:44px;">
+      <div style="display:flex;gap:18px;align-items:center;font-size:40px;font-weight:600;color:#0C0C0C;">${studioIcon(ICO.check, 44, GREEN)}${t}</div>
+      <div style="font-size:30px;line-height:1.45;color:${GREY};margin-top:14px;">${d}</div></div>`).join("")}
+  </div>`);
+
+/* 7b — new in 1.1: apparel, and the jerseys the athletic director designs.
+   The mockup sheet and the roster are the app's own output (capture-mustang-studio.mjs). */
+const STUDIO_AP = [
+  ["Eight garments", "Football, basketball, baseball, soccer and volleyball jerseys, a spirit tee, a hoodie and a staff polo."],
+  ["The uniform rules, built in", "Numbers measured in real inches, no leading zeros, dark at home and white away."],
+  ["The whole roster at once", "Paste the team list: every player’s name and number on their own jersey back."],
+  ["Print art for the maker", "Real-size PNGs at 300 dpi, and a READ ME with the colours and the lettering."],
+];
+const studioApparel = (n) => page("lrpaper", `
+  ${kicker(n, "New · Apparel", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 0;">Jerseys the athletic director can design</div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:1700px 1fr;gap:120px;align-items:center;">
+    <div>
+      <div style="width:100%;border-radius:22px;overflow:hidden;background:#FBFBF9;box-shadow:0 0 0 1px rgba(12,12,12,.08),0 40px 100px -40px rgba(12,12,12,.55);">
+        <img src="${STUDIO}/apparel-mockup.jpg" style="display:block;width:100%;"></div>
+      ${studioCap("A mockup sheet for the coach", "Pick the sport, set the colours, home or away. Front and back, with the colours and the lettering named.", false)}
+    </div>
+    <div>
+      <div style="width:100%;border-radius:22px;overflow:hidden;background:#F1F2F0;box-shadow:0 0 0 1px rgba(12,12,12,.08),0 40px 100px -40px rgba(12,12,12,.55);">
+        <img src="${STUDIO}/apparel-roster.jpg" style="display:block;width:100%;"></div>
+      ${studioCap("One pasted roster", "Six players, six jersey backs. The names shrink to fit the nameplate.", false)}
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:70px;padding-top:20px;border-top:2px solid rgba(12,12,12,.08);">
+    ${STUDIO_AP.map(([t, d]) => `<div style="padding-top:44px;">
       <div style="display:flex;gap:18px;align-items:center;font-size:40px;font-weight:600;color:#0C0C0C;">${studioIcon(ICO.check, 44, GREEN)}${t}</div>
       <div style="font-size:30px;line-height:1.45;color:${GREY};margin-top:14px;">${d}</div></div>`).join("")}
   </div>`);
@@ -993,11 +1039,12 @@ const ORDER = [
   [oneMore, "One more thing…", "One more thing"],
   [studioIntro, "Mustang Studio — a design app that only speaks Mustang", "One more thing"],
   [studioSteps, "How it works — three steps, no designer", "One more thing"],
-  [studioTemplates, "Templates — forty-five, ready on day one", "One more thing"],
+  [studioTemplates, `Templates — ${words(STUDIO_TPL.length)}, ready on day one`, "One more thing"],
   [studioCheck, "Brand check — it checks the work for you", "One more thing"],
-  [studioSizes, "Every size — nineteen sizes, one system", "One more thing"],
+  [studioSizes, `Every size — ${words(STUDIO_SIZES)} sizes, one system`, "One more thing"],
   [studioInside, "Built in — everything is already inside", "One more thing"],
   [studioNew, "Made for people who aren't designers — fill in, batch, carousels", "One more thing"],
+  [studioApparel, "Apparel — jerseys the athletic director can design", "One more thing"],
   [studioAnywhere, "Where it runs — free, and it runs anywhere", "One more thing"],
   [studioBento, "Mustang Studio, on one page", "One more thing"],
   [bento, "Mustangs Ahead — the whole system on one page", "Finale"],
