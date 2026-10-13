@@ -49,6 +49,17 @@ for (const f of fs.readdirSync(marksDir).filter((f) => f.endsWith(".svg"))) {
     .toFile(out);
   n++;
 }
+/* the one raster mark (LRHS Claw Emblem.png, 4000 px): its transparent margin
+   trimmed, so it sits the same size as the SVGs (whose viewBoxes are tight),
+   then the same 1800 px long side */
+for (const f of fs.readdirSync(marksDir).filter((f) => f.endsWith(".png"))) {
+  const trimmed = await sharp(path.join(marksDir, f)).trim().toBuffer();
+  await sharp(trimmed)
+    .resize({ width: 1800, height: 1800, fit: "inside" })
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(IMG, "marks", f.replace(/ /g, "-")));
+  n++;
+}
 console.log(`marks     : ${n}`);
 
 /* ---- 2. the emblem and horse the wallpaper needs, knocked out to white ---- */

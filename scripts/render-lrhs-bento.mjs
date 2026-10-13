@@ -46,7 +46,7 @@ const INDUSTRY = font("Industry Black", [process.env.INDUSTRY_FONT, path.join(us
 const HANKEN = font("Hanken Grotesk", [process.env.HANKEN_FONT, path.join(userFonts, "HankenGrotesk-VariableFont_wght.ttf")]);
 
 const uri = (file, type) => `data:${type};base64,${fs.readFileSync(file).toString("base64")}`;
-const mark = (name) => uri(path.join(root, "public", "images", "lrhs-marks", name), "image/svg+xml");
+const mark = (name) => uri(path.join(root, "public", "images", "lrhs-marks", name), name.endsWith(".png") ? "image/png" : "image/svg+xml");
 const img = (...p) => {
   const f = path.join(root, ...p);
   return uri(f, f.endsWith(".svg") ? "image/svg+xml" : f.endsWith(".png") ? "image/png" : "image/jpeg");
@@ -280,8 +280,8 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
 <!-- academic powerhouse -->
 <div class="t paper c" style="grid-area:4/7/5/8;">
   <div class="art" style="display:flex;gap:14px;">
-    <div style="flex:1;min-width:0;"><img class="fit" src="${mark("LRHS Academic Powerhouse.svg")}"></div>
-    <div style="flex:1;min-width:0;"><img class="fit" src="${mark("LRHS Academic Powerhouse 2.svg")}"></div>
+    <div style="flex:1;min-width:0;"><img class="fit" src="${mark("LRHS Powerhouse 1.svg")}"></div>
+    <div style="flex:1;min-width:0;"><img class="fit" src="${mark("LRHS Powerhouse 2.svg")}"></div>
   </div>
   <div class="hs" style="font-size:34px;margin-top:22px;">Academic Powerhouse</div>
   <div class="sub" style="font-size:22px;margin-top:6px;">From an AI image to a real mark.</div>

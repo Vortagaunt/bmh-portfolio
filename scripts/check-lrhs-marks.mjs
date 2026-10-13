@@ -15,7 +15,9 @@
  *
  * Optional: pass the source folder the marks were exported to, and it will also
  * check the library (and the holiday SVGs) match it byte for byte — the marks were renamed in that
- * folder mid-rebuild once already, and a stale copy would otherwise ship.
+ * folder mid-rebuild once already, and a stale copy would otherwise ship. The
+ * one raster mark (LRHS Claw Emblem.png, Oct 12) isn't in the SVG export folder,
+ * so only the SVG marks are compared.
  *
  * Run: node scripts/check-lrhs-marks.mjs ["C:/Users/B M H/Downloads/SVG"]
  */
@@ -38,7 +40,9 @@ const holFiles = holidays.map((h) => h.file);
 const problems = [];
 for (const f of holFiles) if (!fs.existsSync(path.join(HOL_DIR, f))) problems.push(`holiday emblem listed but missing: ${f}`);
 for (const f of fs.readdirSync(HOL_DIR)) if (!holFiles.includes(f)) problems.push(`in lrhs-holidays but not listed: ${f}`);
-const onDisk = fs.readdirSync(DIR).filter((f) => f.endsWith(".svg")).sort();
+/* the library is SVG, plus one PNG mark (LRHS Claw Emblem.png) */
+const isMark = (f) => /\.(svg|png)$/i.test(f);
+const onDisk = fs.readdirSync(DIR).filter(isMark).sort();
 const listed = [...cat.marks, ...cat.retired].map((m) => m.file);
 
 for (const f of listed) if (!onDisk.includes(f)) problems.push(`catalogued but missing: ${f}`);
@@ -79,7 +83,7 @@ if (source) {
     if (!onDisk.includes(f)) problems.push(`in source folder, not in library: ${f}`);
     else if (hash(path.join(source, f)) !== hash(path.join(DIR, f))) problems.push(`differs from source: ${f}`);
   }
-  for (const m of cat.marks) if (!src.includes(m.file)) problems.push(`live mark not in source folder: ${m.file}`);
+  for (const m of cat.marks) if (m.file.endsWith(".svg") && !src.includes(m.file)) problems.push(`live mark not in source folder: ${m.file}`);
   for (const f of holFiles) if (f.endsWith(".svg") && !src.includes(f)) problems.push(`holiday emblem not in source folder: ${f}`);
 }
 

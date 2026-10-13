@@ -1,5 +1,5 @@
 {
-  "_about": "The LRHS mark library: one source of truth read by the deck (deck/slides-lrhs.js, deck/render-boards.mjs), the printable PDF (deck/build-pdf.mjs) and the site (src/app/case-study/lakewood-ranch-redesign). Files live in public/images/lrhs-marks. ground is the background a mark is shown on: light = paper, dark = Mustang Green.",
+  "_about": "The LRHS mark library: one source of truth read by the deck (deck/slides-lrhs.js, deck/render-boards.mjs), the printable PDF (deck/build-pdf.mjs) and the site (src/app/case-study/lakewood-ranch-redesign). Files live in public/images/lrhs-marks (all SVG except LRHS Claw Emblem.png, a 4000 px PNG). ground is the background a mark is shown on: light = paper, dark = Mustang Green.",
   "families": [
     {
       "id": "emblem",
@@ -7,6 +7,13 @@
       "dept": "Athletics and the whole school",
       "hero": "LRHS Emblem.svg",
       "blurb": "The LR and the mustang. The mark most people will think of as the school."
+    },
+    {
+      "id": "clawed",
+      "name": "Clawed",
+      "dept": "Pep rallies and spirit week",
+      "hero": "LRHS Clawed.svg",
+      "blurb": "The LR with claw marks torn through it. The loud one: pep rallies, the student section, spirit week."
     },
     {
       "id": "wordmark",
@@ -40,7 +47,7 @@
       "id": "academics",
       "name": "Academics",
       "dept": "Academic honours and awards",
-      "hero": "LRHS Academic Powerhouse.svg",
+      "hero": "LRHS Powerhouse 1.svg",
       "blurb": "The Academic Powerhouse badge, redrawn from an AI-generated picture as real artwork, for the work done in the classroom."
     },
     {
@@ -98,6 +105,22 @@
       "use": "Dark grounds",
       "ground": "dark",
       "note": "For green and dark grounds only. Never place the reversed emblem on a light background."
+    },
+    {
+      "file": "LRHS Clawed.svg",
+      "family": "clawed",
+      "name": "Clawed",
+      "use": "Primary",
+      "ground": "light",
+      "note": "The emblem with claw marks torn through the R. Pep-rally posters, student-section shirts and banners, spirit-week posts."
+    },
+    {
+      "file": "LRHS Claw Emblem.png",
+      "family": "clawed",
+      "name": "Clawed — both letters",
+      "use": "Screens and print",
+      "ground": "light",
+      "note": "The claw marks carried across the L as well. Supplied as a 4000 px PNG rather than a vector, so it's for screens and print — not embroidery, vinyl or anything cut."
     },
     {
       "file": "LRHS Wordmark 2.svg",
@@ -196,20 +219,20 @@
       "note": "The crest in Mustang Green alone, for embossing, foil stamping and single-ink print."
     },
     {
-      "file": "LRHS Academic Powerhouse.svg",
+      "file": "LRHS Powerhouse 1.svg",
       "family": "academics",
       "name": "Academic Powerhouse",
       "use": "Academic badge",
       "ground": "light",
-      "note": "The Academic Powerhouse badge redrawn as vector artwork, with the system's mustang inside the LR. Honour rolls, academic awards and banners — it prints sharp at any size."
+      "note": "The Academic Powerhouse badge redrawn as vector artwork, with the full LR breaking out of the top of the shield. Honour rolls, academic awards and banners — it prints sharp at any size."
     },
     {
-      "file": "LRHS Academic Powerhouse 2.svg",
+      "file": "LRHS Powerhouse 2.svg",
       "family": "academics",
       "name": "Academic Powerhouse — mustang",
       "use": "Alternate",
       "ground": "light",
-      "note": "The same badge with the horse alone, drawn larger. For places the LR already appears nearby, or where the horse should lead."
+      "note": "The same badge with the horse alone, drawn larger, with claw marks torn through it. For places the LR already appears nearby, or where the horse should lead."
     },
     {
       "file": "LRHS Mustangs Ahead.svg",

@@ -15,7 +15,7 @@ const CAT = require("../src/data/lrhs-marks.json");
 const RED = "#A82424", ONGREEN = "#D6E2DA", LR_MUTED = "#7E958A", GREY = "#5A6A61";
 const GREEN = "#003C24";
 
-const slug = (file) => file.replace(/\.svg$/, "").replace(/ /g, "-");
+const slug = (file) => file.replace(/\.(svg|png)$/i, "").replace(/ /g, "-");   // one mark is a PNG (Oct 12)
 const markImg = (file) => `img/marks/${slug(file)}.png`;
 const tileBg = (m) => (m.ground === "dark" ? GREEN : "#EFF2F0");
 const family = (id) => CAT.families.find((f) => f.id === id);
@@ -27,8 +27,8 @@ const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "ei
   "eighteen", "nineteen"];
 const TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
 const words = (k) => (k < 20 ? ONES[k] : TENS[Math.floor(k / 10)] + (k % 10 ? "-" + ONES[k % 10] : ""));
-const TOTAL = CAT.marks.length;                      // 27 (Oct 10: the Academics pair joined)
-const FAMILIES = CAT.families.length;                // 8
+const TOTAL = CAT.marks.length;                      // 29 (Oct 12: the Clawed pair joined)
+const FAMILIES = CAT.families.length;                // 9
 
 const badge = (n, onDark) => `
   <span style="display:inline-flex;align-items:center;justify-content:center;
@@ -167,13 +167,13 @@ const identity = section("Identity", "The core lockup",
   "lrhs-identity.jpg", { dark: true, note: "Clear space equal to the height of the L on every side." });
 
 const library = section("The mark library", "Every Mustang, captioned",
-  "The emblem, the wordmarks, the mustang, the band, a graduation crest, the Academic Powerhouse badge, the Mustangs Ahead publications and the retro marks. Supplied as SVG only.",
+  "The emblem, the clawed emblems, the wordmarks, the mustang, the band, a graduation crest, the Academic Powerhouse badge, the Mustangs Ahead publications and the retro marks. Supplied as SVG, plus one PNG.",
   "lrhs-marks.jpg", { note: `${cap(words(TOTAL))} marks in ${words(FAMILIES)} families, each with its own permitted use.` });
 
 function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
 /* NEW for the principal: which mark serves which part of the school. The
-   library grew from one family into eight, and this is the view of it a
+   library grew from one family into nine, and this is the view of it a
    principal actually needs — not the files, but who uses them for what.
    Five to a row; the count tile takes whatever is left of the last row, so a
    new family only ever shrinks it. */
@@ -223,8 +223,8 @@ const fullSet = (n) => page("lrpaper", `
   </div>
   <div style="font-size:40px;line-height:1.45;color:${GREY};max-width:3300px;margin-bottom:44px;text-wrap:balance;">
     ${cap(words(TOTAL))} marks in ${words(FAMILIES)} families &mdash;
-    the emblem and its reductions, three wordmarks, the mustang, the band, the
-    graduation crest, Academic Powerhouse, Mustangs Ahead and the retro marks.
+    the emblem and its reductions, the clawed emblems, three wordmarks, the mustang,
+    the band, the graduation crest, Academic Powerhouse, Mustangs Ahead and the retro marks.
   </div>
   <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(${SET_COLS},1fr);
        grid-auto-rows:1fr;gap:24px 30px;">
@@ -248,7 +248,7 @@ const fullSet = (n) => page("lrpaper", `
              font-weight:600;margin-top:14px;">marks &middot; ${words(FAMILIES)} families</div>
       </div>` : ""}
   </div>`);
-const SET_COLS = 7;
+const SET_COLS = 8;   // 8 across since the Clawed pair (29 marks): four rows, so the tiles keep their size
 
 /* The crest, big. On the full-set slide the three crests are the smallest
    marks in the grid — tall artwork in wide tiles — and they carry the most
@@ -288,11 +288,13 @@ const crest = (n) => page("lrpaper", `
    straight comparison. All three go in white cards because the original is a
    flat image with its own white ground (254, so the cards match it). */
 /* Since Oct 10 the two redrawn badges are catalogued marks — the Academics
-   family — so they come from the same PNGs as every other mark. */
+   family — so they come from the same PNGs as every other mark. Oct 12: Bronx's
+   new exports replaced them (Powerhouse 1: the LR breaks out of the shield;
+   Powerhouse 2: the horse alone, clawed). */
 const POWERHOUSE = [
   ["img/powerhouse/powerhouse-ai-original.png", "Today", "The original", "AI-generated · in use now"],
-  [markImg("LRHS Academic Powerhouse.svg"), "Redrawn", "With the LR", "The system's mustang inside the LR"],
-  [markImg("LRHS Academic Powerhouse 2.svg"), "Redrawn", "The mustang", "The horse alone, drawn larger"],
+  [markImg("LRHS Powerhouse 1.svg"), "Redrawn", "With the LR", "The LR breaks out of the shield"],
+  [markImg("LRHS Powerhouse 2.svg"), "Redrawn", "The mustang", "The horse alone, clawed"],
 ];
 const powerhouse = (n) => page("lrpaper", `
   ${kicker(n, "Academic Powerhouse", false)}
@@ -319,6 +321,44 @@ const powerhouse = (n) => page("lrpaper", `
                color:${GREY};margin-top:12px;">${use}</div>
         </div>
       </div>`).join("")}
+  </div>`);
+
+/* Clawed (Oct 12): Bronx's newest family — the emblem with claw marks torn
+   through it. Two versions, shown big in the same white cards as Academic
+   Powerhouse: the claws through the R (vector), and across both letters (a
+   4000 px PNG — the one raster mark in the library, so the caption says so). */
+const CLAWED_USE = {
+  "LRHS Clawed.svg": ["Vector · SVG", "Through the R", "Prints at any size"],
+  "LRHS Claw Emblem.png": ["Raster · PNG", "Across both letters", "4000 px · screens and print"],
+};
+const clawed = (n) => page("lrpaper", `
+  ${kicker(n, "Clawed", false)}
+  <div class="display" style="font-size:140px;color:#0C0C0C;margin:52px 0 28px;">
+    The LR, clawed
+  </div>
+  <div style="font-size:44px;line-height:1.5;color:${GREY};max-width:3300px;margin-bottom:64px;text-wrap:balance;">
+    The emblem with claw marks torn through it, for the days the school should be loud &mdash;
+    pep rallies, the student section, spirit week. The letters and the horse don&rsquo;t change;
+    the claws do the shouting.
+  </div>
+  <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(${inFamily("clawed").length},1fr);
+       gap:120px;padding:0 260px;">
+    ${inFamily("clawed").map((m) => {
+      const [tag, label, use] = CLAWED_USE[m.file] || [m.use, m.name, family(m.family).dept];
+      return `
+      <div style="display:flex;flex-direction:column;min-height:0;">
+        <div style="flex:1;min-height:0;display:flex;position:relative;background:#FEFEFE;border-radius:36px;
+             box-shadow:0 40px 100px -40px rgba(12,12,12,.35);">
+          ${fit(markImg(m.file), 70)}
+        </div>
+        <div style="text-align:center;margin-top:34px;">
+          <div style="font-size:26px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:${RED};">${tag}</div>
+          <div style="font-size:40px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;margin-top:12px;">${label}</div>
+          <div style="font-size:28px;letter-spacing:.14em;text-transform:uppercase;
+               color:${GREY};margin-top:12px;">${use}</div>
+        </div>
+      </div>`;
+    }).join("")}
   </div>`);
 
 const beforeAfter = (n) => page("greend", `
@@ -914,7 +954,8 @@ const outro = () => page("green", `
    carries no badge; everything after it is numbered in the order it appears.
 
    Holiday emblems (Oct 12) sit after the apparel and before game day, so game
-   day still lands as the "ending" that sets up the reveal.
+   day still lands as the "ending" that sets up the reveal. The Clawed family
+   (Oct 12, later) gets its own page after Academic Powerhouse, like the crest.
 
    Mustang Studio is a surprise (Oct 10): nothing before "One more thing…"
    mentions the app, and the black slide reveals it. The system bento — which
@@ -933,6 +974,7 @@ const ORDER = [
   [fullSet, "The full set — every mark, in one family", "The system"],
   [crest, "The crest — for the moments that should feel permanent", "The system"],
   [powerhouse, "Academic Powerhouse — from a generated image to a real mark", "The system"],
+  [clawed, "Clawed — the LR, clawed", "The system"],
   [beforeAfter, "Before / after — the emblem, redrawn", "The system"],
   [corners, "Corners — softer corners, same LR", "The system"],
   [result, "The result — one horse, drawn once", "The system"],
@@ -991,7 +1033,7 @@ S.layers = {
   [at(staffIds)]: { effect: "fan" },
 };
 
-S.extras = { "lrhs-crest": crest(), "lrhs-powerhouse": powerhouse(), "lrhs-signage": signage(), "lrhs-posters": posters(),
+S.extras = { "lrhs-crest": crest(), "lrhs-powerhouse": powerhouse(), "lrhs-clawed": clawed(), "lrhs-signage": signage(), "lrhs-posters": posters(),
   "lrhs-ids-student": studentIds(), "lrhs-ids-staff": staffIds(),
   "lrhs-corners": corners(),
   "lrhs-studio": studioIntro(), "lrhs-studio-templates": studioTemplates(), "lrhs-studio-new": studioNew() };

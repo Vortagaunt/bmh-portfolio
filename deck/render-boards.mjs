@@ -120,20 +120,21 @@ const marks = board("02", "The marks",
     ${markTile("LRHS-Mustang-2","Mustang","Icon",false)}
   </div>
   <div style="flex:0 0 auto;display:flex;align-items:center;gap:18px;">
-    ${["LRHS-Band","LRHS-Grad-Mark","LRHS-Academic-Powerhouse","LRHS-Mustangs-Ahead","LRHS-Retro-Logo-2"].map((f) => `
+    ${["LRHS-Clawed","LRHS-Band","LRHS-Grad-Mark","LRHS-Powerhouse-1","LRHS-Mustangs-Ahead","LRHS-Retro-Logo-2"].map((f) => `
     <div style="width:124px;height:104px;border-radius:14px;background:#F0F2F0;flex:0 0 auto;
          display:flex;align-items:center;justify-content:center;padding:12px;">
       <img src="img/marks/${f}.png" style="max-width:100%;max-height:100%;object-fit:contain;">
     </div>`).join("")}
     <div class="bd" style="font-size:24px;margin-left:14px;">
-      Plus the <strong style="color:${PAPER};font-weight:600;">band</strong>, the
+      Plus the <strong style="color:${PAPER};font-weight:600;">clawed</strong> emblems, the
+      <strong style="color:${PAPER};font-weight:600;">band</strong>, the
       <strong style="color:${PAPER};font-weight:600;">graduation crest</strong>,
       <strong style="color:${PAPER};font-weight:600;">Academic Powerhouse</strong>,
       <strong style="color:${PAPER};font-weight:600;">Mustangs Ahead</strong> and the
       <strong style="color:${PAPER};font-weight:600;">retro</strong> marks. Legacy &ldquo;Old LR&rdquo; marks are retired.
     </div>
   </div>`,
-  `<span>${capw(CAT.marks.length)} marks &middot; ${words(CAT.families.length)} families</span><span>SVG only</span>`);
+  `<span>${capw(CAT.marks.length)} marks &middot; ${words(CAT.families.length)} families</span><span>SVG, plus one PNG</span>`);
 
 /* 03 colour */
 const SW = [
