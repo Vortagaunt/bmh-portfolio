@@ -125,7 +125,7 @@ node scripts/render-bento-motion.mjs studio-wide                    # then studi
 ```
 
 The template count is read from `assets/studio/templates.json` everywhere it can
-be. Hand-kept: the sizes (19) and brand-check rules (33) of Mustang Studio 1.7 in
+be. Hand-kept: the sizes (19) and brand-check rules (33) of Mustang Studio 1.0 in
 `slides-lrhs.js`, `scripts/render-studio-bento.mjs` and `LrhsCaseStudy.tsx`.
 
 ## Keeping the three surfaces in step

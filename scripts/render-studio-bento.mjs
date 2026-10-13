@@ -66,7 +66,7 @@ const FIELD = `radial-gradient(120% 95% at 18% 10%, #0A5733 0%, rgba(10,87,51,0)
   radial-gradient(110% 100% at 88% 96%, #021A10 0%, rgba(2,26,16,0) 58%),
   linear-gradient(146deg, #04482A 0%, #003C24 44%, #05281A 100%)`;
 const TPL = JSON.parse(fs.readFileSync(path.join(STUDIO, "templates.json"), "utf8"));
-/* Mustang Studio 1.7: 19 sizes and 33 brand-check rules (28 from 1.5, the two seasonal ones from 1.6, three for banners) */
+/* Mustang Studio 1.0: 19 sizes and 33 brand-check rules (28 from 1.5, the two seasonal ones from 1.6, three for banners) */
 const SIZES = 19, CHECKS = 33;
 const STRIP = ["gameday", "pole-gomustangs", "news", "story-podcast", "podstory", "spotlight", "certificate", "id-student-front", "band", "final", "ridetogether", "honor", "schedule", "issue", "gamestory"]
   .filter((id) => TPL.some((t) => t.id === id));

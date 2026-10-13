@@ -2,7 +2,7 @@
  * The LRHS brand system on one page, standing up — the vertical (9:16) cut of the
  * keynote-style bento (scripts/render-lrhs-bento.mjs), for stories, phones and
  * a portrait print. Same tiles, same type, same rules; laid out on a 4 x 8 grid.
- * The Mustang Studio tile shows the 1.7 app (assets/studio/ui-gameday.jpg).
+ * The Mustang Studio tile shows the 1.0 app (assets/studio/ui-gameday.jpg).
  *
  * Emits 8K only:
  *   assets/flyer/lrhs-bento-vertical-8k.jpg   4320x7680

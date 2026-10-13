@@ -845,7 +845,7 @@ const STUDIO_NEW = [
   ["“Who are you?”", "Coach, club, band, newsletter or front office: your templates come first."],
 ];
 const studioNew = (n) => page("lrpaper", `
-  ${kicker(n, "Mustang Studio 1.7", false)}
+  ${kicker(n, "Mustang Studio 1.0", false)}
   <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 0;">Made for people who aren’t designers</div>
   <div style="flex:1;min-height:0;display:grid;grid-template-columns:1.18fr .72fr 1.18fr;gap:90px;align-items:center;">
     <div>${studioCrop("ui-fill.jpg", [190, 30, 1250, 850], 1100)}${studioCap("Fill in the blanks", "A form instead of a canvas. Type the details; long lines shrink to fit and nothing slides off brand.", false)}</div>

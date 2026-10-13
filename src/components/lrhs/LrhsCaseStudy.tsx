@@ -24,7 +24,7 @@ import { Swatches } from "./Swatches";
    Counts come from the catalogues, never typed in: the marks and families
    from src/data/lrhs-marks.json (the same file the deck and the PDF read),
    the templates from src/data/mustang-studio-templates.json. The only
-   hand-kept numbers are Mustang Studio 1.7's sizes, checks and icons.
+   hand-kept numbers are Mustang Studio 1.0's sizes, checks and icons.
    ───────────────────────────────────────────────────────────────────── */
 
 const GREEN = "#033922";

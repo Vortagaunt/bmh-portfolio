@@ -5,7 +5,7 @@ import { ZoomImage } from "../ZoomImage";
 
 type Stop = { id: string; label: string; text: string; alt: string };
 
-/* Real screens from Mustang Studio 1.7 (assets/studio/ui-*.jpg, cut to 1920
+/* Real screens from Mustang Studio 1.0 (assets/studio/ui-*.jpg, cut to 1920
    wide in public/images/lrhs-studio by scripts/studio-site-images.mjs). */
 const STOPS: Stop[] = [
   {
