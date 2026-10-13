@@ -130,7 +130,7 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
   <div style="position:absolute;inset:0;background:radial-gradient(80% 90% at 0% 0%,rgba(46,168,102,.22) 0%,rgba(46,168,102,0) 60%);"></div>
   <div style="position:relative;z-index:1;width:760px;display:flex;flex-direction:column;flex:1;">
     <img src="${uri(path.join(STUDIO, "app-icon-1024.png"))}" style="width:124px;height:124px;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6));">
-    <div class="lab" style="margin-top:38px;"><span class="new">New</span>Version 1.7</div>
+    <div class="lab" style="margin-top:38px;"><span class="new">New</span>Version 1.0</div>
     <div class="ind" style="font-size:142px;margin-top:22px;">Mustang<br><span class="g">Studio</span></div>
     <div class="sub" style="font-size:31px;margin-top:28px;color:#C9D6CE;">A design app that only speaks Mustang. Anyone at school makes a flyer, a post or a poster &mdash; and it comes out on brand every time.</div>
     <div class="sp"></div>
