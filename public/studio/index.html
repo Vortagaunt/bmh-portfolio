@@ -225,6 +225,14 @@ input[type=range]{width:100%;accent-color:var(--accent);min-width:0}
 .dl17 .sec h3{margin:0 0 6px}
 .dl17 .note b{color:var(--ui-text)}
 </style>
+<style id="studio-10-fixes">/* Mustang Studio 1.0 fixes.
+   Mark previews: the tile is a flex item in a column flexbox with only aspect-ratio to size it,
+   and its image has percentage max sizes, so older Chromium (the 1.7 desktop apps) shrank the
+   tile to 0 × 0 and every mark preview disappeared. Give the tile a real width; aspect-ratio
+   then gives it a real height, and the image's percentages resolve against both. */
+.thumb .tb{width:100%;align-self:stretch;flex:0 0 auto}
+.thumb .tb img{width:auto;height:auto;min-width:0;min-height:0}
+</style>
 <style id="studio-16">
 /* ---------- Mustang Studio 1.6: pages, fill in the blanks, start screen, themes, motion, batch ---------- */
 .stage .hint{bottom:auto;top:14px}
@@ -5012,7 +5020,7 @@ async function boot() {
    1.5 projects open unchanged: a design with one page has no `pages`.
    =================================================================== */
 const MS16 = (() => {
-const VERSION = '1.7';
+const VERSION = '1.0';
 const LS16 = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) { } } };
 const clone = o => JSON.parse(JSON.stringify(o));
 const pause = (ms = 0) => new Promise(r => setTimeout(r, ms));
@@ -6504,7 +6512,7 @@ return {
    Wraps 1.6 the way 1.6 wraps 1.5: nothing older is rewritten.
    =================================================================== */
 const MS17 = (() => {
-const VERSION = '1.7';
+const VERSION = '1.0';
 /* Banners work at 75 units per inch: Draft exports at 75 dpi, Print quality at
    150 dpi, which is what large-format printers ask for on vinyl. */
 const U = 75, POCKET = 4, SIDE = 1.5, MIN_LETTER = 1, MIN_PPI = 75, CAP = 0.7;
@@ -6770,9 +6778,9 @@ return { VERSION, POLE, DEPTS, BANNERS, rebuild, setDept, isPole };
 (() => {
 const BASE = 'https://github.com/Vortagaunt/bmh-portfolio/releases/latest/download/';
 const APPS = [
-  { id: 'win', name: 'Windows', sub: 'Windows 10 or 11 · about 80 MB', file: 'Mustang-Studio-Setup.exe', icon: 'monitor' },
-  { id: 'mac-arm', name: 'Mac · Apple silicon', sub: 'M1, M2, M3 or M4 · about 95 MB', file: 'Mustang-Studio-Mac-Apple-Silicon.zip', icon: 'laptop' },
-  { id: 'mac-intel', name: 'Mac · Intel', sub: 'Older Macs · about 100 MB', file: 'Mustang-Studio-Mac-Intel.zip', icon: 'laptop' },
+  { id: 'win', name: 'Windows', sub: 'Windows 10 or 11 · about 106 MB', file: 'Mustang-Studio-Setup.exe', icon: 'monitor' },
+  { id: 'mac-arm', name: 'Mac · Apple silicon', sub: 'M1 or newer · macOS 13+ · about 123 MB', file: 'Mustang-Studio-Mac-Apple-Silicon.zip', icon: 'laptop' },
+  { id: 'mac-intel', name: 'Mac · Intel', sub: 'Intel Macs · macOS 13+ · about 128 MB', file: 'Mustang-Studio-Mac-Intel.zip', icon: 'laptop' },
 ];
 const ico = (name, size) => DATA.icons[name] ? iconSvg(DATA.icons[name], { size, stroke: 1.75 }) : ui('download', size);
 /* which download fits this computer; for a Mac, Chrome names the chip in its WebGL renderer (Safari doesn't) */
