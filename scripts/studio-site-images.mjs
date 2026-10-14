@@ -4,7 +4,6 @@
  *
  *   public/images/lrhs-studio/templates/<id>.jpg   every template, 720px on the long side
  *   public/images/lrhs-studio/ui-<name>.jpg        the tour's screens, 1920 x 1200
- *   public/images/lrhs-studio/apparel-*.jpg        1.1: the jersey mockup sheet (1920 wide) and the roster (1440 wide)
  *   src/data/mustang-studio-templates.json         the template wall's list, in the app's order
  *
  * Existing pictures are left alone unless they are named on the command line
@@ -21,8 +20,7 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const STUDIO = path.join(root, "assets", "studio");
 const SITE = path.join(root, "public", "images", "lrhs-studio");
 const args = process.argv.slice(2), all = args.includes("--all"), named = new Set(args.filter((a) => !a.startsWith("--")));
-const TOUR = ["templates", "edit", "fill", "batch", "carousel", "seasons", "apparel", "sizes", "export", "check-before", "check-after"];
-const APPAREL = [["apparel-mockup", 1920], ["apparel-roster", 1440]];
+const TOUR = ["templates", "edit", "fill", "batch", "carousel", "seasons", "sizes", "export", "check-before", "check-after"];
 
 const list = JSON.parse(fs.readFileSync(path.join(STUDIO, "templates.json"), "utf8"));
 const out = [];
@@ -47,11 +45,5 @@ for (const name of TOUR) {
   if (!(all || named.has(`ui-${name}`)) && fs.existsSync(dest)) continue;
   await sharp(path.join(STUDIO, `ui-${name}.jpg`)).resize(1920, 1200).jpeg({ quality: 86, mozjpeg: true }).toFile(dest);
   console.log("screen", name);
-}
-for (const [name, width] of APPAREL) {
-  const dest = path.join(SITE, `${name}.jpg`);
-  if (!(all || named.has(name)) && fs.existsSync(dest)) continue;
-  await sharp(path.join(STUDIO, `${name}.jpg`)).resize({ width }).jpeg({ quality: 86, mozjpeg: true, progressive: true }).toFile(dest);
-  console.log("apparel", name);
 }
 console.log(`${out.length} templates on the wall`);

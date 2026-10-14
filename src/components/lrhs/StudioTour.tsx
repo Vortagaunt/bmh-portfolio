@@ -5,13 +5,13 @@ import { ZoomImage } from "../ZoomImage";
 
 type Stop = { id: string; label: string; text: string; alt: string };
 
-/* Real screens from Mustang Studio 1.1 (assets/studio/ui-*.jpg, cut to 1920
+/* Real screens from Mustang Studio 1.0 (assets/studio/ui-*.jpg, cut to 1920
    wide in public/images/lrhs-studio by scripts/studio-site-images.mjs). */
 const STOPS: Stop[] = [
   {
     id: "templates",
     label: "Pick a template",
-    text: "Fifty-four of them, sorted by department and season. The ones for whoever's using it — a coach, the athletic director, the band, the front office — come first.",
+    text: "Forty-five of them, sorted by department and season. The ones for whoever's using it — a coach, the band, the front office — come first.",
     alt: "Mustang Studio with the templates panel open beside a game-day post",
   },
   {
@@ -45,15 +45,9 @@ const STOPS: Stop[] = [
     alt: "The seasons panel with Homecoming, Pink Out, Halloween and winter templates",
   },
   {
-    id: "apparel",
-    label: "Design a jersey",
-    text: "Pick the sport and the colours, home or away. Numbers are measured in real inches against the uniform rules, and one button makes the mockup sheet for the coach and the print art for the uniform maker.",
-    alt: "The home football jersey in Mustang Studio, with the Jersey panel: garment, home or away, body, sleeve and trim colours, and the mockup and print-art buttons",
-  },
-  {
     id: "sizes",
     label: "Resize it",
-    text: "Twenty-seven sizes, from an Instagram story to a 24 × 36 poster, a six-foot fence banner, the pole banners out front and a mockup for every jersey and shirt.",
+    text: "Nineteen sizes, from an Instagram story to a 24 × 36 poster, a six-foot fence banner and the pole banners out front.",
     alt: "The change-size dialog listing social, screen and print sizes",
   },
   {

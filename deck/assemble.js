@@ -28,7 +28,10 @@ const sharp = require("sharp");
 const { speakerNotes } = require("./notes.js");
 
 const here = __dirname;
-const OUT = path.join(here, "Bronx-Hanratty-LRHS-Presentation.pptx");
+/* SLIM=1 builds Bronx's cut-down deck instead: only the slides named in slim.json
+   (matched on the part of the title before " — "), in the full deck's order. */
+const SLIM = process.env.SLIM ? require("./slim.json") : null;
+const OUT = path.join(here, SLIM ? "Bronx-Hanratty-LRHS-PresentationSlim.pptx" : "Bronx-Hanratty-LRHS-Presentation.pptx");
 const SW = 13.333, SH = 7.5, PX = 3840, PY = 2160;   // slide in inches, renders in px
 const inch = (px, of, size) => +(px / of * size).toFixed(4);
 const xml = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -140,13 +143,20 @@ const plain = (paras) => paras.map((q) => (q.kind === "head" ? q.text.toUpperCas
   fs.mkdirSync(baseDir, { recursive: true });
 
   /* only slide-NN.png are slides; -base and -layer-* belong to layered slides */
-  const src = fs.readdirSync(srcDir).filter((f) => /^slide-\d+\.png$/.test(f)).sort();
-  for (const f of src) {
+  const all = fs.readdirSync(srcDir).filter((f) => /^slide-\d+\.png$/.test(f)).sort();
+  for (const f of all) {
     await sharp(path.join(srcDir, f)).jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
       .toFile(path.join(jpgDir, f.replace(".png", ".jpg")));
   }
   const readJson = (f, d) => (fs.existsSync(path.join(srcDir, f)) ? JSON.parse(fs.readFileSync(path.join(srcDir, f), "utf8")) : d);
-  const motion = readJson("motion.json", {}), layers = readJson("layers.json", {}), meta = readJson("meta.json", []);
+  const motionAll = readJson("motion.json", {}), layersAll = readJson("layers.json", {}), metaAll = readJson("meta.json", []);
+  /* which of the full deck's slides go in (all of them, unless SLIM) */
+  const head = (t) => String(t || "").split(" — ")[0].trim();
+  const keep = all.map((_, i) => i).filter((i) => !SLIM || SLIM.slides.some((t) => head(t) === head(metaAll[i]?.title)));
+  if (SLIM && keep.length !== SLIM.slides.length) throw new Error(`slim.json names ${SLIM.slides.length} slides, ${keep.length} matched`);
+  const src = keep.map((i) => all[i]), meta = keep.map((i) => metaAll[i]);
+  const motion = {}, layers = {};
+  keep.forEach((o, k) => { if (motionAll[o + 1]) motion[k + 1] = motionAll[o + 1]; if (layersAll[o + 1]) layers[k + 1] = layersAll[o + 1]; });
   for (const L of Object.values(layers)) {
     await sharp(path.join(srcDir, L.base)).jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
       .toFile(path.join(baseDir, L.base.replace(".png", ".jpg")));
@@ -166,7 +176,11 @@ const plain = (paras) => paras.map((q) => (q.kind === "head" ? q.text.toUpperCas
   for (const title of sections) p.addSection({ title });
 
   const titles = src.map((_, i) => meta[i]?.title || `Slide ${i + 1}`);
-  const notes = speakerNotes(src.length, titles);
+  const notesAll = speakerNotes(all.length, all.map((_, i) => metaAll[i]?.title || `Slide ${i + 1}`));
+  const notes = keep.map((o) => notesAll[o]);
+  /* the last slide carries the ask, the Q&A and the quiet-room fallback: if the cut drops it, they go on the new last slide */
+  if (!keep.includes(all.length - 1)) notes[notes.length - 1].push(
+    { kind: "head", text: `From slide ${all.length} of the full deck (not in this one)` }, ...notesAll[all.length - 1]);
   const plan = [];   // per slide: what the timing needs
   src.forEach((f, i) => {
     const n = i + 1, s = p.addSlide(meta[i]?.section ? { sectionTitle: meta[i].section } : undefined);

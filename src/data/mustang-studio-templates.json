@@ -1,5 +1,5 @@
 {
-  "_about": "Mustang Studio's 54 templates, as shown on the LRHS case study. Thumbnails in public/images/lrhs-studio/templates, made from assets/studio/tpl-*.jpg (720px on the long side) by scripts/studio-site-images.mjs. Order and groups come from assets/studio/templates.json.",
+  "_about": "Mustang Studio's 45 templates, as shown on the LRHS case study. Thumbnails in public/images/lrhs-studio/templates, made from assets/studio/tpl-*.jpg (720px on the long side) by scripts/studio-site-images.mjs. Order and groups come from assets/studio/templates.json.",
   "templates": [
     {
       "id": "gameday",
@@ -449,96 +449,6 @@
       "season": null,
       "pages": 1,
       "w": 288,
-      "h": 720
-    },
-    {
-      "id": "ap-football-home",
-      "name": "Football · home",
-      "group": "Apparel",
-      "fmt": "ap-football",
-      "season": null,
-      "pages": 2,
-      "w": 720,
-      "h": 720
-    },
-    {
-      "id": "ap-football-away",
-      "name": "Football · away",
-      "group": "Apparel",
-      "fmt": "ap-football",
-      "season": null,
-      "pages": 2,
-      "w": 720,
-      "h": 720
-    },
-    {
-      "id": "ap-basketball",
-      "name": "Basketball",
-      "group": "Apparel",
-      "fmt": "ap-basketball",
-      "season": null,
-      "pages": 2,
-      "w": 720,
-      "h": 720
-    },
-    {
-      "id": "ap-baseball",
-      "name": "Baseball",
-      "group": "Apparel",
-      "fmt": "ap-baseball",
-      "season": null,
-      "pages": 2,
-      "w": 720,
-      "h": 720
-    },
-    {
-      "id": "ap-soccer",
-      "name": "Soccer",
-      "group": "Apparel",
-      "fmt": "ap-soccer",
-      "season": null,
-      "pages": 2,
-      "w": 720,
-      "h": 720
-    },
-    {
-      "id": "ap-volleyball",
-      "name": "Volleyball",
-      "group": "Apparel",
-      "fmt": "ap-volleyball",
-      "season": null,
-      "pages": 2,
-      "w": 720,
-      "h": 720
-    },
-    {
-      "id": "ap-tee",
-      "name": "Spirit tee",
-      "group": "Apparel",
-      "fmt": "ap-tee",
-      "season": null,
-      "pages": 2,
-      "w": 720,
-      "h": 720
-    },
-    {
-      "id": "ap-hoodie",
-      "name": "Hoodie",
-      "group": "Apparel",
-      "fmt": "ap-hoodie",
-      "season": null,
-      "pages": 2,
-      "w": 720,
-      "h": 720
-    },
-    {
-      "id": "ap-polo",
-      "name": "Staff polo",
-      "group": "Apparel",
-      "fmt": "ap-polo",
-      "season": null,
-      "pages": 2,
-      "w": 720,
       "h": 720
     }
   ]
