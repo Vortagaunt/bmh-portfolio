@@ -1,5 +1,5 @@
 {
-  "_about": "Bronx's cut-down deck (PresentationSlim.pptx), mirrored from the copy he cut in PowerPoint on Oct 13 (26 slides), minus the Studio 1.1 jerseys slide. Build: SLIM=1 node assemble.js. Titles are matched on the part before \" — \". Oct 21: added \"Mustang Studio, in use\". Mirrors Bronx's Oct 15 PowerPoint cut too (Identity and The mark library removed).",
+  "_about": "Bronx's cut-down deck (PresentationSlim.pptx), mirrored from the copy he cut in PowerPoint on Oct 13 (26 slides). Build: SLIM=1 node assemble.js. Titles are matched on the part before \" — \". Oct 21: added \"Mustang Studio, in use\". Mirrors Bronx's Oct 15 PowerPoint cut too (Identity and The mark library removed).",
   "slides": [
     "Lakewood Ranch High School",
     "Departments",
@@ -21,6 +21,7 @@
     "Every size",
     "Built in",
     "Made for people who aren't designers",
+    "Apparel — jerseys",
     "Where it runs",
     "Mustang Studio, in use",
     "Mustang Studio, on one page",

@@ -5,7 +5,9 @@
   "group": "Athletics",
   "fmt": "ig-post",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1080
  },
  {
   "id": "gomustangs",
@@ -13,7 +15,9 @@
   "group": "Athletics",
   "fmt": "slide",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
  },
  {
   "id": "ridetogether",
@@ -21,7 +25,9 @@
   "group": "Events & clubs",
   "fmt": "story",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1920
  },
  {
   "id": "news",
@@ -29,7 +35,9 @@
   "group": "News & podcast",
   "fmt": "ig-portrait",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1350
  },
  {
   "id": "podcast",
@@ -37,7 +45,9 @@
   "group": "News & podcast",
   "fmt": "ig-post",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1080
  },
  {
   "id": "header",
@@ -45,7 +55,9 @@
   "group": "School & awards",
   "fmt": "x-header",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1500,
+  "h": 500
  },
  {
   "id": "name",
@@ -53,7 +65,9 @@
   "group": "School & awards",
   "fmt": "poster18",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 2700,
+  "h": 3600
  },
  {
   "id": "grad",
@@ -61,7 +75,9 @@
   "group": "School & awards",
   "fmt": "letter",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
  },
  {
   "id": "band",
@@ -69,7 +85,9 @@
   "group": "Events & clubs",
   "fmt": "letter",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
  },
  {
   "id": "spirit",
@@ -77,7 +95,9 @@
   "group": "Athletics",
   "fmt": "tabloid",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1650,
+  "h": 2550
  },
  {
   "id": "final",
@@ -85,7 +105,9 @@
   "group": "Athletics",
   "fmt": "ig-post",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1080
  },
  {
   "id": "schedule",
@@ -93,7 +115,9 @@
   "group": "Athletics",
   "fmt": "ig-portrait",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1350
  },
  {
   "id": "gamestory",
@@ -101,7 +125,9 @@
   "group": "Athletics",
   "fmt": "story",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1920
  },
  {
   "id": "spotlight",
@@ -109,7 +135,9 @@
   "group": "Athletics",
   "fmt": "ig-portrait",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1350
  },
  {
   "id": "fence",
@@ -117,7 +145,9 @@
   "group": "Athletics",
   "fmt": "banner",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 3600,
+  "h": 1200
  },
  {
   "id": "club",
@@ -125,7 +155,9 @@
   "group": "Events & clubs",
   "fmt": "half",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 825,
+  "h": 1275
  },
  {
   "id": "event",
@@ -133,7 +165,9 @@
   "group": "Events & clubs",
   "fmt": "fb-event",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1920,
+  "h": 1005
  },
  {
   "id": "savedate",
@@ -141,7 +175,9 @@
   "group": "Events & clubs",
   "fmt": "postcard",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 900,
+  "h": 600
  },
  {
   "id": "bandpost",
@@ -149,7 +185,9 @@
   "group": "Events & clubs",
   "fmt": "ig-post",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1080
  },
  {
   "id": "poster24",
@@ -157,7 +195,9 @@
   "group": "Events & clubs",
   "fmt": "poster24",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 3600,
+  "h": 5400
  },
  {
   "id": "issue",
@@ -165,7 +205,9 @@
   "group": "News & podcast",
   "fmt": "letter",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
  },
  {
   "id": "podstory",
@@ -173,7 +215,9 @@
   "group": "News & podcast",
   "fmt": "story",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1920
  },
  {
   "id": "ytthumb",
@@ -181,7 +225,9 @@
   "group": "News & podcast",
   "fmt": "yt-thumb",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1280,
+  "h": 720
  },
  {
   "id": "announce",
@@ -189,7 +235,9 @@
   "group": "News & podcast",
   "fmt": "slide",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
  },
  {
   "id": "welcome",
@@ -197,7 +245,9 @@
   "group": "School & awards",
   "fmt": "x-post",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1600,
+  "h": 900
  },
  {
   "id": "honor",
@@ -205,7 +255,9 @@
   "group": "School & awards",
   "fmt": "ig-post",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1080
  },
  {
   "id": "certificate",
@@ -213,7 +265,9 @@
   "group": "School & awards",
   "fmt": "letter",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
  },
  {
   "id": "id-student-front",
@@ -221,7 +275,9 @@
   "group": "ID cards",
   "fmt": "id-v",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 319,
+  "h": 506
  },
  {
   "id": "id-student-back",
@@ -229,7 +285,9 @@
   "group": "ID cards",
   "fmt": "id-v",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 319,
+  "h": 506
  },
  {
   "id": "id-staff-front",
@@ -237,7 +295,9 @@
   "group": "ID cards",
   "fmt": "id-h",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 506,
+  "h": 319
  },
  {
   "id": "id-staff-back",
@@ -245,7 +305,9 @@
   "group": "ID cards",
   "fmt": "id-h",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 506,
+  "h": 319
  },
  {
   "id": "homecoming-week",
@@ -253,7 +315,9 @@
   "group": "Seasons",
   "fmt": "ig-portrait",
   "season": "homecoming",
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1350
  },
  {
   "id": "homecoming-dance",
@@ -261,7 +325,9 @@
   "group": "Seasons",
   "fmt": "letter",
   "season": "homecoming",
-  "pages": 1
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
  },
  {
   "id": "pinkout-game",
@@ -269,7 +335,9 @@
   "group": "Seasons",
   "fmt": "ig-post",
   "season": "pinkout",
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1080
  },
  {
   "id": "pinkout-story",
@@ -277,7 +345,9 @@
   "group": "Seasons",
   "fmt": "story",
   "season": "pinkout",
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1920
  },
  {
   "id": "halloween-trunk",
@@ -285,7 +355,9 @@
   "group": "Seasons",
   "fmt": "ig-portrait",
   "season": "halloween",
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1350
  },
  {
   "id": "halloween-costume",
@@ -293,7 +365,9 @@
   "group": "Seasons",
   "fmt": "story",
   "season": "halloween",
-  "pages": 1
+  "pages": 1,
+  "w": 1080,
+  "h": 1920
  },
  {
   "id": "winter-concert",
@@ -301,7 +375,9 @@
   "group": "Seasons",
   "fmt": "letter",
   "season": "winter",
-  "pages": 1
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
  },
  {
   "id": "winter-break",
@@ -309,7 +385,9 @@
   "group": "Seasons",
   "fmt": "x-post",
   "season": "winter",
-  "pages": 1
+  "pages": 1,
+  "w": 1600,
+  "h": 900
  },
  {
   "id": "recap",
@@ -317,7 +395,9 @@
   "group": "Athletics",
   "fmt": "ig-portrait",
   "season": null,
-  "pages": 4
+  "pages": 4,
+  "w": 1080,
+  "h": 1350
  },
  {
   "id": "newsdeck",
@@ -325,7 +405,9 @@
   "group": "News & podcast",
   "fmt": "ig-portrait",
   "season": null,
-  "pages": 3
+  "pages": 3,
+  "w": 1080,
+  "h": 1350
  },
  {
   "id": "pole-welcome",
@@ -333,7 +415,9 @@
   "group": "Banners",
   "fmt": "pole5",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1800,
+  "h": 4500
  },
  {
   "id": "pole-gomustangs",
@@ -341,7 +425,9 @@
   "group": "Banners",
   "fmt": "pole5",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1800,
+  "h": 4500
  },
  {
   "id": "pole-department",
@@ -349,7 +435,9 @@
   "group": "Banners",
   "fmt": "pole5",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1800,
+  "h": 4500
  },
  {
   "id": "pole-senior",
@@ -357,6 +445,358 @@
   "group": "Banners",
   "fmt": "pole5",
   "season": null,
-  "pages": 1
+  "pages": 1,
+  "w": 1800,
+  "h": 4500
+ },
+ {
+  "id": "ap-football-home",
+  "name": "Football · home",
+  "group": "Apparel",
+  "fmt": "ap-football",
+  "season": null,
+  "pages": 2,
+  "w": 2000,
+  "h": 2000
+ },
+ {
+  "id": "ap-football-away",
+  "name": "Football · away",
+  "group": "Apparel",
+  "fmt": "ap-football",
+  "season": null,
+  "pages": 2,
+  "w": 2000,
+  "h": 2000
+ },
+ {
+  "id": "ap-basketball",
+  "name": "Basketball",
+  "group": "Apparel",
+  "fmt": "ap-basketball",
+  "season": null,
+  "pages": 2,
+  "w": 2000,
+  "h": 2000
+ },
+ {
+  "id": "ap-baseball",
+  "name": "Baseball",
+  "group": "Apparel",
+  "fmt": "ap-baseball",
+  "season": null,
+  "pages": 2,
+  "w": 2000,
+  "h": 2000
+ },
+ {
+  "id": "ap-soccer",
+  "name": "Soccer",
+  "group": "Apparel",
+  "fmt": "ap-soccer",
+  "season": null,
+  "pages": 2,
+  "w": 2000,
+  "h": 2000
+ },
+ {
+  "id": "ap-volleyball",
+  "name": "Volleyball",
+  "group": "Apparel",
+  "fmt": "ap-volleyball",
+  "season": null,
+  "pages": 2,
+  "w": 2000,
+  "h": 2000
+ },
+ {
+  "id": "ap-tee",
+  "name": "Spirit tee",
+  "group": "Apparel",
+  "fmt": "ap-tee",
+  "season": null,
+  "pages": 2,
+  "w": 2000,
+  "h": 2000
+ },
+ {
+  "id": "ap-hoodie",
+  "name": "Hoodie",
+  "group": "Apparel",
+  "fmt": "ap-hoodie",
+  "season": null,
+  "pages": 2,
+  "w": 2000,
+  "h": 2000
+ },
+ {
+  "id": "ap-polo",
+  "name": "Staff polo",
+  "group": "Apparel",
+  "fmt": "ap-polo",
+  "season": null,
+  "pages": 2,
+  "w": 2000,
+  "h": 2000
+ },
+ {
+  "id": "motion-hype",
+  "name": "Game day hype",
+  "group": "Motion",
+  "fmt": "story",
+  "season": null,
+  "pages": 1,
+  "w": 1080,
+  "h": 1920
+ },
+ {
+  "id": "motion-final",
+  "name": "Final score animated",
+  "group": "Motion",
+  "fmt": "ig-post",
+  "season": null,
+  "pages": 1,
+  "w": 1080,
+  "h": 1080
+ },
+ {
+  "id": "motion-countdown",
+  "name": "Countdown to kickoff",
+  "group": "Motion",
+  "fmt": "story",
+  "season": null,
+  "pages": 1,
+  "w": 1080,
+  "h": 1920
+ },
+ {
+  "id": "motion-morning",
+  "name": "Morning announcements",
+  "group": "Motion",
+  "fmt": "slide",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "motion-signing",
+  "name": "Signing day",
+  "group": "Motion",
+  "fmt": "ig-portrait",
+  "season": null,
+  "pages": 1,
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "motion-lobby",
+  "name": "Welcome lobby screen",
+  "group": "Motion",
+  "fmt": "slide",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "car-senior",
+  "name": "Senior spotlight carousel",
+  "group": "School & awards",
+  "fmt": "ig-portrait",
+  "season": null,
+  "pages": 4,
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "car-clubs",
+  "name": "Club fair carousel",
+  "group": "Events & clubs",
+  "fmt": "ig-portrait",
+  "season": null,
+  "pages": 5,
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "car-week",
+  "name": "The week ahead carousel",
+  "group": "News & podcast",
+  "fmt": "ig-portrait",
+  "season": null,
+  "pages": 4,
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "car-athlete",
+  "name": "Athlete of the week",
+  "group": "Athletics",
+  "fmt": "ig-portrait",
+  "season": null,
+  "pages": 3,
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "car-bts",
+  "name": "Back-to-school how-to",
+  "group": "School & awards",
+  "fmt": "ig-portrait",
+  "season": null,
+  "pages": 4,
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "banner-senior",
+  "name": "Senior night fence banner",
+  "group": "Banners",
+  "fmt": "banner",
+  "season": null,
+  "pages": 1,
+  "w": 3600,
+  "h": 1200
+ },
+ {
+  "id": "banner-champs",
+  "name": "Champions fence banner",
+  "group": "Banners",
+  "fmt": "banner",
+  "season": null,
+  "pages": 1,
+  "w": 3600,
+  "h": 1200
+ },
+ {
+  "id": "pole-athletics",
+  "name": "Athletics pole banner",
+  "group": "Banners",
+  "fmt": "pole5",
+  "season": null,
+  "pages": 1,
+  "w": 1800,
+  "h": 4500
+ },
+ {
+  "id": "pole-band",
+  "name": "Band pole banner",
+  "group": "Banners",
+  "fmt": "pole5",
+  "season": null,
+  "pages": 1,
+  "w": 1800,
+  "h": 4500
+ },
+ {
+  "id": "hallway-welcome",
+  "name": "Welcome to the Ranch",
+  "group": "Banners",
+  "fmt": "hallway",
+  "season": null,
+  "pages": 1,
+  "w": 4800,
+  "h": 1800
+ },
+ {
+  "id": "poster-clubfair",
+  "name": "Club fair poster",
+  "group": "Events & clubs",
+  "fmt": "tabloid",
+  "season": null,
+  "pages": 1,
+  "w": 1650,
+  "h": 2550
+ },
+ {
+  "id": "poster-tryouts",
+  "name": "Tryouts",
+  "group": "Athletics",
+  "fmt": "letter",
+  "season": null,
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
+ },
+ {
+  "id": "poster-play",
+  "name": "Spring play",
+  "group": "Events & clubs",
+  "fmt": "poster18",
+  "season": null,
+  "pages": 1,
+  "w": 2700,
+  "h": 3600
+ },
+ {
+  "id": "poster-prom",
+  "name": "Prom",
+  "group": "Events & clubs",
+  "fmt": "poster18",
+  "season": null,
+  "pages": 1,
+  "w": 2700,
+  "h": 3600
+ },
+ {
+  "id": "poster-testing",
+  "name": "Testing week",
+  "group": "School & awards",
+  "fmt": "letter",
+  "season": null,
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
+ },
+ {
+  "id": "bell-schedule",
+  "name": "Bell schedule",
+  "group": "School & awards",
+  "fmt": "letter",
+  "season": null,
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
+ },
+ {
+  "id": "yearbook-sale",
+  "name": "Yearbook on sale",
+  "group": "School & awards",
+  "fmt": "ig-post",
+  "season": null,
+  "pages": 1,
+  "w": 1080,
+  "h": 1080
+ },
+ {
+  "id": "teacher-month",
+  "name": "Teacher of the month",
+  "group": "School & awards",
+  "fmt": "ig-portrait",
+  "season": null,
+  "pages": 1,
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "id": "door-sign",
+  "name": "Classroom door sign",
+  "group": "School & awards",
+  "fmt": "letter",
+  "season": null,
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
+ },
+ {
+  "id": "senior-night-post",
+  "name": "Senior night",
+  "group": "Athletics",
+  "fmt": "ig-portrait",
+  "season": null,
+  "pages": 1,
+  "w": 1080,
+  "h": 1350
  }
 ]

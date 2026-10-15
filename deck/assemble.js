@@ -29,7 +29,7 @@ const { speakerNotes } = require("./notes.js");
 
 const here = __dirname;
 /* SLIM=1 builds Bronx's cut-down deck instead: only the slides named in slim.json
-   (matched on the part of the title before " — "), in the full deck's order. */
+   (matched on the start of the title, up to " — "), in the full deck's order. */
 const SLIM = process.env.SLIM ? require("./slim.json") : null;
 const OUT = path.join(here, SLIM ? "Bronx-Hanratty-LRHS-PresentationSlim.pptx" : "Bronx-Hanratty-LRHS-Presentation.pptx");
 const SW = 13.333, SH = 7.5, PX = 3840, PY = 2160;   // slide in inches, renders in px
@@ -151,9 +151,10 @@ const plain = (paras) => paras.map((q) => (q.kind === "head" ? q.text.toUpperCas
   const readJson = (f, d) => (fs.existsSync(path.join(srcDir, f)) ? JSON.parse(fs.readFileSync(path.join(srcDir, f), "utf8")) : d);
   const motionAll = readJson("motion.json", {}), layersAll = readJson("layers.json", {}), metaAll = readJson("meta.json", []);
   /* which of the full deck's slides go in (all of them, unless SLIM) */
-  const head = (t) => String(t || "").split(" — ")[0].trim();
-  const keep = all.map((_, i) => i).filter((i) => !SLIM || SLIM.slides.some((t) => head(t) === head(metaAll[i]?.title)));
-  if (SLIM && keep.length !== SLIM.slides.length) throw new Error(`slim.json names ${SLIM.slides.length} slides, ${keep.length} matched`);
+  /* a slim.json entry names a slide by the start of its title ("Templates" or "Apparel — jerseys") */
+  const hit = (t, title) => { title = String(title || ""); return title === t || title.startsWith(t + " —") || title.startsWith(t + ",") || (t.includes(" — ") && title.startsWith(t)); };
+  const keep = all.map((_, i) => i).filter((i) => !SLIM || SLIM.slides.some((t) => hit(t, metaAll[i]?.title)));
+  if (SLIM) { const miss = SLIM.slides.filter((t) => !metaAll.some((m) => hit(t, m?.title))); if (miss.length) throw new Error(`slim.json: no slide called ${miss.join(', ')}`); }
   const src = keep.map((i) => all[i]), meta = keep.map((i) => metaAll[i]);
   const motion = {}, layers = {};
   keep.forEach((o, k) => { if (motionAll[o + 1]) motion[k + 1] = motionAll[o + 1]; if (layersAll[o + 1]) layers[k + 1] = layersAll[o + 1]; });

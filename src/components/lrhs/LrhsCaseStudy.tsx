@@ -25,7 +25,8 @@ import { Swatches } from "./Swatches";
    Counts come from the catalogues, never typed in: the marks and families
    from src/data/lrhs-marks.json (the same file the deck and the PDF read),
    the templates from src/data/mustang-studio-templates.json. The only
-   hand-kept numbers are Mustang Studio 1.0's sizes, checks and icons.
+   hand-kept numbers are Mustang Studio 1.2's sizes, checks and icons
+   (scripts/capture-mustang-studio.mjs prints them).
    ───────────────────────────────────────────────────────────────────── */
 
 const GREEN = "#033922";
@@ -36,8 +37,8 @@ const MARKS = LRHS_MARKS.marks;
 const FAMILIES = LRHS_MARKS.families;
 const RETIRED = LRHS_MARKS.retired;
 const TEMPLATES = STUDIO_TEMPLATES.templates.length;
-const STUDIO_SIZES = 19;
-const STUDIO_CHECKS = 33;
+const STUDIO_SIZES = 28;
+const STUDIO_CHECKS = 45;
 const STUDIO_ICONS = 134;
 
 const mark = (file: string) => `/images/lrhs-marks/${encodeURI(file)}`;
@@ -46,8 +47,27 @@ const mark = (file: string) => `/images/lrhs-marks/${encodeURI(file)}`;
 const WORDS: Record<number, string> = {
   5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten", 19: "nineteen", 25: "twenty-five",
   26: "twenty-six", 27: "twenty-seven", 28: "twenty-eight", 29: "twenty-nine", 30: "thirty", 33: "thirty-three",
-  40: "forty", 41: "forty-one", 42: "forty-two", 45: "forty-five",
+  40: "forty", 41: "forty-one", 42: "forty-two", 45: "forty-five", 54: "fifty-four", 80: "eighty",
 };
+/* 1.1: the jerseys, as the app exports them (scripts/capture-mustang-studio.mjs → studio-site-images.mjs) */
+const STUDIO_APPAREL = [
+  {
+    src: "/images/lrhs-studio/apparel-mockup.jpg",
+    alt: "Mustang Studio’s mockup sheet for the home football jersey: front and back in Mustang Green with white numbers, and the colours named underneath",
+    w: 1920,
+    h: 1199,
+    span: "lg:col-span-7",
+    cap: "The mockup sheet, as the app exports it: front and back, the colours and the lettering, named.",
+  },
+  {
+    src: "/images/lrhs-studio/apparel-roster.jpg",
+    alt: "Six football jersey backs, each with a different player’s name and number, made from one pasted roster",
+    w: 1440,
+    h: 954,
+    span: "lg:col-span-5",
+    cap: "One pasted roster, six jersey backs. Long names shrink to fit the nameplate.",
+  },
+];
 const say = (n: number) => WORDS[n] ?? String(n);
 const Say = (n: number) => say(n).charAt(0).toUpperCase() + say(n).slice(1);
 
@@ -825,7 +845,7 @@ export function LrhsCaseStudy() {
                   It checks the work for you
                 </h3>
                 <p className="mt-4 max-w-[46ch] text-[16px] leading-[1.6] text-white/75 sm:text-[17px]">
-                  {`${Say(STUDIO_CHECKS)} rules run while you work: text that’s hard to read, a mark on the wrong ground, a tilted or faded mark, off-brand colours, too much Spirit Red, text too small to print or too close to the trim, and words in a banner’s pole pocket. Most come with a one-click fix.`}
+                  {`${Say(STUDIO_CHECKS)} rules run while you work: text that’s hard to read, a mark on the wrong ground, a tilted or faded mark, off-brand colours, too much Spirit Red, text too small to print or too close to the trim, words in a banner’s pole pocket, and jersey numbers that break the uniform rules. Most come with a one-click fix.`}
                 </p>
               </div>
               <div className="col-span-12 lg:col-span-8">
@@ -850,10 +870,46 @@ export function LrhsCaseStudy() {
             <div className="mt-20 sm:mt-28">
               <div className="grid grid-cols-12 gap-x-6 gap-y-4 sm:gap-x-8">
                 <h3 className="col-span-12 font-display text-[28px] leading-[1.05] font-semibold tracking-[-0.03em] sm:text-[36px] lg:col-span-6">
+                  Jerseys the athletic director can design
+                </h3>
+                <p className="col-span-12 max-w-[56ch] text-[16px] leading-[1.6] text-white/75 sm:text-[17px] lg:col-span-6">
+                  New in version 1.2: photographed garments. Pick a football, basketball, baseball, soccer or volleyball jersey &mdash; or a
+                  spirit tee, a hoodie or a staff polo &mdash; set the colours, home or away, and it&rsquo;s a real
+                  mockup, front and back. The brand check knows the uniform rules: numbers measured in real inches, no
+                  number that starts with a zero, dark at home and white away. Paste the roster and every player gets their
+                  own jersey, then it hands the uniform maker real-size print art at 300&nbsp;dpi.
+                </p>
+              </div>
+              <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
+                {STUDIO_APPAREL.map((a, i) => (
+                  <figure key={a.src} className={a.span}>
+                    <div
+                      className="relative w-full overflow-hidden rounded-[16px] bg-[#F1F2F0] ring-1 ring-white/10"
+                      style={{ aspectRatio: `${a.w} / ${a.h}` }}
+                    >
+                      <ZoomImage
+                        src={a.src}
+                        alt={a.alt}
+                        fill
+                        sizes={i ? "(min-width: 1024px) 40vw, 100vw" : "(min-width: 1024px) 58vw, 100vw"}
+                        className="object-cover"
+                        zoomItems={STUDIO_APPAREL.map((x) => ({ src: x.src, alt: x.alt }))}
+                        zoomIndex={i}
+                      />
+                    </div>
+                    <figcaption className="mt-3 text-[14px] leading-[1.5] text-white/60">{a.cap}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-20 sm:mt-28">
+              <div className="grid grid-cols-12 gap-x-6 gap-y-4 sm:gap-x-8">
+                <h3 className="col-span-12 font-display text-[28px] leading-[1.05] font-semibold tracking-[-0.03em] sm:text-[36px] lg:col-span-6">
                   {Say(TEMPLATES)} templates, ready on day one
                 </h3>
                 <p className="col-span-12 max-w-[56ch] text-[16px] leading-[1.6] text-white/75 sm:text-[17px] lg:col-span-6">
-                  Sorted by department, with pole banners for the street and a set for every season — Homecoming, Pink Out,
+                  Sorted by department, with pole banners for the street, the jerseys, and a set for every season — Homecoming, Pink Out,
                   Halloween and the winter holidays. These are the templates exactly as the app opens them, and everything in them stays editable.
                 </p>
               </div>

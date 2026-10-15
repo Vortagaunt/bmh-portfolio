@@ -1,5 +1,5 @@
 {
-  "_about": "Mustang Studio's 45 templates, as shown on the LRHS case study. Thumbnails in public/images/lrhs-studio/templates, made from assets/studio/tpl-*.jpg (720px on the long side) by scripts/studio-site-images.mjs. Order and groups come from assets/studio/templates.json.",
+  "_about": "Mustang Studio's 80 templates, as shown on the LRHS case study. Thumbnails in public/images/lrhs-studio/templates, made from assets/studio/tpl-*.jpg (720px on the long side) by scripts/studio-site-images.mjs. Order and groups come from assets/studio/templates.json.",
   "templates": [
     {
       "id": "gameday",
@@ -449,6 +449,356 @@
       "season": null,
       "pages": 1,
       "w": 288,
+      "h": 720
+    },
+    {
+      "id": "ap-football-home",
+      "name": "Football · home",
+      "group": "Apparel",
+      "fmt": "ap-football",
+      "season": null,
+      "pages": 2,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "ap-football-away",
+      "name": "Football · away",
+      "group": "Apparel",
+      "fmt": "ap-football",
+      "season": null,
+      "pages": 2,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "ap-basketball",
+      "name": "Basketball",
+      "group": "Apparel",
+      "fmt": "ap-basketball",
+      "season": null,
+      "pages": 2,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "ap-baseball",
+      "name": "Baseball",
+      "group": "Apparel",
+      "fmt": "ap-baseball",
+      "season": null,
+      "pages": 2,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "ap-soccer",
+      "name": "Soccer",
+      "group": "Apparel",
+      "fmt": "ap-soccer",
+      "season": null,
+      "pages": 2,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "ap-volleyball",
+      "name": "Volleyball",
+      "group": "Apparel",
+      "fmt": "ap-volleyball",
+      "season": null,
+      "pages": 2,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "ap-tee",
+      "name": "Spirit tee",
+      "group": "Apparel",
+      "fmt": "ap-tee",
+      "season": null,
+      "pages": 2,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "ap-hoodie",
+      "name": "Hoodie",
+      "group": "Apparel",
+      "fmt": "ap-hoodie",
+      "season": null,
+      "pages": 2,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "ap-polo",
+      "name": "Staff polo",
+      "group": "Apparel",
+      "fmt": "ap-polo",
+      "season": null,
+      "pages": 2,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "motion-hype",
+      "name": "Game day hype",
+      "group": "Motion",
+      "fmt": "story",
+      "season": null,
+      "pages": 1,
+      "w": 405,
+      "h": 720
+    },
+    {
+      "id": "motion-final",
+      "name": "Final score animated",
+      "group": "Motion",
+      "fmt": "ig-post",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "motion-countdown",
+      "name": "Countdown to kickoff",
+      "group": "Motion",
+      "fmt": "story",
+      "season": null,
+      "pages": 1,
+      "w": 405,
+      "h": 720
+    },
+    {
+      "id": "motion-morning",
+      "name": "Morning announcements",
+      "group": "Motion",
+      "fmt": "slide",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "motion-signing",
+      "name": "Signing day",
+      "group": "Motion",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 1,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "motion-lobby",
+      "name": "Welcome lobby screen",
+      "group": "Motion",
+      "fmt": "slide",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "car-senior",
+      "name": "Senior spotlight carousel",
+      "group": "School & awards",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 4,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "car-clubs",
+      "name": "Club fair carousel",
+      "group": "Events & clubs",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 5,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "car-week",
+      "name": "The week ahead carousel",
+      "group": "News & podcast",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 4,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "car-athlete",
+      "name": "Athlete of the week",
+      "group": "Athletics",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 3,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "car-bts",
+      "name": "Back-to-school how-to",
+      "group": "School & awards",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 4,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "banner-senior",
+      "name": "Senior night fence banner",
+      "group": "Banners",
+      "fmt": "banner",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 240
+    },
+    {
+      "id": "banner-champs",
+      "name": "Champions fence banner",
+      "group": "Banners",
+      "fmt": "banner",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 240
+    },
+    {
+      "id": "pole-athletics",
+      "name": "Athletics pole banner",
+      "group": "Banners",
+      "fmt": "pole5",
+      "season": null,
+      "pages": 1,
+      "w": 288,
+      "h": 720
+    },
+    {
+      "id": "pole-band",
+      "name": "Band pole banner",
+      "group": "Banners",
+      "fmt": "pole5",
+      "season": null,
+      "pages": 1,
+      "w": 288,
+      "h": 720
+    },
+    {
+      "id": "hallway-welcome",
+      "name": "Welcome to the Ranch",
+      "group": "Banners",
+      "fmt": "hallway",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 270
+    },
+    {
+      "id": "poster-clubfair",
+      "name": "Club fair poster",
+      "group": "Events & clubs",
+      "fmt": "tabloid",
+      "season": null,
+      "pages": 1,
+      "w": 466,
+      "h": 720
+    },
+    {
+      "id": "poster-tryouts",
+      "name": "Tryouts",
+      "group": "Athletics",
+      "fmt": "letter",
+      "season": null,
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "poster-play",
+      "name": "Spring play",
+      "group": "Events & clubs",
+      "fmt": "poster18",
+      "season": null,
+      "pages": 1,
+      "w": 540,
+      "h": 720
+    },
+    {
+      "id": "poster-prom",
+      "name": "Prom",
+      "group": "Events & clubs",
+      "fmt": "poster18",
+      "season": null,
+      "pages": 1,
+      "w": 540,
+      "h": 720
+    },
+    {
+      "id": "poster-testing",
+      "name": "Testing week",
+      "group": "School & awards",
+      "fmt": "letter",
+      "season": null,
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "bell-schedule",
+      "name": "Bell schedule",
+      "group": "School & awards",
+      "fmt": "letter",
+      "season": null,
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "yearbook-sale",
+      "name": "Yearbook on sale",
+      "group": "School & awards",
+      "fmt": "ig-post",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 720
+    },
+    {
+      "id": "teacher-month",
+      "name": "Teacher of the month",
+      "group": "School & awards",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 1,
+      "w": 576,
+      "h": 720
+    },
+    {
+      "id": "door-sign",
+      "name": "Classroom door sign",
+      "group": "School & awards",
+      "fmt": "letter",
+      "season": null,
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
+      "id": "senior-night-post",
+      "name": "Senior night",
+      "group": "Athletics",
+      "fmt": "ig-portrait",
+      "season": null,
+      "pages": 1,
+      "w": 576,
       "h": 720
     }
   ]
