@@ -10,7 +10,6 @@ import { ZoomImage } from "../ZoomImage";
 import { BuildVideo } from "../BuildVideo";
 import { CompareSlider } from "./CompareSlider";
 import { MarkExplorer } from "./MarkExplorer";
-import { IdCards } from "./IdCards";
 import { StudioTour } from "./StudioTour";
 import { TemplateWall } from "./TemplateWall";
 import { StudioExamples } from "./StudioExamples";
@@ -25,7 +24,7 @@ import { Swatches } from "./Swatches";
    Counts come from the catalogues, never typed in: the marks and families
    from src/data/lrhs-marks.json (the same file the deck and the PDF read),
    the templates from src/data/mustang-studio-templates.json. The only
-   hand-kept numbers are Mustang Studio 1.2's sizes, checks and icons
+   hand-kept numbers are Mustang Studio 1.0's sizes, checks and icons
    (scripts/capture-mustang-studio.mjs prints them).
    ───────────────────────────────────────────────────────────────────── */
 
@@ -37,7 +36,7 @@ const MARKS = LRHS_MARKS.marks;
 const FAMILIES = LRHS_MARKS.families;
 const RETIRED = LRHS_MARKS.retired;
 const TEMPLATES = STUDIO_TEMPLATES.templates.length;
-const STUDIO_SIZES = 28;
+const STUDIO_SIZES = 26;
 const STUDIO_CHECKS = 45;
 const STUDIO_ICONS = 134;
 
@@ -361,7 +360,7 @@ export function LrhsCaseStudy() {
                 [MARKS.length, "marks"],
                 [FAMILIES.length, "families, one per department"],
                 [6, "colours, with green in the lead"],
-                [2, "ID cards, student and staff"],
+                [HOLIDAYS.length, "holiday editions of the emblem"],
               ].map(([n, label]) => (
                 <div key={label} className="flex flex-col-reverse gap-1">
                   <dt className="text-[13px] leading-[1.35] text-white/60">{label}</dt>
@@ -739,25 +738,6 @@ export function LrhsCaseStudy() {
         </Part>
       </Chapter>
 
-      {/* ── 07 The cards ──────────────────────────────────────────── */}
-      <Chapter
-        n={7}
-        id="ids"
-        title="The card every student carries"
-        lede="The one piece of the system everybody has on them. Credit-card size, with the photo and name first and the barcode clear so it scans first time. The back keeps the *24/7 support lines* from today's card and adds a return address."
-      >
-        <div
-          className="relative overflow-hidden rounded-[28px] px-5 py-14 sm:rounded-[36px] sm:px-10 sm:py-20 lg:px-16"
-          style={{ background: "radial-gradient(90% 90% at 50% 0%, #0b4a2d 0%, #033922 55%, #022a1a 100%)" }}
-        >
-          <IdCards />
-          <p className="mx-auto mt-14 max-w-[60ch] text-center text-[13.5px] leading-[1.5] text-white/55">
-            Staff cards turn horizontal and full green, so they read differently from students across a corridor. The
-            student number shown is a sample, not a real ID.
-          </p>
-        </div>
-      </Chapter>
-
       {/* ── One more thing… → Mustang Studio ────────────────────────
           The surprise, as in the deck: nothing above this mentions the app —
           not the hero, the numbers, the links or the copy — so the black
@@ -873,7 +853,7 @@ export function LrhsCaseStudy() {
                   Jerseys the athletic director can design
                 </h3>
                 <p className="col-span-12 max-w-[56ch] text-[16px] leading-[1.6] text-white/75 sm:text-[17px] lg:col-span-6">
-                  New in version 1.2: photographed garments. Pick a football, basketball, baseball, soccer or volleyball jersey &mdash; or a
+                  Photographed garments. Pick a football, basketball, baseball, soccer or volleyball jersey &mdash; or a
                   spirit tee, a hoodie or a staff polo &mdash; set the colours, home or away, and it&rsquo;s a real
                   mockup, front and back. The brand check knows the uniform rules: numbers measured in real inches, no
                   number that starts with a zero, dark at home and white away. Paste the roster and every player gets their

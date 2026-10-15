@@ -270,46 +270,6 @@
   "h": 1650
  },
  {
-  "id": "id-student-front",
-  "name": "Student ID · front",
-  "group": "ID cards",
-  "fmt": "id-v",
-  "season": null,
-  "pages": 1,
-  "w": 319,
-  "h": 506
- },
- {
-  "id": "id-student-back",
-  "name": "Student ID · back",
-  "group": "ID cards",
-  "fmt": "id-v",
-  "season": null,
-  "pages": 1,
-  "w": 319,
-  "h": 506
- },
- {
-  "id": "id-staff-front",
-  "name": "Staff ID · front",
-  "group": "ID cards",
-  "fmt": "id-h",
-  "season": null,
-  "pages": 1,
-  "w": 506,
-  "h": 319
- },
- {
-  "id": "id-staff-back",
-  "name": "Staff ID · back",
-  "group": "ID cards",
-  "fmt": "id-h",
-  "season": null,
-  "pages": 1,
-  "w": 506,
-  "h": 319
- },
- {
   "id": "homecoming-week",
   "name": "Homecoming week",
   "group": "Seasons",
@@ -740,6 +700,16 @@
   "h": 3600
  },
  {
+  "id": "club-meeting",
+  "name": "Club meeting",
+  "group": "Events & clubs",
+  "fmt": "half",
+  "season": null,
+  "pages": 1,
+  "w": 825,
+  "h": 1275
+ },
+ {
   "id": "poster-testing",
   "name": "Testing week",
   "group": "School & awards",
@@ -790,6 +760,16 @@
   "h": 1650
  },
  {
+  "id": "open-house",
+  "name": "Open house",
+  "group": "School & awards",
+  "fmt": "letter",
+  "season": null,
+  "pages": 1,
+  "w": 1275,
+  "h": 1650
+ },
+ {
   "id": "senior-night-post",
   "name": "Senior night",
   "group": "Athletics",
@@ -798,5 +778,25 @@
   "pages": 1,
   "w": 1080,
   "h": 1350
+ },
+ {
+  "id": "ticket-game",
+  "name": "Game ticket",
+  "group": "Athletics",
+  "fmt": "postcard",
+  "season": null,
+  "pages": 1,
+  "w": 900,
+  "h": 600
+ },
+ {
+  "id": "concessions",
+  "name": "Concessions menu",
+  "group": "Athletics",
+  "fmt": "tabloid",
+  "season": null,
+  "pages": 1,
+  "w": 1650,
+  "h": 2550
  }
 ]

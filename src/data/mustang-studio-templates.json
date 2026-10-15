@@ -272,46 +272,6 @@
       "h": 720
     },
     {
-      "id": "id-student-front",
-      "name": "Student ID · front",
-      "group": "ID cards",
-      "fmt": "id-v",
-      "season": null,
-      "pages": 1,
-      "w": 454,
-      "h": 720
-    },
-    {
-      "id": "id-student-back",
-      "name": "Student ID · back",
-      "group": "ID cards",
-      "fmt": "id-v",
-      "season": null,
-      "pages": 1,
-      "w": 454,
-      "h": 720
-    },
-    {
-      "id": "id-staff-front",
-      "name": "Staff ID · front",
-      "group": "ID cards",
-      "fmt": "id-h",
-      "season": null,
-      "pages": 1,
-      "w": 720,
-      "h": 454
-    },
-    {
-      "id": "id-staff-back",
-      "name": "Staff ID · back",
-      "group": "ID cards",
-      "fmt": "id-h",
-      "season": null,
-      "pages": 1,
-      "w": 720,
-      "h": 454
-    },
-    {
       "id": "homecoming-week",
       "name": "Homecoming week",
       "group": "Seasons",
@@ -742,6 +702,16 @@
       "h": 720
     },
     {
+      "id": "club-meeting",
+      "name": "Club meeting",
+      "group": "Events & clubs",
+      "fmt": "half",
+      "season": null,
+      "pages": 1,
+      "w": 466,
+      "h": 720
+    },
+    {
       "id": "poster-testing",
       "name": "Testing week",
       "group": "School & awards",
@@ -792,6 +762,16 @@
       "h": 720
     },
     {
+      "id": "open-house",
+      "name": "Open house",
+      "group": "School & awards",
+      "fmt": "letter",
+      "season": null,
+      "pages": 1,
+      "w": 556,
+      "h": 720
+    },
+    {
       "id": "senior-night-post",
       "name": "Senior night",
       "group": "Athletics",
@@ -799,6 +779,26 @@
       "season": null,
       "pages": 1,
       "w": 576,
+      "h": 720
+    },
+    {
+      "id": "ticket-game",
+      "name": "Game ticket",
+      "group": "Athletics",
+      "fmt": "postcard",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 480
+    },
+    {
+      "id": "concessions",
+      "name": "Concessions menu",
+      "group": "Athletics",
+      "fmt": "tabloid",
+      "season": null,
+      "pages": 1,
+      "w": 466,
       "h": 720
     }
   ]

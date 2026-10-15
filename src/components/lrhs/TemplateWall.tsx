@@ -6,7 +6,7 @@ import DATA from "@/data/mustang-studio-templates.json";
 
 type Template = (typeof DATA.templates)[number];
 
-const GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Banners", "ID cards", "Seasons"] as const;
+const GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Banners", "Seasons"] as const;
 
 /* The app's size ids, said the way the people choosing them would say them. */
 const FORMAT: Record<string, string> = {
@@ -27,8 +27,6 @@ const FORMAT: Record<string, string> = {
   pole4: "Pole banner, 2 × 4 ft",
   pole5: "Pole banner, 2 × 5 ft",
   postcard: "Postcard",
-  "id-v": "ID card, vertical",
-  "id-h": "ID card, horizontal",
 };
 
 const format = (t: Template) => `${FORMAT[t.fmt] ?? t.fmt}${t.pages > 1 ? `, ${t.pages} pages` : ""}`;

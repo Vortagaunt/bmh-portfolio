@@ -7,7 +7,7 @@
  *   tpl-<id>.jpg              each template (page 1), longest side 1500px
  *   ui-*.jpg                  1440x900 screens at 2x (game day, edit, export, brand check before/after,
  *                             marks, text, icons, templates, sizes — and from 1.6: fill, batch, carousel, seasons)
- *   sheet-staff-ids.jpg       a batch of staff IDs ganged on a Letter sheet with cut marks, as the PDF lays them out
+ *   sheet-batch.jpg (+ -300)  a batch of numbered game tickets on a Letter sheet with cut marks, as the PDF lays them out
  *   from 1.1 (apparel):
  *   ui-apparel.jpg            the football jersey open, with the Jersey panel
  *   ui-apparel-check.jpg      the brand check on a jersey (its dialog): a front number too small for the rules, and a leading zero
@@ -116,16 +116,17 @@ await p.waitForTimeout(900); await ui("carousel");
 await p.evaluate(() => { const r = [...document.querySelectorAll("#rail button")].find((b) => b.textContent.includes("Templates")); r.click(); });
 
 /* 1.6: a batch from a spreadsheet, and the sheet it makes */
-const STAFF = [["Name", "Title"], ["Ms. Rivera", "Math · Mathematics"], ["Mr. Okafor", "Director · Mustang Band"], ["Dr. Patel", "Principal · Administration"], ["Ms. Kim", "Counselor · Student Services"],
-  ["Mr. Diaz", "Coach · Athletics"], ["Ms. Lee", "Librarian · Media Center"], ["Mr. Shah", "Teacher · Science"], ["Ms. Burke", "Registrar · Front Office"]];
-await load("id-staff-front");
+/* ID cards are made by the district, so the batch example is game tickets: one row per seat */
+const CLUBS = [["Ticket number", "Section"], ["No. 0001", "Home · A"], ["No. 0002", "Home · A"], ["No. 0003", "Home · B"], ["No. 0004", "Home · B"],
+  ["No. 0005", "Home · C"], ["No. 0006", "Visitor · D"], ["No. 0007", "Visitor · D"], ["No. 0008", "Visitor · E"]];
+await load("ticket-game");
 await p.evaluate(() => MS16.batch()); await p.waitForTimeout(500);
-await p.fill(".modal textarea", STAFF.map((r) => r.join("\t")).join("\n")); await p.waitForTimeout(1200);
+await p.fill(".modal textarea", CLUBS.map((r) => r.join("\t")).join("\n")); await p.waitForTimeout(1200);
 await p.evaluate(() => { const m = document.querySelector(".modal"); m.scrollTop = 260; });
 await p.waitForTimeout(500); await ui("batch");
 await p.evaluate(() => closeModal());
 const sheet = await p.evaluate(async (rows) => {
-  const f = FMT_BY_ID[doc.fmt], DPI = 150, b = 0.0625, fit = MS16._.sheetFit(f.inch[0], f.inch[1], b);
+  const f = FMT_BY_ID[doc.fmt], DPI = 300, b = 0.0625, fit = MS16._.sheetFit(f.inch[0], f.inch[1], b);
   const c = document.createElement("canvas"); c.width = fit.SW * DPI; c.height = fit.SH * DPI;
   const x = c.getContext("2d"); x.fillStyle = "#FFFFFF"; x.fillRect(0, 0, c.width, c.height);
   const gw = fit.cols * f.inch[0] + (fit.cols - 1) * fit.G, gh = fit.rows * f.inch[1] + (fit.rows - 1) * fit.G;
@@ -133,7 +134,7 @@ const sheet = await p.evaluate(async (rows) => {
   const base = MS16._.pageDoc(doc.page);
   rows.slice(1, 1 + fit.n).forEach(([name, title], k) => {
     const d = JSON.parse(JSON.stringify(base));
-    for (const l of d.layers) { if (l.label === "Name") { l.text = name; MS16._.fitSlot(l); } if (l.label === "Title") { l.text = title; MS16._.fitSlot(l); } }
+    for (const l of d.layers) { if (l.label === "Ticket number") { l.text = name; MS16._.fitSlot(l); } if (l.label === "Section") { l.text = title; MS16._.fitSlot(l); } }
     const bd = MS16._.bleedDoc(d, b * (d.w / f.inch[0]));
     const pc = MS16._.renderSync(bd, (DPI * (f.inch[0] + 2 * b)) / bd.w);
     const col = k % fit.cols, row = Math.floor(k / fit.cols);
@@ -143,8 +144,9 @@ const sheet = await p.evaluate(async (rows) => {
   for (let col = 0; col < fit.cols; col++) for (const xx of [x0 + col * (f.inch[0] + fit.G), x0 + col * (f.inch[0] + fit.G) + f.inch[0]]) { x.beginPath(); x.moveTo(xx * DPI, y0 * DPI - off); x.lineTo(xx * DPI, y0 * DPI - off - L); x.moveTo(xx * DPI, (y0 + gh) * DPI + off); x.lineTo(xx * DPI, (y0 + gh) * DPI + off + L); x.stroke(); }
   for (let row = 0; row < fit.rows; row++) for (const yy of [y0 + row * (f.inch[1] + fit.G), y0 + row * (f.inch[1] + fit.G) + f.inch[1]]) { x.beginPath(); x.moveTo(x0 * DPI - off, yy * DPI); x.lineTo(x0 * DPI - off - L, yy * DPI); x.moveTo((x0 + gw) * DPI + off, yy * DPI); x.lineTo((x0 + gw) * DPI + off + L, yy * DPI); x.stroke(); }
   return c.toDataURL("image/png");
-}, STAFF);
-await sharp(Buffer.from(sheet.split(",")[1], "base64")).jpeg({ quality: 90, mozjpeg: true }).toFile(path.join(OUT, "sheet-staff-ids.jpg"));
+}, CLUBS);
+await sharp(Buffer.from(sheet.split(",")[1], "base64")).jpeg({ quality: 90, mozjpeg: true }).toFile(path.join(OUT, "sheet-batch-300.jpg"));
+await sharp(Buffer.from(sheet.split(",")[1], "base64")).resize({ width: 1275 }).jpeg({ quality: 90, mozjpeg: true }).toFile(path.join(OUT, "sheet-batch.jpg"));
 
 /* 1.1: apparel — the football jersey, its panel, the brand check, the mockup sheet and a roster */
 await load("ap-football-home");

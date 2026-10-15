@@ -63,8 +63,6 @@ const SCENES: SceneInfo[] = [
   { id: "cries", label: "Rallying cries", chapter: "Voice", tone: "green" },
   { id: "signage", label: "The same wall, redrawn", chapter: "In use", tone: "ink" },
   { id: "posters", label: "Two posters, one system", chapter: "In use", tone: "paper" },
-  { id: "student-id", label: "Student ID", chapter: "In use", tone: "mist" },
-  { id: "staff-id", label: "Staff ID", chapter: "In use", tone: "paper" },
   { id: "apparel", label: "Apparel", chapter: "In use", tone: "mist" },
   { id: "holidays", label: "Holiday emblems", chapter: "In use", tone: "paper" },
   { id: "game-day", label: "Game day", chapter: "In use", tone: "green" },
@@ -890,58 +888,6 @@ const Scenes = memo(function Scenes() {
                 <ZoomImage src={src} alt={`Poster concept — ${name}`} fill sizes="(min-width: 768px) 46vw, 92vw" className="object-cover transition-transform duration-700 hover:scale-[1.03]" />
               </div>
               <Cap name={name} use={use} />
-            </figure>
-          ))}
-        </div>
-      </Scene>
-
-      {/* ── 19 Student ID ─────────────────────────────────────────── */}
-      <Scene id="student-id">
-        <Head
-          id="student-id"
-          kicker="Student ID"
-          title="A card every student carries"
-          lede="Credit-card size and vertical, for the lanyard. The photo and name lead, the barcode sits clear so it scans first time, and the 24/7 support lines stay on the back."
-          wide
-        />
-        <div className="mt-8 flex flex-1 items-center justify-center gap-[clamp(20px,6vw,110px)]">
-          {(
-            [
-              ["front", "student-front", "Front", "Photo, name, grade and barcode", "Shown at the door and the library"],
-              ["back", "student-back", "Back", "Support lines and return address", "The same helplines as today's card"],
-            ] as const
-          ).map(([side, file, tag, name, use], i) => (
-            <figure key={file} className="flex flex-col items-center text-center" style={{ zIndex: side === "front" ? 2 : 1 }}>
-              <div data-r="fade" data-card={side} style={d(160 + i * 120)} className="relative h-[min(34svh,400px)] drop-shadow-[0_30px_40px_rgba(12,12,12,0.25)]">
-                <Image src={`/images/lrhs-ids/${file}.png`} alt={`Student ID — ${tag.toLowerCase()}: ${name.toLowerCase()}`} width={1007} height={1600} sizes="300px" className="h-full w-auto" />
-              </div>
-              <Cap tag={tag} name={name} use={use} className="max-w-[260px]" />
-            </figure>
-          ))}
-        </div>
-      </Scene>
-
-      {/* ── 20 Staff ID ───────────────────────────────────────────── */}
-      <Scene id="staff-id">
-        <Head
-          id="staff-id"
-          kicker="Staff ID"
-          title="Staff, at a glance"
-          lede="Horizontal and full Mustang Green, so staff read differently from students across a corridor. The back carries the return address, the same support lines and an employee ID."
-          wide
-        />
-        <div className="mt-8 flex flex-1 flex-col items-center justify-center gap-8 md:flex-row md:gap-[clamp(20px,4vw,72px)]">
-          {(
-            [
-              ["front", "staff-front", "Front", "Photo, name, title and department", "Worn on campus all day"],
-              ["back", "staff-back", "Back", "Return address, support lines, employee ID", "Printed for each member of staff"],
-            ] as const
-          ).map(([side, file, tag, name, use], i) => (
-            <figure key={file} className="flex w-full max-w-[520px] flex-col items-center text-center md:w-[min(44%,calc((100svh-430px)*1.45))]" style={{ zIndex: side === "front" ? 2 : 1 }}>
-              <div data-r="fade" data-card={side} style={d(160 + i * 120)} className="w-full drop-shadow-[0_30px_40px_rgba(12,12,12,0.25)]">
-                <Image src={`/images/lrhs-ids/${file}.png`} alt={`Staff ID — ${tag.toLowerCase()}: ${name.toLowerCase()}`} width={1600} height={1007} sizes="(min-width: 768px) 520px, 90vw" className="h-auto w-full" />
-              </div>
-              <Cap tag={tag} name={name} use={use} />
             </figure>
           ))}
         </div>

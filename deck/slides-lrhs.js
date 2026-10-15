@@ -666,14 +666,14 @@ const ask = (n) => page("lrpaper", `
    The brand-locked design app Bronx built, shown with its own screens and its
    own template exports (assets/studio — captured from the app by
    scripts/capture-mustang-studio.mjs). prepare-assets copies them to img/studio.
-   Facts on these slides are read from the app (1.2, Oct 15): 80 templates in 9
-   groups (Seasons, Motion, Banners and Apparel among them), 28 sizes (8 of them garments),
+   Facts on these slides are read from the app (1.0, Oct 15): 80 templates in 8
+   groups (Seasons, Motion, Banners and Apparel among them), 26 sizes (8 of them garments; no ID cards),
    29 marks, 7 type styles, 134 icons, 45 brand-check rules, 4 seasonal themes.
    The template count comes from templates.json and the marks from the catalogue;
    the sizes and rules are kept here by hand (capture-mustang-studio.mjs prints them). */
 const STUDIO = "img/studio";
 const STUDIO_TPL = require("../assets/studio/templates.json");
-const STUDIO_SIZES = 28, STUDIO_RULES = 45, STUDIO_STYLES = 7;
+const STUDIO_SIZES = 26, STUDIO_RULES = 45, STUDIO_STYLES = 7;
 const Words = (k) => { const w = words(k); return w[0].toUpperCase() + w.slice(1); };
 const STUDIO_FMT = {
   "ig-post": [1080, 1080, "Instagram", "1080 × 1080"], "ig-portrait": [1080, 1350, "Portrait", "1080 × 1350"],
@@ -684,8 +684,7 @@ const STUDIO_FMT = {
   tabloid: [11, 17, "Poster", "11 × 17 in"], poster18: [18, 24, "Poster", "18 × 24 in"],
   poster24: [24, 36, "Poster", "24 × 36 in"], banner: [72, 24, "Fence banner", "6 × 2 ft"],
   pole4: [24, 48, "Pole banner", "2 × 4 ft"], pole5: [24, 60, "Pole banner", "2 × 5 ft"], hallway: [96, 36, "Hallway banner", "8 × 3 ft"],
-  postcard: [6, 4, "Postcard", "6 × 4 in"], "id-v": [2.125, 3.375, "ID card", "Vertical"],
-  "id-h": [3.375, 2.125, "ID card", "Horizontal"],
+  postcard: [6, 4, "Postcard", "6 × 4 in"],
 };
 const studioIcon = (paths, size, color) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"
   stroke="${color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
@@ -752,7 +751,7 @@ const studioSteps = (n) => page("lrpaper", `
   </div></div>`);
 
 /* 3 — every template, by department, as the app exports them */
-const STUDIO_GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Motion", "Banners", "ID cards", "Seasons", "Apparel"];
+const STUDIO_GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Motion", "Banners", "Seasons", "Apparel"];
 const studioTemplates = (n) => page("lrpaper", `
   ${kicker(n, "Templates", false)}
   <div class="display" style="font-size:130px;color:#0C0C0C;margin:48px 0 20px;">${Words(STUDIO_TPL.length)} templates, ready on day one</div>
@@ -802,7 +801,7 @@ const studioCheck = (n) => page("greend", `
 /* 5 — every size the app makes, drawn to shape */
 const STUDIO_ROWS = [
   [["Social", ["ig-post", "ig-portrait", "story", "x-post", "fb-event", "yt-thumb", "x-header"]], ["Screen", ["slide"]]],
-  [["Print", ["letter", "half", "tabloid", "poster18", "poster24", "postcard", "id-v", "id-h"]], ["Banners", ["banner", "hallway", "pole4", "pole5"]]],
+  [["Print", ["letter", "half", "tabloid", "poster18", "poster24", "postcard"]], ["Banners", ["banner", "hallway", "pole4", "pole5"]]],
 ];
 const studioShape = (id, H = 200) => {
   const [w, h, name, dims] = STUDIO_FMT[id], W = Math.round(H * w / h), card = id.startsWith("id-");
@@ -827,7 +826,7 @@ const studioSizes = (n) => page("lrpaper", `
   ${kicker(n, "Every size", false)}
   <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">${Words(STUDIO_SIZES)} sizes, one system</div>
   <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3200px;text-wrap:balance;">
-    Posts and stories, a screen slide, flyers, posters up to 24 × 36, the ID cards, a six-foot fence banner, an eight-foot hallway banner, the pole
+    Posts and stories, a screen slide, flyers, posters up to 24 × 36, a postcard, a six-foot fence banner, an eight-foot hallway banner, the pole
     banners out front &mdash; and a mockup for every jersey and shirt. Print sizes export as print-ready PDFs.</div>
   <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:64px;">
     ${STUDIO_ROWS.map((row) => `<div style="display:flex;gap:90px;align-items:flex-end;">
@@ -865,14 +864,14 @@ const STUDIO_NEW = [
   ["“Who are you?”", "Coach, club, band, newsletter or front office: your templates come first."],
 ];
 const studioNew = (n) => page("lrpaper", `
-  ${kicker(n, "Mustang Studio 1.2", false)}
+  ${kicker(n, "Mustang Studio 1.0", false)}
   <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 0;">Made for people who aren’t designers</div>
   <div style="flex:1;min-height:0;display:grid;grid-template-columns:1.18fr .72fr 1.18fr;gap:90px;align-items:center;">
     <div>${studioCrop("ui-fill.jpg", [190, 30, 1250, 850], 1100)}${studioCap("Fill in the blanks", "A form instead of a canvas. Type the details; long lines shrink to fit and nothing slides off brand.", false)}</div>
     <div>
       <div style="width:100%;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(12,12,12,.08),0 40px 100px -40px rgba(12,12,12,.55);">
-        <img src="${STUDIO}/sheet-staff-ids.jpg" style="display:block;width:100%;"></div>
-      ${studioCap("A batch from a spreadsheet", "Paste a staff list: every ID comes out ganged on Letter sheets with cut marks.", false)}
+        <img src="${STUDIO}/sheet-batch.jpg" style="display:block;width:100%;"></div>
+      ${studioCap("A batch from a spreadsheet", "Paste a list of seats: every game ticket comes out numbered, on Letter sheets with cut marks.", false)}
     </div>
     <div>${studioCrop("ui-carousel.jpg", [110, 70, 1150, 790], 1100)}${studioCap("Carousels and multi-page files", "Pages along the bottom. An Instagram carousel exports as a ZIP; a newsletter as one PDF.", false)}</div>
   </div>
@@ -1057,8 +1056,8 @@ const ORDER = [
   [inUse, "In use — the system on real surfaces", "Guidelines"],
   [signage, "Signage — the same wall, redrawn", "Applied"],
   [posters, "Poster concepts — two posters, one system", "Applied"],
-  [studentIds, "Student ID — a card every student carries", "Applied"],
-  [staffIds, "Staff ID — staff, at a glance", "Applied"],
+  /* Student ID and Staff ID came out on Oct 15: the district makes the ID cards, so the school can't change them.
+     The slides are still above (studentIds, staffIds) if that ever changes. */
   [apparel, "Apparel — the part students actually wear", "Applied"],
   [holidays, "Holiday emblems — the LR, all year round", "Applied"],
   [gameDay, "Game day — where Spirit Red earns its keep", "Applied"],
@@ -1102,13 +1101,11 @@ S.motion = {
    transparent ground) and renders the slide once more without them; assemble.js
    puts the cut-outs back in exactly the same place and gives them an entrance.
    "fan": the cards rise in as one stack, then spread to where they sit. */
-S.layers = {
-  [at(studentIds)]: { effect: "fan" },
-  [at(staffIds)]: { effect: "fan" },
-};
+S.layers = {};
+if (at(studentIds)) S.layers[at(studentIds)] = { effect: "fan" };
+if (at(staffIds)) S.layers[at(staffIds)] = { effect: "fan" };
 
 S.extras = { "lrhs-crest": crest(), "lrhs-powerhouse": powerhouse(), "lrhs-clawed": clawed(), "lrhs-signage": signage(), "lrhs-posters": posters(),
-  "lrhs-ids-student": studentIds(), "lrhs-ids-staff": staffIds(),
   "lrhs-corners": corners(),
   "lrhs-studio": studioIntro(), "lrhs-studio-templates": studioTemplates(), "lrhs-studio-new": studioNew() };
 

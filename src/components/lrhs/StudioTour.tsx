@@ -5,7 +5,7 @@ import { ZoomImage } from "../ZoomImage";
 
 type Stop = { id: string; label: string; text: string; alt: string };
 
-/* Real screens from Mustang Studio 1.2 (assets/studio/ui-*.jpg, cut to 1920
+/* Real screens from Mustang Studio 1.0 (assets/studio/ui-*.jpg, cut to 1920
    wide in public/images/lrhs-studio by scripts/studio-site-images.mjs). */
 const STOPS: Stop[] = [
   {
@@ -29,8 +29,8 @@ const STOPS: Stop[] = [
   {
     id: "batch",
     label: "Make a batch",
-    text: "Paste a spreadsheet and make every version at once — a staff list becomes every ID card, ganged on Letter sheets with cut marks.",
-    alt: "Batch from a spreadsheet: columns matched to fields, with a preview row of staff ID cards",
+    text: "Paste a spreadsheet and make every version at once — a list of seats becomes every numbered game ticket, ganged on Letter sheets with cut marks.",
+    alt: "Batch from a spreadsheet: columns matched to fields, with a preview row of game tickets",
   },
   {
     id: "carousel",
@@ -53,7 +53,7 @@ const STOPS: Stop[] = [
   {
     id: "sizes",
     label: "Resize it",
-    text: "Twenty-eight sizes, from an Instagram story to a 24 × 36 poster, a six-foot fence banner, an eight-foot hallway banner, the pole banners out front and a mockup for every jersey and shirt.",
+    text: "Twenty-six sizes, from an Instagram story to a 24 × 36 poster, a six-foot fence banner, an eight-foot hallway banner, the pole banners out front and a mockup for every jersey and shirt.",
     alt: "The change-size dialog listing social, screen and print sizes",
   },
   {
