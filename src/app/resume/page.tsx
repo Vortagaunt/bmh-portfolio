@@ -26,7 +26,11 @@ const experience = [
     when: "2026",
     role: "Motion Graphics & Image Designer — Auger",
     org: "Twitch streamer",
-    points: ["Make motion graphics and images for Auger's Twitch channel."],
+    points: [
+      "Designed printed flyers for an IRL stream, handed out in person during the BULLY rollout.",
+      "Made promo flyers he posted to Instagram and X (Twitter).",
+      "Built stream assets: the stream-starting screen, custom emotes and motion graphics for the channel.",
+    ],
   },
   {
     when: "2026",
