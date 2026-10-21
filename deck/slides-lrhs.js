@@ -883,6 +883,29 @@ const studioAnywhere = (n) => page("greend", `
       <div style="display:flex;gap:22px;align-items:center;font-size:42px;color:#FCFCFC;">${studioIcon(ICO.check, 50, "#2EA866")}${t}</div>`).join("")}
   </div>`);
 
+/* 9 — real things made with the app (Oct 21): Bronx's own exports, the same
+   six the case study's "Made in Mustang Studio" carousel shows
+   (src/data/lrhs-studio-examples.json; prepare-assets copies them to
+   img/studio-examples). One row, each piece at its own ratio, so the widths
+   share the line in proportion and every piece is the same height. */
+const STUDIO_EXAMPLES = require("../src/data/lrhs-studio-examples.json");
+const studioInUse = (n) => page("lrpaper", `
+  ${kicker(n, "Mustang Studio, in use", false)}
+  <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">Made in Mustang Studio</div>
+  <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3100px;">Real things, made with the app &mdash; not mock-ups.</div>
+  <div style="flex:1;min-height:0;display:flex;align-items:center;">
+  <div style="width:100%;display:flex;gap:56px;align-items:flex-start;">
+    ${STUDIO_EXAMPLES.map((e) => {
+      const r = e.width / e.height;
+      return `<div style="flex:${r.toFixed(4)} 1 0;min-width:0;">
+        <div style="border-radius:22px;overflow:hidden;box-shadow:0 0 0 2px rgba(12,12,12,.06),0 40px 90px -40px rgba(12,12,12,.55);">
+          <img src="img/studio-examples/${e.file}" style="display:block;width:100%;aspect-ratio:${e.width} / ${e.height};"></div>
+        <div style="font-size:34px;font-weight:600;color:#0C0C0C;margin-top:30px;">${e.title}</div>
+        <div style="font-size:26px;color:${GREY};margin-top:8px;">${e.format}</div>
+      </div>`;
+    }).join("")}
+  </div></div>`);
+
 /* The whole system on one page — the keynote-style bento rendered by
    scripts/render-lrhs-bento.mjs (assets/flyer/lrhs-bento-v2.jpg), full bleed.
    It is already a finished 3840x2160 composition with its own type, so it gets
@@ -999,6 +1022,7 @@ const ORDER = [
   [studioInside, "Built in — everything is already inside", "One more thing"],
   [studioNew, "Made for people who aren't designers — fill in, batch, carousels", "One more thing"],
   [studioAnywhere, "Where it runs — free, and it runs anywhere", "One more thing"],
+  [studioInUse, "Mustang Studio, in use — made in Mustang Studio", "One more thing"],
   [studioBento, "Mustang Studio, on one page", "One more thing"],
   [bento, "Mustangs Ahead — the whole system on one page", "Finale"],
   [qr, "See it live — bronxhanratty.me", "Finale"],

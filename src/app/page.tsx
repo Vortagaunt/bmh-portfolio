@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { GridBackdrop } from "@/components/GridBackdrop";
 import { IntroOverlay } from "@/components/IntroOverlay";
 import { Hero } from "@/components/Hero";
+import { InTheNews } from "@/components/InTheNews";
 import { ToolStack } from "@/components/ToolStack";
 import { Works } from "@/components/Works";
 import { Archive } from "@/components/Archive";
@@ -28,6 +29,7 @@ export default function Home() {
 
       <div className="relative z-10">
         <Hero />
+        <InTheNews />
         <ToolStack />
         <Works />
         <Archive />

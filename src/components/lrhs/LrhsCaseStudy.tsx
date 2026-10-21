@@ -13,6 +13,7 @@ import { MarkExplorer } from "./MarkExplorer";
 import { IdCards } from "./IdCards";
 import { StudioTour } from "./StudioTour";
 import { TemplateWall } from "./TemplateWall";
+import { StudioExamples } from "./StudioExamples";
 import { Swatches } from "./Swatches";
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -858,6 +859,21 @@ export function LrhsCaseStudy() {
               </div>
               <div className="mt-8">
                 <TemplateWall />
+              </div>
+            </div>
+
+            <div className="mt-20 sm:mt-28">
+              <div className="grid grid-cols-12 gap-x-6 gap-y-4 sm:gap-x-8">
+                <h3 className="col-span-12 font-display text-[28px] leading-[1.05] font-semibold tracking-[-0.03em] sm:text-[36px] lg:col-span-6">
+                  Made in Mustang Studio
+                </h3>
+                <p className="col-span-12 max-w-[56ch] text-[16px] leading-[1.6] text-white/75 sm:text-[17px] lg:col-span-6">
+                  Real things, made with the app: a certificate, a band spotlight, a home schedule, the newsletter, a
+                  pep rally poster and a winter break slide.
+                </p>
+              </div>
+              <div className="mt-8">
+                <StudioExamples />
               </div>
             </div>
 
