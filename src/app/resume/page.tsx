@@ -7,25 +7,33 @@ import { Reveal } from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Resume — Bronx Hanratty",
   description:
-    "Resume of Bronx Hanratty — digital & brand designer in Sarasota, FL. Yearbook lead design, award-winning documentary work, and real client branding.",
+    "Resume of Bronx Hanratty — digital, brand & motion designer in Sarasota, FL. The Lakewood Ranch High School brand system, award-winning documentary work, and real client branding.",
 };
 
 const experience = [
   {
-    when: "2025 — 2026",
-    role: "Lead Designer — DMJ Yearbook 2025–2026",
-    org: "Dr. Mona Jain Middle School",
+    when: "2026",
+    role: "Brand Designer — Lakewood Ranch High School",
+    org: "“Mustangs Ahead” brand system · self-initiated · logos approved by the principal, Oct 2026",
     points: [
-      "Led cover, identity, and layout system for a 112-page hardcover yearbook inspired by Spotify Wrapped.",
-      "Built a reusable grid + type system the whole yearbook staff could follow in Pictavo and Photoshop.",
+      "Redesigned the school's whole identity: 29 marks in 9 families, from the core emblem and wordmarks to the band, graduation crest, academic awards, newsletter and podcast.",
+      "Replaced at least five different campus horses with one redrawn emblem, then set the colors, type and voice.",
+      "Applied it to signage, posters, apparel, game day and holiday editions of the emblem.",
+      "Pitched it to the principal myself with a scripted presentation, and published the brand guidelines on my site.",
     ],
+  },
+  {
+    when: "2026",
+    role: "Motion Graphics & Image Designer — Auger",
+    org: "Twitch streamer",
+    points: ["Make motion graphics and images for Auger's Twitch channel."],
   },
   {
     when: "2026",
     role: "Director & Editor — “8:46 AM”",
     org: "Short documentary",
     points: [
-      "Researched, filmed, and edited a 7-minute documentary on the morning of September 11, 2001.",
+      "Researched, filmed and edited a 7-minute documentary on the morning of September 11, 2001.",
       "Interviewed retired CNN anchor Carol Lin and Pentagon first responder Jordan Swonger.",
       "Winner — Manatee Film Rush · Jim Harbin Student Festival.",
     ],
@@ -36,15 +44,16 @@ const experience = [
     org: "Family-run business · Sarasota, FL",
     points: [
       "Designed the launch mark and identity for a real mobile dirty-soda business.",
-      "Mascot logo, sticker system, and brand applications from cup to counter.",
+      "Mascot logo, sticker system and brand applications from cup to counter.",
     ],
   },
   {
-    when: "2026",
-    role: "Brand Concept — Lakewood Ranch High School",
-    org: "Self-initiated · my school",
+    when: "2025 — 2026",
+    role: "Lead Designer — DMJ Yearbook 2025–2026",
+    org: "Dr. Mona Jain Middle School",
     points: [
-      "Rebuilt the Mustang identity as a full brand system — marks, color, type, voice — plus a working website mockup.",
+      "Led the cover, identity and layout system for a 112-page hardcover yearbook inspired by Spotify Wrapped.",
+      "Built a reusable grid and type system the whole yearbook staff could follow in Pictavo and Photoshop.",
     ],
   },
 ];
@@ -60,18 +69,23 @@ const recognition = [
     detail: "For the short documentary “8:46 AM.” (2026)",
   },
   {
+    what: "Adobe Certified Professional",
+    detail: "Three Adobe certifications.",
+  },
+  {
     what: "Press — The Observer",
     detail: "“Local Student Honored at Dalí Museum exhibit,” June 2025.",
   },
 ];
 
 const skills = [
+  "Figma",
+  "Photopea",
+  "DaVinci Resolve",
   "Photoshop",
   "Illustrator",
-  "InDesign",
   "Premiere Pro",
   "After Effects",
-  "Figma",
   "Blender",
   "Pictavo",
 ];
@@ -100,7 +114,7 @@ export default function ResumePage() {
               Hanratty
             </h1>
             <p className="mt-3 text-[16px] tracking-tight text-ink/75">
-              Digital &amp; brand designer — Sarasota, Florida
+              Digital, brand &amp; motion designer — Sarasota, Florida
             </p>
             <p className="mt-2 text-[13px] tracking-tight text-ink/60">
               bronxhanratty.me · bronxhanratty@gmail.com · linkedin.com/in/bronx-hanratty-57a8212b6
@@ -129,10 +143,11 @@ export default function ResumePage() {
           <section className="mt-10">
             <h2 className="text-[11px] tracking-[0.18em] uppercase text-ink/55">Profile</h2>
             <p className="mt-3 max-w-[640px] text-[15px] leading-[1.6] text-ink/90">
-              Ninth-grade designer working across brand, editorial, and film.
-              Award-winning digital artist with real client work, a published
-              yearbook, and a museum wall to show for it. Adobe Creative Cloud
-              native; currently exploring Figma and Blender.
+              Ninth-grade designer working across brand, motion, editorial and
+              film. Redesigned my high school&apos;s entire visual identity and got
+              the logos approved by the principal. Award-winning digital artist
+              and filmmaker, Adobe Certified Professional, with real client work
+              and a published yearbook behind me.
             </p>
           </section>
         </Reveal>
