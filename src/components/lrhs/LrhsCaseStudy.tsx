@@ -939,9 +939,6 @@ export function LrhsCaseStudy() {
               <CtaLink href="/studio/" exitBg={STUDIO_BG}>
                 Open Mustang Studio
               </CtaLink>
-              <CtaLink href="/lrhs-brand-guidelines">
-                Read the brand guidelines
-              </CtaLink>
             </div>
             <p className="mt-8 text-[13px] leading-[1.5] text-ink/50">
               A self-initiated student project. Not affiliated with the school district.

@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { ZoomImage } from "./ZoomImage";
 import { Reveal } from "./Reveal";
 
@@ -143,6 +145,63 @@ export function ArchivePiece() {
             ))}
           </div>
         </div>
+
+        {/* LRHS brand guidelines — laid out like "In the news" at the top of
+            the page, on the wallpaper's Field: Mustang Green lit from the top
+            left, deep in the bottom right, the mustang ghosted across it.
+            Public page: no Mustang Studio here. */}
+        <Reveal variant="up" duration={1200} className="mt-16 sm:mt-24">
+          <div
+            className="media-elevated relative overflow-hidden text-white"
+            style={{
+              background:
+                "radial-gradient(120% 90% at 22% 12%, #0A5733 0%, rgba(10,87,51,0) 62%), " +
+                "radial-gradient(110% 100% at 88% 96%, #021A10 0%, rgba(2,26,16,0) 58%), " +
+                "linear-gradient(146deg, #04482A 0%, #003C24 44%, #05281A 100%)",
+            }}
+          >
+            {/* the ghost mustang, drifting off the right edge */}
+            <Image
+              src="/images/lrhs-marks/LRHS Mustang 4.svg"
+              alt=""
+              aria-hidden
+              width={1329}
+              height={786}
+              className="pointer-events-none absolute top-1/2 -right-[22%] w-[115%] max-w-none -translate-y-[42%] opacity-[0.06] brightness-0 invert select-none sm:-right-[12%] sm:w-[78%]"
+            />
+            {/* the wallpaper's vignette, pulling the eye to the copy */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{ background: "radial-gradient(130% 105% at 50% 45%, rgba(0,0,0,0) 38%, rgba(0,0,0,.34) 100%)" }}
+            />
+            <div className="relative grid grid-cols-12 items-center gap-x-6 gap-y-8 p-7 sm:gap-x-8 sm:p-12 lg:p-14">
+              <div className="col-span-12 lg:col-span-9">
+                <p className="text-[12px] font-medium tracking-[0.14em] text-white/60 uppercase">
+                  LRHS · Mustangs Ahead
+                </p>
+                <h3
+                  className="mt-4 font-display"
+                  style={{ fontSize: "clamp(28px, 4.2vw, 52px)", fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.02 }}
+                >
+                  Brand guidelines
+                </h3>
+                <p className="mt-4 max-w-[58ch] text-[16px] leading-[1.6] text-pretty text-white/75 sm:text-[18px]">
+                  The Lakewood Ranch brand system, scene by scene.
+                </p>
+                <div className="mt-7">
+                  <Link
+                    href="/lrhs-brand-guidelines"
+                    className="group inline-flex h-11 items-center rounded-full bg-white px-5 text-[15px] font-medium text-[#033922] transition hover:bg-white/90 focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none"
+                  >
+                    Read the guidelines
+                    <span aria-hidden className="ml-2 transition-transform duration-500 group-hover:translate-x-1">→</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
