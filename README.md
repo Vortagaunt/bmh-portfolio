@@ -1,6 +1,6 @@
-# Bronx Hanratty — Portfolio 2026
+# Bronx Hanratty — Portfolio
 
-Personal design portfolio for **Bronx Hanratty**, a 9th-grade digital designer based in Sarasota, FL.
+Personal design portfolio for **Bronx Hanratty**, a digital and brand designer at Lakewood Ranch High School (Class of 2030) in Sarasota, FL.
 
 🌐 **Live:** [bronxhanratty.me](https://bronxhanratty.me)
 
@@ -8,164 +8,101 @@ Personal design portfolio for **Bronx Hanratty**, a 9th-grade digital designer b
 
 ## About
 
-A minimal, motion-driven portfolio built to feel like a printed editorial spread rather than a typical tech site. Off-white paper, ink-black type, italic serif accents for emphasis, and a vintage-Macintosh "hello" intro that animates on first visit.
-
-The site doubles as a personal home for Bronx's work — yearbook design, short documentaries, and a rolling gallery of recent illustration / brand / album-cover experiments.
+A motion-driven portfolio built to feel like a printed editorial spread: off-white paper, ink-black type, italic serif accents, and a vintage-Macintosh "hello" intro on first visit. It's the home for Bronx's yearbook design, short documentary work, brand systems and a rolling gallery of recent experiments.
 
 ## What's on the site
 
-### `/` — Home
+### Home `/`
+- **Intro animation** — a vintage Mac draws `hello` on its MacPaint screen, flies the word to the nav and settles into the hero. Plays once per session.
+- **Auto-fitting hero** — "Bronx Hanratty" is measured and scaled live to fill the viewport, with scroll parallax on the Mac (reduced motion respected).
+- **Works** — cards into each case study.
+- **In the news** — a press card that switches on from `src/data/press.json`.
+- **Tool stack, Digital Archive, the Dalí Museum feature, the Mona Jain block, About and Resume.**
+- **Footer iPod** — Cover Flow, a Brick game and 118 tracks, played as legal 30-second iTunes previews (no music files are hosted here).
 
-- **Custom intro animation** — black screen → vintage Macintosh fades in → hand-drawn `hello` script draws onto its MacPaint screen → flies up to the nav corner → Mac glides into the hero position. Plays once per browser session.
-- **Auto-fitting hero typography** — "Bronx Hanratty" measured and scaled live to fill the viewport edge-to-edge, no matter the screen width.
-- **Scroll-driven parallax** on the hero Mac (with `prefers-reduced-motion` honored).
-- **Three project cards** linking into case studies, with hover lift, image zoom, and a gentle gradient overlay.
-- **About section** with portrait, italicized accents, and a CTA.
-- **Footer** with a Phone.obj mockup, contact links (Email / LinkedIn / X), and an animated outline "Let's Talk" backdrop.
-
-### `/case-study/yearbook-2025` — Yearbook 2025
-
-Currently in **Coming Soon** mode while the book is under wraps. Flips back to the full case study via a single boolean (`COMING_SOON = false`) once the yearbook is officially out.
-
-### `/case-study/846-am` — 8:46 AM
-
-Short-documentary case study. Numbered chapter sections (Research / Edit & Pacing / Interviews), sticky chapter labels, a 4-column metadata grid (Year / Role / Tools / Runtime), full-bleed hero stills, gallery grid, and a "Next Project" jump card.
-
-### `/case-study/recent-works` — Recent Works
-
-A masonry-style photo gallery of recent design work: posters (Raized Wrong, 8:46 AM, YARG, Earth Cost), album-cover concepts (Yeezus, Northwest, Kanye Bear, MiniDisc, Red Portrait), brand marks (Dirty Sara-Soda, Guitar Hero 20), and illustrations (Skydive, Vorty, Brothers). Sorted from tallest aspect ratio to widest.
-
-## Features
-
-| Feature | Detail |
+### Case studies `/case-study/<slug>`
+| Slug | What it is |
 |---|---|
-| **Intro overlay** | One-shot SVG-stroke animation, persisted via `sessionStorage` |
-| **Page transitions** | Paper-fade overlay on every internal link click |
-| **Persistent audio** | Background music loads muted to bypass autoplay block, unmutes on first user gesture; survives client-side navigation |
-| **Smooth scroll** | Lenis-powered scroll with custom easing |
-| **Reveal-on-scroll** | Custom `<Reveal>` IntersectionObserver wrapper with `up` / `fade` / `scale` / `blur` variants |
-| **Inline italic markup** | Case study text supports `*word*` markers that render as italic-serif spans |
-| **Responsive grid** | 12-col grid with sane mobile fallbacks throughout |
-| **Static export** | Builds to a flat `out/` directory; deploys anywhere |
+| `lakewood-ranch-redesign` | **Mustangs Ahead** — an unofficial brand system for Lakewood Ranch High School. Logos approved by the principal, October 2026. |
+| `846-am` | **8:46 AM** — a 7-minute 9/11 documentary. Winner, Manatee Film Rush · Jim Harbin Student Festival. |
+| `dirty-sara-soda` | Brand identity for a mobile dirty-soda trailer. |
+| `yearbook-2025` | Yearbook 2025 — in "Coming soon" mode until the book is out. |
+| `recent-works` | Masonry gallery of posters, album-cover concepts, marks and illustrations. |
 
-## Tech Stack
+### Other pages
+- `/lrhs-brand-guidelines` — the Mustangs Ahead guidelines as full-screen, scroll-snapping scenes.
+- `/about`, `/resume` (plus a PDF version), and a System 7–style 404.
+- There may be a secret or two. 🖱️
 
-- **Framework:** [Next.js 16](https://nextjs.org/) (App Router, React 19, TypeScript strict)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) with oklch design tokens
+## Tech stack
+
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router, React 19, TypeScript strict), static export to `out/`
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
 - **Smooth scroll:** [Lenis](https://github.com/darkroomengineering/lenis)
-- **Fonts:** [Inter](https://rsms.me/inter/) (sans), [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Grotesque) (display), [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) (italic accents)
-- **Hosting:** [Cloudflare Pages](https://pages.cloudflare.com/) (auto-deploys on push to `master`)
-
-## Project structure
-
-```
-src/
-├── app/
-│   ├── case-study/
-│   │   ├── 846-am/page.tsx           # Short doc case study
-│   │   ├── recent-works/page.tsx     # Photo gallery
-│   │   └── yearbook-2025/page.tsx    # Yearbook (Coming Soon toggle)
-│   ├── icon.png                      # Browser favicon (BMH on light)
-│   ├── apple-icon.png                # iOS home-screen icon (BMH on black)
-│   ├── globals.css                   # Tokens + custom animations
-│   ├── layout.tsx                    # Root layout (audio + transitions)
-│   └── page.tsx                      # Home
-├── components/
-│   ├── About.tsx
-│   ├── Archive.tsx
-│   ├── BackgroundMusic.tsx           # Autoplay-muted-then-unmute audio
-│   ├── CaseStudyLayout.tsx           # Shared case-study scaffold
-│   ├── Footer.tsx
-│   ├── GridBackdrop.tsx              # Subtle grid lines behind content
-│   ├── Hero.tsx                      # Full-width name + parallax Mac
-│   ├── IntroOverlay.tsx              # First-visit animation
-│   ├── PageTransition.tsx            # Paper-fade between routes
-│   ├── Reveal.tsx                    # IO-based reveal wrapper
-│   ├── SiteHeader.tsx                # Sticky nav (mix-blend-difference)
-│   ├── SmoothScroll.tsx              # Lenis bootstrapper
-│   ├── Works.tsx                     # Home page projects grid
-│   └── icons.tsx                     # Inline SVG icons
-├── lib/utils.ts                      # cn() helper
-└── types/index.ts                    # CaseStudy interface
-public/
-├── audio/background.mp3
-└── images/                           # All artwork and photography
-```
+- **Fonts:** Inter, Bricolage Grotesque, Instrument Serif; Hanken Grotesk on the LRHS pages
+- **Hosting:** [Cloudflare Pages](https://pages.cloudflare.com/), auto-deploys on every push to `master`
 
 ## Local development
 
-Requires Node 18+.
+Node 24 (see `.nvmrc`).
 
 ```bash
-npm install
-npm run dev
+npm ci
+npm run dev        # http://localhost:3000
 ```
-
-Then visit `http://localhost:3000/`. The dev server hot-reloads on every save.
-
-### Other scripts
 
 ```bash
-npm run build       # Production build → `out/`
-npm run lint        # ESLint
-npm run typecheck   # TypeScript --noEmit
-npm run check       # Lint + typecheck + build
+npm run build      # static export → out/
+npm run lint       # must stay at zero warnings
+npm run typecheck
+npm run check      # lint + typecheck + build
 ```
 
-## Editing case study copy
+If something looks broken on localhost, clear the browser cache before anything else.
 
-Each case study lives in its own `page.tsx` under `src/app/case-study/<slug>/`. The text content is exposed as a plain `data` object at the top of the file:
+## Repo layout
 
-```ts
-const data: CaseStudyData = {
-  title: "8:46 AM",
-  subtitle: "A short documentary about *September 11, 2001* — ...",
-  meta: [
-    { label: "Year", value: "2026" },
-    { label: "Tools", value: "*Premiere Pro*, *After Effects*" },
-    // ...
-  ],
-  overview: "...",
-  sections: [
-    { heading: "Research", body: "...", image: "/images/846am.png" },
-    // ...
-  ],
-  gallery: [{ src: "/images/846am.png", alt: "..." }],
-  next: { slug: "recent-works", title: "Recent Works" },
-};
+```
+src/
+├── app/                 # routes (home, case studies, brand guidelines, about, resume…)
+├── components/          # shared UI; LRHS pieces live in components/lrhs/
+└── data/                # JSON that drives content (marks catalogue, press, holidays…)
+public/                  # images, video and static pages
+deck/                    # build for the LRHS presentation + marks PDF (outputs are git-ignored)
+scripts/                 # image, bento, motion and validation scripts
+assets/                  # source files for social, signature, podcast and flyer work
 ```
 
-**Tip:** wrap any proper noun, brand, or term-of-art in `*asterisks*` to render it as italic serif — same pattern the home page uses for "roots / exploring / building".
+### The LRHS mark catalogue
+`src/data/lrhs-marks.json` is the single source of truth for the Mustangs Ahead marks. The site, the deck, the PDF and every board read from it, so counts are never hard-coded. Check it with:
+
+```bash
+node scripts/check-lrhs-marks.mjs
+```
+
+The LRHS display face (Industry Black) is licensed and is **not** in this repo. Lettering on public pages is outlined to paths.
+
+## Editing case-study copy
+
+Each case study is a `page.tsx` under `src/app/case-study/<slug>/` with its text in a plain `data` object at the top. Wrap a word in `*asterisks*` to set it in italic serif.
 
 ## Deploying
 
-Cloudflare Pages is configured to build from the `master` branch:
+Cloudflare Pages builds from `master`:
 
 ```
 Build command:  npm run build
 Output dir:     out
-Node version:   18+
 ```
 
-Pushing to `master` triggers a redeploy automatically. The custom domain `bronxhanratty.me` is wired up via CNAME.
-
-## Screenshots
-
-| The intro | The hero |
-|---|---|
-| ![Intro animation — vintage Mac drawing "hello"](docs/screenshots/intro.jpg) | ![Home hero — Bronx Hanratty](docs/screenshots/home.jpg) |
-
-| Case study | Recent Works |
-|---|---|
-| ![Lakewood Ranch HS case study](docs/screenshots/case-study.jpg) | ![Recent Works gallery](docs/screenshots/recent-works.jpg) |
-
+If a build fails at "Install dependencies" with a 404, check `npm view <package>` — a package may have been unpublished from npm.
 
 ## Credits
 
-- Visual inspiration: [sahor.work](https://sahor.work) (intro animation), [jameshanratty.design](https://jameshanratty.design) (case study scaffold)
-- Built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), and [Lenis](https://github.com/darkroomengineering/lenis)
-- Designed and developed by **Bronx Hanratty**
+- Designed by **Bronx Hanratty**, built with **James Hanratty** and **Claude**.
+- Visual inspiration: [sahor.work](https://sahor.work) (intro), [jameshanratty.design](https://jameshanratty.design) (case-study scaffold).
+- Built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) and [Lenis](https://github.com/darkroomengineering/lenis).
 
 ---
 
-© 2026 Bronx Hanratty. All artwork and writing on the site are the author's own.
+© 2026 Bronx Hanratty. All artwork and writing on the site are the author's own. Code is under the MIT licence (see `LICENSE`). The Mustangs Ahead work is concept work and is not affiliated with the school district.
