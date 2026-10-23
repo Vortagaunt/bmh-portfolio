@@ -3,8 +3,8 @@
  *
  * It opens on black. The tiles rise in one after another, sweeping across the
  * page, and the details play as they land: the big numbers count up, the colour
- * strips rise one at a time, the student ID fans open (the back card slides out
- * from behind the front), the chips pop in. On the Mustang Studio bento the
+ * strips rise one at a time, the holiday emblems land one by one (the student ID
+ * fan stays for any bento that still has it), the chips pop in. On the Mustang Studio bento the
  * Motion tile plays the game-day post's real "rise", frame by frame from the
  * app itself, each cell freezing on the moment the still shows. Then it holds
  * on the finished bento, which is pixel-for-pixel the page the still is made
@@ -136,6 +136,8 @@ function motion({ sweep, gameday, T0, SPREAD }) {
       add(back, [{ opacity: 0, transform: stack }, { opacity: 0, transform: stack, offset: 0.42 },
                  { opacity: 1, transform: stack, offset: 0.425, easing: FAN }, { opacity: 1, transform: back.style.transform }], s + 0.3, 1.9, "linear");
     }
+    if (/Holiday emblems/.test(name))                    // the eight editions land one after another, school-year order
+      t.querySelectorAll(".hc").forEach((c, i) => rise(c, s + 0.35 + i * 0.08, 0.8, 34));
     if (/^Pages/.test(name)) {                            // carousel pages fan out from one stack
       t.querySelectorAll(".art img").forEach((el) => {
         const left = parseFloat(el.style.left) || 0, rot = el.style.transform.match(/rotate\(([^)]+)\)/)[1];
@@ -162,6 +164,8 @@ function motion({ sweep, gameday, T0, SPREAD }) {
       })));
       cells.forEach((c) => claimed.add(c));
     }
+    if (/^Made in Mustang Studio/.test(name))             // the six real pieces land one after another
+      t.querySelectorAll("img.ex").forEach((im, i) => rise(im, s + 0.35 + i * 0.1, 0.9, 36));
     if (/^Batch from a spreadsheet/.test(name)) {         // rows paste in, then the sheet of IDs slides in
       const table = [...t.querySelectorAll(".art > div")][0];
       [...table.children].forEach((row, i) => rise(row, s + 0.45 + i * 0.07, 0.6, 14));

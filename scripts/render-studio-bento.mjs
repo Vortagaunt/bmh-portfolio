@@ -5,8 +5,8 @@
  *
  * Every picture is the app's own output: screens captured by
  * scripts/capture-mustang-studio.mjs, templates exported by its renderer, motion
- * frames and carousel pages drawn by its motion and page code, and the staff-ID
- * sheet laid out the way its batch PDF lays them out (assets/studio/).
+ * frames and carousel pages drawn by its motion and page code (assets/studio/),
+ * plus six real pieces made with it (public/images/lrhs-studio-examples/).
  *
  * Emits 8K only:
  *   assets/flyer/mustang-studio-bento-8k.jpg   4320x7680
@@ -68,7 +68,7 @@ const FIELD = `radial-gradient(120% 95% at 18% 10%, #0A5733 0%, rgba(10,87,51,0)
 const TPL = JSON.parse(fs.readFileSync(path.join(STUDIO, "templates.json"), "utf8"));
 /* Mustang Studio 1.0: 19 sizes and 33 brand-check rules (28 from 1.5, the two seasonal ones from 1.6, three for banners) */
 const SIZES = 19, CHECKS = 33;
-const STRIP = ["gameday", "pole-gomustangs", "news", "story-podcast", "podstory", "spotlight", "certificate", "id-student-front", "band", "final", "ridetogether", "honor", "schedule", "issue", "gamestory"]
+const STRIP = ["gameday", "pole-gomustangs", "news", "story-podcast", "podstory", "spotlight", "certificate", "band", "final", "ridetogether", "honor", "schedule", "issue", "gamestory"]
   .filter((id) => TPL.some((t) => t.id === id));
 const SEASONS = [["homecoming-week", "Homecoming", ["#C9A227", "#EAD9A0"]], ["pinkout-game", "Pink Out", ["#EC5C8D", "#F8D3DF"]],
   ["halloween-trunk", "Halloween", ["#E8731C", "#F6C453"]], ["winter-break", "Winter", ["#B9C2C6", "#E7EEF1"]]];
@@ -77,6 +77,9 @@ const ROLES = [["trophy", "Coach or athlete"], ["users", "Club or activity"], ["
 const STAFF = [["Name", "Title"], ["Ms. Rivera", "Math · Mathematics"], ["Mr. Okafor", "Director · Mustang Band"], ["Dr. Patel", "Principal · Administration"],
   ["Ms. Kim", "Counselor · Student Services"], ["Mr. Diaz", "Coach · Athletics"], ["Ms. Lee", "Librarian · Media Center"]];
 
+/* Made in Mustang Studio: the three portraits on top, then the newsletter, the poster and the wide screen */
+const EX = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-studio-examples.json"), "utf8")).map((e) => [e.file, e]));
+const EXAMPLES = ["award-certificate.jpg", "band-mustang-spotlight.jpg", "jv-home-schedule.jpg", "newsletter-cover.jpg", "spirit-week.jpg", "winter-break.jpg"].map((f) => EX[f]);
 const WIDE = process.env.BENTO_LAYOUT === "wide";
 const W = WIDE ? 3840 : 2160, H = WIDE ? 2160 : 3840;   // CSS px; rendered at 2x = 8K
 /* where each tile sits: grid-area row / column / row-end / column-end */
@@ -153,23 +156,18 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
   </div>
 </div>
 
-<!-- batch from a spreadsheet -->
+<!-- made in Mustang Studio (Oct 22): six real pieces made with the app. Replaced the
+     staff-ID batch tile — ID cards are district-controlled, so they're out of the bentos. -->
 <div class="t paper" style="grid-area:${AREA.batch};">
-  <div class="lab">${icon("list-checks", 30)} &nbsp;Batch from a spreadsheet</div>
-  <div class="h" style="margin-top:18px;">The whole staff, <span class="m">in one go.</span></div>
-  <div class="sub" style="margin-top:14px;">Paste a list from Sheets or Excel. Every ID comes back on Letter sheets, with cut marks.</div>
-  <div class="art" style="margin-top:34px;">
-    <div style="position:absolute;left:0;top:${w(118, 70)}px;width:${w(340, 396)}px;background:#fff;border-radius:14px;overflow:hidden;
-         box-shadow:0 0 0 1px rgba(0,0,0,.08),0 24px 50px -20px rgba(0,0,0,.35);font-size:${w(17, 19)}px;z-index:2;">
-      ${STAFF.map((r, i) => `<div style="display:grid;grid-template-columns:44px 1fr 1.25fr;border-top:${i ? "1px solid #E3E6E3" : "0"};
-        ${i ? "" : "background:#EEF1EE;font-weight:700;color:#3B423D;"}">
-        <div style="padding:12px 0;text-align:center;color:#8B938E;border-right:1px solid #E3E6E3;font-size:16px;">${i + 1}</div>
-        <div style="padding:12px 12px;border-right:1px solid #E3E6E3;white-space:nowrap;overflow:hidden;">${r[0]}</div>
-        <div style="padding:12px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:${i ? "#3B423D" : "inherit"};">${r[1]}</div></div>`).join("")}
-    </div>
-    <div style="position:absolute;left:${w(346, 404)}px;top:${w(278, 240)}px;width:44px;color:#1C6E40;z-index:3;">${icon("arrow-right", 44, 2.4)}</div>
-    <img src="${uri(path.join(STUDIO, "sheet-staff-ids-300.jpg"))}" style="position:absolute;right:${w(0, 6)}px;top:${w(66, 10)}px;height:${w(528, 556)}px;border-radius:6px;
-      transform:rotate(2deg);box-shadow:0 0 0 1px rgba(0,0,0,.08),0 30px 60px -20px rgba(0,0,0,.45);">
+  <div class="lab">${icon("sparkles", 30)} &nbsp;Made in Mustang Studio</div>
+  <div class="h" style="margin-top:18px;">Real pieces, <span class="m">already in use.</span></div>
+  <div class="sub" style="margin-top:14px;">A certificate, a band spotlight, a schedule, a newsletter, a pep rally poster and a screen.</div>
+  <div class="art" style="margin-top:34px;display:flex;flex-direction:column;justify-content:center;gap:14px;container-type:size;
+       --row:min(calc((100cqh - 14px) / 2.35), calc((100cqw - 28px) / 3.2));">   <!-- the bottom row's height: fits both ways -->
+    ${[[0, 3, 1.35], [3, 6, 1]].map(([a, b, f]) => `<div style="height:calc(var(--row) * ${f});flex:none;display:flex;justify-content:center;gap:14px;">
+      ${EXAMPLES.slice(a, b).map((e) => `<img class="ex" src="${uri(path.join(root, "public", "images", "lrhs-studio-examples", e.file))}"
+        style="height:100%;aspect-ratio:${e.width}/${e.height};border-radius:10px;object-fit:cover;
+        box-shadow:0 0 0 1px rgba(0,0,0,.08),0 20px 40px -18px rgba(0,0,0,.45);">`).join("")}</div>`).join("")}
   </div>
 </div>
 

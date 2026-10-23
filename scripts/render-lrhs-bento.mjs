@@ -5,7 +5,8 @@
  * v2 (Oct 8): reworked to read like Apple's keynote recap slides — true-black
  * canvas, flat graphite and paper tiles, sentence-case two-tone headlines, big
  * gradient numerals, v1's colour strips — and a new Student ID tile
- * (front + back, the repo's sample-number art). Signage dropped for room;
+ * (front + back, the repo's sample-number art). Oct 22: the ID cards are
+ * district-controlled, so that tile is now the holiday emblems. Signage dropped for room;
  * Mustang Studio added (screenshot: assets/studio/mustang-studio-ui.png).
  *
  * Emits (the v1 files are kept):
@@ -49,7 +50,7 @@ const uri = (file, type) => `data:${type};base64,${fs.readFileSync(file).toStrin
 const mark = (name) => uri(path.join(root, "public", "images", "lrhs-marks", name), name.endsWith(".png") ? "image/png" : "image/svg+xml");
 const img = (...p) => {
   const f = path.join(root, ...p);
-  return uri(f, f.endsWith(".svg") ? "image/svg+xml" : f.endsWith(".png") ? "image/png" : "image/jpeg");
+  return uri(f, f.endsWith(".svg") ? "image/svg+xml" : f.endsWith(".png") ? "image/png" : f.endsWith(".webp") ? "image/webp" : "image/jpeg");
 };
 
 /* lucide glyphs straight from the package, as on the iconography board */
@@ -70,6 +71,7 @@ const FIELD = `radial-gradient(120% 95% at 18% 10%, #0A5733 0%, rgba(10,87,51,0)
 
 /* counts and families straight from the catalogue, so the bento can't fall behind the library */
 const CAT = JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-marks.json"), "utf8"));
+const HOLIDAYS = JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-holidays.json"), "utf8")).holidays;
 const NUM = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
 const SHORT = { crest: "Crest" };   // the bento's chip names, where they differ from the catalogue's
 const FAMILIES = CAT.families.map((f) => [SHORT[f.id] || f.name, CAT.marks.filter((m) => m.family === f.id).length]);
@@ -131,17 +133,15 @@ body{font-family:'Hanken',sans-serif;-webkit-font-smoothing:antialiased;text-ren
   <div class="sub" style="position:relative;font-size:36px;margin-top:22px;color:#D6E2DA;">The Lakewood Ranch High School brand system.</div>
 </div>
 
-<!-- student ID — new -->
-<div class="t dark c" style="grid-area:1/4/3/6;padding-bottom:0;">
-  <div class="lab"><span class="new">New</span>Student ID</div>
-  <div class="h" style="margin-top:18px;">A card every student <span class="m">carries.</span></div>
-  <div class="sub" style="margin-top:14px;">Front and back, with 24/7 support lines.</div>
-  <div class="art" style="margin-top:10px;">
-    <img src="${img("public", "images", "lrhs-ids", "student-back.png")}" style="position:absolute;height:640px;left:50%;top:50%;
-      transform:translate(-50%,-50%) translate(-160px,-6px) rotate(-7deg);filter:drop-shadow(0 30px 50px rgba(0,0,0,.6));">
-    <img src="${img("public", "images", "lrhs-ids", "student-front.png")}" style="position:absolute;height:640px;left:50%;top:50%;
-      transform:translate(-50%,-50%) translate(150px,16px) rotate(4deg);filter:drop-shadow(0 40px 60px rgba(0,0,0,.7));">
+<!-- holiday emblems — the LR all year round (replaced the Student ID tile, Oct 22: ID cards are district-controlled) -->
+<div class="t dark" style="grid-area:1/4/3/6;">
+  <div class="lab"><span class="new">New</span>Holiday emblems</div>
+  <div class="h" style="margin-top:18px;">The LR, <span class="m">all year round.</span></div>
+  <div class="art" style="margin-top:32px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:16px;">
+    ${HOLIDAYS.map((h) => `<div class="hc" style="position:relative;min-width:0;min-height:0;background:#FEFEFE;border-radius:24px;">
+      <img src="${img("public", "images", "lrhs-holidays", h.file)}" style="position:absolute;inset:12px;width:calc(100% - 24px);height:calc(100% - 24px);object-fit:contain;"></div>`).join("")}
   </div>
+  <div class="sub" style="margin-top:24px;">${NUM[HOLIDAYS.length][0].toUpperCase() + NUM[HOLIDAYS.length].slice(1)} editions, from Pink Out to the Fourth of July.</div>
 </div>
 
 <!-- one horse -->

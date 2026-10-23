@@ -38,7 +38,7 @@ const INDUSTRY = font("Industry Black", [process.env.INDUSTRY_FONT, path.join(us
 const HANKEN = font("Hanken Grotesk", [process.env.HANKEN_FONT, path.join(userFonts, "HankenGrotesk-VariableFont_wght.ttf")]);
 
 const uri = (file) => {
-  const t = file.endsWith(".svg") ? "image/svg+xml" : file.endsWith(".png") ? "image/png" : "image/jpeg";
+  const t = file.endsWith(".svg") ? "image/svg+xml" : file.endsWith(".png") ? "image/png" : file.endsWith(".webp") ? "image/webp" : "image/jpeg";
   return `data:${t};base64,${fs.readFileSync(file).toString("base64")}`;
 };
 const mark = (name) => uri(path.join(root, "public", "images", "lrhs-marks", name));
@@ -76,6 +76,10 @@ const SWATCHES = [
   ["Ink", "#0B0B0B", "Contrast", "#fff"],
   ["Paper", "#FBFBF9", "Background", "#3A4A42"],
 ];
+const HOLIDAYS = JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-holidays.json"), "utf8")).holidays;
+/* Made in Mustang Studio: portraits on top, then the newsletter, poster and the wide screen */
+const EX = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-studio-examples.json"), "utf8")).map((e) => [e.file, e]));
+const EXAMPLES = ["award-certificate.jpg", "band-mustang-spotlight.jpg", "jv-home-schedule.jpg", "newsletter-cover.jpg", "spirit-week.jpg", "winter-break.jpg"].map((f) => EX[f]);
 const APPAREL = [["cap", "Cap"], ["hoodie", "Hoodie"], ["jersey", "Jersey"], ["crewneck", "Crewneck"], ["polo", "Polo"]];
 
 const ghost = (w, right, top) => `<div style="position:absolute;inset:0;overflow:hidden;">
@@ -93,17 +97,17 @@ const SLIDES = [
        background:rgba(255,255,255,.13);font-size:25px;font-weight:600;">Swipe through the system ${ARROW}</div>
 </div>`, DISCLAIMER],
 
-["student-id", `
-<div class="t dark c" style="padding-bottom:0;">
-  <div class="lab"><span class="new">New</span>Student ID</div>
-  <div class="h" style="margin-top:22px;">A card every student <span class="m">carries.</span></div>
-  <div class="sub" style="margin-top:18px;">Front and back, with 24/7 support lines.</div>
-  <div class="art" style="margin-top:14px;">
-    <img src="${img("public", "images", "lrhs-ids", "student-back.png")}" style="position:absolute;height:650px;left:50%;top:50%;
-      transform:translate(-50%,-50%) translate(-160px,-10px) rotate(-7deg);filter:drop-shadow(0 30px 50px rgba(0,0,0,.6));">
-    <img src="${img("public", "images", "lrhs-ids", "student-front.png")}" style="position:absolute;height:650px;left:50%;top:50%;
-      transform:translate(-50%,-50%) translate(150px,14px) rotate(4deg);filter:drop-shadow(0 40px 60px rgba(0,0,0,.7));">
+["clawed", `
+<div class="t paper c">
+  <div class="lab"><span class="new">New</span>The Clawed family</div>
+  <div class="art" style="margin:30px 0 38px;display:flex;flex-direction:column;gap:22px;">
+    ${["LRHS-Clawed", "LRHS-Claw-Emblem"].map((s, i) => `<div style="flex:1;min-height:0;position:relative;background:#FEFEFE;border-radius:34px;
+      box-shadow:0 24px 50px -26px rgba(12,12,12,.35);">
+      <img class="fit abs" src="${png(s)}" style="inset:26px;width:calc(100% - 52px);height:calc(100% - 52px);">
+      <span class="chip" style="background:${i ? "#5A6A61" : RED};">${i ? "Both letters" : "Through the R"}</span></div>`).join("")}
   </div>
+  <div class="h">The LR, <span class="m">clawed.</span></div>
+  <div class="sub" style="margin-top:16px;">For pep rallies, the student section and spirit week.</div>
 </div>`],
 
 ["one-horse", `
@@ -220,6 +224,21 @@ const SLIDES = [
   <div class="h">The part students <span class="m">actually wear.</span></div>
 </div>`],
 
+["holidays", `
+<div class="t paper">
+  <div class="lab">Holiday emblems</div>
+  <div class="h" style="margin-top:18px;">The LR, <span class="m">all year round.</span></div>
+  <div class="art" style="margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:26px 18px;">
+    ${HOLIDAYS.map((h) => `<div style="display:flex;flex-direction:column;min-height:0;">
+      <div style="flex:1;min-height:0;position:relative;background:#FEFEFE;border-radius:26px;box-shadow:0 20px 40px -24px rgba(12,12,12,.35);">
+        <img class="fit abs" src="${img("public", "images", "lrhs-holidays", h.file)}" style="inset:14px;width:calc(100% - 28px);height:calc(100% - 28px);"></div>
+      <div style="font-size:19px;font-weight:650;margin-top:12px;text-align:center;white-space:nowrap;letter-spacing:-.005em;">${h.name}</div>
+      <div style="font-size:13.5px;font-weight:700;margin-top:4px;text-align:center;letter-spacing:.12em;text-transform:uppercase;color:${RED};white-space:nowrap;">${h.when}</div>
+    </div>`).join("")}
+  </div>
+  <div class="sub" style="margin-top:34px;">${NUM[HOLIDAYS.length][0].toUpperCase() + NUM[HOLIDAYS.length].slice(1)} editions, from Pink Out to the Fourth of July. The letters never change shape.</div>
+</div>`],
+
 ["academic-powerhouse", `
 <div class="t paper c">
   <div class="lab">Academic Powerhouse</div>
@@ -257,6 +276,18 @@ const SLIDES = [
       <img src="${img("assets", "studio", "mustang-studio-ui.png")}" style="display:block;width:100%;">
     </div>
   </div>
+</div>`],
+
+["made-in-studio", `
+<div class="t dark">
+  <div class="lab">Made in Mustang Studio</div>
+  <div class="h" style="margin-top:18px;">Real pieces, <span class="m">already in use.</span></div>
+  <div class="art" style="margin-top:40px;display:flex;flex-direction:column;gap:18px;">
+    ${[[0, 3, 1.35], [3, 6, 1]].map(([a, b, f]) => `<div style="flex:${f} 1 0;min-height:0;display:flex;justify-content:center;gap:18px;">
+      ${EXAMPLES.slice(a, b).map((e) => `<img src="${img("public", "images", "lrhs-studio-examples", e.file)}" style="height:100%;aspect-ratio:${e.width}/${e.height};
+        border-radius:14px;object-fit:cover;box-shadow:0 26px 50px -24px rgba(0,0,0,.85);">`).join("")}</div>`).join("")}
+  </div>
+  <div class="sub" style="margin-top:34px;">A certificate, a band spotlight, a schedule, a newsletter, a pep rally poster and a screen.</div>
 </div>`],
 
 ["see-it-all", `

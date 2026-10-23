@@ -885,7 +885,7 @@ export function LrhsCaseStudy() {
                 <BuildVideo
                   src="/videos/mustang-studio-bento-motion.mp4"
                   still="/images/lrhs-studio-bento.jpg"
-                  alt="A one-page summary of Mustang Studio — the editor, fill in the blanks, a staff list becoming ID cards, the templates, carousels, motion, seasons, the brand check, where it runs and what it exports"
+                  alt="A one-page summary of Mustang Studio — the editor, fill in the blanks, six real pieces made with it, the templates, carousels, motion, seasons, the brand check, where it runs and what it exports"
                 />
               </div>
             </div>
@@ -906,7 +906,7 @@ export function LrhsCaseStudy() {
               Mustangs Ahead, on one page
             </h2>
             <p className="col-span-12 max-w-[58ch] text-[17px] leading-[1.55] text-ink/75 sm:text-[18px] lg:col-span-5 lg:col-start-8 lg:pt-2">
-              Everything above on a single sheet — the LR, the student ID, the marks, colour and type, the crest,
+              Everything above on a single sheet — the LR, the holiday emblems, the marks, colour and type, the crest,
               posters, apparel and Mustang Studio — built in like a keynote recap. It&rsquo;s the page to send when
               someone asks what the system actually is.
             </p>
@@ -916,7 +916,7 @@ export function LrhsCaseStudy() {
           <BuildVideo
             src="/videos/lrhs-bento-motion.mp4"
             still="/images/lrhs-bento.jpg"
-            alt="Mustangs Ahead on one page — the LR emblem, the student ID, the mark library, colour, type, the crest, the band and podcast marks, Spirit Red, posters, apparel, the voice, Mustang Studio and a code that leads to this site"
+            alt="Mustangs Ahead on one page — the LR emblem, the holiday emblems, the mark library, colour, type, the crest, the band and podcast marks, Spirit Red, posters, apparel, the voice, Mustang Studio and a code that leads to this site"
           />
         </div>
       </section>
