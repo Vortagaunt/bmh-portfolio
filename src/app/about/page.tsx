@@ -6,6 +6,7 @@ import { GridBackdrop } from "@/components/GridBackdrop";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Reveal } from "@/components/Reveal";
+import { AgeCounter } from "@/components/AgeCounter";
 
 export const metadata: Metadata = {
   title: "About — Bronx Hanratty",
@@ -137,6 +138,7 @@ export default function AboutPage() {
                   ninth-grade designer who fell for digital design and
                   hasn&apos;t looked back.
                 </p>
+                <AgeCounter className="mt-3 text-[14px] leading-none text-ink/55" />
               </Reveal>
               <Reveal variant="up" delay={200} duration={1100}>
                 <p className="text-[16px] leading-[1.6] text-ink/80">

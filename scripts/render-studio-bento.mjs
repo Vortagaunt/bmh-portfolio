@@ -74,8 +74,6 @@ const SEASONS = [["homecoming-week", "Homecoming", ["#C9A227", "#EAD9A0"]], ["pi
   ["halloween-trunk", "Halloween", ["#E8731C", "#F6C453"]], ["winter-break", "Winter", ["#B9C2C6", "#E7EEF1"]]];
 const ROLES = [["trophy", "Coach or athlete"], ["users", "Club or activity"], ["music", "Mustang Band"],
   ["podcast", "Newsletter or podcast"], ["school", "Front office or teacher"], ["star", "Student"]];
-const STAFF = [["Name", "Title"], ["Ms. Rivera", "Math · Mathematics"], ["Mr. Okafor", "Director · Mustang Band"], ["Dr. Patel", "Principal · Administration"],
-  ["Ms. Kim", "Counselor · Student Services"], ["Mr. Diaz", "Coach · Athletics"], ["Ms. Lee", "Librarian · Media Center"]];
 
 /* Made in Mustang Studio: the three portraits on top, then the newsletter, the poster and the wide screen */
 const EX = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(root, "src", "data", "lrhs-studio-examples.json"), "utf8")).map((e) => [e.file, e]));

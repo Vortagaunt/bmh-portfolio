@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AgeCounter } from "./AgeCounter";
 import { Reveal } from "./Reveal";
 
 export function About() {
@@ -59,6 +60,7 @@ export function About() {
               Documentarys, and more. I have collaborated with a lot of
               bright people, and hopefully you can be the next.
             </p>
+            <AgeCounter className="mt-4 text-[14px] leading-none text-ink/55" />
             <div className="mt-12 flex flex-wrap gap-3">
               <Link
                 href="/about"
