@@ -221,18 +221,6 @@
   clip-path: inset(0 0 0 0);
 }
 
-/* ID cards: each pair starts as one stack, then spreads and straightens —
-   the same build the PowerPoint plays */
-.scene [data-card="front"] {
-  transform: translate3d(54%, 12%, 0) rotate(-7deg);
-}
-.scene [data-card="back"] {
-  transform: translate3d(-54%, 16%, 0) rotate(6deg);
-}
-.in [data-card] {
-  transform: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .scene [data-r],
   .scene [data-card] {

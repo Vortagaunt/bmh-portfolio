@@ -66,8 +66,9 @@ const FIELD = `radial-gradient(120% 95% at 18% 10%, #0A5733 0%, rgba(10,87,51,0)
   radial-gradient(110% 100% at 88% 96%, #021A10 0%, rgba(2,26,16,0) 58%),
   linear-gradient(146deg, #04482A 0%, #003C24 44%, #05281A 100%)`;
 const TPL = JSON.parse(fs.readFileSync(path.join(STUDIO, "templates.json"), "utf8"));
-/* Mustang Studio 1.0: 19 sizes and 33 brand-check rules (28 from 1.5, the two seasonal ones from 1.6, three for banners) */
-const SIZES = 19, CHECKS = 33;
+/* Mustang Studio 1.0: 26 sizes (17 + the hallway banner + 8 garments; no ID cards, the district makes those) and 45 brand-check rules (33 in 1.0, twelve for apparel and jerseys);
+   the marks come from the same catalogue the app is built from */
+const SIZES = 26, CHECKS = 45;
 const STRIP = ["gameday", "pole-gomustangs", "news", "story-podcast", "podstory", "spotlight", "certificate", "band", "final", "ridetogether", "honor", "schedule", "issue", "gamestory"]
   .filter((id) => TPL.some((t) => t.id === id));
 const SEASONS = [["homecoming-week", "Homecoming", ["#C9A227", "#EAD9A0"]], ["pinkout-game", "Pink Out", ["#EC5C8D", "#F8D3DF"]],

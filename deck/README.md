@@ -78,11 +78,12 @@ adding slides.
   The videos come from `node ../scripts/render-bento-motion.mjs lrhs` and
   `... studio-wide` (run before `prepare-assets.mjs` whenever a bento changes).
   `S.motion` in `slides-lrhs.js` says which slides move.
-- **The ID cards fan in.** Anything marked `data-layer` on a slide listed in
-  `S.layers` is cut out by `render-slides.mjs` (shadow and all, on a
-  transparent ground), the slide is rendered again without it, and
-  `assemble.js` puts the cards back in place as separate pictures with a
-  native entrance: they rise in as one stack and spread to where they sit.
+- **The ID cards are cut (Oct 15).** The district makes the student and staff
+  IDs, so the school can't change them, and their two slides are out of
+  `ORDER`, the slim deck, the script, the site and Mustang Studio. Their code
+  (`studentIds`, `staffIds`) and the `S.layers` fan-in hook that cut out
+  anything marked `data-layer` are still in `slides-lrhs.js`, switched off,
+  in case that ever changes.
 - **Speaker notes** on every slide come from
   `assets/script/presenter-script.html` (`notes.js` reads it). Bold lines are
   to say, italic lines are what to do. The last slide also carries the Q&A.
