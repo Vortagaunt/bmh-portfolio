@@ -76,3 +76,8 @@ public/games/vice-dos/
 
 # one-folder copy of every Claude-made image (local only)
 /_claude-images/
+
+# stadium motion: the 4K/8K renders are huge, keep them out of git
+/assets/motion/stadium/out/
+/assets/motion/stadium/**/*.mov
+/assets/motion/stadium/**/*.mp4

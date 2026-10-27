@@ -1,0 +1,6 @@
+{
+  "about": "The starting lineup for scripts/render-stadium-motion.mjs (piece 08). One video per player: `node scripts/render-stadium-motion.mjs lineup`. Placeholders only: never commit real student names or photos. photo is optional (a path or data URI); without it the slot shows the ghosted mustang.",
+  "players": [
+    { "number": "00", "name": "Player Name", "position": "Position", "classOf": "20XX" }
+  ]
+}
