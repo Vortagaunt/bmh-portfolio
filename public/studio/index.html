@@ -11099,6 +11099,12 @@ runCheck = function () {
   const add = (sev, title, detail, id, fix) => issues.push({ sev, title, detail, id, fix: fix || null });
   // the two big-play pieces may go full Spirit Red; anything else keeps the usual limit
   if (doc.bigPlay) for (let i = issues.length - 1; i >= 0; i--) if (issues[i].title === 'Too much Spirit Red') issues.splice(i, 1);
+  // the emblem family, Clawed LR and band emblem carry a white keyline that holds on green
+  const KEYLINED = new Set(['LRHS Emblem.svg', 'LRHS Emblem 2.svg', 'LRHS Clawed.svg', 'LRHS Band Emblem.svg']);
+  for (let i = issues.length - 1; i >= 0; i--) {
+    const l = issues[i].id && doc.layers.find(x => x.id === issues[i].id);
+    if (issues[i].title === 'Made for light grounds' && l && KEYLINED.has(l.file)) issues.splice(i, 1);
+  }
   const z = SAFE(doc), minSize = Math.round(doc.h * MIN_TYPE);
   for (const l of doc.layers) {
     if (l.hidden || isGhost(l) || l.type === 'shape' || (l.type === 'image' && l.bleed)) continue;
@@ -11128,15 +11134,14 @@ const middle = (items, gaps) => { let tot = 0; items.forEach((it, i) => { tot +=
 const big = (d, text, size, o = {}) => tx(d, 'display', text, { size, w: 1728, leading: 0.95, balance: false, ...o });
 /* second lines: Hanken Grotesk, heavy and barely tracked, still 12% of the height */
 const second = (d, text, o = {}) => tx(d, 'eyebrow', text, { size: 130, weight: 800, tracking: 0.03, color: ONG, w: 1728, ...o });
-/* The Clawed LR and the band emblem are drawn for light grounds (the brand check
-   says so on green), so on the board they sit on a Paper plate, as the pole
-   banners do. Returns a slot for middle(); place() puts the plate and mark there. */
+/* The Clawed LR and the band emblem sit straight on the board, like the stadium
+   videos (their white keyline holds on green). Returns a slot for middle(). */
 const plated = (d, file, hh, name, anim) => {
-  const pad = Math.round(hh * 0.12), w = markW(file, hh);
-  const plate = shp(d, { x: (W - w) / 2 - pad, y: 0, w: w + pad * 2, h: hh + pad * 2, fill: '#FBFBF9', radius: Math.round(pad * 0.9), locked: true, name: 'Paper plate', anim });
-  const m = mk(d, file, { w, name, anim });
-  return { h: hh + pad * 2, place() { plate.y = this.y; m.y = this.y + pad; } };
+  const m = mk(d, file, { w: markW(file, hh), name, anim });
+  return { h: hh, place() { m.y = this.y; } };
 };
+/* the ghosted mustang every board has, drifting slowly when the motion plays */
+const ghostOf = d => ghost(d, { w: 1600, x: 760, y: 235, opacity: 0.05 });
 const flood = (d, anim = 'wipe') => shp(d, { x: 0, y: 0, w: W, h: H, fill: RED, locked: true, name: 'Spirit Red', anim });
 const photoSlot = (d, o) => {
   const { x, y, w, h: hh, radius = 22 } = o;
@@ -11149,7 +11154,7 @@ const photoSlot = (d, o) => {
 const BOARDS = [
   { id: 'board-welcome', name: 'Welcome to The Ranch', build() {
     const d = tdoc('board');
-    ghost(d, { w: 1600, x: 760, y: 235, opacity: 0.05 });
+    ghostOf(d);
     const em = mk(d, 'LRHS Emblem Mono.svg', { w: markW('LRHS Emblem Mono.svg', 500), name: 'LR emblem', anim: 'rise' });
     const a = fx(big(d, 'Welcome to The Ranch', 138, { anim: 'rise' }));
     const b = fx(second(d, 'Home of the Mustangs', { anim: 'rise' }));
@@ -11160,6 +11165,7 @@ const BOARDS = [
   { id: 'board-touchdown', name: 'Touchdown', bigPlay: true, build() {
     const d = tdoc('board');
     flood(d, 'wipe');
+    ghostOf(d);
     const em = mk(d, 'LRHS Emblem Mono.svg', { w: markW('LRHS Emblem Mono.svg', 380), name: 'LR emblem', anim: 'pop' });
     const t = lbl(big(d, 'Touchdown', 272, { anim: 'pop' }), 'Big word');
     middle([em, t], 40);
@@ -11168,6 +11174,7 @@ const BOARDS = [
   } },
   { id: 'board-itsgood', name: 'It’s good', build() {
     const d = tdoc('board');
+    ghostOf(d);
     const px = 760;
     shp(d, { x: W / 2 - px, y: 0, w: px * 2, h: H, fill: INK, opacity: 0.4, locked: true, name: 'Between the uprights', anim: 'fade' });
     [W / 2 - px - 13, W / 2 + px - 13].forEach((x, i) => shp(d, { x, y: 0, w: 26, h: H, fill: WHITE, locked: true, name: i ? 'Right upright' : 'Left upright', anim: 'wipe' }));
@@ -11179,6 +11186,7 @@ const BOARDS = [
   } },
   { id: 'board-firstdown', name: 'First down', build() {
     const d = tdoc('board');
+    ghostOf(d);
     shp(d, { x: 0, y: 290, w: W, h: 340, fill: INK, opacity: 0.4, locked: true, name: 'Band', anim: 'wipe' });
     const t = lbl(big(d, 'First Down', 280, { anim: 'slide' }), 'Big word'); t.y = 290 + (340 - t.h) / 2;
     shp(d, { kind: 'line', x: 96, y: 733, w: 1473, h: 14, fill: WHITE, strokeColor: null, cap: 'butt', name: 'Chain line', anim: 'wipe' });
@@ -11188,7 +11196,8 @@ const BOARDS = [
   } },
   { id: 'board-noise', name: 'Make some noise', build() {
     const d = tdoc('board');
-    const cl = plated(d, 'LRHS Clawed.svg', 260, 'Clawed LR', 'pop');
+    ghostOf(d);
+    const cl = plated(d, 'LRHS Clawed.svg', 320, 'Clawed LR', 'pop');
     const t = lbl(big(d, 'Make Some Noise', 150, { anim: 'rise' }), 'Shout');
     // the meter: twelve segments that pop in left to right, the last three in Spirit Red
     const seg = { h: 44, w: 112, gap: 10 }, mw = 12 * seg.w + 11 * seg.gap;
@@ -11201,6 +11210,7 @@ const BOARDS = [
   } },
   { id: 'board-turnover', name: 'Turnover', build() {
     const d = tdoc('board');
+    ghostOf(d);
     const em = mk(d, 'LRHS Emblem Mono.svg', { w: markW('LRHS Emblem Mono.svg', 240), name: 'LR emblem', anim: 'pop' });
     const card = { h: 420 };
     middle([em, card], 44);
@@ -11215,7 +11225,8 @@ const BOARDS = [
   { id: 'board-sack', name: 'Sack', bigPlay: true, build() {
     const d = tdoc('board');
     flood(d, 'fade');
-    const cl = plated(d, 'LRHS Clawed.svg', 200, 'Clawed LR', 'pop');
+    ghostOf(d);
+    const cl = plated(d, 'LRHS Clawed.svg', 250, 'Clawed LR', 'pop');
     const t = lbl(big(d, 'Sack', 520, { w: 1500, leading: 0.9, anim: 'pop' }), 'Big word');
     middle([cl, t], 30); cl.place();
     // three claw marks tear through the word, in the ground's own red
@@ -11225,7 +11236,7 @@ const BOARDS = [
   } },
   { id: 'board-lineup', name: 'Starting lineup', build() {
     const d = tdoc('board');
-    ghost(d, { w: 1600, x: 760, y: 235, opacity: 0.04 });
+    ghostOf(d);
     const x0 = 96, pw = 520, ph = 700, py = (H - ph) / 2, cx0 = x0 + pw + 72, cw = 1824 - cx0;
     photoSlot(d, { x: x0, y: py, w: pw, h: ph });
     shp(d, { x: cx0 - 40, y: py, w: 14, h: ph, fill: RED, locked: true, name: 'Red rule', anim: 'wipe' });
@@ -11242,8 +11253,9 @@ const BOARDS = [
   } },
   { id: 'board-halftime', name: 'Halftime · Mustang Band', build() {
     const d = tdoc('board');
+    ghostOf(d);
     for (let i = 0; i < 5; i++) shp(d, { x: 0, y: 598 + i * 44, w: W, h: 5, fill: WHITE, opacity: 0.16, locked: true, name: `Staff line ${i + 1}`, anim: 'wipe' });
-    const em = plated(d, 'LRHS Band Emblem.svg', 330, 'Band emblem', 'fade');
+    const em = plated(d, 'LRHS Band Emblem.svg', 400, 'Band emblem', 'fade');
     const a = fx(big(d, 'Halftime', 250, { anim: 'fade' }));
     const b = lbl(second(d, 'The Mustang Band', { anim: 'fade' }), 'Who’s on');
     middle([em, a, b], [38, 30]); em.place();
@@ -11252,7 +11264,7 @@ const BOARDS = [
   } },
   ...[['board-win', 'Mustangs win', 'Mustangs Win'], ['board-gomustangs', 'Go Mustangs', 'Go Mustangs']].map(([id, name, words]) => ({ id, name, build() {
     const d = tdoc('board');
-    ghost(d, { w: 1600, x: 760, y: 235, opacity: 0.05 });
+    ghostOf(d);
     const eh = 330, ew = markW('LRHS Emblem Mono.svg', eh), ww = 978, wh = markH('LRHS Wordmark.svg', ww), gap = 56, rowW = ew + gap + 6 + gap + ww;
     const row = { h: eh };
     const t = lbl(big(d, words, 220, { anim: 'rise' }), 'Big line');
