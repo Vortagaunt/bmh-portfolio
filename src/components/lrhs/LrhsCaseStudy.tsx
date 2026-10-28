@@ -8,6 +8,7 @@ import { RichText } from "../CaseStudyLayout";
 import { Reveal } from "../Reveal";
 import { ZoomImage } from "../ZoomImage";
 import { BuildVideo } from "../BuildVideo";
+import { LoopVideo } from "../LoopVideo";
 import { CompareSlider } from "./CompareSlider";
 import { MarkExplorer } from "./MarkExplorer";
 import { StudioTour } from "./StudioTour";
@@ -192,6 +193,31 @@ const AUDIT = [
   alt: `A horse on campus today — ${caption.toLowerCase()}`,
   title: caption,
 }));
+
+/* Stadium video-board motion: the 1080p site loops (public/videos/stadium/)
+   are cut from the 8K renders (scripts/render-stadium-motion.mjs); the stills
+   are each piece's hold frame. In game order. */
+const STADIUM = [
+  ["01-welcome-to-the-ranch", "Welcome to The Ranch", "Gates open. The first thing on the board."],
+  ["02-touchdown", "Touchdown", "Full-frame Spirit Red, straight after a Mustangs score."],
+  ["03-its-good", "It\u2019s Good", "Field goal or extra point, between the uprights."],
+  ["04-first-down", "First Down", "The chains move; the Mustang rides the line."],
+  ["05-make-some-noise", "Make Some Noise", "Defence on the field. The meter fills as the type grows."],
+  ["06-turnover", "Turnover", "Interception or fumble \u2014 the card literally turns over."],
+  ["07-sack", "Sack", "A hard impact frame, then the claws tear through the word."],
+  ["08-starting-lineup", "Starting Lineup", "A template: one video per player, from a list of names."],
+  ["09-halftime-mustang-band", "Halftime", "Slower and warmer, as the Mustang Band takes the field."],
+  ["10-mustangs-win", "Mustangs Win", "The closer after a win."],
+  ["10-alt-go-mustangs", "Go Mustangs", "The closer for every other night."],
+].map(([file, name, when]) => ({
+  file,
+  name,
+  when,
+  src: `/videos/stadium/${file}.mp4`,
+  poster: `/images/lrhs-stadium/${file}.jpg`,
+  alt: `Stadium video-board motion graphic — ${name}`,
+}));
+const [STADIUM_OPENER, ...STADIUM_REST] = STADIUM;
 
 const APPAREL = [
   ["cap.png", "Cap", "Embroidered"],
@@ -736,6 +762,57 @@ export function LrhsCaseStudy() {
             ))}
           </ul>
         </Part>
+      </Chapter>
+
+      {/* ── 07 Stadium motion ─────────────────────────────────────── */}
+      <Chapter
+        n={7}
+        id="stadium"
+        title="Game day, on the big board"
+        lede="Friday nights at *The Ranch* need more than a still logo. Eleven silent video-board pieces, one for each moment of a game — and *Spirit Red*, saved all week, finally gets the full screen."
+      >
+        <figure>
+          <div className="media-elevated relative w-full overflow-hidden rounded-[18px] bg-[#033922] sm:rounded-[24px]" style={{ aspectRatio: "16 / 9" }}>
+            <LoopVideo
+              src={STADIUM_OPENER.src}
+              poster={STADIUM_OPENER.poster}
+              alt={STADIUM_OPENER.alt}
+              sizes="(min-width: 1440px) 1380px, 100vw"
+            />
+          </div>
+          <Caption title={STADIUM_OPENER.name}>{STADIUM_OPENER.when}</Caption>
+        </figure>
+
+        <Part
+          title="Build in, hold, clear"
+          body="Every piece follows the same beat: it *builds in*, *holds* long enough to read from the far stands, then clears back to the bare green field — so any of them can sit on the board as a loop. No audio: the stadium runs its own sound. Each one is mastered at *8K*, so it stays sharp on a board of any size."
+        >
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
+            {STADIUM_REST.slice(0, 4).map((p) => (
+              <li key={p.file}>
+                <figure>
+                  <div className="media-elevated relative w-full overflow-hidden bg-[#033922]" style={{ aspectRatio: "16 / 9" }}>
+                    <LoopVideo src={p.src} poster={p.poster} alt={p.alt} sizes="(min-width: 1024px) 440px, (min-width: 640px) 50vw, 100vw" />
+                  </div>
+                  <Caption title={p.name}>{p.when}</Caption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </Part>
+
+        <ul className="mt-12 grid grid-cols-1 gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          {STADIUM_REST.slice(4).map((p) => (
+            <li key={p.file}>
+              <figure>
+                <div className="media-elevated relative w-full overflow-hidden bg-[#033922]" style={{ aspectRatio: "16 / 9" }}>
+                  <LoopVideo src={p.src} poster={p.poster} alt={p.alt} sizes="(min-width: 1024px) 460px, (min-width: 640px) 50vw, 100vw" />
+                </div>
+                <Caption title={p.name}>{p.when}</Caption>
+              </figure>
+            </li>
+          ))}
+        </ul>
       </Chapter>
 
       {/* ── One more thing… → Mustang Studio ────────────────────────
