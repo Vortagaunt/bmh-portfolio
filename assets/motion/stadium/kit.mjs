@@ -109,7 +109,7 @@ html,body{width:${W}px;height:${H}px;overflow:hidden;background:${T.green}}
   radial-gradient(120% 90% at 22% 12%, #0A5733 0%, rgba(10,87,51,0) 62%),
   radial-gradient(110% 100% at 88% 96%, #021A10 0%, rgba(2,26,16,0) 58%),
   linear-gradient(146deg, #04482A 0%, #003C24 44%, #05281A 100%);}
-.ghost{position:absolute;width:1600px;right:-440px;top:235px;opacity:.042;filter:brightness(0) invert(1);will-change:transform}
+.ghost{position:absolute;width:1600px;right:-440px;top:235px;opacity:.042;filter:brightness(0) invert(1)}
 .grid{position:absolute;inset:0;opacity:.5;background-image:
   linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
   linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
@@ -122,11 +122,11 @@ html,body{width:${W}px;height:${H}px;overflow:hidden;background:${T.green}}
 .ib{font-family:IB;line-height:1;color:${T.paper};white-space:nowrap;text-transform:uppercase}
 .hk{font-family:HK;font-weight:800;line-height:1;letter-spacing:.03em;color:${T.paper};white-space:nowrap;text-transform:uppercase}
 .m{display:block;overflow:hidden;padding:.1em .14em;margin:-.1em -.14em}
-.m>.i,.c>.i{display:block;will-change:transform}
+.m>.i,.c>.i{display:block}
 .row{display:flex;align-items:flex-end;flex:none}
 .c{display:inline-block}
 .row .m.c{margin:-.1em -.02em;padding:.1em .02em}
-.mk{position:relative;flex:none;will-change:transform}
+.mk{position:relative;flex:none}
 .mk img{display:block;height:100%;width:auto}
 .mk .sh{position:absolute;inset:0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
   background:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.9) 50%,rgba(255,255,255,0) 62%);

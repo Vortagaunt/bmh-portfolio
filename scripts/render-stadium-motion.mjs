@@ -290,8 +290,37 @@ function targets(args) {
 }
 
 const list = targets(process.argv.slice(2));
-const browser = await chromium.launch({ executablePath: CHROME, headless: true });
+/* Software rendering, and sRGB whatever the monitor's profile. On Windows, Chrome's GPU
+   path ran out of tile memory at 8K (device scale 4) and dropped layers for a frame or
+   two while the Turnover card folded: the word and the emblem blinked out. */
+const browser = await chromium.launch({ executablePath: CHROME, headless: true,
+  args: ["--disable-gpu", "--disable-gpu-compositing", "--disable-gpu-rasterization", "--force-color-profile=srgb"] });
 if (process.env.PREVIEW) await preview(browser, list);
+else if (process.env.REF) {   // REF=1: every frame at 1080p, no blur, as 240x135 grey (for checking a render against)
+  for (const job of list) for (const once of job.piece.once ? [false, true] : [false]) {
+    const P = await openPiece(browser, job.piece, { scale: 1, player: job.player, seconds: once ? job.piece.once : undefined });
+    fs.mkdirSync(path.join(OUT, "ref"), { recursive: true });
+    const bufs = [];
+    for (let i = 0; i < P.frames; i++) {
+      await P.page.evaluate((t) => window.__seek(t), i / FPS);
+      bufs.push(await sharp(await P.page.screenshot({ type: "png" })).resize(240, 135).greyscale().raw().toBuffer());
+    }
+    fs.writeFileSync(path.join(OUT, "ref", `${job.tag}${once ? "-once" : ""}.gray`), Buffer.concat(bufs));
+    console.log(job.tag, once ? "once" : "", P.frames);
+    await P.close();
+  }
+}
+else if (process.env.PROBE) {   // PROBE=1.5,1.6 [PROBE_SCALE=4]: real-size frames at those times, saved small, for checking renders
+  for (const job of list) {
+    const P = await openPiece(browser, job.piece, { scale: +(process.env.PROBE_SCALE || 4), player: job.player });
+    fs.mkdirSync(path.join(OUT, "probe"), { recursive: true });
+    for (const t of process.env.PROBE.split(",").map(Number)) {
+      await P.page.evaluate((t) => window.__seek(t), t);
+      await sharp(await P.page.screenshot({ type: "png" })).resize(960).jpeg({ quality: 85 }).toFile(path.join(OUT, "probe", `${job.tag}-${t.toFixed(3)}s.jpg`));
+    }
+    await P.close();
+  }
+}
 else if (process.env.GIF) { for (const job of list) await renderGif(browser, job.piece, job, +process.env.GIF); }
 else {
   /* every file still to make (finished ones are skipped, so a stopped run picks up where it left off) */
