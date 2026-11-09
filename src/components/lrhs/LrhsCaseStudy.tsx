@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import LRHS_MARKS from "@/data/lrhs-marks.json";
 import LRHS_HOLIDAYS from "@/data/lrhs-holidays.json";
+import LRHS_STADIUM from "@/data/lrhs-stadium.json";
 import STUDIO_TEMPLATES from "@/data/mustang-studio-templates.json";
 import { RichText } from "../CaseStudyLayout";
 import { Reveal } from "../Reveal";
@@ -24,9 +25,10 @@ import { Swatches } from "./Swatches";
 
    Counts come from the catalogues, never typed in: the marks and families
    from src/data/lrhs-marks.json (the same file the deck and the PDF read),
-   the templates from src/data/mustang-studio-templates.json. The only
-   hand-kept numbers are Mustang Studio 1.0's sizes, checks and icons
-   (scripts/capture-mustang-studio.mjs prints them).
+   the templates and their groups from src/data/mustang-studio-templates.json.
+   The only hand-kept numbers are Mustang Studio 1.0's sizes, checks and
+   icons, read from the app itself (scripts/capture-mustang-studio.mjs prints
+   them): 27 sizes with the video board, 47 brand-check rules, 134 icons.
    ───────────────────────────────────────────────────────────────────── */
 
 const GREEN = "#033922";
@@ -37,19 +39,20 @@ const MARKS = LRHS_MARKS.marks;
 const FAMILIES = LRHS_MARKS.families;
 const RETIRED = LRHS_MARKS.retired;
 const TEMPLATES = STUDIO_TEMPLATES.templates.length;
-const STUDIO_SIZES = 26;
-const STUDIO_CHECKS = 45;
+const STUDIO_SIZES = 27;
+const STUDIO_CHECKS = 47;
 const STUDIO_ICONS = 134;
 
 const mark = (file: string) => `/images/lrhs-marks/${encodeURI(file)}`;
 
 /* Numbers written out where they open a sentence or a heading. */
 const WORDS: Record<number, string> = {
-  5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten", 19: "nineteen", 25: "twenty-five",
+  5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten", 11: "eleven", 12: "twelve", 19: "nineteen", 25: "twenty-five",
   26: "twenty-six", 27: "twenty-seven", 28: "twenty-eight", 29: "twenty-nine", 30: "thirty", 33: "thirty-three",
-  40: "forty", 41: "forty-one", 42: "forty-two", 45: "forty-five", 54: "fifty-four", 80: "eighty",
+  40: "forty", 41: "forty-one", 42: "forty-two", 45: "forty-five", 47: "forty-seven", 54: "fifty-four", 80: "eighty",
+  91: "ninety-one",
 };
-/* 1.1: the jerseys, as the app exports them (scripts/capture-mustang-studio.mjs → studio-site-images.mjs) */
+/* The jerseys, as the app exports them (scripts/capture-mustang-studio.mjs → studio-site-images.mjs) */
 const STUDIO_APPAREL = [
   {
     src: "/images/lrhs-studio/apparel-mockup.jpg",
@@ -194,22 +197,11 @@ const AUDIT = [
   title: caption,
 }));
 
-/* Stadium video-board motion: the 1080p site loops (public/videos/stadium/)
-   are cut from the 8K renders (scripts/render-stadium-motion.mjs); the stills
-   are each piece's hold frame. In game order. */
-const STADIUM = [
-  ["01-welcome-to-the-ranch", "Welcome to The Ranch", "Gates open. The first thing on the board."],
-  ["02-touchdown", "Touchdown", "Full-frame Spirit Red, straight after a Mustangs score."],
-  ["03-its-good", "It\u2019s Good", "Field goal or extra point, between the uprights."],
-  ["04-first-down", "First Down", "The chains move; the Mustang rides the line."],
-  ["05-make-some-noise", "Make Some Noise", "Defence on the field. The meter fills as the type grows."],
-  ["06-turnover", "Turnover", "Interception or fumble \u2014 the card literally turns over."],
-  ["07-sack", "Sack", "A hard impact frame, then the claws tear through the word."],
-  ["08-starting-lineup", "Starting Lineup", "A template: one video per player, from a list of names."],
-  ["09-halftime-mustang-band", "Halftime", "Slower and warmer, as the Mustang Band takes the field."],
-  ["10-mustangs-win", "Mustangs Win", "The closer after a win."],
-  ["10-alt-go-mustangs", "Go Mustangs", "The closer for every other night."],
-].map(([file, name, when]) => ({
+/* Stadium video-board motion, in game order — the same list the deck's
+   "Game day, on the big board" slide reads (src/data/lrhs-stadium.json). The
+   1080p site loops (public/videos/stadium/) are cut from the 8K renders
+   (scripts/render-stadium-motion.mjs); the stills are each piece's hold frame. */
+const STADIUM = LRHS_STADIUM.pieces.map(({ file, name, when }) => ({
   file,
   name,
   when,
@@ -375,8 +367,8 @@ export function LrhsCaseStudy() {
               <Reveal variant="up" delay={260} duration={1100}>
                 <p className="mt-6 max-w-[34em] text-[17px] leading-[1.5] text-white/80 sm:mt-8 sm:text-[19px]">
                   A brand system for my school, home of the Mustangs since 1998 — {say(MARKS.length)} marks in{" "}
-                  {say(FAMILIES.length)} families, the colour, type and voice that hold them together, and the cards
-                  every student carries.
+                  {say(FAMILIES.length)} families, the colour, type and voice that hold them together, and the places
+                  the school actually uses them.
                 </p>
               </Reveal>
             </div>
@@ -405,7 +397,7 @@ export function LrhsCaseStudy() {
           <p className="text-[21px] leading-[1.4] tracking-[-0.01em] text-ink sm:text-[28px] sm:leading-[1.35]">
             <RichText>
               {
-                "Walk around Lakewood Ranch High and you can count at least *five different horses* — on the scoreboard, the banners, the band trailer — each drawn differently, in a different green. None of them are wrong; each one was someone doing their best with whatever file they could find. This project draws one horse, builds a system around it, and puts it on the things the school actually uses — the signs, the posters, the shirts and the cards in everyone's pocket."
+                "Walk around Lakewood Ranch High and you can count at least *five different horses* — on the scoreboard, the banners, the band trailer — each drawn differently, in a different green. None of them are wrong; each one was someone doing their best with whatever file they could find. This project draws one horse, builds a system around it, and puts it on the things the school actually uses — the signs, the posters, the shirts and the stadium's video board."
               }
             </RichText>
           </p>
@@ -769,7 +761,7 @@ export function LrhsCaseStudy() {
         n={7}
         id="stadium"
         title="Game day, on the big board"
-        lede="Friday nights at *The Ranch* need more than a still logo. Eleven silent video-board pieces, one for each moment of a game — and *Spirit Red*, saved all week, finally gets the full screen."
+        lede={`Friday nights at *The Ranch* need more than a still logo. ${Say(STADIUM.length)} silent video-board pieces, one for each moment of a game — and *Spirit Red*, saved all week, finally gets the full screen.`}
       >
         <figure>
           <div className="media-elevated relative w-full overflow-hidden rounded-[18px] bg-[#033922] sm:rounded-[24px]" style={{ aspectRatio: "16 / 9" }}>
@@ -902,7 +894,7 @@ export function LrhsCaseStudy() {
                   It checks the work for you
                 </h3>
                 <p className="mt-4 max-w-[46ch] text-[16px] leading-[1.6] text-white/75 sm:text-[17px]">
-                  {`${Say(STUDIO_CHECKS)} rules run while you work: text that’s hard to read, a mark on the wrong ground, a tilted or faded mark, off-brand colours, too much Spirit Red, text too small to print or too close to the trim, words in a banner’s pole pocket, and jersey numbers that break the uniform rules. Most come with a one-click fix.`}
+                  {`${Say(STUDIO_CHECKS)} rules run while you work: text that’s hard to read, a mark on the wrong ground, a tilted or faded mark, off-brand colours, too much Spirit Red, text too small to print or too close to the trim, words in a banner’s pole pocket, anything outside a video board’s title-safe area, and jersey numbers that break the uniform rules. Most come with a one-click fix.`}
                 </p>
               </div>
               <div className="col-span-12 lg:col-span-8">
@@ -966,8 +958,10 @@ export function LrhsCaseStudy() {
                   {Say(TEMPLATES)} templates, ready on day one
                 </h3>
                 <p className="col-span-12 max-w-[56ch] text-[16px] leading-[1.6] text-white/75 sm:text-[17px] lg:col-span-6">
-                  Sorted by department, with pole banners for the street, the jerseys, and a set for every season — Homecoming, Pink Out,
-                  Halloween and the winter holidays. These are the templates exactly as the app opens them, and everything in them stays editable.
+                  Sorted by department, with pole banners for the street, the jerseys, the video-board pieces
+                  for Friday nights, and a set for every season — Homecoming, Pink Out, Halloween and the winter
+                  holidays. These are the templates exactly as the app opens them, and everything in them stays
+                  editable.
                 </p>
               </div>
               <div className="mt-8">

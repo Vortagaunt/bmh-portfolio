@@ -635,6 +635,37 @@ const gameDay = (n) => `<!doctype html><html><head><meta charset="utf-8"><style>
   </div>
 </div></body></html>`;
 
+/* stadium motion — the video-board pieces as their hold frames, in game order.
+   The same list the case study's chapter 07 reads (src/data/lrhs-stadium.json);
+   prepare-assets copies the frames to img/stadium. Three lead, the rest follow. */
+const STADIUM = require("../src/data/lrhs-stadium.json").pieces;
+const STADIUM_LEAD = ["01-welcome-to-the-ranch", "02-touchdown", "10-mustangs-win"];
+const stadiumTile = (p, big) => `
+  <div style="display:flex;flex-direction:column;min-width:0;">
+    <img src="img/stadium/${p.file}.jpg" alt="${p.name}" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;
+         border-radius:${big ? 28 : 18}px;box-shadow:0 34px 80px -36px rgba(12,12,12,.55);">
+    <div style="font-size:${big ? 40 : 30}px;font-weight:600;letter-spacing:-.01em;color:#0C0C0C;margin-top:${big ? 26 : 18}px;white-space:nowrap;">${p.name}</div>
+    ${big ? `<div style="font-size:28px;line-height:1.35;color:${GREY};margin-top:8px;">${p.when}</div>` : ""}
+  </div>`;
+const stadium = (n) => page("lrpaper", `
+  ${kicker(n, "The video board", false)}
+  <div class="display" style="font-size:140px;color:#0C0C0C;margin:52px 0 28px;">
+    Game day, on the big board
+  </div>
+  <div style="font-size:44px;line-height:1.5;color:${GREY};max-width:3300px;text-wrap:balance;">
+    ${cap(words(STADIUM.length))} silent pieces for the stadium&rsquo;s video board, one for each moment of a game. Each builds in,
+    holds long enough to read from the far stands, then clears back to the green &mdash; and Spirit Red
+    finally gets the full screen.
+  </div>
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:52px;margin-top:40px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:56px;">
+      ${STADIUM.filter((p) => STADIUM_LEAD.includes(p.file)).map((p) => stadiumTile(p, true)).join("")}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(${STADIUM.length - STADIUM_LEAD.length},1fr);gap:32px;">
+      ${STADIUM.filter((p) => !STADIUM_LEAD.includes(p.file)).map((p) => stadiumTile(p, false)).join("")}
+    </div>
+  </div>`);
+
 const ask = (n) => page("lrpaper", `
   ${kicker(n, "The ask", false)}
   <div class="display" style="font-size:170px;color:#0C0C0C;margin:56px 0 70px;">
@@ -666,20 +697,21 @@ const ask = (n) => page("lrpaper", `
    The brand-locked design app Bronx built, shown with its own screens and its
    own template exports (assets/studio — captured from the app by
    scripts/capture-mustang-studio.mjs). prepare-assets copies them to img/studio.
-   Facts on these slides are read from the app (1.0, Oct 15): 80 templates in 8
-   groups (Seasons, Motion, Banners and Apparel among them), 26 sizes (8 of them garments; no ID cards),
-   29 marks, 7 type styles, 134 icons, 45 brand-check rules, 4 seasonal themes.
+   Facts on these slides are read from the app (1.0 with the video board, Oct 27): 91 templates in 9
+   groups (Seasons, Motion, Banners, Apparel and Video board among them), 27 sizes (8 of them garments; no ID cards),
+   29 marks, 7 type styles, 134 icons, 47 brand-check rules, 4 seasonal themes.
    The template count comes from templates.json and the marks from the catalogue;
    the sizes and rules are kept here by hand (capture-mustang-studio.mjs prints them). */
 const STUDIO = "img/studio";
 const STUDIO_TPL = require("../assets/studio/templates.json");
-const STUDIO_SIZES = 26, STUDIO_RULES = 45, STUDIO_STYLES = 7;
+const STUDIO_SIZES = 27, STUDIO_RULES = 47, STUDIO_STYLES = 7;
 const Words = (k) => { const w = words(k); return w[0].toUpperCase() + w.slice(1); };
 const STUDIO_FMT = {
   "ig-post": [1080, 1080, "Instagram", "1080 × 1080"], "ig-portrait": [1080, 1350, "Portrait", "1080 × 1350"],
   story: [1080, 1920, "Story", "1080 × 1920"], "x-post": [1600, 900, "X / Facebook", "1600 × 900"],
   "fb-event": [1920, 1005, "Facebook event", "1920 × 1005"], "yt-thumb": [1280, 720, "YouTube", "1280 × 720"],
   "x-header": [1500, 500, "X header", "1500 × 500"], slide: [1920, 1080, "Slide", "16 : 9"],
+  board: [1920, 1080, "Video board", "16 : 9"],
   letter: [8.5, 11, "Flyer", "8.5 × 11 in"], half: [5.5, 8.5, "Half-letter", "5.5 × 8.5 in"],
   tabloid: [11, 17, "Poster", "11 × 17 in"], poster18: [18, 24, "Poster", "18 × 24 in"],
   poster24: [24, 36, "Poster", "24 × 36 in"], banner: [72, 24, "Fence banner", "6 × 2 ft"],
@@ -751,15 +783,15 @@ const studioSteps = (n) => page("lrpaper", `
   </div></div>`);
 
 /* 3 — every template, by department, as the app exports them */
-const STUDIO_GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Motion", "Banners", "Seasons", "Apparel"];
+const STUDIO_GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Motion", "Banners", "Seasons", "Apparel", "Video board"];
 const studioTemplates = (n) => page("lrpaper", `
   ${kicker(n, "Templates", false)}
   <div class="display" style="font-size:130px;color:#0C0C0C;margin:48px 0 20px;">${Words(STUDIO_TPL.length)} templates, ready on day one</div>
-  <div style="font-size:42px;line-height:1.5;color:${GREY};">Built from the brand system, one set for every part of the school, one for every season &mdash; and the jerseys. Everything stays editable.</div>
+  <div style="font-size:42px;line-height:1.5;color:${GREY};">Built from the brand system, one set for every part of the school, one for every season &mdash; plus the jerseys and the stadium&rsquo;s video board. Everything stays editable.</div>
   <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:12px;">
     ${STUDIO_GROUPS.map((g) => {
       const items = STUDIO_TPL.filter((t) => t.group === g);
-      /* 1.2: up to eighty thumbnails in nine rows — a long row gets smaller so it fits the slide */
+      /* ninety-one thumbnails in nine rows — a long row gets smaller so it fits the slide */
       const aspect = items.reduce((a, t) => a + (t.w && t.h ? t.w / t.h : 0.8), 0);
       const TH = Math.round(Math.min(118, (2900 - 18 * (items.length - 1)) / Math.max(aspect, 1)));
       return `<div style="display:flex;align-items:center;gap:60px;">
@@ -800,7 +832,7 @@ const studioCheck = (n) => page("greend", `
 
 /* 5 — every size the app makes, drawn to shape */
 const STUDIO_ROWS = [
-  [["Social", ["ig-post", "ig-portrait", "story", "x-post", "fb-event", "yt-thumb", "x-header"]], ["Screen", ["slide"]]],
+  [["Social", ["ig-post", "ig-portrait", "story", "x-post", "fb-event", "yt-thumb", "x-header"]], ["Screen", ["slide", "board"]]],
   [["Print", ["letter", "half", "tabloid", "poster18", "poster24", "postcard"]], ["Banners", ["banner", "hallway", "pole4", "pole5"]]],
 ];
 const studioShape = (id, H = 200) => {
@@ -826,7 +858,7 @@ const studioSizes = (n) => page("lrpaper", `
   ${kicker(n, "Every size", false)}
   <div class="display" style="font-size:150px;color:#0C0C0C;margin:56px 0 30px;">${Words(STUDIO_SIZES)} sizes, one system</div>
   <div style="font-size:46px;line-height:1.5;color:${GREY};max-width:3200px;text-wrap:balance;">
-    Posts and stories, a screen slide, flyers, posters up to 24 × 36, a postcard, a six-foot fence banner, an eight-foot hallway banner, the pole
+    Posts and stories, a screen slide, the stadium&rsquo;s video board, flyers, posters up to 24 × 36, a postcard, a six-foot fence banner, an eight-foot hallway banner, the pole
     banners out front &mdash; and a mockup for every jersey and shirt. Print sizes export as print-ready PDFs.</div>
   <div style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:64px;">
     ${STUDIO_ROWS.map((row) => `<div style="display:flex;gap:90px;align-items:flex-end;">
@@ -1061,6 +1093,9 @@ const ORDER = [
   [apparel, "Apparel — the part students actually wear", "Applied"],
   [holidays, "Holiday emblems — the LR, all year round", "Applied"],
   [gameDay, "Game day — where Spirit Red earns its keep", "Applied"],
+  /* Nov 9: the stadium motion set, which the site has had since Oct 28 (chapter 07). No mention of the app here —
+     the video-board templates belong to the reveal. Cut this line to take the slide back out. */
+  [stadium, "The video board — game day, on the big board", "Applied"],
   [oneMore, "One more thing…", "One more thing"],
   [studioIntro, "Mustang Studio — a design app that only speaks Mustang", "One more thing"],
   [studioSteps, "How it works — three steps, no designer", "One more thing"],

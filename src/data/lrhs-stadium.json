@@ -1,0 +1,60 @@
+{
+  "_about": "The stadium video-board motion set, in game order. The case study (chapter 07) and the deck's \"Game day, on the big board\" slide both read this list. Each piece has a 1080p loop at public/videos/stadium/<file>.mp4 and its hold frame at public/images/lrhs-stadium/<file>.jpg, cut from the 8K renders (scripts/render-stadium-motion.mjs).",
+  "pieces": [
+    {
+      "file": "01-welcome-to-the-ranch",
+      "name": "Welcome to The Ranch",
+      "when": "Gates open. The first thing on the board."
+    },
+    {
+      "file": "02-touchdown",
+      "name": "Touchdown",
+      "when": "Full-frame Spirit Red, straight after a Mustangs score."
+    },
+    {
+      "file": "03-its-good",
+      "name": "It’s Good",
+      "when": "Field goal or extra point, between the uprights."
+    },
+    {
+      "file": "04-first-down",
+      "name": "First Down",
+      "when": "The chains move; the Mustang rides the line."
+    },
+    {
+      "file": "05-make-some-noise",
+      "name": "Make Some Noise",
+      "when": "Defence on the field. The meter fills as the type grows."
+    },
+    {
+      "file": "06-turnover",
+      "name": "Turnover",
+      "when": "Interception or fumble — the card literally turns over."
+    },
+    {
+      "file": "07-sack",
+      "name": "Sack",
+      "when": "A hard impact frame, then the claws tear through the word."
+    },
+    {
+      "file": "08-starting-lineup",
+      "name": "Starting Lineup",
+      "when": "A template: one video per player, from a list of names."
+    },
+    {
+      "file": "09-halftime-mustang-band",
+      "name": "Halftime",
+      "when": "Slower and warmer, as the Mustang Band takes the field."
+    },
+    {
+      "file": "10-mustangs-win",
+      "name": "Mustangs Win",
+      "when": "The closer after a win."
+    },
+    {
+      "file": "10-alt-go-mustangs",
+      "name": "Go Mustangs",
+      "when": "The closer for every other night."
+    }
+  ]
+}

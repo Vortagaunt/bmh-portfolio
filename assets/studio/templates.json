@@ -798,5 +798,115 @@
   "pages": 1,
   "w": 1650,
   "h": 2550
+ },
+ {
+  "id": "board-welcome",
+  "name": "Welcome to The Ranch",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-touchdown",
+  "name": "Touchdown",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-itsgood",
+  "name": "It’s good",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-firstdown",
+  "name": "First down",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-noise",
+  "name": "Make some noise",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-turnover",
+  "name": "Turnover",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-sack",
+  "name": "Sack",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-lineup",
+  "name": "Starting lineup",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-halftime",
+  "name": "Halftime · Mustang Band",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-win",
+  "name": "Mustangs win",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
+ },
+ {
+  "id": "board-gomustangs",
+  "name": "Go Mustangs",
+  "group": "Video board",
+  "fmt": "board",
+  "season": null,
+  "pages": 1,
+  "w": 1920,
+  "h": 1080
  }
 ]

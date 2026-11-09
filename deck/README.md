@@ -42,6 +42,15 @@ Apparel, before Game day), the case study's Applied chapter and the guidelines
 page all read that list. The validator checks the SVGs against the export folder
 too. The Halloween photo version is a WebP (2000 px), since it is a picture.
 
+### Stadium motion
+
+`src/data/lrhs-stadium.json` lists the eleven video-board pieces in game order.
+The case study's chapter 07 plays their 1080p loops; the deck's "Game day, on
+the big board" slide (after Game day, the last slide before "One more thing…")
+shows their hold frames from `public/images/lrhs-stadium`. The slide says
+nothing about how they are made: the video-board templates are part of the
+Mustang Studio reveal.
+
 ## Build
 
 ```bash
@@ -63,7 +72,7 @@ another browser binary.
 
 ### Mustang Studio is the surprise
 
-The principal hasn't seen the app. Nothing before slide 24, "One more thing…",
+The principal hasn't seen the app. Nothing before the "One more thing…" slide
 mentions it — not the slides, not the speaker notes, and not the section names
 (the reveal's section is called "One more thing"). The Studio slides follow the
 black slide, then "Mustang Studio, on one page", then the system bento (which

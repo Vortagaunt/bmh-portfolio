@@ -249,6 +249,9 @@ const plain = (paras) => paras.map((q) => (q.kind === "head" ? q.text.toUpperCas
     x = x.replace(/(<p:cNvPr id="\d+" name="Notes Placeholder 2"\/>[\s\S]*?<p:spPr\/>)<p:txBody>[\s\S]*?<\/p:txBody>/, (m, head) => head + notesBody(notes[i]));
     zip.file(name, x);
   }
+  /* no bare folder entries in the package: PowerPoint never writes them, and files that have them
+     can fail to open or co-edit from OneDrive, which is how this deck is shared */
+  for (const name of Object.keys(zip.files)) if (zip.files[name].dir) delete zip.files[name];
   fs.writeFileSync(OUT, await zip.generateAsync({ type: "nodebuffer", compression: "STORE" }));   // as before: media stays stored
 
   const mb = (fs.statSync(OUT).size / 1048576).toFixed(2);

@@ -2,8 +2,13 @@
 
 import { useRef, useState, type KeyboardEvent } from "react";
 import { ZoomImage } from "../ZoomImage";
+import DATA from "@/data/mustang-studio-templates.json";
 
 type Stop = { id: string; label: string; text: string; alt: string };
+
+/* The template count is read from the same list as the template wall, so the
+   tour can't fall behind the app. */
+const TEMPLATES = DATA.templates.length;
 
 /* Real screens from Mustang Studio 1.0 (assets/studio/ui-*.jpg, cut to 1920
    wide in public/images/lrhs-studio by scripts/studio-site-images.mjs). */
@@ -11,7 +16,7 @@ const STOPS: Stop[] = [
   {
     id: "templates",
     label: "Pick a template",
-    text: "Eighty of them, sorted by department and season. The ones for whoever's using it — a coach, the athletic director, the band, the front office — come first.",
+    text: `All ${TEMPLATES} of them, sorted by department and season. The ones for whoever's using it — a coach, the athletic director, the band, the front office — come first.`,
     alt: "Mustang Studio with the templates panel open beside a game-day post",
   },
   {
@@ -53,13 +58,13 @@ const STOPS: Stop[] = [
   {
     id: "sizes",
     label: "Resize it",
-    text: "Twenty-six sizes, from an Instagram story to a 24 × 36 poster, a six-foot fence banner, an eight-foot hallway banner, the pole banners out front and a mockup for every jersey and shirt.",
+    text: "Twenty-seven sizes, from an Instagram story to a 24 × 36 poster, a six-foot fence banner, an eight-foot hallway banner, the pole banners out front, the stadium's video board and a mockup for every jersey and shirt.",
     alt: "The change-size dialog listing social, screen and print sizes",
   },
   {
     id: "export",
     label: "Export",
-    text: "PNG, JPG, PDF, MP4 or GIF. Print sizes come out as print-ready PDFs — 300 dpi, or 150 for the pole banners — with bleed and crop marks when the print shop wants them.",
+    text: "PNG, JPG, PDF, MP4 or GIF. Print sizes come out as print-ready PDFs — 300 dpi, or 150 for the pole banners — with bleed and crop marks when the print shop wants them. Video-board pieces export as MP4 at 1080p or 4K.",
     alt: "The export dialog with PNG, JPG, PDF, video and GIF options",
   },
 ];

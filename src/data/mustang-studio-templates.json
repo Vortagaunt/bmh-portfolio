@@ -1,5 +1,5 @@
 {
-  "_about": "Mustang Studio's 80 templates, as shown on the LRHS case study. Thumbnails in public/images/lrhs-studio/templates, made from assets/studio/tpl-*.jpg (720px on the long side) by scripts/studio-site-images.mjs. Order and groups come from assets/studio/templates.json.",
+  "_about": "Mustang Studio's 91 templates, as shown on the LRHS case study. Thumbnails in public/images/lrhs-studio/templates, made from assets/studio/tpl-*.jpg (720px on the long side) by scripts/studio-site-images.mjs. Order and groups come from assets/studio/templates.json.",
   "templates": [
     {
       "id": "gameday",
@@ -800,6 +800,116 @@
       "pages": 1,
       "w": 466,
       "h": 720
+    },
+    {
+      "id": "board-welcome",
+      "name": "Welcome to The Ranch",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-touchdown",
+      "name": "Touchdown",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-itsgood",
+      "name": "It’s good",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-firstdown",
+      "name": "First down",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-noise",
+      "name": "Make some noise",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-turnover",
+      "name": "Turnover",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-sack",
+      "name": "Sack",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-lineup",
+      "name": "Starting lineup",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-halftime",
+      "name": "Halftime · Mustang Band",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-win",
+      "name": "Mustangs win",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
+    },
+    {
+      "id": "board-gomustangs",
+      "name": "Go Mustangs",
+      "group": "Video board",
+      "fmt": "board",
+      "season": null,
+      "pages": 1,
+      "w": 720,
+      "h": 405
     }
   ]
 }

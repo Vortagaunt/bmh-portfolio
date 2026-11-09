@@ -6,7 +6,10 @@ import DATA from "@/data/mustang-studio-templates.json";
 
 type Template = (typeof DATA.templates)[number];
 
-const GROUPS = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Banners", "Seasons"] as const;
+/* The chips, in the order they read best. Any group the app adds later still
+   gets a chip (after these), so the chips always add up to "All". */
+const ORDER = ["Athletics", "Events & clubs", "News & podcast", "School & awards", "Banners", "Seasons", "Apparel", "Motion", "Video board"];
+const GROUPS = [...new Set([...ORDER.filter((g) => DATA.templates.some((t) => t.group === g)), ...DATA.templates.map((t) => t.group)])];
 
 /* The app's size ids, said the way the people choosing them would say them. */
 const FORMAT: Record<string, string> = {
@@ -26,10 +29,22 @@ const FORMAT: Record<string, string> = {
   banner: "Fence banner, 6 × 2 ft",
   pole4: "Pole banner, 2 × 4 ft",
   pole5: "Pole banner, 2 × 5 ft",
+  hallway: "Hallway banner, 8 × 3 ft",
   postcard: "Postcard",
+  board: "Video board, 16:9",
+  "ap-football": "Football jersey",
+  "ap-basketball": "Basketball jersey",
+  "ap-baseball": "Baseball jersey",
+  "ap-soccer": "Soccer jersey",
+  "ap-volleyball": "Volleyball jersey",
+  "ap-tee": "Spirit tee",
+  "ap-hoodie": "Hoodie",
+  "ap-polo": "Staff polo",
 };
 
-const format = (t: Template) => `${FORMAT[t.fmt] ?? t.fmt}${t.pages > 1 ? `, ${t.pages} pages` : ""}`;
+/* A garment's two pages are its front and its back. */
+const pages = (t: Template) => (t.pages < 2 ? "" : t.fmt.startsWith("ap-") && t.pages === 2 ? ", front and back" : `, ${t.pages} pages`);
+const format = (t: Template) => `${FORMAT[t.fmt] ?? t.fmt}${pages(t)}`;
 const src = (t: Template) => `/images/lrhs-studio/templates/${t.id}.jpg`;
 
 /**
