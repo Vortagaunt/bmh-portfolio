@@ -37,7 +37,7 @@ const data: CaseStudyData = {
   category: "Editorial · Print",
   title: "DMJ Yearbook 2025-2026",
   subtitle:
-    "Designing the cover, opening spreads, and editorial layout system for the 2025–2026 school yearbook — a 200+ page printed book documenting a year on campus.",
+    "Designing the cover, opening spreads, and editorial layout system for the 2025–2026 school yearbook — a 112-page hardcover book documenting a year on campus.",
   hero: {
     src: "/images/yearbook-2025.png",
     alt: "DMJ Yearbook 2025-2026 cover and editorial spreads",

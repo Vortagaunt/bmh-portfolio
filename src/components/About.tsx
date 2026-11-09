@@ -57,7 +57,7 @@ export function About() {
                 Adobe Creative Cloud
               </span>
               . I have worked on designing Yearbooks, creating
-              Documentarys, and more. I have collaborated with a lot of
+              Documentaries, and more. I have collaborated with a lot of
               bright people, and hopefully you can be the next.
             </p>
             <AgeCounter className="mt-4 text-[14px] leading-none text-ink/55" />

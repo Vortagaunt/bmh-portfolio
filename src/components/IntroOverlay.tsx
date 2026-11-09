@@ -27,7 +27,12 @@ export function IntroOverlay() {
     // Skip the intro only on client-side returns to the home page
     // (e.g., user clicked into a case study and clicked the hello logo to
     // come back). Full page loads always replay the animation.
-    if (introPlayedThisLoad) {
+    // Also skip it when the visitor asked for a section ("/#works" from the
+    // header on another page, or a shared link): they want that section, and
+    // the Mac would otherwise fly off towards a hero that is off screen.
+    const section = window.location.hash.length > 1 && document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+    if (introPlayedThisLoad || section) {
+      introPlayedThisLoad = true;
       setPhase(6);
       document.body.classList.add("intro-skipped");
       const target = document.getElementById("hero-mac-target");

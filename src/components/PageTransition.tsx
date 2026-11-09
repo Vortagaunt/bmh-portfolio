@@ -25,15 +25,26 @@ export function PageTransition() {
       firstRender.current = false;
       return;
     }
-    // Reset scroll position to the top so every new route starts at the hero.
+    // Reset scroll position to the top so every new route starts at the hero —
+    // unless the link named a section ("/#works" from the header on another
+    // page), in which case land on that section instead of throwing it away.
     // We try Lenis first (the smooth-scroll engine has its own internal target);
     // if it isn't ready yet during the route swap, fall back to window.scrollTo.
-    const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number, o?: object) => void } }).__lenis;
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    } else {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
-    }
+    const jump = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      const section = id ? document.getElementById(id) : null;
+      const top = section ? Math.max(0, Math.round(section.getBoundingClientRect().top + window.scrollY)) : 0;
+      const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number, o?: object) => void } }).__lenis;
+      if (lenis) {
+        lenis.scrollTo(top, { immediate: true });
+      } else {
+        window.scrollTo({ top, left: 0, behavior: "instant" as ScrollBehavior });
+      }
+      return !!section;
+    };
+    // The section's position can still move while the new page lays out (fonts,
+    // the auto-fitting hero), so settle on it once more while the overlay is up.
+    const settleId = jump() ? window.setTimeout(jump, 250) : 0;
     // Sit at full opacity briefly so the new page can mount underneath, then
     // fade out. State updates happen inside rAF callbacks (not synchronously
     // in the effect body) so React never cascades renders mid-commit.
@@ -51,6 +62,7 @@ export function PageTransition() {
       cancelAnimationFrame(showId);
       cancelAnimationFrame(fadeId);
       if (doneId) clearTimeout(doneId);
+      if (settleId) clearTimeout(settleId);
     };
   }, [pathname]);
 

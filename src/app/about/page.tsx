@@ -48,7 +48,7 @@ const recognition = [
   {
     year: "2026",
     title: "Lakewood Ranch HS — Brand Concept",
-    detail: "A speculative Mustang identity and working website mockup.",
+    detail: "A Mustang brand system for my school. Logos approved by the principal, October 2026.",
   },
 ];
 

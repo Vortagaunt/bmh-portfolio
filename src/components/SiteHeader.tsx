@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HelloHandwritingIcon, SparkleIcon } from "./icons";
 import { ThemeToggle } from "./ThemeToggle";
@@ -21,6 +22,9 @@ import { ThemeToggle } from "./ThemeToggle";
  */
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
+  // Works, About and Contact are sections of the home page. From any other
+  // page a bare "#works" points at nothing, so the links go home first.
+  const home = usePathname() === "/" ? "" : "/";
 
   useEffect(() => {
     let frame = 0;
@@ -76,13 +80,13 @@ export function SiteHeader() {
         <nav
           className={`hidden items-center justify-center gap-6 text-[14px] transition-colors duration-500 sm:flex sm:gap-10 sm:text-[15px] ${tone}`}
         >
-          <Link href="#works" className="link-underline magnetic font-medium tracking-tight">
+          <Link href={`${home}#works`} className="link-underline magnetic font-medium tracking-tight">
             (Works)
           </Link>
-          <Link href="#about-me" className="link-underline magnetic font-medium tracking-tight">
+          <Link href={`${home}#about-me`} className="link-underline magnetic font-medium tracking-tight">
             (About)
           </Link>
-          <Link href="#about-me" className="link-underline magnetic font-medium tracking-tight">
+          <Link href={`${home}#contact`} className="link-underline magnetic font-medium tracking-tight">
             (Contact)
           </Link>
         </nav>
@@ -91,10 +95,10 @@ export function SiteHeader() {
         <nav
           className={`flex items-center justify-center gap-4 text-[13px] transition-colors duration-500 sm:hidden ${tone}`}
         >
-          <Link href="#works" className="link-underline font-medium tracking-tight">
+          <Link href={`${home}#works`} className="link-underline font-medium tracking-tight">
             (Works)
           </Link>
-          <Link href="#about-me" className="link-underline font-medium tracking-tight">
+          <Link href={`${home}#about-me`} className="link-underline font-medium tracking-tight">
             (About)
           </Link>
         </nav>

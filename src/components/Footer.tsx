@@ -10,7 +10,7 @@ const contactLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative">
+    <footer id="contact" className="relative scroll-mt-16">
       {/* Let's talk reveal area */}
       <div className="relative overflow-hidden px-5 pt-16 pb-20 sm:px-8 sm:pb-24">
         <div className="relative mx-auto min-h-[520px] max-w-[1280px] sm:min-h-[640px]">

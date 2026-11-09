@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://bronxhanratty.me"),
   title: "Bronx (Portfolio 2026)",
   description:
-    "Bronx Hanratty, Digital Product Designer. Current: Almabase",
+    "Bronx Hanratty — digital and brand designer in Sarasota, FL. Brand systems, documentary film and editorial design.",
   openGraph: {
     title: "Bronx Hanratty — Portfolio 2026",
     description: "Digital & brand designer based in Sarasota, FL.",

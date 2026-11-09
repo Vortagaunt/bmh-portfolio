@@ -26,7 +26,7 @@ A motion-driven portfolio built to feel like a printed editorial spread: off-whi
 | `lakewood-ranch-redesign` | **Mustangs Ahead** — an unofficial brand system for Lakewood Ranch High School. Logos approved by the principal, October 2026. |
 | `846-am` | **8:46 AM** — a 7-minute 9/11 documentary. Winner, Manatee Film Rush · Jim Harbin Student Festival. |
 | `dirty-sara-soda` | Brand identity for a mobile dirty-soda trailer. |
-| `yearbook-2025` | Yearbook 2025 — in "Coming soon" mode until the book is out. |
+| `yearbook-2025` | **DMJ Yearbook 2025–2026** — cover, layout system and editorial design for Dr. Mona Jain Middle School’s yearbook. |
 | `recent-works` | Masonry gallery of posters, album-cover concepts, marks and illustrations. |
 
 ### Other pages
